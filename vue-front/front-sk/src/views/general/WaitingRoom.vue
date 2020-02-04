@@ -2,7 +2,7 @@
   <div id="waitingRoom">
     waitingRoom
     
-
+    
 
   </div>
 </template>
@@ -17,7 +17,6 @@ export default {
   components: {},
   data() {
     return {
-        대기명단:"",
         userid: "",
         room_id: "",
         singer_num: "",
@@ -30,41 +29,39 @@ export default {
     };
   },
   methods: {},
-  created() {
-    let store = this.$store;
-    const userId = this.$session.get("userId");
-    axios
-      .post("http://70.12.247.115:8080/Insert_waiting/"+ userId)
-      .then(response => {
-        console.log("success2: ", response);
-        const id = response.data.user_info.userid;
-        console.log(id);
-        const nick = response.data.user_info.nickname;
-        const profile = response.data.user_iidnfo.profileimg;
-        const email = response.data.user_info.email;
-        const provider = response.data.user_info.provider;
-        const grade = response.data.user_info.grade;
-        const game = response.data.user_info.game;
-        const win = response.data.user_info.win;
-        const lose = response.data.user_info.lose;
-        const winrate = response.data.user_info.win_rate;
+//   created() {
+//     let store = this.$store;
+//     const userId = this.$session.get("userId");
+//     console.log("userId : "+userId);
+//     axios
+//       .post("http://70.12.247.115:8080/Insert_waiting",{id:userId})
+//       .then(response => {
+//         console.log("success2: ", response);
+//         //const userid = response.data.user_info.userid;
+//         const room_id = response.data.roomViewInfo.room_id;
+//         const user1 = response.data.roomViewInfo.user1;
+//         const user2 = response.data.roomViewInfo.user2;
+//         const music1 = response.data.roomViewInfo.music1;
+//         const music2 = response.data.roomViewInfo.music2;
+//         const watching_num = response.data.roomViewInfo.watching_num;
 
-        this.id = id;
-        console.log(this.id);
-        this.nick = nick;
-        this.profile = profile;
-        this.email = email;
-        this.provider = provider;
-        this.grade = grade;
-        this.game = game;
-        this.win = win;
-        this.lose = lose;
-        this.winrate = winrate;
-      })
-      .catch(e => {
-        console.log("error: ", e);
-      });
-  }
+//         //this.userid = userid;
+//         this.room_id = room_id;
+//         this.user1 = user1;
+//         this.user2 = user2;
+//         this.music1 = music1;
+//         this.music2 = music2;
+//         this.watching_num = watching_num;
+
+//         //console.log(userid);
+//         console.log(room_id);
+//         console.log(user1);
+//         console.log(user2);
+//       })
+//       .catch(e => {
+//         console.log("error: ", e);
+//       });
+//   }
 
   // viewMypage
 };

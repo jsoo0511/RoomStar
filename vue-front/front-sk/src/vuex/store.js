@@ -9,7 +9,6 @@ Vue.use(VueSession)
 Vue.use(Vuex)
 
 const state = {
-  articles: require('@/data/articles.json'),
   isUser: false,
   token: null,
   userId: "",

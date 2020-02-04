@@ -5,7 +5,6 @@ import HomePage from "./views/general/HomePage.vue";
 import MyPage from "./views/general/MyPage.vue";
 import GameRoom from "./views/general/GameRoom.vue";
 import WaitingRoom from "./views/general/WaitingRoom.vue";
-import SharingPage from "./views/general/SharingPage.vue";
 // import PostPage from "./views/PostPage.vue";
 // import PortfolioPage from "./views/PortfolioPage.vue";
 
@@ -55,10 +54,5 @@ export default [
     path:"/waitingRoom",
     name:"waitingRoom",
     component : WaitingRoom
-  },
-  {
-    path:"/sharingPage",
-    name:"sharingPage",
-    component : SharingPage
   },
 ];

@@ -45,7 +45,6 @@
         <kakaoLogin :component="component" />
         <GoogleLogin :component="component" />
       </div>
-      
       <div class="add-option">
         <div class="text">
           <p>혹시</p>

@@ -19,18 +19,16 @@
 
       <!-- 로그인 된 상태이면 true 값이므로 로그아웃을 보여준다 -->
       <v-toolbar-title v-if="this.isUser === true">
-        <button @click="headerLogout()" style="color:black">로그아웃</button>
+        <button @click='headerLogout()' style="color:black">로그아웃</button>
 
         <router-link to="/waitingRoom/">대기실</router-link>
         <router-link to="/mypage/">마이페이지</router-link>
         <router-link to="/gameRoom/">게임룸</router-link>
-        <router-link to="/sharingPage/">자랑하기</router-link>
       </v-toolbar-title>
 
       <!-- 로그인 된 상태이면 false 값이므로 로그인을 보여준다 -->
       <v-toolbar-title v-if="this.isUser === false">
-        <!-- <router-link to="/login/">로그인</router-link> -->
-        <ModalLogin />
+        <router-link to="/login/">로그인</router-link>
       </v-toolbar-title>
 
       <v-menu left bottom>
@@ -56,20 +54,18 @@ import { mapState, mapGetters, mapActions } from "vuex";
 import axios from "axios";
 import jwtDecode from "jwt-decode"; // JWT 의 payload 값을 해석해서 보여주는 library
 import router from "@/routes";
-import ModalLogin from "../user/ModalLogin";
+
 
 export default {
   computed: {
     ...mapState(["isUser", "token"]),
-    ...mapGetters(["options", "userId", "getIsUser", "getToken"])
+    ...mapGetters(["options", "userId", "getIsUser", "getToken"]),
   },
-  components: {
-    ModalLogin
-  },
+
   methods: {
-    headerLogout() {
-      this.$store.dispatch("logout");
-      this.$router.push("/");
+    headerLogout(){
+      this.$store.dispatch("logout")
+      this.$router.push('/')
     },
 
     checkLoggedIn() {
@@ -116,10 +112,11 @@ export default {
 };
 </script>
  
-<style type="text/css">
+<style scoped type="text/css">
 a {
   color: white !important;
   text-decoration: none !important;
+
 }
 a:link {
   color: white;

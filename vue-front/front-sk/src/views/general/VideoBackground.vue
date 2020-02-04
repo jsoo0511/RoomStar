@@ -21,7 +21,7 @@
 //   components: { VideoBg }
 // })
 </script>
-<style>
+<style scoped>
 @media (min-aspect-ratio: 16/9) {
   .fullscreen-bg__video {
     width: 100%;

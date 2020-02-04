@@ -4,13 +4,7 @@
       api-key="75bdc978e83228e7b1e197264c163a8f"
       :on-success="onSuccess"
       :on-failure="onFailure"
-      image="kakao_account_login_btn_medium_narrow_ov"
-      width="300"
-    >
-      <!-- <img
-        src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium_ov.png"
-      /> -->
-    </KakaoLogin>
+    />
   </div>
 </template>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -78,7 +72,7 @@ let onSuccess = function(data) {
           store.dispatch("checkLogin", response.data.token);
           store.dispatch("login", toStore);
         })
-
+        
         .catch(e => {
           console.log("error: ", e);
         });
