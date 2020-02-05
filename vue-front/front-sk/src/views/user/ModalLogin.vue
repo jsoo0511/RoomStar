@@ -1,4 +1,6 @@
 <template>
+
+
   <v-row justify="center">
     <v-dialog v-model="dialog" max-width="400px">
       <template v-slot:activator="{ on }">
@@ -6,12 +8,11 @@
       </template>
 
       <v-card>
-        <v-card-title>
-          <h3>RoomSTAR</h3>
-        </v-card-title>
+        <!-- <v-card-title> -->
+          <h3 style="text-align:center">RoomSTAR</h3>
+        <!-- </v-card-title> -->
 
         <v-row>
-
           <div class="input-with-label">
             <v-text-field
               v-model="email"
@@ -37,7 +38,6 @@
             <label for="password">비밀번호</label>
             <div class="error-text" v-if="error.password">{{error.password}}</div>
           </div>
-
         </v-row>
 
         <button
@@ -46,24 +46,41 @@
           @click="dialog = false"
           :disabled="!isSubmit"
           :class="{disabled : !isSubmit}"
-          color="blue darken-1"
-          text
+          color="black darken-1"
+          text small
         >로그인</button>
+
+        <!-- <v-btn text small
+          class="btn btn--back btn--login"
+          v-on:click="login"
+          @click="dialog = false"
+          :disabled="!isSubmit"
+          :class="{disabled : !isSubmit}"
+          color="black darken-1"
+        >로그인</v-btn> -->
 
         <div class="add-option">
           <div class="text-center">
-            <v-btn text small color="black" dark to="/user/password" v-on:click="dialog = false">비밀번호 찾기</v-btn>
+            <v-btn
+              text
+              small
+              color="black"
+              dark
+              to="/user/password"
+              v-on:click="dialog = false"
+            >비밀번호 찾기</v-btn>
             <v-btn text small color="black" dark to="/user/join" v-on:click="dialog = false">가입하기</v-btn>
             <v-btn text small color="black" dark to="#" v-on:click="dialog = false">서비스소개</v-btn>
           </div>
         </div>
 
-        <div class="sns-login">
+
+        <div style = 'text-align:center;' >
           <p>SNS 로그인</p>
-          <kakaoLogin />
+          <kakaoLogin /> 
+          <!-- 이거 가운데로 왜 안가니? -->
           <GoogleLogin />
         </div>
-
 
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -72,6 +89,8 @@
       </v-card>
     </v-dialog>
   </v-row>
+
+  
 </template>
 
 <script>
@@ -89,7 +108,7 @@ import UserApi from "../../apis/UserApi";
 export default {
   components: {
     KakaoLogin,
-    GoogleLogin
+    GoogleLogin,
   },
   created() {
     this.component = this;
@@ -115,14 +134,14 @@ export default {
   methods: {
     checkForm() {
       if (this.email.length >= 0 && !EmailValidator.validate(this.email))
-        this.error.email = "이메일 형식이 아닙니다.";
+        this.error.email = "=  이메일 형식이 아닙니다.";
       else this.error.email = false;
 
       if (
         this.password.length >= 0 &&
         !this.passwordSchema.validate(this.password)
       )
-        this.error.password = "영문,숫자 포함 8 자리이상이어야 합니다.";
+        this.error.password = "=  영문,숫자 포함 8 자리이상이어야 합니다.";
       else this.error.password = false;
 
       let isSubmit = true;
@@ -208,3 +227,8 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+
+
+</style>

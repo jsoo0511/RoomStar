@@ -4,6 +4,7 @@
       api-key="75bdc978e83228e7b1e197264c163a8f"
       :on-success="onSuccess"
       :on-failure="onFailure"
+      image='kakao_account_login_btn_medium_narrow'
     >
       <!-- <img
         src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium_ov.png"

@@ -1,12 +1,14 @@
 <template>
-    <div>
-
-    </div>
+  <div>
+    <basicComponents />
+  </div>
 </template>
 
 <script>
-
-    export default {
-
-    }
+import BasicComponents from "../Components.vue";
+export default {
+  components: {
+    BasicComponents
+  }
+};
 </script>
