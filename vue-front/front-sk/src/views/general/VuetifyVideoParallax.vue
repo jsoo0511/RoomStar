@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="v-parallax" :style="'height: ' + height + 'px;'">
+  <div class="v-parallax" :style="'height: ' + 900 + 'px;'">
     <div class="v-parallax__image-container">
       <img ref="image" :src="img" :style="imageStyles">
       <video ref="video" :loop="loop" :muted="muted" :autoplay="autoplay" :style="videoStyles">
@@ -19,7 +19,10 @@ import { Loader, middleware } from 'resource-loader';
 export default {
   name: 'v-video-parallax',
   props: {
-    src: String,
+    src: {
+      type: String,
+      default: ''
+    },
     img: {
       type: String,
       default: ''
@@ -27,7 +30,7 @@ export default {
     height: String,
     width: {
       type: String,
-      default: '100%'
+      default: '1600px'
     },
     loop: {
       type: String,
@@ -156,7 +159,7 @@ export default {
           display: 'block',
           opacity: this.isBooted ? 1 : 0,
           width: this._width,
-          transform: 'translate(0, ' + this.parallax + 'px)'
+          transform: 'translate(0,  +'+ this.parallax + 'px)'
         }
       }
     },
@@ -216,7 +219,7 @@ export default {
 
 <style>
 .v-parallax {
-    position: relative;
+    position: absolute;
     overflow: hidden;
     z-index: 0;
 }

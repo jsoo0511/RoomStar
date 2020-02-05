@@ -3,7 +3,7 @@
    <v-app light id="hp_video">
     <v-content>
       <section>
-		<v-video-parallax img="../../assets/images/hero.jpeg" height="800">
+		<v-video-parallax>
           <v-layout
             column
             align-center
@@ -11,7 +11,7 @@
             class="white--text"
           >
             <h1 class="white--text mb-2 display-1 text-center">ROOM STAR</h1>
-            <div class="subheading mb-4 text-center">Powered by Vuetify</div>
+            <h2 class="subheading mb-1 text-center">        </h2>
             <v-btn
               class="mt-12"
               color="blue lighten-2"
@@ -19,7 +19,7 @@
               large
               href="/pre-made-themes"
             >
-              Get Started
+              노래하기
             </v-btn>
           </v-layout>
         </v-video-parallax>
@@ -32,61 +32,94 @@
           class="my-12"
           align-center
         >
-          <v-flex xs12 sm4 class="my-4">
+         <!-- <v-flex xs12 sm4 class="my-4">
             <div class="text-center">
-              <h2 class="headline">The best way to start developing</h2>
+              <h1 class="headline">ROOM ★ STAR</h1>
               <span class="subheading">
-                Cras facilisis mi vitae nunc
+                
               </span>
             </div>
-          </v-flex>
+          </v-flex>-->
           <v-flex xs12>
             <v-container grid-list-xl>
               <v-layout row wrap align-center>
                 <v-flex xs12 md4>
-                  <v-card flat class="transparent">
-                    <v-card-text class="text-center">
-                      <v-icon x-large class="blue--text text--lighten-2">mdi-palette</v-icon>
-                    </v-card-text>
-                    <v-card-title primary-title class="layout justify-center">
-                      <div class="headline text-center">Material Design</div>
-                    </v-card-title>
-                    <v-card-text>
-                      Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare.
-                      Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.
-                    </v-card-text>
-                  </v-card>
+                  <v-card flat class="mx-auto" elevation="4">
+                   <v-img
+                      class="white--text align-end"
+                      height="200px"
+                      width="350px"
+                      src="../../assets/images/singBattle.png"
+                    >
+                      <v-card-title>Sing Battle</v-card-title>
+                    </v-img>
+                    <v-card-subtitle class="pb-0">노래 배틀하기</v-card-subtitle>
+                      <v-card-text class="text--primary">
+                        <div>내 노래는 세상을 울릴 노래다ㅏ아!</div>
+                        <div>추천을 많이 받은 사람이 승리합니다!</div>
+                      </v-card-text>
+
+                      <v-card-actions>
+                        <v-btn
+                          color="orange"
+                          text
+                        >
+                          경연하기
+                        </v-btn>
+                      </v-card-actions>
+                    </v-card>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-card flat class="transparent">
-                    <v-card-text class="text-center">
-                      <v-icon x-large class="blue--text text--lighten-2">mdi-flash</v-icon>
-                    </v-card-text>
-                    <v-card-title primary-title class="layout justify-center">
-                      <div class="headline">Fast development</div>
-                    </v-card-title>
-                    <v-card-text>
-                      Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare.
-                      Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.
-                    </v-card-text>
-                  </v-card>
+                  <v-card flat class="mx-auto" elevation="4">
+                   <v-img
+                      class="white--text align-end"
+                      width="350px"
+                      height="200px"
+                      src="../../assets/images/watchBattle.png"
+                    >
+                      <v-card-title>Watch Battle</v-card-title>
+                    </v-img>
+                    <v-card-subtitle class="pb-0">배틀 시청하기</v-card-subtitle>
+                      <v-card-text class="text--primary">
+                        <div>그치만.. 듣지 않으면 알 수 없는걸..</div>
+                        <div>노래 경연을 듣고 투표해주세요!</div>
+                      </v-card-text>
+
+                      <v-card-actions>
+                        <v-btn
+                          color="orange"
+                          text
+                        >
+                          시청하기
+                        </v-btn>
+                      </v-card-actions>
+                    </v-card>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-card flat class="transparent">
-                    <v-card-text class="text-center">
-                      <v-icon x-large class="blue--text text--lighten-2">mdi-wrench</v-icon>
-                    </v-card-text>
-                    <v-card-title primary-title class="layout justify-center">
-                      <div class="headline text-center">Completely Open Sourced</div>
-                    </v-card-title>
-                    <v-card-text>
-                      Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare.
-                      Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.
-                    </v-card-text>
-                  </v-card>
+                  <v-card flat class="mx-auto" elevation="4"> 
+                   <v-img
+                      class="white--text align-end"
+                      height="200px"
+                      width="350px"
+                      src="../../assets/images/showOff.png"
+                    >
+                      <v-card-title>Sing Showoff</v-card-title>
+                    </v-img>
+                    <v-card-subtitle class="pb-0">노래 자랑하기</v-card-subtitle>
+                      <v-card-text class="text--primary">
+                        <div>오늘따라 노래가 너무 잘된다구?!</div>
+                        <div>내 노래를 모두에게 자랑해보세요!</div>
+                      </v-card-text>
+
+                      <v-card-actions>
+                        <v-btn
+                          color="orange"
+                          text
+                        >
+                          자랑하기
+                        </v-btn>
+                      </v-card-actions>
+                    </v-card>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -95,7 +128,7 @@
       </section>
 
       <section>
-        <v-parallax src="../../assets/images/section.jpg" height="380">
+        <v-parallax src="../../assets/images/hero.jpeg" height="380">
           <v-layout column align-center justify-center>
             <div class="headline white--text mb-4 text-center">Web development has never been easier</div>
             <em>Kick-start your application today</em>
@@ -118,12 +151,16 @@
             <v-flex xs12 sm4>
               <v-card flat class="transparent">
                 <v-card-title primary-title class="layout justify-center">
-                  <div class="headline">Company info</div>
+                  <div class="headline">Information</div>
                 </v-card-title>
                 <v-card-text>
-                  Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare.
-                  Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                  Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.
+                  InformationInformationInformationInformationInfo
+                  InformationInformationInformationInformationInfo
+                  InformationInformationInformationInformationInfo
+                  InformationInformationInformationInformationInfo
+                  InformationInformationInformationInformationInfo
+                  InformationInformationInformationInformationInfo
+                  InformationInformationInformation
                 </v-card-text>
               </v-card>
             </v-flex>
@@ -133,7 +170,7 @@
                   <div class="headline">Contact us</div>
                 </v-card-title>
                 <v-card-text>
-                  Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare.
+                  삼성 청년 SW 아카데미 2기 4반 ★7조★ 1등 ㄱㄱ!!
                 </v-card-text>
                 <v-list class="transparent">
                   <v-list-item>
@@ -141,7 +178,7 @@
                       <v-icon class="blue--text text--lighten-2">mdi-phone</v-icon>
                     </v-list-item-action>
                     <v-list-item-content>
-                      <v-list-item-title>777-867-5309</v-list-item-title>
+                      <v-list-item-title>010-9559-5296</v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
                   <v-list-item>
@@ -149,7 +186,7 @@
                       <v-icon class="blue--text text--lighten-2">mdi-map-marker</v-icon>
                     </v-list-item-action>
                     <v-list-item-content>
-                      <v-list-item-title>Chicago, US</v-list-item-title>
+                      <v-list-item-title>서울특별시 강남구 역삼동 테헤란로 212</v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
                   <v-list-item>
@@ -157,7 +194,7 @@
                       <v-icon class="blue--text text--lighten-2">mdi-email</v-icon>
                     </v-list-item-action>
                     <v-list-item-content>
-                      <v-list-item-title>john@vuetifyjs.com</v-list-item-title>
+                      <v-list-item-title>qpalzmfghtgv@naver.com</v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
                 </v-list>
@@ -221,7 +258,6 @@ export default {
       width: 64,
       height: 64,
       backgroundColor: '#ffffff',
-      opacity: 0.5,
       zIndex: 999,
     })
     let self = Object.assign(this, {})
@@ -232,3 +268,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+section{
+  background-color:;
+}
+v-content__wrap{
+  background-color:black;
+}
+</style>
