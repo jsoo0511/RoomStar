@@ -6,8 +6,7 @@ import MyPage from "./views/general/MyPage.vue";
 import GameRoom from "./views/general/GameRoom.vue";
 import WaitingRoom from "./views/general/WaitingRoom.vue";
 import SharingPage from "./views/general/SharingPage.vue";
-// import PostPage from "./views/PostPage.vue";
-// import PortfolioPage from "./views/PortfolioPage.vue";
+import Password from "./views/user/Password.vue";
 
 import Components from './views/Components.vue'
 import Vue from 'vue'
@@ -60,5 +59,10 @@ export default [
     path:"/sharingPage",
     name:"sharingPage",
     component : SharingPage
+  },
+  {
+    path:"/user/password",
+    name:"Password",
+    component : Password
   },
 ];

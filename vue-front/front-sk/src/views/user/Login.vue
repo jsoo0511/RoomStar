@@ -37,6 +37,7 @@
 
       <div class="sns-login">
         <div class="text">
+
           <p>SNS 간편 로그인</p>
           <div class="bar"></div>
         </div>
@@ -162,7 +163,7 @@ export default {
             // true, jwt-auth-token, email, nickname
             // 로딩 로직 짜는데 사용
             this.loading = false;
-            this.$router.push("/");
+            this.$router.push("/").catch(err => {});
           })
           .catch(error => {
             alert("없는 사용자 입니다.");

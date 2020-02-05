@@ -64,10 +64,12 @@ export default {
     ...mapGetters(["options", "userId", "getIsUser", "getToken"])
   },
   components: {
-    ModalLogin
+    ModalLogin,
   },
   methods: {
     headerLogout() {
+      this.$session.clear()
+      this.$session.destroy()
       this.$store.dispatch("logout");
       this.$router.push("/");
     },

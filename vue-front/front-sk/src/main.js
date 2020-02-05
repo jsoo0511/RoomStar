@@ -5,10 +5,11 @@ import routes from './routes'
 import store from './vuex/store'
 import vuetify from './plugins/vuetify';
 import VideoBg from 'vue-videobg'
-
 Vue.config.productionTip = false
 
 Vue.use(Router)
+// Install BootstrapVue
+
 
 const router = new Router({
     routes,
