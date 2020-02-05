@@ -86,11 +86,11 @@ let onSuccess = function(data) {
       console.log(error);
     }
   });
-  this.$router.push("/");
+  this.$router.push("/").catch(err => {});
 };
 
 let onFailure = function(data) {
-  this.$router.push("/user/join");
+  this.$router.push("/user/join").catch(err => {});
 };
 
 export default {

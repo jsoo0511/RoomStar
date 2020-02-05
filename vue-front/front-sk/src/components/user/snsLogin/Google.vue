@@ -93,11 +93,11 @@ export default {
         .catch(e => {
           console.log("error: ", e);
         });
-      this.$router.push("/");
+      this.$router.push("/").catch(err => {});
     },
 
     onFailure(error) {
-      this.$router.push("/user/join");
+      this.$router.push("/user/join").catch(err => {});
     }
   }
 };

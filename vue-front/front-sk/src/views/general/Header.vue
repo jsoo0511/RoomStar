@@ -64,7 +64,7 @@ export default {
     ...mapGetters(["options", "userId", "getIsUser", "getToken"])
   },
   components: {
-    ModalLogin
+    ModalLogin,
   },
   methods: {
     headerLogout() {

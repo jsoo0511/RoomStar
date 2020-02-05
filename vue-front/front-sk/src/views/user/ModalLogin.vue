@@ -6,12 +6,15 @@
       </template>
 
       <v-card>
-        <!-- <v-card-title> -->
-        <h3 style="text-align:center">RoomSTAR</h3>
-        <!-- </v-card-title> -->
+        <br />
+        
+        <div style="text-align:center;">
+          <kakaoLogin />
+          <GoogleLogin />
+        </div>
 
-        <!-- <v-row> -->
-        <!-- <div class="input-with-label"> -->
+        <p style="text-align:center;">또는</p>
+
         <v-text-field
           v-model="email"
           v-bind:class="{error : error.email, complete:!error.email&&email.length!==0}"
@@ -20,11 +23,8 @@
           placeholder="이메일을 입력하세요."
           type="text"
         />
-        <!-- <label for="email">이메일</label> -->
-        <div class="error-text" v-if="error.email">{{error.email}}</div>
-        <!-- </div> -->
 
-        <!-- <div class="input-with-label"> -->
+        <div class="error-text" v-if="error.email">{{error.email}}</div>
         <v-text-field
           v-model="password"
           type="password"
@@ -33,10 +33,8 @@
           @keyup.enter="login"
           placeholder="비밀번호를 입력하세요."
         />
-        <!-- <label for="password">비밀번호</label> -->
+  
         <div class="error-text" v-if="error.password">{{error.password}}</div>
-        <!-- </div> -->
-        <!-- </v-row> -->
 
         <button
           class="btn btn--back btn--login"
@@ -48,15 +46,6 @@
           text
           small
         >로그인</button>
-
-        <!-- <v-btn text small
-          class="btn btn--back btn--login"
-          v-on:click="login"
-          @click="dialog = false"
-          :disabled="!isSubmit"
-          :class="{disabled : !isSubmit}"
-          color="black darken-1"
-        >로그인</v-btn>-->
 
         <div class="add-option">
           <div class="text-center">
@@ -73,13 +62,6 @@
           </div>
         </div>
 
-        <div style="text-align:center;">
-          <p>SNS 로그인</p>
-          <kakaoLogin />
-          <!-- 이거 가운데로 왜 안가니? -->
-          <GoogleLogin />
-        </div>
-
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="dialog = false">취소</v-btn>
@@ -87,6 +69,8 @@
       </v-card>
     </v-dialog>
   </v-row>
+
+
 </template>
 
 <script>
@@ -102,10 +86,12 @@ import KakaoLogin from "../../components/user/snsLogin/Kakao.vue";
 import GoogleLogin from "../../components/user/snsLogin/Google.vue";
 import UserApi from "../../apis/UserApi";
 
+//https://sweet-modal-vue.adepto.as/ 여기꺼 모달 쓰고싶은데 잘
+
 export default {
   components: {
     KakaoLogin,
-    GoogleLogin
+    GoogleLogin,
   },
   created() {
     this.component = this;
@@ -188,13 +174,13 @@ export default {
           .catch(error => {
             // https://sweetalert.js.org/guides/
             swal({
-              title: "없는 사용자 입니다.",
-              text: "다시 시도해보세요.",
-              buttons: '확인',
+              title: "다시 시도해보세요.",
+              text: "아이디 혹은 비밀번호가 일치하지 않습니다.",
+              buttons: "확인"
               // icon: "warning"
             });
-            // createelement로 해야 하나?
-            // return '<v-alert border="top" colored-border type="info" elevation="2"> 없는 사용자 입니다.</v-alert>'
+            console.log(error.response.config);
+            console.log(error.response.config.data);
             // fail인 경우 사용자가 없다고 하기 --> 버튼이 비활성화되므로 알람 안줘도 된다.
             // this.loading = false;
             return false;
