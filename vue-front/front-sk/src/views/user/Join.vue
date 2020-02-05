@@ -138,7 +138,7 @@ export default {
         axios
           .post(SERVER_IP, data)
           .then(response => {
-            this.$router.push("/login");
+            this.$router.push("/");
           })
           .catch(error => {
             console.log(error);

@@ -43,7 +43,8 @@
 
           <button
             class="btn btn--back btn--login"
-            v-on:click="login; dialog = false"
+            v-on:click="login"
+            @click="dialog = false"
             :disabled="!isSubmit"
             :class="{disabled : !isSubmit}"
             color="blue darken-1"
@@ -61,7 +62,7 @@
           <p>혹시</p>
           <div class="wrap">
             <p>비밀번호를 잊으셨나요?</p>
-            <v-btn to="/????" class="btn--text">비밀번호 찾기</v-btn>
+            <v-btn to="/user/password" class="btn--text">비밀번호 찾기</v-btn>
             <!-- <router-link v-bind:to="{name:'????'}" class="btn--text">비밀번호 찾기</router-link> -->
           </div>
           <div class="wrap">
