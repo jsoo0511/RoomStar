@@ -7,75 +7,63 @@
 
       <v-card>
         <v-card-title>
-          <h1>RoomSTAR</h1>
+          <h3>RoomSTAR</h3>
         </v-card-title>
 
         <v-row>
-          <!-- <v-col cols="12" sm="6" md="4"> -->
-            <div class="input-with-label">
-              <v-text-field
-                v-model="email"
-                v-bind:class="{error : error.email, complete:!error.email&&email.length!==0}"
-                @keyup.enter="login"
-                id="email"
-                placeholder="이메일을 입력하세요."
-                type="text"
-              />
-              <label for="email">이메일</label>
-              <div class="error-text" v-if="error.email">{{error.email}}</div>
-            </div>
-          <!-- </v-col> -->
-          <!-- <v-col cols="12" sm="6" md="4"> -->
-            <div class="input-with-label">
-              <v-text-field
-                v-model="password"
-                type="password"
-                v-bind:class="{error : error.password, complete:!error.password&&password.length!==0}"
-                id="password"
-                @keyup.enter="login"
-                placeholder="비밀번호를 입력하세요."
-              />
-              <label for="password">비밀번호</label>
-              <div class="error-text" v-if="error.password">{{error.password}}</div>
-            </div>
-          <!-- </v-col> -->
+
+          <div class="input-with-label">
+            <v-text-field
+              v-model="email"
+              v-bind:class="{error : error.email, complete:!error.email&&email.length!==0}"
+              @keyup.enter="login"
+              id="email"
+              placeholder="이메일을 입력하세요."
+              type="text"
+            />
+            <label for="email">이메일</label>
+            <div class="error-text" v-if="error.email">{{error.email}}</div>
+          </div>
+
+          <div class="input-with-label">
+            <v-text-field
+              v-model="password"
+              type="password"
+              v-bind:class="{error : error.password, complete:!error.password&&password.length!==0}"
+              id="password"
+              @keyup.enter="login"
+              placeholder="비밀번호를 입력하세요."
+            />
+            <label for="password">비밀번호</label>
+            <div class="error-text" v-if="error.password">{{error.password}}</div>
+          </div>
+
         </v-row>
 
-          <button
-            class="btn btn--back btn--login"
-            v-on:click="login"
-            @click="dialog = false"
-            :disabled="!isSubmit"
-            :class="{disabled : !isSubmit}"
-            color="blue darken-1"
-            text
-          >로그인</button>
-
-
-        <div class="sns-login">
-          <p>SNS 간편 로그인</p>
-          <kakaoLogin :component="component" />
-          <GoogleLogin :component="component" />
-        </div>
+        <button
+          class="btn btn--back btn--login"
+          v-on:click="login"
+          @click="dialog = false"
+          :disabled="!isSubmit"
+          :class="{disabled : !isSubmit}"
+          color="blue darken-1"
+          text
+        >로그인</button>
 
         <div class="add-option">
-          <p>혹시</p>
-          <div class="wrap">
-            <p>비밀번호를 잊으셨나요?</p>
-            <v-btn to="/user/password" class="btn--text">비밀번호 찾기</v-btn>
-            <!-- <router-link v-bind:to="{name:'????'}" class="btn--text">비밀번호 찾기</router-link> -->
-          </div>
-          <div class="wrap">
-            <p>아직 회원이 아니신가요?</p>
-            <v-btn to="/user/join" class="btn--text" v-on:click="dialog = false">가입하기</v-btn>
-            <!-- <router-link v-bind:to="{name:'Join'}" class="btn--text">가입하기</router-link> -->
-          </div>
-          <div class="wrap">
-            <p>서비스소개</p>
-            <v-btn to="/" class="btn--text" v-on:click="dialog = false">서비스소개</v-btn>
-            <!-- <router-link v-bind:to="{name:'HomePage'}" class="btn--text">서비스소개</router-link> -->
+          <div class="text-center">
+            <v-btn text small color="black" dark to="/user/password" v-on:click="dialog = false">비밀번호 찾기</v-btn>
+            <v-btn text small color="black" dark to="/user/join" v-on:click="dialog = false">가입하기</v-btn>
+            <v-btn text small color="black" dark to="#" v-on:click="dialog = false">서비스소개</v-btn>
           </div>
         </div>
+
+        <div class="sns-login">
+          <p>SNS 로그인</p>
+          <kakaoLogin />
+          <GoogleLogin />
+        </div>
+
 
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -116,14 +104,14 @@ export default {
       .has()
       .letters();
   },
-    watch: {
-      password: function(v) {
-        this.checkForm();
-      },
-      email: function(v) {
-        this.checkForm();
-      }
+  watch: {
+    password: function(v) {
+      this.checkForm();
     },
+    email: function(v) {
+      this.checkForm();
+    }
+  },
   methods: {
     checkForm() {
       if (this.email.length >= 0 && !EmailValidator.validate(this.email))
