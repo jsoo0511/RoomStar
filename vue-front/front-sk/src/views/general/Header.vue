@@ -68,6 +68,8 @@ export default {
   },
   methods: {
     headerLogout() {
+      this.$session.clear()
+      this.$session.destroy()
       this.$store.dispatch("logout");
       this.$router.push("/");
     },
