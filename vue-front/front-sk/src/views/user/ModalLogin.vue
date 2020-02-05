@@ -1,7 +1,5 @@
 <template>
-
-
-  <v-row justify="center">
+  <v-row justify="center" align="center">
     <v-dialog v-model="dialog" max-width="400px">
       <template v-slot:activator="{ on }">
         <v-btn color="transparent" dark v-on="on">로그인</v-btn>
@@ -9,36 +7,36 @@
 
       <v-card>
         <!-- <v-card-title> -->
-          <h3 style="text-align:center">RoomSTAR</h3>
+        <h3 style="text-align:center">RoomSTAR</h3>
         <!-- </v-card-title> -->
 
-        <v-row>
-          <div class="input-with-label">
-            <v-text-field
-              v-model="email"
-              v-bind:class="{error : error.email, complete:!error.email&&email.length!==0}"
-              @keyup.enter="login"
-              id="email"
-              placeholder="이메일을 입력하세요."
-              type="text"
-            />
-            <label for="email">이메일</label>
-            <div class="error-text" v-if="error.email">{{error.email}}</div>
-          </div>
+        <!-- <v-row> -->
+        <!-- <div class="input-with-label"> -->
+        <v-text-field
+          v-model="email"
+          v-bind:class="{error : error.email, complete:!error.email&&email.length!==0}"
+          @keyup.enter="login"
+          id="email"
+          placeholder="이메일을 입력하세요."
+          type="text"
+        />
+        <!-- <label for="email">이메일</label> -->
+        <div class="error-text" v-if="error.email">{{error.email}}</div>
+        <!-- </div> -->
 
-          <div class="input-with-label">
-            <v-text-field
-              v-model="password"
-              type="password"
-              v-bind:class="{error : error.password, complete:!error.password&&password.length!==0}"
-              id="password"
-              @keyup.enter="login"
-              placeholder="비밀번호를 입력하세요."
-            />
-            <label for="password">비밀번호</label>
-            <div class="error-text" v-if="error.password">{{error.password}}</div>
-          </div>
-        </v-row>
+        <!-- <div class="input-with-label"> -->
+        <v-text-field
+          v-model="password"
+          type="password"
+          v-bind:class="{error : error.password, complete:!error.password&&password.length!==0}"
+          id="password"
+          @keyup.enter="login"
+          placeholder="비밀번호를 입력하세요."
+        />
+        <!-- <label for="password">비밀번호</label> -->
+        <div class="error-text" v-if="error.password">{{error.password}}</div>
+        <!-- </div> -->
+        <!-- </v-row> -->
 
         <button
           class="btn btn--back btn--login"
@@ -47,7 +45,8 @@
           :disabled="!isSubmit"
           :class="{disabled : !isSubmit}"
           color="black darken-1"
-          text small
+          text
+          small
         >로그인</button>
 
         <!-- <v-btn text small
@@ -57,7 +56,7 @@
           :disabled="!isSubmit"
           :class="{disabled : !isSubmit}"
           color="black darken-1"
-        >로그인</v-btn> -->
+        >로그인</v-btn>-->
 
         <div class="add-option">
           <div class="text-center">
@@ -74,10 +73,9 @@
           </div>
         </div>
 
-
-        <div style = 'text-align:center;' >
+        <div style="text-align:center;">
           <p>SNS 로그인</p>
-          <kakaoLogin /> 
+          <kakaoLogin />
           <!-- 이거 가운데로 왜 안가니? -->
           <GoogleLogin />
         </div>
@@ -89,8 +87,6 @@
       </v-card>
     </v-dialog>
   </v-row>
-
-  
 </template>
 
 <script>
@@ -100,6 +96,7 @@ import router from "@/routes";
 import axios from "axios";
 import PV from "password-validator";
 import * as EmailValidator from "email-validator";
+import swal from "sweetalert";
 
 import KakaoLogin from "../../components/user/snsLogin/Kakao.vue";
 import GoogleLogin from "../../components/user/snsLogin/Google.vue";
@@ -108,7 +105,7 @@ import UserApi from "../../apis/UserApi";
 export default {
   components: {
     KakaoLogin,
-    GoogleLogin,
+    GoogleLogin
   },
   created() {
     this.component = this;
@@ -134,14 +131,14 @@ export default {
   methods: {
     checkForm() {
       if (this.email.length >= 0 && !EmailValidator.validate(this.email))
-        this.error.email = "=  이메일 형식이 아닙니다.";
+        this.error.email = "이메일 형식이 아닙니다.";
       else this.error.email = false;
 
       if (
         this.password.length >= 0 &&
         !this.passwordSchema.validate(this.password)
       )
-        this.error.password = "=  영문,숫자 포함 8 자리이상이어야 합니다.";
+        this.error.password = "영문,숫자 포함 8 자리이상이어야 합니다.";
       else this.error.password = false;
 
       let isSubmit = true;
@@ -186,11 +183,21 @@ export default {
             // 로딩 로직 짜는데 사용
             this.loading = false;
             this.$router.push("/");
+            return true;
           })
           .catch(error => {
-            alert("없는 사용자 입니다.");
+            // https://sweetalert.js.org/guides/
+            swal({
+              title: "없는 사용자 입니다.",
+              text: "다시 시도해보세요.",
+              buttons: '확인',
+              // icon: "warning"
+            });
+            // createelement로 해야 하나?
+            // return '<v-alert border="top" colored-border type="info" elevation="2"> 없는 사용자 입니다.</v-alert>'
             // fail인 경우 사용자가 없다고 하기 --> 버튼이 비활성화되므로 알람 안줘도 된다.
             // this.loading = false;
+            return false;
           });
 
         //요청 후에는 버튼 비활성화
@@ -229,6 +236,4 @@ export default {
 </script>
 
 <style scoped>
-
-
 </style>
