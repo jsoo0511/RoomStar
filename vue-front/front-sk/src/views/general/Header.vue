@@ -18,17 +18,18 @@
             </v-layout>
           </v-container>
 
-          <v-navigation-drawer v-model="drawer" absolute temporary>
+          <v-navigation-drawer v-model="drawer" absolute temporary disable-resize-watcher width='250' height='1000'>
+            <!-- https://kr.vuejs.org/v2/guide/transitioning-state.html -->
             <v-list class="pa-1">
               <v-list-tile avatar>
                 <v-list-tile-avatar>
                   <img src="https://randomuser.me/api/portraits/men/85.jpg" />
-                <br />
+                  <br />
                 </v-list-tile-avatar>
 
                 <v-list-tile-content>
                   <v-list-tile-title>John Leider</v-list-tile-title>
-                <br />
+                  <br />
                 </v-list-tile-content>
 
                 <br />
