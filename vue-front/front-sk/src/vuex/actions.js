@@ -8,7 +8,6 @@ export default {
     context.commit("setUserNickname", info.four);
   },
   logout(context) {
-    // this.$session.set("isUser", false);
     context.commit("setIsUser", false);
     context.commit("setToken", null);
   },

@@ -4,7 +4,7 @@
     <div class="v-parallax__image-container">
       <img ref="image" :src="img" :style="imageStyles">
       <video ref="video" :loop="loop" :muted="muted" :autoplay="autoplay" :style="videoStyles">
-        <source src="../../assets/images/IU_SKD.mp4" type="video/mp4">
+        <source src="../../../../../../../IU_SKD.mp4" type="video/mp4">
       </video>
     </div>
     <div class="v-parallax__content">

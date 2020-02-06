@@ -26,9 +26,9 @@ export default {
       // client_secret : xqVdC-6FJqgLZOSp3JndOKSK
       // only needed if you want to render the button with the google ui
       renderParams: {
-        width: 250,
-        height: 50,
-        longtitle: true
+        width: 220,
+        height: 49,
+        longtitle: true,
       }
     };
   },
@@ -54,7 +54,6 @@ export default {
       };
 
       console.log(toStore)
-
 
       this.$store.dispatch("login", toStore).then(res => {
         console.log(this.$store.state);
@@ -94,11 +93,11 @@ export default {
         .catch(e => {
           console.log("error: ", e);
         });
-      this.$router.push("/");
+      this.$router.push("/").catch(err => {});
     },
 
     onFailure(error) {
-      this.$router.push("/user/join");
+      this.$router.push("/user/join").catch(err => {});
     }
   }
 };
