@@ -77,7 +77,7 @@ let onSuccess = function(data) {
           store.dispatch("checkLogin", response.data.token);
           store.dispatch("login", toStore);
         })
-
+        
         .catch(e => {
           console.log("error: ", e);
         });
