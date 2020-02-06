@@ -26,11 +26,19 @@
         <router-link to="/gameRoom/">게임룸</router-link>
       </v-toolbar-title>
 
+
+
+
+
       <!-- 로그인 된 상태이면 false 값이므로 로그인을 보여준다 -->
       <v-toolbar-title v-if="this.isUser === false">
         <!--<router-link to="/login/">로그인</router-link>-->
         <ModalLogin />
       </v-toolbar-title>
+
+
+
+
 
       <v-menu left bottom>
         <template v-slot:activator="{ on }">

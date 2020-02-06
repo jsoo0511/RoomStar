@@ -5,9 +5,9 @@
         <v-btn color="transparent" dark v-on="on">로그인</v-btn>
       </template>
 
-      <v-card z-index=1>
+      <v-card z-index="1">
         <br />
-        
+
         <div style="text-align:center;">
           <kakaoLogin />
           <GoogleLogin />
@@ -33,7 +33,7 @@
           @keyup.enter="login"
           placeholder="비밀번호를 입력하세요."
         />
-  
+
         <div class="error-text" v-if="error.password">{{error.password}}</div>
 
         <button
@@ -57,7 +57,25 @@
               to="/user/password"
               v-on:click="dialog = false"
             >비밀번호 찾기</v-btn>
-            <v-btn text small color="black" dark to="/user/join" v-on:click="dialog = false">가입하기</v-btn>
+
+            <v-dialog v-model="joinDialog" max-width="400px">
+              <template v-slot:activator="{ on }">
+                <v-btn text small color="black" dark v-on="on" v-on:click="joinDialog = true">가입하기</v-btn>
+              </template>
+
+              <v-card z-index="2">
+                <br />
+                <br />
+                <br />
+                <br />
+
+                <Join />
+
+                <p>joinDialog</p>
+              </v-card>
+            </v-dialog>
+
+            <!-- <v-btn text small color="black" dark to="/user/join" v-on:click="dialog = false">가입하기</v-btn> -->
             <v-btn text small color="black" dark to="#" v-on:click="dialog = false">서비스소개</v-btn>
           </div>
         </div>
@@ -69,8 +87,6 @@
       </v-card>
     </v-dialog>
   </v-row>
-
-
 </template>
 
 <script>
@@ -85,6 +101,7 @@ import swal from "sweetalert";
 import KakaoLogin from "../../components/user/snsLogin/Kakao.vue";
 import GoogleLogin from "../../components/user/snsLogin/Google.vue";
 import UserApi from "../../apis/UserApi";
+import Join from "./Join.vue";
 
 //https://sweet-modal-vue.adepto.as/ 여기꺼 모달 쓰고싶은데 잘
 
@@ -92,6 +109,7 @@ export default {
   components: {
     KakaoLogin,
     GoogleLogin,
+    Join
   },
   created() {
     this.component = this;
@@ -207,6 +225,7 @@ export default {
   data: () => {
     return {
       dialog: false,
+      joinDialog: false,
       email: "",
       password: "",
       passwordSchema: new PV(),
