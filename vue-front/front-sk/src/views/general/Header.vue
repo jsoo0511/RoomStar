@@ -1,7 +1,14 @@
 <template>
   <div>
     <v-app-bar fixed color="rgba(0,0,0,0)" dark elevation="0">
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon>
+      <div v-if="this.drawer === true">
+        <!-- drawer 모듈이 들어갈 자리 -->
+        </div> 
+
+
+
+      </v-app-bar-nav-icon>
 
       <v-toolbar-title>
         <router-link to="/">RoomSTAR</router-link>
@@ -32,7 +39,6 @@
 
       <!-- 로그인 된 상태이면 false 값이므로 로그인을 보여준다 -->
       <v-toolbar-title v-if="this.isUser === false">
-        <!--<router-link to="/login/">로그인</router-link>-->
         <ModalLogin />
       </v-toolbar-title>
 
@@ -67,6 +73,13 @@ import ModalLogin from '../user/ModalLogin.vue'
 
 
 export default {
+
+
+  data: () => {
+    return {
+      drawer: false
+    }
+  },
   computed: {
     ...mapState(["isUser", "token"]),
     ...mapGetters(["options", "userId", "getIsUser", "getToken"])
