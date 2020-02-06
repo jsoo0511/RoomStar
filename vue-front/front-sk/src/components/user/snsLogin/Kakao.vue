@@ -113,6 +113,7 @@ export default {
   methods: {
     onSuccess,
     onFailure,
+
     loginWithKakao() {
       // 로그인 창을 띄웁니다.
       console.log(this.$store);

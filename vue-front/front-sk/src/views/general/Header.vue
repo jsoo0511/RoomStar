@@ -1,64 +1,75 @@
 <template>
   <div>
-    <v-app-bar fixed color="rgba(0,0,0,0)" dark elevation="0">
-      <v-app-bar-nav-icon>
-      <div v-if="this.drawer === true">
-        <!-- drawer 모듈이 들어갈 자리 -->
-        </div> 
-
-
-
-      </v-app-bar-nav-icon>
-
+    <v-app-bar
+      fixed
+      color="rgba(0,0,0,0)"
+      dark
+      elevation="0"
+      height="500px"
+      v-if="this.isUser === true"
+    >
+      <!-- 로그인 된 상태이면 true 값이므로 로그아웃을 보여준다 -->
       <v-toolbar-title>
-        <router-link to="/">RoomSTAR</router-link>
+        <!-- drawer 모듈이 들어갈 자리 -->
+        <v-layout wrap style="height: 650px; width: 100px;">
+          <v-container>
+            <v-layout justify-center>
+              <v-btn color="orange" dark @click.stop="drawer = !drawer">Toggle</v-btn>
+            </v-layout>
+          </v-container>
+
+          <v-navigation-drawer v-model="drawer" absolute temporary>
+            <v-list class="pa-1">
+              <v-list-tile avatar>
+                <v-list-tile-avatar>
+                  <img src="https://randomuser.me/api/portraits/men/85.jpg" />
+                <br />
+                </v-list-tile-avatar>
+
+                <v-list-tile-content>
+                  <v-list-tile-title>John Leider</v-list-tile-title>
+                <br />
+                </v-list-tile-content>
+
+                <br />
+              </v-list-tile>
+            </v-list>
+
+            <v-list class="pt-0" dense>
+              <v-divider></v-divider>
+
+              <v-list-tile v-for="item in items" :key="item.title">
+                <v-list-tile-action>
+                  <v-icon>{{ item.icon }}</v-icon>
+                </v-list-tile-action>
+
+                <v-list-tile-content>
+                  <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                </v-list-tile-content>
+              </v-list-tile>
+            </v-list>
+          </v-navigation-drawer>
+        </v-layout>
       </v-toolbar-title>
 
-      <v-spacer></v-spacer>
-
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <!-- 로그인 된 상태이면 true 값이므로 로그아웃을 보여준다 -->
-      <v-toolbar-title v-if="this.isUser === true">
-        <button @click='headerLogout()' style="color:black">로그아웃</button>
-
+      <v-toolbar-title v-if="this.isUser === true" style="position:static">
         <router-link to="/waitingRoom/">대기실</router-link>
         <router-link to="/mypage/">마이페이지</router-link>
         <router-link to="/gameRoom/">게임룸</router-link>
+        <button @click="headerLogout()" style="color:black">로그아웃</button>
       </v-toolbar-title>
+    </v-app-bar>
 
-
-
-
-
+    <v-app-bar fixed color="rgba(0,0,0,0)" dark elevation="0" v-if="this.isUser === false">
       <!-- 로그인 된 상태이면 false 값이므로 로그인을 보여준다 -->
-      <v-toolbar-title v-if="this.isUser === false">
+      <v-toolbar-title>
         <ModalLogin />
       </v-toolbar-title>
+      <v-spacer></v-spacer>
 
-
-
-
-
-      <v-menu left bottom>
-        <template v-slot:activator="{ on }">
-          <v-btn icon v-on="on">
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </template>
-
-        <v-list>
-          <v-list-item v-for="n in 5" :key="n" @click="() => {}">
-            <v-list-item-title>Option {{ n }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+      <!-- <v-toolbar-title>
+        <router-link to="/">RoomSTAR</router-link>
+      </v-toolbar-title>-->
     </v-app-bar>
   </div>
 </template>
@@ -69,29 +80,32 @@ import { mapState, mapGetters, mapActions } from "vuex";
 import axios from "axios";
 import jwtDecode from "jwt-decode"; // JWT 의 payload 값을 해석해서 보여주는 library
 import router from "@/routes";
-import ModalLogin from '../user/ModalLogin.vue'
-
+import ModalLogin from "../user/ModalLogin.vue";
+// import HeaderDrawer from "./HeaderDrawer.vue";
 
 export default {
-
-
-  data: () => {
+  data() {
     return {
-      drawer: false
-    }
+      drawer: null,
+      items: [
+        { title: "Home", icon: "dashboard" },
+        { title: "About", icon: "question_answer" }
+      ]
+    };
   },
   computed: {
     ...mapState(["isUser", "token"]),
     ...mapGetters(["options", "userId", "getIsUser", "getToken"])
   },
   components: {
-    ModalLogin,
+    ModalLogin
+    // HeaderDrawer
   },
 
   methods: {
     headerLogout() {
-      this.$session.clear()
-      this.$session.destroy()
+      this.$session.clear();
+      this.$session.destroy();
       this.$store.dispatch("logout");
       this.$router.push("/");
     },
@@ -144,7 +158,6 @@ export default {
 a {
   color: white !important;
   text-decoration: none !important;
-
 }
 a:link {
   color: white;
