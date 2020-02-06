@@ -28,8 +28,7 @@
 
       <!-- 로그인 된 상태이면 false 값이므로 로그인을 보여준다 -->
       <v-toolbar-title v-if="this.isUser === false">
-        <!--<router-link to="/login/">로그인</router-link>-->
-        <ModalLogin />
+        <router-link to="/login/">로그인</router-link>
       </v-toolbar-title>
 
       <v-menu left bottom>
@@ -55,24 +54,18 @@ import { mapState, mapGetters, mapActions } from "vuex";
 import axios from "axios";
 import jwtDecode from "jwt-decode"; // JWT 의 payload 값을 해석해서 보여주는 library
 import router from "@/routes";
-import ModalLogin from '../user/ModalLogin.vue'
 
 
 export default {
   computed: {
     ...mapState(["isUser", "token"]),
-    ...mapGetters(["options", "userId", "getIsUser", "getToken"])
-  },
-  components: {
-    ModalLogin,
+    ...mapGetters(["options", "userId", "getIsUser", "getToken"]),
   },
 
   methods: {
-    headerLogout() {
-      this.$session.clear()
-      this.$session.destroy()
-      this.$store.dispatch("logout");
-      this.$router.push("/");
+    headerLogout(){
+      this.$store.dispatch("logout")
+      this.$router.push('/')
     },
 
     checkLoggedIn() {
@@ -119,7 +112,7 @@ export default {
 };
 </script>
  
-<style scoped type="text/css">
+<style type="text/css">
 a {
   color: white !important;
   text-decoration: none !important;

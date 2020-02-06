@@ -5,12 +5,16 @@ import HomePage from "./views/general/HomePage.vue";
 import MyPage from "./views/general/MyPage.vue";
 import GameRoom from "./views/general/GameRoom.vue";
 import WaitingRoom from "./views/general/WaitingRoom.vue";
-import SharingPage from "./views/general/SharingPage.vue";
-import Password from "./views/user/Password.vue";
+// import PostPage from "./views/PostPage.vue";
+// import PortfolioPage from "./views/PortfolioPage.vue";
 
 import Components from './views/Components.vue'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
+//upload
+import FileUploader from './views/FileUploader.vue'
+import Downloader from './views/Downloader.vue'
 
 Vue.use(VueRouter)
 
@@ -51,18 +55,18 @@ export default [
     component : GameRoom
   },
   {
+    path: '/file',
+    name: 'file',
+    component: FileUploader
+  },
+  {
+    path: '/down',
+    name: 'down',
+    component: Downloader
+  },
+  {
     path:"/waitingRoom",
     name:"waitingRoom",
     component : WaitingRoom
-  },
-  {
-    path:"/sharingPage",
-    name:"sharingPage",
-    component : SharingPage
-  },
-  {
-    path:"/user/password",
-    name:"Password",
-    component : Password
   },
 ];
