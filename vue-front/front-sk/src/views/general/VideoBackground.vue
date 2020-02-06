@@ -1,6 +1,6 @@
 <template>
   <div>
-  <video autoplay loop muted>
+  <video autoplay loop muted height="800">
     <source src = "../../../../../../../IU_SKD.mp4" type = "video/mp4">
   </video>
   </div>
@@ -21,7 +21,7 @@
 //   components: { VideoBg }
 // })
 </script>
-<style>
+<style scoped>
 @media (min-aspect-ratio: 16/9) {
   .fullscreen-bg__video {
     width: 100%;

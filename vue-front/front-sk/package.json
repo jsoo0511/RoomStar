@@ -38,6 +38,7 @@
     "vue-video-background": "^0.1.2",
     "vue-videobg": "^2.0.0",
     "vuetify": "^2.2.6",
+    "vuetify-video-parallax": "^1.0.2",
     "vuex": "^3.1.2"
   },
   "devDependencies": {

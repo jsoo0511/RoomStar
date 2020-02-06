@@ -3,11 +3,11 @@
     <v-bottom-navigation
     fixed
     :value="activeBtn"
-    dark
-    color="rgba(99,99,99)"
+    dark  
     background-color="rgba(255,255,255,0)"
     horizontal
-    elevation="0"
+    grow
+    toggle
   >
     <v-btn>
       <span>Recents</span>
