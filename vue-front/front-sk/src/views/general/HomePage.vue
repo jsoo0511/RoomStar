@@ -16,20 +16,18 @@
               class="mt-12"
               color="orange lighten-1"
               opacity="0.5"
-              dark
+              dark  
               large
               href="/pre-made-themes"
             >
               노래하기
             </v-btn>
-            <section id="section05" class="demo">
-            <a href="#section06"><span></span>Scroll</a>
-          </section>
+           <a href="#" id="scroll-down" class="scroll-down" address="true"></a>
           </v-layout>
         </v-video-parallax>
       </section>
 
-      <section id="section06">
+      <section class="ok" id="ok">
         <v-layout
           column
           wrap
@@ -217,6 +215,7 @@
 </template>
  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  
 
 <script>
@@ -239,6 +238,7 @@ import VuetifyVideoParallax from './VuetifyVideoParallax.vue'
 Vue.component('v-video-parallax', VuetifyVideoParallax)
 import VueLoading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css';
+import $ from 'jquery';
 Vue.use(VueLoading);
 Vue.component('loading', VueLoading)
 export default {
@@ -250,7 +250,13 @@ export default {
       loader: null,
     }
   },
-  mounted: function() {
+  mounted(){   
+     $(function() {
+    $('.scroll-down').click (function() {
+      $('html, body').animate({scrollTop: $('section.ok').offset().top }, 'slow');
+      return false;
+    });
+  });
   },
   created: function() {
     let loader = Vue.$loading.show({
@@ -314,11 +320,11 @@ v-content__wrap{
 }
 #thanks p a:hover {
   color: #888;
-}
+}/*
 .demo a {
   position: absolute;
   bottom: 20px;
-  left: 50%;
+  left: 48%;
   z-index: 2;
   display: inline-block;
   -webkit-transform: translate(0, -50%);
@@ -332,6 +338,7 @@ v-content__wrap{
 .demo a:hover {
   opacity: .5;
 }
+
 
 #section05 a {
   padding-top: 170px;
@@ -377,5 +384,75 @@ v-content__wrap{
     opacity: 0;
   }
 }
+*/
+
+*,
+:after,
+:before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.scroll-down {
+  opacity: 1;
+  -webkit-transition: all .5s ease-in 3s;
+  transition: all .5s ease-in 3s;
+}
+
+.scroll-down {
+  position: absolute;
+  bottom: 250px;
+  left: 50%;
+  margin-left: -16px;
+  display: block;
+  width: 32px;
+  height: 32px;
+  border: 2px solid #FFF;
+  background-size: 14px auto;
+  border-radius: 50%;
+  z-index: 2;
+  -webkit-animation: bounce 2s infinite 2s;
+  animation: bounce 2s infinite 2s;
+  -webkit-transition: all .2s ease-in;
+  transition: all .2s ease-in;
+  transform: scale(1)
+}
+
+.scroll-down:before {
+    position: absolute;
+    top: calc(50% - 8px);
+    left: calc(50% - 6px);
+    transform: rotate(-45deg);
+    display: block;
+    width: 12px;
+    height: 12px;
+    content: "";
+    border: 2px solid white;
+    border-width: 0px 0 2px 2px;
+}
+
+@keyframes bounce {
+  0%,
+  100%,
+  20%,
+  50%,
+  80% {
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+  40% {
+    -webkit-transform: translateY(-10px);
+    -ms-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+  60% {
+    -webkit-transform: translateY(-5px);
+    -ms-transform: translateY(-5px);
+    transform: translateY(-5px);
+  }
+  }
+  
 
 </style>

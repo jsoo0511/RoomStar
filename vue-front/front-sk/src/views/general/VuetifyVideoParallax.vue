@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="v-parallax" :style="'height: ' + 900 + 'px;'">
+  <div class="v-parallax" :style="'height: ' + 855 + 'px;'">
     <div class="v-parallax__image-container">
       <img ref="image" :src="img" :style="imageStyles">
       <video ref="video" :loop="loop" :muted="muted" :autoplay="autoplay" :style="videoStyles">
@@ -30,7 +30,7 @@ export default {
     height: String,
     width: {
       type: String,
-      default: '1600px'
+      default: '100%'
     },
     loop: {
       type: String,
@@ -150,7 +150,7 @@ export default {
     videoStyles: function () {
       if (!this.$data.videoReady) {
         return {
-          visibility: 'hidden',
+          visibility: 'overflow-hidden',
           display: 'none',
         }
       } else {
