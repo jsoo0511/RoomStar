@@ -5,7 +5,7 @@
         <v-btn color="transparent" dark v-on="on">로그인</v-btn>
       </template>
 
-      <v-card>
+      <v-card z-index=1>
         <br />
         
         <div style="text-align:center;">
