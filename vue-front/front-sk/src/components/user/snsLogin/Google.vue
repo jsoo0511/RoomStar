@@ -1,12 +1,11 @@
 <template>
-  <div class="google-login">
     <GoogleLogin
       :params="params"
       :renderParams="renderParams"
       :onSuccess="onSuccess"
       :onFailure="onFailure"
     ></GoogleLogin>
-  </div>
+
 </template>
 
 <script>
@@ -26,7 +25,7 @@ export default {
       // client_secret : xqVdC-6FJqgLZOSp3JndOKSK
       // only needed if you want to render the button with the google ui
       renderParams: {
-        width: 220,
+        width: 50,
         height: 49,
         longtitle: true,
       }
