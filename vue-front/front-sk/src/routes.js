@@ -1,12 +1,16 @@
-import Login from './views/user/Login.vue'
-import Join from './views/user/Join.vue'
+import Password from "./views/user/Password.vue";
+
 import webCam from './webcam/webCam.vue'
 import HomePage from "./views/general/HomePage.vue";
 import MyPage from "./views/general/MyPage.vue";
-import GameRoom from "./views/general/GameRoom.vue";
 import WaitingRoom from "./views/general/WaitingRoom.vue";
 import SharingPage from "./views/general/SharingPage.vue";
-import Password from "./views/user/Password.vue";
+
+import GameRoom from "./views/general/GameRoom.vue";
+import firstGameRoom from "./views/gamerooms/firstGameRoom.vue"
+import secondGameRoom from "./views/gamerooms/secondGameRoom.vue"
+import thirdGameRoom from "./views/gamerooms/thirdGameRoom.vue"
+import fourthGameRoom from "./views/gamerooms/fourthGameRoom.vue"
 
 import Components from './views/Components.vue'
 import Vue from 'vue'
@@ -39,6 +43,26 @@ export default [
     path:"/gameRoom",
     name:"gameRoom",
     component : GameRoom
+  },
+  {
+    path:"/firstGameRoom",
+    name:"firstGameRoom",
+    component : firstGameRoom
+  },
+  {
+    path:"/secondGameRoom",
+    name:"secondGameRoom",
+    component : secondGameRoom
+  },
+  {
+    path:"/thirdGameRoom",
+    name:"thirdGameRoom",
+    component : thirdGameRoom
+  },
+  {
+    path:"/fourthGameRoom",
+    name:"fourthGameRoom",
+    component : fourthGameRoom
   },
   {
     path:"/waitingRoom",

@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-app-bar
+    fixed
     hide-on-scroll
       color="rgba(0,0,0,0)"
       dark
@@ -19,19 +20,12 @@
     <v-app-bar fixed color="rgba(0,0,0,0)" dark elevation="0" v-if="this.isUser === false" 
       hide-on-scroll>
       <!-- 로그인 된 상태이면 false 값이므로 로그인을 보여준다 -->
-      <v-app-bar-nav-icon 
-          @click.stop="drawer = !drawer">
-    </v-app-bar-nav-icon>
       <v-spacer></v-spacer>
       <v-toolbar-title  style="margin-right:10px;">
         <ModalLogin />
 
       </v-toolbar-title>
       <v-spacer></v-spacer>
-
-      <!-- <v-toolbar-title>
-        <router-link to="/">RoomSTAR</router-link>
-      </v-toolbar-title>-->
     </v-app-bar>
 
 
