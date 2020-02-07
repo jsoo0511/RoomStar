@@ -47,7 +47,8 @@
         >
           <v-list-item two-line :class="miniVariant && 'px-0'">
             <v-list-item-avatar>
-              <img src="https://randomuser.me/api/portraits/men/81.jpg">
+              <!-- <img src="https://randomuser.me/api/portraits/men/81.jpg"> -->
+              <img :src="this.profile">
             </v-list-item-avatar>
 
             <v-list-item-content>
@@ -104,6 +105,7 @@ export default {
         miniVariant: false,
         expandOnHover: false,
         background: false,
+        profile: '',
     };
   },
   computed: {
@@ -160,8 +162,35 @@ export default {
   mounted() {
     if (this.isUser) {
       this.checkLoggedIn();
+
+
+    // 프로필사진로딩하거나 그냥 SESSION에 저장해서 저장한 URL을 올리자
+    // 근데 값이 자주 바뀔 수도 있으니까 그냥 MOUNTED? CREATED하는게 좋을 것 같음
+    const userId = this.$session.get("userId");
+    axios
+      .get("http://70.12.247.115:8080/mypage/" + userId)
+      .then(response => {
+        console.log("success2: ", response);
+        const email = response.data.user_info.email;
+        const nick = response.data.user_info.nickname;
+        const grade = response.data.user_info.grade;
+        const game = response.data.user_info.game;
+        const win = response.data.user_info.win;
+        const lose = response.data.user_info.lose;
+        const winrate = response.data.user_info.win_rate;
+
+        this.profile = response.data.user_info.profileimg;
+
+
+
+        
+      })
+      .catch(e => {
+        console.log("error: ", e);
+      });
     }
   },
+
   watch() {
     if (this.isUser) {
       this.checkLoggedIn();
