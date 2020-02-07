@@ -43,21 +43,21 @@
             </div>
           </v-flex>-->
           <v-flex xs12>
-          <h1 style="text-align:center; margin-bottom:-20px"> Menu Select </h1>
+          <h1 style="text-align:center; margin-top:30px;margin-bottom:-20px"> Menu Select </h1>
             <v-container grid-list-xl>
               <v-layout row wrap align-center>
                 <v-flex xs12 md4>
-                  <v-card flat class="mx-auto" elevation="5">
+                  <v-card flat  elevation="5">
                    <v-img
                       class="white--text align-end"
-                      height="300px"
+                      height="500px"
                       width="100%"
                       src="../../assets/images/singBattle.png"
                     >
                       <v-card-title>Sing Battle</v-card-title>
-                    </v-img>
-                    <v-card-subtitle class="pb-0">노래 배틀하기</v-card-subtitle>
-                      <v-card-text class="text--primary" style="height:150px;">
+                    
+                    <!--<v-card-subtitle class="pb-0">노래 배틀하기</v-card-subtitle>-->
+                      <v-card-text class="white--text" style="height:100px; padding-top:10px;">
                         <div>내 노래는 세상을 울릴 노래다ㅏ아!</div>
                         <div>추천을 많이 받은 사람이 승리합니다!</div>
                       </v-card-text>
@@ -70,6 +70,7 @@
                           경연하기
                         </v-btn>
                       </v-card-actions>
+                      </v-img>
                     </v-card>
                 </v-flex>
                 <v-flex xs12 md4>
@@ -77,13 +78,12 @@
                    <v-img
                       class="white--text align-end"
                       width="100%"
-                      height="300px"
+                      height="500px"
                       src="../../assets/images/watchBattle.png"
                     >
                       <v-card-title>Watch Battle</v-card-title>
-                    </v-img>
-                    <v-card-subtitle class="pb-0">배틀 시청하기</v-card-subtitle>
-                      <v-card-text class="text--primary"  style="height:150px;">
+                    
+                      <v-card-text class="white--text"  style="height:100px;">
                         <div>그치만.. 듣지 않으면 알 수 없는걸..</div>
                         <div>노래 경연을 듣고 투표해주세요!</div>
                       </v-card-text>
@@ -96,20 +96,20 @@
                           시청하기
                         </v-btn>
                       </v-card-actions>
+                      </v-img>
                     </v-card>
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-card flat class="mx-auto" elevation="5"> 
                    <v-img
                       class="white--text align-end"
-                      height="300px"
+                      height="500px"
                       width="100%"
                       src="../../assets/images/showOff.png"
                     >
                       <v-card-title>Sing Showoff</v-card-title>
-                    </v-img>
-                    <v-card-subtitle class="pb-0">노래 자랑하기</v-card-subtitle>
-                      <v-card-text class="text--primary"  style="height:150px;">
+                    
+                      <v-card-text class="white--text"  style="height:100px;">
                         <div>오늘따라 노래가 너무 잘된다구?!</div>
                         <div>내 노래를 모두에게 자랑해보세요!</div>
                       </v-card-text>
@@ -122,6 +122,7 @@
                           자랑하기
                         </v-btn>
                       </v-card-actions>
+                      </v-img>
                     </v-card>
                 </v-flex>
               </v-layout>
@@ -129,7 +130,7 @@
           </v-flex>
         </v-layout>
       </section>
-<!--
+
       <section>
         <v-parallax src="../../assets/images/hero.jpeg" height="380">
           <v-layout column align-center justify-center>
@@ -147,7 +148,7 @@
           </v-layout>
         </v-parallax>
       </section>
--->
+
       <section>
         <v-container grid-list-xl>
           <v-layout row wrap justify-center class="my-12">
@@ -265,17 +266,17 @@ export default {
   });
   },
   created: function() {
-    let loader = Vue.$loading.show({
-      container: this.$refs.loadingContainer,
-      canCancel: true, // default false
-      //onCancel: this.yourMethodName,
-      color: '#ffffff',
-      loader: 'spinner',
-      width: 64,
-      height: 64,
-      backgroundColor: '#ffffff',
-      zIndex: 999,
-    })
+    // let loader = Vue.$loading.show({
+    //   container: this.$refs.loadingContainer,
+    //   canCancel: true, // default false
+    //   //onCancel: this.yourMethodName,
+    //   color: '#ffffff',
+    //   loader: 'spinner',
+    //   width: 64,
+    //   height: 64,
+    //   backgroundColor: '#ffffff',
+    //   zIndex: 999,
+    // })
     let self = Object.assign(this, {})
     window.addEventListener("load", function(event) {
       console.log('document ready')
