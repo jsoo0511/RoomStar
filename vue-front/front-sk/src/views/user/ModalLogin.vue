@@ -1,6 +1,6 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-dialog v-model="dialog" max-width="400px">
+  <v-row justify="center">
+    <v-dialog v-model="dialog">
       <template v-slot:activator="{ on }">
         <v-btn color="transparent" dark v-on="on">로그인</v-btn>
       </template>
