@@ -16,16 +16,6 @@ Vue.use(VueRouter)
 
 export default [
   {
-    path: "/Login",
-    name: "Login",
-    component: Login
-  },
-  {
-    path: "/user/join",
-    name: "Join",
-    component: Join
-  },
-  {
     path: "/components",
     name: "Components",
     component: Components
@@ -56,8 +46,8 @@ export default [
     component : WaitingRoom
   },
   {
-    path:"/sharingPage",
-    name:"sharingPage",
+    path:"/SharingPage",
+    name:"SharingPage",
     component : SharingPage
   },
   {

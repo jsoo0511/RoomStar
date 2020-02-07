@@ -11,7 +11,7 @@
 <script>
 export default {
   components: {
-    Feed: () => import("@/views/general/Feed")
+    Feed: () => import("./Feed.vue")
   }
 };
 </script>

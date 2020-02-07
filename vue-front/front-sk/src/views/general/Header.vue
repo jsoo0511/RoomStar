@@ -32,6 +32,9 @@
         <router-link to="/">RoomSTAR</router-link>
       </v-toolbar-title>-->
     </v-app-bar>
+
+
+
     <v-navigation-drawer
      v-model="drawer"
         :color="color"
@@ -76,6 +79,10 @@
           </v-list-item>
         </v-list>
     </v-navigation-drawer>
+
+
+
+    
   </div>
 </template>
 
