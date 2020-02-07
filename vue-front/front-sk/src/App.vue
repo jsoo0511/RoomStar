@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <Header />
+    <HeaderDrawer/>
     <router-view />
     <Footer />
   </v-app>
@@ -8,6 +9,7 @@
 <script>
 import Header from "./views/general/Header.vue";
 import Footer from "./views/general/Footer.vue";
+import HeaderDrawer from "./views/general/HeaderDrawer.vue";
 import { mapState, mapGetters } from "vuex";
 import axios from "axios";
 import jwtDecode from "jwt-decode"; // JWT 의 payload 값을 해석해서 보여주는 library
@@ -17,7 +19,8 @@ export default {
   name: "app",
   components: {
     Header,
-    Footer
+    Footer,
+    HeaderDrawer
   },
   computed: {
     ...mapState(["isUser", "token", "userId", "userNickname"])

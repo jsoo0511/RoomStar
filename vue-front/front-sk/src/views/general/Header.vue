@@ -5,55 +5,10 @@
       color="rgba(0,0,0,0)"
       dark
       elevation="0"
-      height="500px"
       v-if="this.isUser === true"
     >
-      <!-- 로그인 된 상태이면 true 값이므로 로그아웃을 보여준다 -->
-      <v-toolbar-title>
-        <!-- drawer 모듈이 들어갈 자리 -->
-        <v-layout wrap style="height: 650px; width: 100px;">
-          <v-container>
-            <v-layout justify-center>
-              <v-btn color="orange" dark @click.stop="drawer = !drawer">Toggle</v-btn>
-            </v-layout>
-          </v-container>
 
-          <v-navigation-drawer v-model="drawer" absolute temporary disable-resize-watcher width='250' height='1000'>
-            <!-- https://kr.vuejs.org/v2/guide/transitioning-state.html -->
-            <v-list class="pa-1">
-              <v-list-tile avatar>
-                <v-list-tile-avatar>
-                  <img src="https://randomuser.me/api/portraits/men/85.jpg" />
-                  <br />
-                </v-list-tile-avatar>
-
-                <v-list-tile-content>
-                  <v-list-tile-title>John Leider</v-list-tile-title>
-                  <br />
-                </v-list-tile-content>
-
-                <br />
-              </v-list-tile>
-            </v-list>
-
-            <v-list class="pt-0" dense>
-              <v-divider></v-divider>
-
-              <v-list-tile v-for="item in items" :key="item.title">
-                <v-list-tile-action>
-                  <v-icon>{{ item.icon }}</v-icon>
-                </v-list-tile-action>
-
-                <v-list-tile-content>
-                  <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                </v-list-tile-content>
-              </v-list-tile>
-            </v-list>
-          </v-navigation-drawer>
-        </v-layout>
-      </v-toolbar-title>
-
-      <v-toolbar-title v-if="this.isUser === true" style="position:static">
+      <v-toolbar-title v-if="this.isUser === true">
         <router-link to="/waitingRoom/">대기실</router-link>
         <router-link to="/mypage/">마이페이지</router-link>
         <router-link to="/gameRoom/">게임룸</router-link>
