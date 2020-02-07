@@ -8,7 +8,7 @@
       <v-card z-index="1">
         <br />
 
-        <div style="text-align:center;">
+        <div>
           <kakaoLogin />
           <GoogleLogin />
         </div>
@@ -65,13 +65,7 @@
 
               <v-card z-index="2">
                 <br />
-                <br />
-                <br />
-                <br />
-
                 <Join />
-
-                <p>joinDialog</p>
               </v-card>
             </v-dialog>
 

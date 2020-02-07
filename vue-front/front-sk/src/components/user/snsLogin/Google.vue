@@ -1,12 +1,11 @@
 <template>
-  <div class="google-login">
     <GoogleLogin
       :params="params"
       :renderParams="renderParams"
       :onSuccess="onSuccess"
       :onFailure="onFailure"
     ></GoogleLogin>
-  </div>
+
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <span>
     <button id="kakao-login" v-on:click="loginWithKakao" :on-success="success" :on-failure="fail">
       <img
         src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium_ov.png"
@@ -16,7 +16,7 @@
         style="display:none"
       ></KakaoLogin>
     </div>
-  </div>
+  </span>
 </template>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
