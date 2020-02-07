@@ -7,19 +7,24 @@
       elevation="0"
       v-if="this.isUser === true"
     >
-
-      <v-toolbar-title v-if="this.isUser === true">
-        <router-link to="/waitingRoom/">대기실</router-link>
-        <router-link to="/mypage/">마이페이지</router-link>
-        <router-link to="/gameRoom/">게임룸</router-link>
-        <button @click="headerLogout()" style="color:black">로그아웃</button>
+    <v-app-bar-nav-icon 
+          @click.stop="drawer = !drawer">
+    </v-app-bar-nav-icon>
+    <v-spacer></v-spacer>
+    <v-toolbar-title v-if="this.isUser === true" style="margin-right:10px;">
+        <button @click="headerLogout()" style="color:white">로그아웃</button>
       </v-toolbar-title>
     </v-app-bar>
 
     <v-app-bar fixed color="rgba(0,0,0,0)" dark elevation="0" v-if="this.isUser === false">
       <!-- 로그인 된 상태이면 false 값이므로 로그인을 보여준다 -->
-      <v-toolbar-title>
+      <v-app-bar-nav-icon 
+          @click.stop="drawer = !drawer">
+    </v-app-bar-nav-icon>
+      <v-spacer></v-spacer>
+      <v-toolbar-title  style="margin-right:10px;">
         <ModalLogin />
+
       </v-toolbar-title>
       <v-spacer></v-spacer>
 
@@ -27,6 +32,50 @@
         <router-link to="/">RoomSTAR</router-link>
       </v-toolbar-title>-->
     </v-app-bar>
+    <v-navigation-drawer
+     v-model="drawer"
+        :color="color"
+        :expand-on-hover="expandOnHover"
+        :mini-variant="miniVariant"
+        :src="bg"
+        absolute
+        temporary
+        dark
+        floating
+      >
+        <v-list
+          dense
+          nav
+        >
+          <v-list-item two-line :class="miniVariant && 'px-0'">
+            <v-list-item-avatar>
+              <img src="https://randomuser.me/api/portraits/men/81.jpg">
+            </v-list-item-avatar>
+
+            <v-list-item-content>
+              <v-list-item-title>Application</v-list-item-title>
+              <v-list-item-subtitle>Subtext</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-divider></v-divider>
+
+          <v-list-item
+            v-for="item in items"
+            :key="item.title"
+            :to="item.links"
+            link
+          >
+            <v-list-item-icon>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+    </v-navigation-drawer>
   </div>
 </template>
 
@@ -42,16 +91,25 @@ import ModalLogin from "../user/ModalLogin.vue";
 export default {
   data() {
     return {
-      drawer: null,
-      items: [
-        { title: "Home", icon: "dashboard" },
-        { title: "About", icon: "question_answer" }
-      ]
+        drawer: false,
+        items: [
+          { title: '마이페이지', icon: 'mdi-view-dashboard',links : '/mypage/' },
+          { title: '노래 배틀하기', icon: 'mdi-image',links : '/gameRoom/' },
+          { title: '배틀 시청하기', icon: 'mdi-help-box',links : '/waitingRoom/' },
+          { title: '노래 자랑하기', icon: 'mdi-view-dashboard', links : '/SharingPage/' },
+        ],
+        color: 'rgba(253,208,23,0.8)',
+        miniVariant: false,
+        expandOnHover: false,
+        background: false,
     };
   },
   computed: {
     ...mapState(["isUser", "token"]),
-    ...mapGetters(["options", "userId", "getIsUser", "getToken"])
+    ...mapGetters(["options", "userId", "getIsUser", "getToken"]),
+    bg () {
+        return this.background ? 'https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg' : undefined
+      },
   },
   components: {
     ModalLogin
