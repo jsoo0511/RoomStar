@@ -12,6 +12,8 @@
           >
             <h1 class="white--text mb-2 display-1 text-center">ROOM STAR</h1>
             <h2 class="subheading mb-1 text-center">        </h2>
+
+
             <v-btn
               class="mt-12"
               color="orange lighten-1"
@@ -22,6 +24,8 @@
             >
               로그인하기
             </v-btn>
+
+
            <a href="#" id="scroll-down" class="scroll-down" address="true"></a>
           </v-layout>
         </v-video-parallax>
@@ -221,6 +225,7 @@
 
 <script>
 import Vue from 'vue'
+// import ModalLogin from '../user/ModalLogin.vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 Vue.use(Vuetify, {
@@ -245,6 +250,9 @@ Vue.component('loading', VueLoading)
 export default {
   name: 'HomePage',
   vuetify: new Vuetify(),
+  components: {
+    // ModalLogin
+  },
   data () {
     return {
       title: '',

@@ -22,17 +22,9 @@
           참가자 등급: {{roomInfo.user2_grade}}<br>
           참가자 승률: {{roomInfo.user2_win_rate}}<br>
           
-
-          <v-btn v-if="roomInfo.singer_num < 2" @click="SingingButton">노래부르기</v-btn>
-          
-          
-          <v-btn @click="WatchingButton">시청하기</v-btn>
-
-
+          <v-btn @click="WatchingButton(roomInfo.room_id, $event)">시청하기</v-btn>
 
         </li>
-        
-      
       </ul>
     </section>
 
@@ -56,29 +48,27 @@ export default {
     };
   },
   methods: {
-    WatchingButton(){
-      const userId = this.$session.get("userId");
+    WatchingButton(room_id){
+      const userid = this.$session.get("userId");
       const userNickname = this.$session.get("userNickname");
-      console.log(userId, userNickname)
+      console.log(userid, userNickname)
       let data = {
-        userid : userId
-
+        userid,
+        room_id,
+        vote: 0 
       }
+      console.log(data)
 
-      axios.post("http://localhost:8080/Insert_watching/")
-      // http://localhost:8080/Insert_watching
-      // 이건 넘겨줄때 userid랑 들어가는 room_id랑 vote(투표1,2에 했는지 유무)값 requestbody로 묶어서 보내주면돼
-      // post 
-      // vote는 그냥 0으로 default한다음 묶어서 보내줘
-
-    
+      axios
+      .post("http://70.12.247.115:8080/Insert_watching", data)
+      .then(response => {
+        console.log(response)
+        // 해당 room으로 이동
+      })
+      .catch(e => {
+        console.log("error: ", e)
+      })
     },
-    SingingButton(){
-      // http://localhost:8080/Insert_watching
-      //
-    }
-
-
   },
 
   created() {
