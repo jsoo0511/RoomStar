@@ -79,7 +79,7 @@
   }
 </script>
 
-<style>
+<style scoped>
 .v-image__image {
   transition: .3s linear;
 }
