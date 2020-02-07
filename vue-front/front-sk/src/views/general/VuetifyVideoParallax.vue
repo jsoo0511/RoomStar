@@ -30,7 +30,7 @@ export default {
     height: String,
     width: {
       type: String,
-      default: '1600px'
+      default: '1600px%'
     },
     loop: {
       type: String,

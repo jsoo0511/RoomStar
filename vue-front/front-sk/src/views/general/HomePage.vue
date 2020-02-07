@@ -10,7 +10,7 @@
             justify-center
             class="white--text"
           >
-            <h1 class="white--text mb-2 display-1 text-center">ROOM STAR</h1>
+            <h1 class="white--text mb-2 display-1 text-center">ROOM ST★R</h1>
             <h2 class="subheading mb-1 text-center">        </h2>
 
 
@@ -20,7 +20,7 @@
               opacity="0.5"
               dark  
               large
-              href="/pre-made-themes"
+              href="/"
             >
               로그인하기
             </v-btn> -->
@@ -51,17 +51,17 @@
             <v-container grid-list-xl>
               <v-layout row wrap align-center>
                 <v-flex xs12 md4>
-                  <v-card flat  elevation="5">
+                  <v-card flat class="mx-auto " elevation="7"  width="90%">
                    <v-img
                       class="white--text align-end"
                       height="500px"
                       width="100%"
                       src="../../assets/images/singBattle.png"
                     >
-                      <v-card-title>Sing Battle</v-card-title>
+                      <v-card-title style="margin-left:5px;">Sing Battle</v-card-title>
                     
                     <!--<v-card-subtitle class="pb-0">노래 배틀하기</v-card-subtitle>-->
-                      <v-card-text class="white--text" style="height:100px; padding-top:10px;">
+                      <v-card-text class="white--text" style="height:100px; padding-top:10px; margin-left:10px;">
                         <div>내 노래는 세상을 울릴 노래다ㅏ아!</div>
                         <div>추천을 많이 받은 사람이 승리합니다!</div>
                       </v-card-text>
@@ -78,16 +78,17 @@
                     </v-card>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-card flat class="mx-auto" elevation="5">
+                  <v-card flat class="mx-auto align-center" width="90%" elevation="7">
                    <v-img
                       class="white--text align-end"
                       width="100%"
                       height="500px"
                       src="../../assets/images/watchBattle.png"
+                      href="/"
                     >
-                      <v-card-title>Watch Battle</v-card-title>
+                      <v-card-title style="margin-left:5px;">Watch Battle</v-card-title>
                     
-                      <v-card-text class="white--text"  style="height:100px;">
+                      <v-card-text class="white--text"  style="height:100px; margin-left:10px;padding-top:10px; ">
                         <div>그치만.. 듣지 않으면 알 수 없는걸..</div>
                         <div>노래 경연을 듣고 투표해주세요!</div>
                       </v-card-text>
@@ -104,16 +105,16 @@
                     </v-card>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-card flat class="mx-auto" elevation="5"> 
+                  <v-card flat class="mx-auto" width="90%" elevation="7">
                    <v-img
                       class="white--text align-end"
                       height="500px"
                       width="100%"
                       src="../../assets/images/showOff.png"
                     >
-                      <v-card-title>Sing Showoff</v-card-title>
+                      <v-card-title style="margin-left:5px;">Sing Showoff</v-card-title>
                     
-                      <v-card-text class="white--text"  style="height:100px;">
+                      <v-card-text class="white--text"  style="height:100px; margin-left:10px;padding-top:10px; ">
                         <div>오늘따라 노래가 너무 잘된다구?!</div>
                         <div>내 노래를 모두에게 자랑해보세요!</div>
                       </v-card-text>
@@ -136,6 +137,7 @@
       </section>
 
       <section>
+      <v-container grid-list-xl>
         <v-parallax src="../../assets/images/hero.jpeg" height="380">
           <v-layout column align-center justify-center>
             <div class="headline white--text mb-4 text-center">Web development has never been easier</div>
@@ -151,6 +153,7 @@
             </v-btn>
           </v-layout>
         </v-parallax>
+        </v-container>
       </section>
 
       <section>
@@ -288,7 +291,7 @@ export default {
     let self = Object.assign(this, {})
     window.addEventListener("load", function(event) {
       console.log('document ready')
-      loader.hide();
+      // loader.hide();
     });
   }
 }
