@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <Header />
-    <HeaderDrawer/>
     <router-view />
+    <HeaderDrawer/>
     <Footer />
   </v-app>
 </template>

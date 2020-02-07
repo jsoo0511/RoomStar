@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="v-parallax" :style="'height: ' + 855 + 'px;'">
+  <div class="v-parallax" :style="'height: ' + height + 'px;'">
     <div class="v-parallax__image-container">
       <img ref="image" :src="img" :style="imageStyles">
       <video ref="video" :loop="loop" :muted="muted" :autoplay="autoplay" :style="videoStyles">
@@ -30,7 +30,7 @@ export default {
     height: String,
     width: {
       type: String,
-      default: '100%'
+      default: '1600px'
     },
     loop: {
       type: String,

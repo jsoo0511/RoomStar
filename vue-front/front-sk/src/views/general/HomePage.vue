@@ -3,7 +3,7 @@
    <v-app light id="hp_video">
     <v-content>
       <section>
-		<v-video-parallax>
+		<v-video-parallax height="900">
           <v-layout
             column
             align-center
@@ -20,15 +20,15 @@
               large
               href="/pre-made-themes"
             >
-              노래하기
+              로그인하기
             </v-btn>
            <a href="#" id="scroll-down" class="scroll-down" address="true"></a>
           </v-layout>
         </v-video-parallax>
       </section>
 
-      <section class="ok" id="ok">
-        <v-layout
+      <section>
+        <v-layout id="ok"
           column
           wrap
           class="my-12"
@@ -43,20 +43,21 @@
             </div>
           </v-flex>-->
           <v-flex xs12>
+          <h1 style="text-align:center; margin-bottom:-20px"> Menu Select </h1>
             <v-container grid-list-xl>
               <v-layout row wrap align-center>
                 <v-flex xs12 md4>
-                  <v-card flat class="mx-auto" elevation="4">
+                  <v-card flat class="mx-auto" elevation="5">
                    <v-img
                       class="white--text align-end"
-                      height="200px"
-                      width="350px"
+                      height="300px"
+                      width="100%"
                       src="../../assets/images/singBattle.png"
                     >
                       <v-card-title>Sing Battle</v-card-title>
                     </v-img>
                     <v-card-subtitle class="pb-0">노래 배틀하기</v-card-subtitle>
-                      <v-card-text class="text--primary">
+                      <v-card-text class="text--primary" style="height:150px;">
                         <div>내 노래는 세상을 울릴 노래다ㅏ아!</div>
                         <div>추천을 많이 받은 사람이 승리합니다!</div>
                       </v-card-text>
@@ -72,17 +73,17 @@
                     </v-card>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-card flat class="mx-auto" elevation="4">
+                  <v-card flat class="mx-auto" elevation="5">
                    <v-img
                       class="white--text align-end"
-                      width="350px"
-                      height="200px"
+                      width="100%"
+                      height="300px"
                       src="../../assets/images/watchBattle.png"
                     >
                       <v-card-title>Watch Battle</v-card-title>
                     </v-img>
                     <v-card-subtitle class="pb-0">배틀 시청하기</v-card-subtitle>
-                      <v-card-text class="text--primary">
+                      <v-card-text class="text--primary"  style="height:150px;">
                         <div>그치만.. 듣지 않으면 알 수 없는걸..</div>
                         <div>노래 경연을 듣고 투표해주세요!</div>
                       </v-card-text>
@@ -98,17 +99,17 @@
                     </v-card>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-card flat class="mx-auto" elevation="4"> 
+                  <v-card flat class="mx-auto" elevation="5"> 
                    <v-img
                       class="white--text align-end"
-                      height="200px"
-                      width="350px"
+                      height="300px"
+                      width="100%"
                       src="../../assets/images/showOff.png"
                     >
                       <v-card-title>Sing Showoff</v-card-title>
                     </v-img>
                     <v-card-subtitle class="pb-0">노래 자랑하기</v-card-subtitle>
-                      <v-card-text class="text--primary">
+                      <v-card-text class="text--primary"  style="height:150px;">
                         <div>오늘따라 노래가 너무 잘된다구?!</div>
                         <div>내 노래를 모두에게 자랑해보세요!</div>
                       </v-card-text>
@@ -128,7 +129,7 @@
           </v-flex>
         </v-layout>
       </section>
-
+<!--
       <section>
         <v-parallax src="../../assets/images/hero.jpeg" height="380">
           <v-layout column align-center justify-center>
@@ -146,7 +147,7 @@
           </v-layout>
         </v-parallax>
       </section>
-
+-->
       <section>
         <v-container grid-list-xl>
           <v-layout row wrap justify-center class="my-12">
@@ -247,13 +248,18 @@ export default {
   data () {
     return {
       title: '',
-      loader: null,
+      loader: null,      
+      drawer: null,
+      items: [
+        { title: "Home", icon: "dashboard" },
+        { title: "About", icon: "question_answer" }
+      ]
     }
   },
   mounted(){   
      $(function() {
     $('.scroll-down').click (function() {
-      $('html, body').animate({scrollTop: $('section.ok').offset().top }, 'slow');
+      $('html, body').animate({scrollTop: $('#ok').offset().top }, 'slow');
       return false;
     });
   });
