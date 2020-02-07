@@ -14,7 +14,7 @@
             <h2 class="subheading mb-1 text-center">        </h2>
 
 
-            <v-btn
+            <!-- <v-btn
               class="mt-12"
               color="orange lighten-1"
               opacity="0.5"
@@ -23,7 +23,7 @@
               href="/pre-made-themes"
             >
               로그인하기
-            </v-btn>
+            </v-btn> -->
 
 
            <a href="#" id="scroll-down" class="scroll-down" address="true"></a>
