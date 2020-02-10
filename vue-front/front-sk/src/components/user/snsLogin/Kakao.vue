@@ -81,6 +81,7 @@ let onSuccess = function(data) {
           session.set("isUser", true);
           session.set("userId", userId1);
           session.set("userNickname", userNickname1);
+          $session.set("profileImg", profileImage1);
           store.dispatch("checkLogin", response.data.token);
           store.dispatch("login", toStore);
         })

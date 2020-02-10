@@ -45,13 +45,12 @@
       <v-list dense nav>
         <v-list-item two-line :class="miniVariant && 'px-0'">
           <v-list-item-avatar>
-            <!-- <img src="https://randomuser.me/api/portraits/men/81.jpg"> -->
-            <img :src="this.profile" />
+            <v-img :src="this.profile" />
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>Application</v-list-item-title>
-            <v-list-item-subtitle>Subtext</v-list-item-subtitle>
+            <v-list-item-title>유저이름</v-list-item-title>
+            <v-list-item-subtitle>유저상세정보</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
 
@@ -85,6 +84,7 @@ export default {
     return {
       drawer: false,
       items: [
+        { title: "홈으로 가기", icon: "mdi-image", links: "/" },
         { title: "마이페이지", icon: "mdi-view-dashboard", links: "/mypage/" },
         { title: "노래 배틀하기", icon: "mdi-image", links: "/gameRoom/" },
         {
@@ -102,7 +102,9 @@ export default {
       miniVariant: false,
       expandOnHover: false,
       background: false,
-      profile: ""
+      profile: this.$session.get("profileImg")
+
+      
     };
   },
   computed: {
@@ -116,7 +118,6 @@ export default {
   },
   components: {
     ModalLogin
-
   },
 
   methods: {
@@ -134,7 +135,6 @@ export default {
       console.log("--------------", token);
       // JWT 에 담겨있는 user_id 값을 추출
       const userId = jwtDecode(token).user_id;
-      const profile = this.$session.get("profileImg");
 
       // JWT 를 axios 요청에 담아서 보낼 옵션을 정의
       const options = {
@@ -143,13 +143,11 @@ export default {
         }
       };
 
-
       // axios.get(URL, 옵션)
       axios
-        .post("http://localhost:8080/info", options)
+        .post("http://70.12.247.115:8080/info", options)
         .then(response => {
-          // Django 에서 응답받은 todo 목록을 todos 데이터에 할당
-          console.log("http://localhost:8080/info", options);
+          console.log("http://70.12.247.115:8080/info", options);
         })
         .catch(error => {
           console.error(error);
@@ -180,9 +178,6 @@ export default {
           const win = response.data.user_info.win;
           const lose = response.data.user_info.lose;
           const winrate = response.data.user_info.win_rate;
-
-          this.profile = response.data.user_info.profileimg;
-          console.log("---", this.profile);
         })
         .catch(e => {
           console.log("error: ", e);
@@ -208,9 +203,6 @@ export default {
           const win = response.data.user_info.win;
           const lose = response.data.user_info.lose;
           const winrate = response.data.user_info.win_rate;
-
-          this.profile = response.data.user_info.profileimg;
-          console.log("---", this.profile);
         })
         .catch(e => {
           console.log("error: ", e);

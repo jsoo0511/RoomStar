@@ -1,6 +1,10 @@
 <template>
   <div id="waitingRoom">
-    waitingRoom
+    <br />
+    <br />
+    <h2>노래부르는 버튼 임시 구현</h2>
+    <v-btn @click="SingingButton()">시청하기</v-btn>
+    <br />waitingRoom
     <br />
     <br />
     <section>
@@ -58,11 +62,38 @@ export default {
     };
   },
   methods: {
+    SingingButton() {
+      const userid = this.$session.get("userId");
+      console.log(userid);
+      axios
+        .put("http://70.12.247.115:8080/Enter_room/" + userid)
+        .then(response => {
+          switch (response.data.room_id) {
+            case 1:
+              this.$router.push("/firstGameRoom"); // firstGameRoom
+              break;
+            case 2:
+              this.$router.push("/secondGameRoom");
+              break;
+            case 3:
+              this.$router.push("/thirdGameRoom.vue");
+              break;
+            case 4:
+              this.$router.push("/fourthGameRoom.vue");
+              break;
+          }
+        })
+        .catch(e => {
+          console.log("error: ", e);
+        });
+    },
+
     // 시청하기를 누르면 해당 방으로 이동
     WatchingButton(room_id) {
       const userid = this.$session.get("userId");
       const userNickname = this.$session.get("userNickname");
       console.log(userid, userNickname);
+
       let data = {
         userid,
         room_id,
@@ -77,17 +108,17 @@ export default {
           // 해당 room으로 이동
           switch (room_id) {
             case 1:
-              this.$router.push("/gameroom"); // firstGameRoom
-              break
+              this.$router.push("/firstGameRoom"); // firstGameRoom
+              break;
             case 2:
               this.$router.push("/secondGameRoom");
-              break
+              break;
             case 3:
               this.$router.push("/thirdGameRoom.vue");
-              break
+              break;
             case 4:
               this.$router.push("/fourthGameRoom.vue");
-              break
+              break;
           }
         })
         .catch(e => {
