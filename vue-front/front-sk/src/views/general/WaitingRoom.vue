@@ -3,7 +3,7 @@
     <br />
     <br />
     <h2>노래부르는 버튼 임시 구현</h2>
-    <v-btn @click="SingingButton()">시청하기</v-btn>
+    <v-btn @click="singingButton()">노래부르기</v-btn>
     <br />waitingRoom
     <br />
     <br />
@@ -36,7 +36,7 @@
           참가자 승률: {{roomInfo.user2_win_rate}}
           <br />
 
-          <v-btn @click="WatchingButton(roomInfo.room_id, $event)">시청하기</v-btn>
+          <v-btn @click="watchingButton(roomInfo.room_id, $event)">시청하기</v-btn>
           <!-- <hr> -->
         </li>
       </ul>
@@ -62,9 +62,10 @@ export default {
     };
   },
   methods: {
-    SingingButton() {
+    singingButton() {
       const userid = this.$session.get("userId");
       console.log(userid);
+      this.$store.dispatch("changeToSinger", 1);
       axios
         .put("http://70.12.247.115:8080/Enter_room/" + userid)
         .then(response => {
@@ -76,10 +77,10 @@ export default {
               this.$router.push("/secondGameRoom");
               break;
             case 3:
-              this.$router.push("/thirdGameRoom.vue");
+              this.$router.push("/thirdGameRoom");
               break;
             case 4:
-              this.$router.push("/fourthGameRoom.vue");
+              this.$router.push("/fourthGameRoom");
               break;
           }
         })
@@ -89,7 +90,7 @@ export default {
     },
 
     // 시청하기를 누르면 해당 방으로 이동
-    WatchingButton(room_id) {
+    watchingButton(room_id) {
       const userid = this.$session.get("userId");
       const userNickname = this.$session.get("userNickname");
       console.log(userid, userNickname);
@@ -99,8 +100,7 @@ export default {
         room_id,
         vote: 0
       };
-      console.log(data);
-
+      this.$store.dispatch("changeToWatcher", 2);
       axios
         .post("http://70.12.247.115:8080/Insert_watching", data)
         .then(response => {
@@ -131,12 +131,10 @@ export default {
     // 유저가 처음 대기방에 들어왔을때 얻을 수 있는 방들의 정보
     let store = this.$store;
     const userid = this.$session.get("userId");
-    console.log("userId : " + userid);
     axios
       .post("http://70.12.247.115:8080/Insert_waiting/" + userid)
       .then(response => {
         for (let i = 0; i < 4; i++) {
-          console.log(response.data.roomViewInfo[i]);
           this.allRoomInfo.push(response.data.roomViewInfo[i]);
         }
         // 대기인원수
