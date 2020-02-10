@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div style="background:grey">
+    임시
     <section id="feed">
       <feed>
         <slot />
@@ -15,3 +16,8 @@ export default {
   }
 };
 </script>
+
+
+<style scoped>
+
+</style>

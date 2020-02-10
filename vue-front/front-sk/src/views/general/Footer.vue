@@ -25,6 +25,8 @@
       <span>Nearby</span>
       <v-icon>mdi-map-marker</v-icon>
     </v-btn>
+
+    <!-- 간단한 연락 챗봇/ 오늘의 노래/ 멜론 인기순위 보여주기? 하고싶다 -->
   </v-bottom-navigation>
   </div>
 </template>

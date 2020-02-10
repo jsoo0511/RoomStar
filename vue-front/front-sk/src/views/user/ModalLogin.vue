@@ -2,7 +2,7 @@
   <v-row justify="center">
     <v-dialog v-model="dialog">
       <template v-slot:activator="{ on }">
-        <v-btn color="transparent" dark v-on="on">로그인</v-btn>
+        <v-btn color="transparent" dark v-on="on" x-large >로그인</v-btn>
       </template>
 
       <v-card z-index="1">
