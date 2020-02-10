@@ -14,7 +14,7 @@ const state = {
   token: null,
   userId: "",
   userNickname: '',
-  
+  profileImg:'',
 };
 
 export default new Vuex.Store({

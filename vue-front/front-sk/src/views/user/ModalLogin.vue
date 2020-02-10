@@ -175,6 +175,7 @@ export default {
             this.$session.set("jwt", token);
             this.$session.set("userId", email);
             this.$session.set("userNickname", userNickname1);
+            this.$session.set("profileImg", userNickname1);
             this.$store.dispatch("checkLogin", token);
             this.$store.dispatch("login", toStore);
             // true, jwt-auth-token, email, nickname
