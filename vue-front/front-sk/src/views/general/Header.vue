@@ -126,7 +126,7 @@ export default {
       this.$session.clear();
       this.$session.destroy();
       this.$store.dispatch("logout");
-      this.$router.push("/");
+      this.$router.push("/").catch(err =>{});
     },
 
     checkLoggedIn() {

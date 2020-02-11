@@ -193,7 +193,7 @@ export default {
             // true, jwt-auth-token, email, nickname
             // 로딩 로직 짜는데 사용
             this.loading = false;
-            this.$router.push("/");
+            this.$router.push("/").catch(err =>{});
             return true;
           })
           .catch(error => {

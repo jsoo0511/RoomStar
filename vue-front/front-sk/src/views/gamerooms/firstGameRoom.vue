@@ -77,7 +77,7 @@ export default {
             .put("http://70.12.247.115:8080/Out_room/" + userid)
             .then(response => {
               console.log(response);
-              this.$router.push("/");
+              this.$router.push("/").catch(err =>{});
             })
             .catch(e => {
               console.log("error: ", e);
@@ -90,14 +90,14 @@ export default {
             .put("http://70.12.247.115:8080/Delete_watching/", params)
             .then(response => {
               console.log(response);
-              this.$router.push("/");
+              this.$router.push("/").catch(err =>{});
             })
             .catch(e => {
               console.log("error: ", e);
             });
           break;
         default:
-          this.$router.push("/");
+          this.$router.push("/").catch(err =>{});
           break;
       }
     }

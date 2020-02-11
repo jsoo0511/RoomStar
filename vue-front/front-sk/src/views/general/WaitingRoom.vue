@@ -71,16 +71,16 @@ export default {
         .then(response => {
           switch (response.data.room_id) {
             case 1:
-              this.$router.push("/firstGameRoom"); // firstGameRoom
+              this.$router.push("/firstGameRoom").catch(err =>{}); // firstGameRoom
               break;
             case 2:
-              this.$router.push("/secondGameRoom");
+              this.$router.push("/secondGameRoom").catch(err =>{});
               break;
             case 3:
-              this.$router.push("/thirdGameRoom");
+              this.$router.push("/thirdGameRoom").catch(err =>{});
               break;
             case 4:
-              this.$router.push("/fourthGameRoom");
+              this.$router.push("/fourthGameRoom").catch(err =>{});
               break;
           }
         })
@@ -109,16 +109,16 @@ export default {
           // 해당 room으로 이동
           switch (room_id) {
             case 1:
-              this.$router.push("/firstGameRoom"); // firstGameRoom
+              this.$router.push("/firstGameRoom").catch(err =>{}); // firstGameRoom
               break;
             case 2:
-              this.$router.push("/secondGameRoom");
+              this.$router.push("/secondGameRoom").catch(err =>{});
               break;
             case 3:
-              this.$router.push("/thirdGameRoom.vue");
+              this.$router.push("/thirdGameRoom").catch(err =>{});
               break;
             case 4:
-              this.$router.push("/fourthGameRoom.vue");
+              this.$router.push("/fourthGameRoom").catch(err =>{});
               break;
           }
         })
