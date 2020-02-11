@@ -85,6 +85,7 @@ export default {
           this.$session.set("isUser", true);
           this.$session.set("userId", userid);
           this.$session.set("userNickname", nickname);
+          this.$session.set("profileImg", profileimg);
           this.$store.dispatch("checkLogin", token);
           this.$store.dispatch("login", toStore);
         })

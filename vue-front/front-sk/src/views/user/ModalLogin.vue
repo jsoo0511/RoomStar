@@ -161,6 +161,7 @@ export default {
         axios
           .post(SERVER_IP, data)
           .then(response => {
+            console.log(response, '-----------')
             userNickname1 = response.data.nickName;
             token = response.data.token;
             let toStore = {
@@ -175,6 +176,7 @@ export default {
             this.$session.set("jwt", token);
             this.$session.set("userId", email);
             this.$session.set("userNickname", userNickname1);
+            // this.$session.set("profileImg", ); 
             this.$store.dispatch("checkLogin", token);
             this.$store.dispatch("login", toStore);
             // true, jwt-auth-token, email, nickname
