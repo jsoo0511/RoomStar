@@ -1,4 +1,5 @@
 <template>
+
     <GoogleLogin
       :params="params"
       :renderParams="renderParams"
@@ -12,9 +13,9 @@
 import GoogleLogin from "vue-google-login";
 import router from "@/routes";
 import axios from "axios";
+import jwt_decode from 'jwt-decode';
 
 export default {
-  name: "google-login",
   data() {
     return {
       // client_id is the only required property but you can add several more params, full list down bellow on the Auth api section
@@ -81,6 +82,7 @@ export default {
             four: nickname
           };
           this.$session.start();
+          console.log('using jwt_decode',jwt_decode(token))
           this.$session.set("jwt", token);
           this.$session.set("isUser", true);
           this.$session.set("userId", userid);
@@ -93,6 +95,10 @@ export default {
         .catch(e => {
           console.log("error: ", e);
         });
+
+
+
+
       this.$router.push("/").catch(err => {});
     },
 
@@ -102,3 +108,6 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+</style>

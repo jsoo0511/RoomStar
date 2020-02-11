@@ -8,7 +8,7 @@
       <v-card z-index="1">
         <br />
 
-        <div>
+        <div class="snsLogin">
           <kakaoLogin />
           <GoogleLogin />
         </div>
@@ -91,7 +91,7 @@ import axios from "axios";
 import PV from "password-validator";
 import * as EmailValidator from "email-validator";
 import swal from "sweetalert";
-
+import jwt_decode from 'jwt-decode';
 import KakaoLogin from "../../components/user/snsLogin/Kakao.vue";
 import GoogleLogin from "../../components/user/snsLogin/Google.vue";
 import UserApi from "../../apis/UserApi";
@@ -161,21 +161,27 @@ export default {
         axios
           .post(SERVER_IP, data)
           .then(response => {
-            console.log(response, '-----------')
-            userNickname1 = response.data.nickName;
+            console.log('-----------', response)
+            userNickname1 = response.data.nickname;
+            console.log(userNickname1)
             token = response.data.token;
             let toStore = {
               one: true,
               two: token,
               three: email,
               four: userNickname1
+
             };
             this.$session.start();
             // session에 저장
             this.$session.set("isUser", true);
             this.$session.set("jwt", token);
+            console.log('local login, using jwt decode', jwt_decode(token))
             this.$session.set("userId", email);
             this.$session.set("userNickname", userNickname1);
+            let userInfo = jwt_decode(token)
+            console.log(userInfo.User.profileimg)
+            this.$session.set("profileImg", userInfo.User.profileimg);
             // this.$session.set("profileImg", ); 
             this.$store.dispatch("checkLogin", token);
             this.$store.dispatch("login", toStore);
@@ -237,4 +243,10 @@ export default {
 </script>
 
 <style scoped>
+.snsLogin {
+  text-align: center;
+  align-content: center;
+}
+
+
 </style>
