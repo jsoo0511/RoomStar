@@ -117,3 +117,12 @@ export default {
   //get
 };
 </script>
+
+
+<style scoped>
+div {
+  background: white;
+  border-radius: 5px;
+  border: 3px dashed #bcbcbc;
+}
+</style>

@@ -86,6 +86,7 @@ export default {
         })
         .catch(e => {
           console.log("error: ", e);
+          alert('모든 방이 차있습니다.')
         });
     },
 
