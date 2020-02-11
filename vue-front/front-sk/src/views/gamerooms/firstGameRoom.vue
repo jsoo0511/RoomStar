@@ -6,6 +6,26 @@
     <v-btn @click="backButton">나가기</v-btn>
     유저상태
     {{this.singerOrWatcherStatus}}
+    <div class="cams">
+      <div class="first-cam">
+            부르는사람1
+    {{ this.roomInfo.data.data[0].user1 }}
+        노래1
+    {{ this.roomInfo.data.data[0].music1 }}
+    <br />
+    
+    
+    webRTC</div>
+      <div class="second-cam">
+        
+    부르는사람2
+    {{ this.roomInfo.data.data[0].user2 }}
+    노래2
+    {{ this.roomInfo.data.data[0].music2 }}
+    <br />
+        
+        webRTC</div>
+    </div>
     <br />
     {{this.roomInfo}}
     <br />
@@ -13,18 +33,7 @@
     <br />
     {{ this.roomInfo.data.data[0].singer_num }}
     <br />
-    부르는사람1
-    {{ this.roomInfo.data.data[0].user1 }}
-    <br />
-    부르는사람2
-    {{ this.roomInfo.data.data[0].user2 }}
-    <br />
-    노래1
-    {{ this.roomInfo.data.data[0].music1 }}
-    <br />
-    노래2
-    {{ this.roomInfo.data.data[0].music2 }}
-    <br />
+
     {{ this.roomInfo.data.data[0].watching_num }}
     <hr />
 
@@ -77,7 +86,7 @@ export default {
             .put("http://70.12.247.115:8080/Out_room/" + userid)
             .then(response => {
               console.log(response);
-              this.$router.push("/").catch(err =>{});
+              this.$router.push("/").catch(err => {});
             })
             .catch(e => {
               console.log("error: ", e);
@@ -90,14 +99,14 @@ export default {
             .put("http://70.12.247.115:8080/Delete_watching/", params)
             .then(response => {
               console.log(response);
-              this.$router.push("/").catch(err =>{});
+              this.$router.push("/").catch(err => {});
             })
             .catch(e => {
               console.log("error: ", e);
             });
           break;
         default:
-          this.$router.push("/").catch(err =>{});
+          this.$router.push("/").catch(err => {});
           break;
       }
     }
