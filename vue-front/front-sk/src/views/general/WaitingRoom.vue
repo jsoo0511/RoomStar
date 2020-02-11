@@ -86,6 +86,7 @@ export default {
         })
         .catch(e => {
           console.log("error: ", e);
+          alert('모든 방이 차있습니다.')
         });
     },
 
@@ -131,6 +132,7 @@ export default {
     // 유저가 처음 대기방에 들어왔을때 얻을 수 있는 방들의 정보
     let store = this.$store;
     const userid = this.$session.get("userId");
+    console.log(userid)
     axios
       .post("http://70.12.247.115:8080/Insert_waiting/" + userid)
       .then(response => {

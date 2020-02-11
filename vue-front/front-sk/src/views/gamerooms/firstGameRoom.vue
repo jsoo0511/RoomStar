@@ -26,11 +26,18 @@
     {{ this.roomInfo.data.data[0].music2 }}
     <br />
     {{ this.roomInfo.data.data[0].watching_num }}
+    <hr />
 
-    <hr>
-    <p>
-      노래선곡하는곳
-    </p>
+    <p>노래선곡하는곳</p>
+
+    <div class="msg-form">
+      msf-form
+      <br />
+      <button type="submit">
+        입력
+        <input type="text" />
+      </button>
+    </div>
   </div>
 </template>
 
@@ -64,8 +71,6 @@ export default {
 
       console.log("router 정보", this.$router);
       switch (this.singerOrWatcherStatus) {
-
-
         case 1:
           console.log(userid);
           axios
@@ -90,6 +95,9 @@ export default {
             .catch(e => {
               console.log("error: ", e);
             });
+          break;
+        default:
+          this.$router.push("/");
           break;
       }
     }
@@ -117,3 +125,16 @@ export default {
   //get
 };
 </script>
+
+
+<style scoped>
+div {
+  border-radius: 5px;
+  border: 3px dashed #bcbcbc;
+}
+.msg-form {
+  left: 0;
+  right: 0;
+  background: greenyellow;
+}
+</style>

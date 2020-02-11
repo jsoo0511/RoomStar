@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <div id="kakao-login">
     <button id="kakao-login" v-on:click="loginWithKakao" :on-success="success" :on-failure="fail">
       <img
         src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium_ov.png"
@@ -7,16 +7,14 @@
       />
     </button>
 
-    <div id="kakao-login">
-      <KakaoLogin
-        api-key="75bdc978e83228e7b1e197264c163a8f"
-        :on-success="onSuccess"
-        :on-failure="onFailure"
-        image="kakao_account_login_btn_medium_narrow"
-        style="display:none"
-      ></KakaoLogin>
-    </div>
-  </span>
+    <KakaoLogin
+      api-key="75bdc978e83228e7b1e197264c163a8f"
+      :on-success="onSuccess"
+      :on-failure="onFailure"
+      image="kakao_account_login_btn_medium_narrow"
+      style="display:none"
+    ></KakaoLogin>
+  </div>
 </template>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
@@ -81,7 +79,8 @@ let onSuccess = function(data) {
           session.set("isUser", true);
           session.set("userId", userId1);
           session.set("userNickname", userNickname1);
-          $session.set("profileImg", profileImage1);
+          session.set("profileImg", profileImage1);
+          localStorage.setItem('jwt', token)
           store.dispatch("checkLogin", response.data.token);
           store.dispatch("login", toStore);
         })
@@ -105,7 +104,7 @@ export default {
   name: "kakao-login",
   data: () => {
     return {
-      Kakao: Kakao.init("75bdc978e83228e7b1e197264c163a8f"),
+      Kakao: Kakao.init("75bdc978e83228e7b1e197264c163a8f")
     };
   },
   components: {
@@ -122,20 +121,20 @@ export default {
       let session = this.$session;
 
       Kakao.Auth.login({
-        success (data) {
+        success(data) {
           let userId1 = "";
           let userNickname1 = "";
           let profileImage1 = "";
           let userEmail1 = "";
           let provider1 = "";
           console.log(store);
-          console.log(this)
+          console.log(this);
           // alert(JSON.stringify(authObj));
           console.log(data);
 
           Kakao.API.request({
             url: "/v2/user/me",
-            success (res) {
+            success(res) {
               console.log(res);
               userId1 = res.id;
               userNickname1 = res.properties.nickname;
@@ -179,6 +178,8 @@ export default {
                   session.set("isUser", true);
                   session.set("userId", userId1);
                   session.set("userNickname", userNickname1);
+                  session.set("profileImg", profileimg)
+                  localStorage.setItem('jwt', token)
                   store.dispatch("checkLogin", response.data.token);
                   store.dispatch("login", toStore);
                 })
@@ -189,7 +190,7 @@ export default {
             }
           });
         },
-        fail (err) {
+        fail(err) {
           alert(JSON.stringify(err));
         }
       });

@@ -127,10 +127,14 @@ export default {
         axios
           .post(SERVER_IP, data)
           .then(response => {
-            this.$router.push("/");
+            console.log(response)
+            this.$router.push("/").catch(err => {
+              console.log(err);
+            });
           })
           .catch(error => {
             console.log(error);
+            // 중복시 로긴 불가
             // this.loading = false;
           });
       }
