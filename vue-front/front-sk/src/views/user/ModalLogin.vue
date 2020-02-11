@@ -182,7 +182,12 @@ export default {
             let userInfo = jwt_decode(token)
             console.log(userInfo.User.profileimg)
             this.$session.set("profileImg", userInfo.User.profileimg);
-            // this.$session.set("profileImg", ); 
+
+            // localStorage 저장
+            localStorage.setItem('jwt', token)
+
+
+      
             this.$store.dispatch("checkLogin", token);
             this.$store.dispatch("login", toStore);
             // true, jwt-auth-token, email, nickname

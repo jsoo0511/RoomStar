@@ -88,6 +88,8 @@ export default {
           this.$session.set("userId", userid);
           this.$session.set("userNickname", nickname);
           this.$session.set("profileImg", profileimg);
+          
+          localStorage.setItem('jwt', token)
           this.$store.dispatch("checkLogin", token);
           this.$store.dispatch("login", toStore);
         })

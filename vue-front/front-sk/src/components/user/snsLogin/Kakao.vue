@@ -80,6 +80,7 @@ let onSuccess = function(data) {
           session.set("userId", userId1);
           session.set("userNickname", userNickname1);
           session.set("profileImg", profileImage1);
+          localStorage.setItem('jwt', token)
           store.dispatch("checkLogin", response.data.token);
           store.dispatch("login", toStore);
         })
@@ -177,6 +178,8 @@ export default {
                   session.set("isUser", true);
                   session.set("userId", userId1);
                   session.set("userNickname", userNickname1);
+                  session.set("profileImg", profileimg)
+                  localStorage.setItem('jwt', token)
                   store.dispatch("checkLogin", response.data.token);
                   store.dispatch("login", toStore);
                 })

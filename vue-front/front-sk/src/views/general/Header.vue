@@ -50,7 +50,7 @@
 
           <v-list-item-content>
             {{ this.profile }}
-            <v-list-item-title>유저이름</v-list-item-title>
+            <v-list-item-title>{{ this.userNickname }}</v-list-item-title>
             <v-list-item-subtitle>유저상세정보</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -103,8 +103,8 @@ export default {
       miniVariant: false,
       expandOnHover: false,
       background: false,
-      profile: this.$session.get("profileImg")
-
+      profile: this.$session.get("profileImg"),
+      userNickname: this.$session.get("userNickname")
       
     };
   },
