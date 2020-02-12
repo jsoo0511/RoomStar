@@ -1,20 +1,22 @@
 <template>
+  <div>
   <v-row justify="center">
-    <v-dialog v-model="dialog">
+    <v-dialog v-model="dialog" id="dialog" max-width="350">
       <template v-slot:activator="{ on }">
-        <v-btn color="transparent" dark v-on="on" x-large >로그인</v-btn>
+        <v-btn color="transparent" dark v-on="on">로그인</v-btn>
       </template>
 
-      <v-card z-index="1">
+
+      <v-card z-index="1" id="modalLogin">
+      <h2><b> Login with </b></h2>
         <br />
 
-        <div class="snsLogin">
+        <v-row justify="center">
           <kakaoLogin />
           <GoogleLogin />
-        </div>
-
-        <p style="text-align:center;">또는</p>
-
+        </v-row>
+        <br>
+        <p style="text-align:center; color:rgba(0,0,0,0.2);">------------<b style="color:rgba(0,0,0,0.6); padding-left:2.6em; padding-right:2.6em;">or</b>------------</p>
         <v-text-field
           v-model="email"
           v-bind:class="{error : error.email, complete:!error.email&&email.length!==0}"
@@ -81,6 +83,7 @@
       </v-card>
     </v-dialog>
   </v-row>
+  </div>
 </template>
 
 <script>
@@ -91,7 +94,7 @@ import axios from "axios";
 import PV from "password-validator";
 import * as EmailValidator from "email-validator";
 import swal from "sweetalert";
-import jwt_decode from 'jwt-decode';
+
 import KakaoLogin from "../../components/user/snsLogin/Kakao.vue";
 import GoogleLogin from "../../components/user/snsLogin/Google.vue";
 import UserApi from "../../apis/UserApi";
@@ -161,33 +164,20 @@ export default {
         axios
           .post(SERVER_IP, data)
           .then(response => {
-            console.log('-----------', response)
-            userNickname1 = response.data.nickname;
-            console.log(userNickname1)
+            userNickname1 = response.data.nickName;
             token = response.data.token;
             let toStore = {
               one: true,
               two: token,
               three: email,
               four: userNickname1
-
             };
             this.$session.start();
             // session에 저장
             this.$session.set("isUser", true);
             this.$session.set("jwt", token);
-            console.log('local login, using jwt decode', jwt_decode(token))
             this.$session.set("userId", email);
             this.$session.set("userNickname", userNickname1);
-            let userInfo = jwt_decode(token)
-            console.log(userInfo.User.profileimg)
-            this.$session.set("profileImg", userInfo.User.profileimg);
-
-            // localStorage 저장
-            localStorage.setItem('jwt', token)
-
-
-      
             this.$store.dispatch("checkLogin", token);
             this.$store.dispatch("login", toStore);
             // true, jwt-auth-token, email, nickname
@@ -248,10 +238,16 @@ export default {
 </script>
 
 <style scoped>
-.snsLogin {
-  text-align: center;
-  align-content: center;
+#modalLogin{
+  padding: 30px;
+  max-width: 350px;
+  width: 100% !important;
+  margin: 0 auto;
+  border-radius: 2px;
+  overflow: hidden;
 }
 
-
+#dialog{ 
+  max-width: 350px;
+}
 </style>

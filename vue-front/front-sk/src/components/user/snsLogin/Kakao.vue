@@ -199,3 +199,8 @@ export default {
   }
 };
 </script>
+<style>
+#kakao-login{
+  margin-right:20px;
+}
+</style>
