@@ -1,78 +1,76 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" max-width="400px">
+    <v-dialog v-model="dialog">
       <template v-slot:activator="{ on }">
-        <v-btn color="transparent" dark v-on="on">로그인</v-btn>
+        <v-btn color="transparent" dark v-on="on" x-large >로그인</v-btn>
       </template>
 
-      <v-card>
-        <v-card-title>
-          <h1>RoomSTAR</h1>
-        </v-card-title>
+      <v-card z-index="1">
+        <br />
 
-        <v-row>
-          <!-- <v-col cols="12" sm="6" md="4"> -->
-            <div class="input-with-label">
-              <v-text-field
-                v-model="email"
-                v-bind:class="{error : error.email, complete:!error.email&&email.length!==0}"
-                @keyup.enter="login"
-                id="email"
-                placeholder="이메일을 입력하세요."
-                type="text"
-              />
-              <label for="email">이메일</label>
-              <div class="error-text" v-if="error.email">{{error.email}}</div>
-            </div>
-          <!-- </v-col> -->
-          <!-- <v-col cols="12" sm="6" md="4"> -->
-            <div class="input-with-label">
-              <v-text-field
-                v-model="password"
-                type="password"
-                v-bind:class="{error : error.password, complete:!error.password&&password.length!==0}"
-                id="password"
-                @keyup.enter="login"
-                placeholder="비밀번호를 입력하세요."
-              />
-              <label for="password">비밀번호</label>
-              <div class="error-text" v-if="error.password">{{error.password}}</div>
-            </div>
-          <!-- </v-col> -->
-        </v-row>
-
-          <button
-            class="btn btn--back btn--login"
-            v-on:click="login; dialog = false"
-            :disabled="!isSubmit"
-            :class="{disabled : !isSubmit}"
-            color="blue darken-1"
-            text
-          >로그인</button>
-
-
-        <div class="sns-login">
-          <p>SNS 간편 로그인</p>
-          <kakaoLogin :component="component" />
-          <GoogleLogin :component="component" />
+        <div class="snsLogin">
+          <kakaoLogin />
+          <GoogleLogin />
         </div>
 
+        <p style="text-align:center;">또는</p>
+
+        <v-text-field
+          v-model="email"
+          v-bind:class="{error : error.email, complete:!error.email&&email.length!==0}"
+          @keyup.enter="login"
+          id="email"
+          placeholder="이메일을 입력하세요."
+          type="text"
+        />
+
+        <div class="error-text" v-if="error.email">{{error.email}}</div>
+        <v-text-field
+          v-model="password"
+          type="password"
+          v-bind:class="{error : error.password, complete:!error.password&&password.length!==0}"
+          id="password"
+          @keyup.enter="login"
+          placeholder="비밀번호를 입력하세요."
+        />
+
+        <div class="error-text" v-if="error.password">{{error.password}}</div>
+
+        <button
+          class="btn btn--back btn--login"
+          v-on:click="login"
+          @click="dialog = false"
+          :disabled="!isSubmit"
+          :class="{disabled : !isSubmit}"
+          color="black darken-1"
+          text
+          small
+        >로그인</button>
+
         <div class="add-option">
-          <p>혹시</p>
-          <div class="wrap">
-            <p>비밀번호를 잊으셨나요?</p>
-            <v-btn to="/????" class="btn--text">비밀번호 찾기</v-btn>
-            <!-- <router-link v-bind:to="{name:'????'}" class="btn--text">비밀번호 찾기</router-link> -->
-          </div>
-          <div class="wrap">
-            <p>아직 회원이 아니신가요?</p>
-            <v-btn to="/user/join" class="btn--text" v-on:click="dialog = false">가입하기</v-btn>
-            <!-- <router-link v-bind:to="{name:'Join'}" class="btn--text">가입하기</router-link> -->
-          </div>
-          <div class="wrap">
-            <p>서비스소개</p>
-            <v-btn to="/" class="btn--text" v-on:click="dialog = false">서비스소개</v-btn>
-            <!-- <router-link v-bind:to="{name:'HomePage'}" class="btn--text">서비스소개</router-link> -->
+          <div class="text-center">
+            <v-btn
+              text
+              small
+              color="black"
+              dark
+              to="/user/password"
+              v-on:click="dialog = false"
+            >비밀번호 찾기</v-btn>
+
+            <v-dialog v-model="joinDialog" max-width="400px">
+              <template v-slot:activator="{ on }">
+                <v-btn text small color="black" dark v-on="on" v-on:click="joinDialog = true">가입하기</v-btn>
+              </template>
+
+              <v-card z-index="2">
+                <br />
+                <Join />
+              </v-card>
+            </v-dialog>
+
+            <!-- <v-btn text small color="black" dark to="/user/join" v-on:click="dialog = false">가입하기</v-btn> -->
+            <v-btn text small color="black" dark to="#" v-on:click="dialog = false">서비스소개</v-btn>
           </div>
         </div>
 
@@ -92,15 +90,20 @@ import router from "@/routes";
 import axios from "axios";
 import PV from "password-validator";
 import * as EmailValidator from "email-validator";
-
+import swal from "sweetalert";
+import jwt_decode from 'jwt-decode';
 import KakaoLogin from "../../components/user/snsLogin/Kakao.vue";
 import GoogleLogin from "../../components/user/snsLogin/Google.vue";
 import UserApi from "../../apis/UserApi";
+import Join from "./Join.vue";
+
+//https://sweet-modal-vue.adepto.as/ 여기꺼 모달 쓰고싶은데 잘
 
 export default {
   components: {
     KakaoLogin,
-    GoogleLogin
+    GoogleLogin,
+    Join
   },
   created() {
     this.component = this;
@@ -115,14 +118,14 @@ export default {
       .has()
       .letters();
   },
-    watch: {
-      password: function(v) {
-        this.checkForm();
-      },
-      email: function(v) {
-        this.checkForm();
-      }
+  watch: {
+    password: function(v) {
+      this.checkForm();
     },
+    email: function(v) {
+      this.checkForm();
+    }
+  },
   methods: {
     checkForm() {
       if (this.email.length >= 0 && !EmailValidator.validate(this.email))
@@ -158,31 +161,54 @@ export default {
         axios
           .post(SERVER_IP, data)
           .then(response => {
-            userNickname1 = response.data.nickName;
+            console.log('-----------', response)
+            userNickname1 = response.data.nickname;
+            console.log(userNickname1)
             token = response.data.token;
             let toStore = {
               one: true,
               two: token,
               three: email,
               four: userNickname1
+
             };
             this.$session.start();
             // session에 저장
             this.$session.set("isUser", true);
             this.$session.set("jwt", token);
+            console.log('local login, using jwt decode', jwt_decode(token))
             this.$session.set("userId", email);
             this.$session.set("userNickname", userNickname1);
+            let userInfo = jwt_decode(token)
+            console.log(userInfo.User.profileimg)
+            this.$session.set("profileImg", userInfo.User.profileimg);
+
+            // localStorage 저장
+            localStorage.setItem('jwt', token)
+
+
+      
             this.$store.dispatch("checkLogin", token);
             this.$store.dispatch("login", toStore);
             // true, jwt-auth-token, email, nickname
             // 로딩 로직 짜는데 사용
             this.loading = false;
             this.$router.push("/");
+            return true;
           })
           .catch(error => {
-            alert("없는 사용자 입니다.");
+            // https://sweetalert.js.org/guides/
+            swal({
+              title: "다시 시도해보세요.",
+              text: "아이디 혹은 비밀번호가 일치하지 않습니다.",
+              buttons: "확인"
+              // icon: "warning"
+            });
+            console.log(error.response.config);
+            console.log(error.response.config.data);
             // fail인 경우 사용자가 없다고 하기 --> 버튼이 비활성화되므로 알람 안줘도 된다.
             // this.loading = false;
+            return false;
           });
 
         //요청 후에는 버튼 비활성화
@@ -206,6 +232,7 @@ export default {
   data: () => {
     return {
       dialog: false,
+      joinDialog: false,
       email: "",
       password: "",
       passwordSchema: new PV(),
@@ -219,3 +246,12 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.snsLogin {
+  text-align: center;
+  align-content: center;
+}
+
+
+</style>

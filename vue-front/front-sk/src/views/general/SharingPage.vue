@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div style="background:grey">
+    임시
     <section id="feed">
       <feed>
         <slot />
@@ -11,7 +12,12 @@
 <script>
 export default {
   components: {
-    Feed: () => import("@/views/general/Feed")
+    Feed: () => import("./Feed.vue")
   }
 };
 </script>
+
+
+<style scoped>
+
+</style>

@@ -1,15 +1,4 @@
-
-<!--
-    가입하기는 기본적인 폼만 제공됩니다
-    기능명세에 따라 개발을 진행하세요.
-    Sub PJT I에서는 UX, 디자인 등을 포함하여 백엔드를 제외하여 개발합니다.
- -->
-
-
-
-
- 
-<template>
+ <template>
   <div>
     <h1>가입하기</h1>
     <div>
@@ -138,10 +127,14 @@ export default {
         axios
           .post(SERVER_IP, data)
           .then(response => {
-            this.$router.push("/login");
+            console.log(response)
+            this.$router.push("/").catch(err => {
+              console.log(err);
+            });
           })
           .catch(error => {
             console.log(error);
+            // 중복시 로긴 불가
             // this.loading = false;
           });
       }

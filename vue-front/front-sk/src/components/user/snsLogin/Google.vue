@@ -1,21 +1,21 @@
 <template>
-  <div class="google-login">
+
     <GoogleLogin
       :params="params"
       :renderParams="renderParams"
       :onSuccess="onSuccess"
       :onFailure="onFailure"
     ></GoogleLogin>
-  </div>
+
 </template>
 
 <script>
 import GoogleLogin from "vue-google-login";
 import router from "@/routes";
 import axios from "axios";
+import jwt_decode from 'jwt-decode';
 
 export default {
-  name: "google-login",
   data() {
     return {
       // client_id is the only required property but you can add several more params, full list down bellow on the Auth api section
@@ -26,9 +26,9 @@ export default {
       // client_secret : xqVdC-6FJqgLZOSp3JndOKSK
       // only needed if you want to render the button with the google ui
       renderParams: {
-        width: 250,
-        height: 50,
-        longtitle: true
+        width: 50,
+        height: 49,
+        longtitle: true,
       }
     };
   },
@@ -54,7 +54,6 @@ export default {
       };
 
       console.log(toStore)
-
 
       this.$store.dispatch("login", toStore).then(res => {
         console.log(this.$store.state);
@@ -83,10 +82,14 @@ export default {
             four: nickname
           };
           this.$session.start();
+          console.log('using jwt_decode',jwt_decode(token))
           this.$session.set("jwt", token);
           this.$session.set("isUser", true);
           this.$session.set("userId", userid);
           this.$session.set("userNickname", nickname);
+          this.$session.set("profileImg", profileimg);
+          
+          localStorage.setItem('jwt', token)
           this.$store.dispatch("checkLogin", token);
           this.$store.dispatch("login", toStore);
         })
@@ -94,12 +97,19 @@ export default {
         .catch(e => {
           console.log("error: ", e);
         });
-      this.$router.push("/");
+
+
+
+
+      this.$router.push("/").catch(err => {});
     },
 
     onFailure(error) {
-      this.$router.push("/user/join");
+      this.$router.push("/user/join").catch(err => {});
     }
   }
 };
 </script>
+
+<style scoped>
+</style>

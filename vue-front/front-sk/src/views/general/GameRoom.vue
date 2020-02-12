@@ -10,6 +10,7 @@
         </video>
          
        
+
       </div>
       
       <div id="secondWebCam">
@@ -18,12 +19,12 @@
         </video>
       </div>
     </div>
-
   </div> 
 </template>
 
 <script>
 import io from "socket.io-client"
+
 
 const stun_server = "stun.l.google.com:19302";
 const pcConfig = {
@@ -36,6 +37,7 @@ const pcConfig = {
 
 
 export default {
+  
   name: "GameRoom",
   props: ["user_id"],
   data() {
@@ -43,7 +45,6 @@ export default {
       //localVideo:null,
       local_video: null,
       local_stream: null,
-
       //connected_users: [-1, null, null, null, null, null],
       //peer_connections: {},
 
@@ -120,8 +121,6 @@ export default {
               candidate: event.candidate.candidate
             },
             //room_id: 1,
-           /// from: this.user_id,
-            //to: user_id
           });
         }
       };
