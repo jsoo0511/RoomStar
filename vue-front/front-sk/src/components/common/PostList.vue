@@ -44,7 +44,7 @@ export default {
 	}
 }
 </script>
-<style scoped>
+<style>
   .mw-700 {
     max-width: 700px;
     margin: auto;

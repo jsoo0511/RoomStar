@@ -17,8 +17,9 @@
 
           <v-spacer></v-spacer>
 
-          <v-btn dark icon class="mr-4">
-            <v-icon>mdi-pencil</v-icon>
+          <!-- 프로필 편집 위해 사용 -->
+          <v-btn dark icon class="mr-4" to="/gameRoom/">
+            <v-icon >mdi-pencil</v-icon>
           </v-btn>
 
           <v-btn dark icon>

@@ -23,7 +23,7 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style>
   .color-666 {
     color: #666;
   }
