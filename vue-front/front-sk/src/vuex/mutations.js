@@ -11,8 +11,5 @@ export default {
   },
   setUserNickname(state, userNickname) {
     state.userNickname = userNickname;
-  },
-  setSingerOrWatcherStatus(state, newSingerOrWatcherStatus) {
-    state.singerOrWatcherStatus = newSingerOrWatcherStatus
   }
 };

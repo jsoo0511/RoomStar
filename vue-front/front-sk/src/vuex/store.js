@@ -15,8 +15,6 @@ const state = {
   userId: "",
   userNickname: '',
   profileImg:'',
-  // 0은 아무것도 아닌 상태, 1은 singer인 상태, 2는 watcher인 상태
-  singerOrWatcherStatus:0,
 };
 
 export default new Vuex.Store({

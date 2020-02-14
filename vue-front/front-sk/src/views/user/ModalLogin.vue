@@ -1,22 +1,20 @@
 <template>
-  <div>
   <v-row justify="center">
-    <v-dialog v-model="dialog" id="dialog" max-width="350">
+    <v-dialog v-model="dialog">
       <template v-slot:activator="{ on }">
-        <v-btn color="transparent" dark v-on="on">로그인</v-btn>
+        <v-btn color="transparent" dark v-on="on" x-large >로그인</v-btn>
       </template>
 
-
-      <v-card z-index="1" id="modalLogin">
-      <h2><b> Login with </b></h2>
+      <v-card z-index="1">
         <br />
 
-        <v-row justify="center">
+        <div>
           <kakaoLogin />
           <GoogleLogin />
-        </v-row>
-        <br>
-        <p style="text-align:center; color:rgba(0,0,0,0.2);">------------<b style="color:rgba(0,0,0,0.6); padding-left:2.6em; padding-right:2.6em;">or</b>------------</p>
+        </div>
+
+        <p style="text-align:center;">또는</p>
+
         <v-text-field
           v-model="email"
           v-bind:class="{error : error.email, complete:!error.email&&email.length!==0}"
@@ -83,7 +81,6 @@
       </v-card>
     </v-dialog>
   </v-row>
-  </div>
 </template>
 
 <script>
@@ -164,6 +161,7 @@ export default {
         axios
           .post(SERVER_IP, data)
           .then(response => {
+            console.log(response, '-----------')
             userNickname1 = response.data.nickName;
             token = response.data.token;
             let toStore = {
@@ -178,6 +176,7 @@ export default {
             this.$session.set("jwt", token);
             this.$session.set("userId", email);
             this.$session.set("userNickname", userNickname1);
+            // this.$session.set("profileImg", ); 
             this.$store.dispatch("checkLogin", token);
             this.$store.dispatch("login", toStore);
             // true, jwt-auth-token, email, nickname
@@ -238,16 +237,4 @@ export default {
 </script>
 
 <style scoped>
-#modalLogin{
-  padding: 30px;
-  max-width: 350px;
-  width: 100% !important;
-  margin: 0 auto;
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-#dialog{ 
-  max-width: 350px;
-}
 </style>
