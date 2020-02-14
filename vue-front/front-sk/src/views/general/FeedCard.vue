@@ -57,7 +57,31 @@
 </template>
 
 <script>
+import { app } from "../../services/FirebaseServices";
+
+import * as firebase from "firebase/app";
+//import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/storage";
+
   export default {
+    data(){       //fire base list에 있는 항목을 불러옴
+      return{
+        videoList:[],
+      };
+    },
+    created(){
+      var storageRef = firebase.storage().ref();
+
+      storageRef
+      .listAll()
+      .then(result =>{
+        let video={};
+        
+      })
+
+
+    },
     props: {
       size: {
         type: Number,

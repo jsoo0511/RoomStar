@@ -5,11 +5,13 @@
 
       <table class="lectures">
         <tr v-for="(music, i) in musicTitle" :key="i">
-          <td v-if="music.title != '창모- meteor.mp3'">
+          <td v-if="music.title != '창모- meteor.mp3'&music.title[music.title.length-1]==='3'">
+          <!-- <td v-else-if="music.title[music.title.length-1]==='3'"> -->
             {{ music.title }}
           </td>
 
-          <td v-if="music.title != '창모- meteor.mp3'">
+            <td v-if="music.title != '창모- meteor.mp3'&music.title[music.title.length-1]==='3'">
+          <!-- <td v-else-if="music.title[music.title.length-1]==='3'"> -->
             <video controls name="media">
               <source :src="music.url" type="audio/mp3" />
             </video>
@@ -31,19 +33,17 @@ import axios from "axios";
 export default {
   data() {
     return {
-      musicUrl: [],
       musicTitle: [],
-      musicTest: []
     };
   },
   methods: {
-    test() {
-      // list에 있는 항목들을 불러옴
+    test() { // fire base list에 있는 항목들을 불러옴
 
       //var temp=this;
       var storageRef = firebase.storage().ref();
       console.log("1234");
       console.log(storageRef);
+      
 
       // storageRef.listAll.then(result => {
       //   result.items.forEach(name => {
