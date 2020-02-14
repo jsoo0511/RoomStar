@@ -156,6 +156,7 @@
           >
             <v-card-title class="headline winlose_title">{{win}} 승 {{lose}} 패</v-card-title>
             <v-card-subtitle class="winlose_subtitle">{{winrate}} %</v-card-subtitle>
+
           </v-card>
         </v-col>
       </v-row>

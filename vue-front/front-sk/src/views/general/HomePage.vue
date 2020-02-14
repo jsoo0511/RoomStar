@@ -107,6 +107,8 @@
         </v-layout>
       </section>
 
+
+
       <section>
         <v-layout
           column
@@ -127,7 +129,7 @@
             <v-container grid-list-xl>
               <v-layout row wrap align-center>
                 <v-flex xs12 md4>
-                  <v-card flat class="mx-auto" elevation="7"  width="90%">
+                  <v-card flat class="mx-auto" elevation="7"  width="90%" id="card-box">
                    <v-img
                       class="white--text align-end"
                       height="500px"
@@ -146,6 +148,7 @@
                         <v-btn
                           color="orange"
                           text
+                          @click="singingButton()"
                         >
                           경연하기
                         </v-btn>
@@ -555,6 +558,17 @@ v-content__wrap{
     -ms-transform: translateY(-5px);
     transform: translateY(-5px);
   }
-  }
-  
+}
+#card-box {
+    -webkit-transform: perspective(1000px);
+    transform: perspective(1000px);
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+#card-box .card.hover{
+    z-index:10;
+    box-shadow: 0px 20px 40px 10px rgba(48, 54, 62, 0.8);
+}
+
+
 </style>
