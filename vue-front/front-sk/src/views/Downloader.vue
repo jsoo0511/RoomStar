@@ -1,36 +1,20 @@
 <template>
   <div>
     <div id="testt">
-      <!-- <button @click="downloadImg">download</button> -->
-      <!-- <video autoplay loop muted src="" id="imgtag"></video> -->
       <button @click="test">download</button>
 
-      <!-- <audio src="" id="music" type="audio/mp3"></audio> -->
-
       <table class="lectures">
-        <tr v-for="(music, i) in (musicTitle, musicUrl)" :key="i">
-         
-          <td>
-            {{ musicTitle[i].name }}
+        <tr v-for="(music, i) in musicTitle" :key="i">
+          <td v-if="music.title != '창모- meteor.mp3'">
+            {{ music.title }}
           </td>
-          <td>
-            <!-- <a :href="makeUrl(music)">{{ music }} </a> -->
-          </td>
-          <td>
+
+          <td v-if="music.title != '창모- meteor.mp3'">
             <video controls name="media">
-              <source :src="music" type="audio/mp3"/>
+              <source :src="music.url" type="audio/mp3" />
             </video>
           </td>
-          <!-- <td>
-            <v-btn :href="music">down</v-btn>
-          </td> -->
         </tr>
-
-        <!-- <tr v-for="(music, i) in musicUrl" :key="i">
-          <td>
-            {{ music }}
-          </td>
-        </tr> -->
       </table>
     </div>
   </div>
@@ -53,8 +37,6 @@ export default {
     };
   },
   methods: {
-  
-
     test() {
       // list에 있는 항목들을 불러옴
 
@@ -72,11 +54,19 @@ export default {
       storageRef
         .listAll()
         .then(result => {
-          console.log(result);
-          //this.musicUrl.push(result.items);
+          console.log("333");
 
+          //this.musicUrl.push(result.items);
           result.items.forEach(musicRef => {
-            this.musicTitle.push(musicRef);
+            let music = {};
+            music.title = musicRef.name;
+            //this.musicTitle.push(musicRef);
+            console.log(musicRef);
+            musicRef.getDownloadURL().then(url => {
+              music.url = url;
+              this.musicTitle.push(music);
+            });
+            //console.log(musicRef.getDownloadURL().i);
           });
         })
         .catch(function(error) {});
