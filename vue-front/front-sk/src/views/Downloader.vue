@@ -8,14 +8,22 @@
       <!-- <audio src="" id="music" type="audio/mp3"></audio> -->
 
       <table class="lectures">
-        <tr v-for="(music, i) in musicTitle,musicUrl" :key="i">
+        <tr v-for="(music, i) in (musicTitle, musicUrl)" :key="i">
+         
           <td>
             {{ musicTitle[i].name }}
-            
           </td>
           <td>
-             <a href="">{{ music }} </a>
+            <!-- <a :href="makeUrl(music)">{{ music }} </a> -->
           </td>
+          <td>
+            <video controls name="media">
+              <source :src="music" type="audio/mp3"/>
+            </video>
+          </td>
+          <!-- <td>
+            <v-btn :href="music">down</v-btn>
+          </td> -->
         </tr>
 
         <!-- <tr v-for="(music, i) in musicUrl" :key="i">
@@ -34,21 +42,26 @@ import * as firebase from "firebase/app";
 //import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/storage";
+import axios from "axios";
 
 export default {
   data() {
     return {
       musicUrl: [],
       musicTitle: [],
-      musicTest:[]
+      musicTest: []
     };
   },
   methods: {
+  
+
     test() {
       // list에 있는 항목들을 불러옴
 
       //var temp=this;
       var storageRef = firebase.storage().ref();
+      console.log("1234");
+      console.log(storageRef);
 
       // storageRef.listAll.then(result => {
       //   result.items.forEach(name => {
@@ -56,20 +69,17 @@ export default {
       //   });
       // });
 
-       storageRef
+      storageRef
         .listAll()
         .then(result => {
           console.log(result);
           //this.musicUrl.push(result.items);
-     
-        
+
           result.items.forEach(musicRef => {
             this.musicTitle.push(musicRef);
           });
         })
         .catch(function(error) {});
-
-
 
       storageRef
         .listAll()
