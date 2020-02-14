@@ -1,5 +1,5 @@
 <template>
-  <div id="waitingRoom">
+  <div id="waitingRooms">
     <br />
     <br />
     <h2>노래부르는 버튼 임시 구현</h2>
@@ -12,7 +12,7 @@
         <div class="swiper-wrapper">
 
             <div class="swiper-slide">
-                <div class="card">
+                <div class="cards">
                     <div class="sliderText">
                         <h3>Slider One</h3>
                     </div>
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="swiper-slide">
-                <div class="card">
+                <div class="cards">
                     <div class="sliderText">
                         <h3>Slider Two</h3>
                     </div>
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="swiper-slide">
-                <div class="card">
+                <div class="cards">
                     <div class="sliderText">
                         <h3>Slider Three</h3>
                     </div>
@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="swiper-slide">
-                <div class="card">
+                <div class="cards">
                     <div class="sliderText">
                         <h3>Slider Three</h3>
                     </div>
@@ -55,12 +55,8 @@
                     </div>        
                 </div>
             </div>
-            
-
-
         </div>
     </div>
-
 
   <div class="card">
   <div class="card-image"></div>
@@ -128,25 +124,24 @@
 <script>
 import router from "@/routes";
 import axios from "axios";
-
 var waitingNumofPeople = 0;
 
-// var swiper = new Swiper('.swiper-container', {
-//   effect: 'coverflow',
-//   grabCursor: true,
-//   centeredSlides: true,
-//   slidesPerView: 'auto',
-//   coverflowEffect: {
-//     rotate: 30,
-//     stretch: 0,
-//     depth: 500,
-//     modifier: 1,
-//     slideShadows : true,
-//   },
-//   pagination: {
-//     el: '.swiper-pagination',
-//   },
-// });
+var swiper = new Swiper('.swiper-container', {
+  effect: 'coverflow',
+  grabCursor: true,
+  centeredSlides: true,
+  slidesPerView: 'auto',
+  coverflowEffect: {
+    rotate: 30,
+    stretch: 0,
+    depth: 500,
+    modifier: 1,
+    slideShadows : true,
+  },
+  pagination: {
+    el: '.swiper-pagination',
+  },
+});
 
 export default {
   name: "WaitingRoom",
@@ -339,9 +334,7 @@ li {
   box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
 }
 
-@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,600,700');
-
-body{
+#waitingRooms{
     margin:0;
     padding:0;
     display:flex;
@@ -352,7 +345,7 @@ body{
     font-family:'Poppins',sans-serif;
 }
 
-.card
+.cards
 {
     position:relative;
     background:#fff;
@@ -360,14 +353,14 @@ body{
     height:500px;
     margin:0 auto;
 }
-.card .content
+.cards .content
 {
     width:400px;
     padding:30px;
     box-sizing:border-box;
 }
 
-.card .content a{
+.cards .content a{
     display:inline-block;
     margin:10px 0 0;
     padding:10px 20px;
@@ -378,7 +371,7 @@ body{
 
 }
 
-.card .sliderText{
+.cards .sliderText{
     position:relative;
     width:100%;
     height:200px;
@@ -388,7 +381,7 @@ body{
     background:#000;
 } 
 
-.card .sliderText h3{
+.cards .sliderText h3{
     color:#fff;
     font-size:3em;
 } 
