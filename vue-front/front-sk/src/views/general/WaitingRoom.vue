@@ -7,21 +7,85 @@
     <br />waitingRoom
     <br />
     <br />
-    <section>
 
-  <div class="card-box"
-            onmouseenter="hoverCard.handleEnter(this,event)" onmousemove="hoverCard.handleMove(this,event)" onmouseleave="hoverCard.handleLeave(this)">
-            <div class="card ani">
-                <div class="bg" style="background-image:url('../assets/images/showOff.png')"></div>
-                <div class="info">
-                    <h1>HOVER ME</h1>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+                <div class="card">
+                    <div class="sliderText">
+                        <h3>Slider One</h3>
+                    </div>
+                    <div class="content">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat esse quibusdam, illo perspiciatis placeat magni dolorum consequatur libero temporibus eos vitae ipsum iure, architecto molestias, voluptas numquam repellendus deserunt voluptatum!</p>
+                        <a href="#">Read More</a>
+                    </div>        
                 </div>
             </div>
+            <div class="swiper-slide">
+                <div class="card">
+                    <div class="sliderText">
+                        <h3>Slider Two</h3>
+                    </div>
+                    <div class="content">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat esse quibusdam, illo perspiciatis placeat magni dolorum consequatur libero temporibus eos vitae ipsum iure, architecto molestias, voluptas numquam repellendus deserunt voluptatum!</p>
+                        <a href="#">Read More</a>
+                    </div>        
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="card">
+                    <div class="sliderText">
+                        <h3>Slider Three</h3>
+                    </div>
+                    <div class="content">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat esse quibusdam, illo perspiciatis placeat magni dolorum consequatur libero temporibus eos vitae ipsum iure, architecto molestias, voluptas numquam repellendus deserunt voluptatum!</p>
+                        <a href="#">Read More</a>
+                    </div>        
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="card">
+                    <div class="sliderText">
+                        <h3>Slider Three</h3>
+                    </div>
+                    <div class="content">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat esse quibusdam, illo perspiciatis placeat magni dolorum consequatur libero temporibus eos vitae ipsum iure, architecto molestias, voluptas numquam repellendus deserunt voluptatum!</p>
+                        <a href="#">Read More</a>
+                    </div>        
+                </div>
+            </div>
+            
+
+
+        </div>
     </div>
 
 
+  <div class="card">
+  <div class="card-image"></div>
+  <div class="card-text">
+    <span class="date">4 days ago</span>
+    <h2>Post One</h2>
+    <p>Lorem ipsum dolor sit amet consectetur, Ducimus, repudiandae temporibus omnis illum maxime quod deserunt eligendi dolor</p>
+  </div>
+  <div class="card-stats">
+    <div class="stat">
+      <div class="value">4<sup>m</sup></div>
+      <div class="type">read</div>
+    </div>
+    <div class="stat border">
+      <div class="value">5123</div>
+      <div class="type">views</div>
+    </div>
+    <div class="stat">
+      <div class="value">32</div>
+      <div class="type">comments</div>
+    </div>
+  </div>
+</div>
 
-      <ul>
+     <ul>
         <!-- {{allRoomInfo }} array인 경우 key가 반드시 필요하다.-->
         <li :key="index" v-for="(roomInfo, index) in allRoomInfo">
           방정보: {{roomInfo}}
@@ -55,26 +119,34 @@
           <!-- <hr> -->
         </li>
       </ul>
-    </section>
 
     <p>대기인원: {{ waitingNumofPeople }}</p>
   </div>
 </template>
 
+<script src="swiper.min.js"></script>
 <script>
 import router from "@/routes";
 import axios from "axios";
 
 var waitingNumofPeople = 0;
 
-var hoverCard = {
-    width: 0,
-    height: 0,
-    startX:0,
-    startY:0,
-    mouseX: 0,
-    mouseY: 0,
-}
+// var swiper = new Swiper('.swiper-container', {
+//   effect: 'coverflow',
+//   grabCursor: true,
+//   centeredSlides: true,
+//   slidesPerView: 'auto',
+//   coverflowEffect: {
+//     rotate: 30,
+//     stretch: 0,
+//     depth: 500,
+//     modifier: 1,
+//     slideShadows : true,
+//   },
+//   pagination: {
+//     el: '.swiper-pagination',
+//   },
+// });
 
 export default {
   name: "WaitingRoom",
@@ -150,50 +222,6 @@ export default {
         });
     }
   },
-  mounted:{
-   postionX: function () {
-        return this.mouseX / this.width;
-    },
-    positionY: function () {
-        return this.mouseY / this.height;
-    },
-    cardTransform: function (target) {
-        var rx = this.postionX() * 30;
-        var ry = this.positionY() * -30;
-        return target.children[0].style.transform = 'rotateY(' + rx + 'deg)' + ' ' + 'rotateX(' + ry + 'deg)';
-    },
-    cardBgTransform: function (target) {
-        var bx = this.postionX() * -50;
-        var by = this.positionY() * -50;
-        return target.children[0].children[0].style.backgroundPosition = bx + 'px' + ' ' + by + 'px';
-    },
-    handleEnter: function (target, e) {
-        this.width = target.clientWidth;
-        this.height = target.clientHeight;
-        this.startX=e.pageX;
-        this.startY=e.pageY;
-        target.children[0].classList.add('hover');
-    },
-    handleMove: function (target, e) {
-        if(Math.abs(this.startX-e.pageX)>50){
-            target.children[0].classList.remove('ani');
-        }
-        this.mouseX = e.pageX - target.offsetLeft - this.width / 2;
-        this.mouseY = e.pageY - target.offsetTop - this.height / 2;
-        this.cardTransform(target);
-        this.cardBgTransform(target);
-    },
-    handleLeave: function (target) {
-        this.mouseX = 0;
-        this.mouseY = 0;
-        target.children[0].classList.add('ani');
-        target.children[0].classList.remove('hover');
-        this.cardTransform(target);
-        this.cardBgTransform(target);
-    },
-
-
-  },
   created() {
     // 유저가 처음 대기방에 들어왔을때 얻을 수 있는 방들의 정보
     let store = this.$store;
@@ -218,12 +246,8 @@ export default {
   // viewMypage
 };
 </script>
-<script>
-
-</script>
-
-
 <style scoped>
+
 ul {
   list-style-type: none;
   padding-left: 0px;
@@ -241,72 +265,151 @@ li {
   border: 3px dashed #bcbcbc;
 }
 
-.card-box {
-    margin: 10px;
-    -webkit-transform: perspective(1000px);
-    transform: perspective(1000px);
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    min-width: 300px;
-    max-width: 380px;
-}
-
 .card {
-    position: relative;
-    width: 100%;
-    height: 350px;
-    overflow: hidden;
-    background-color: #000;
-    box-shadow: 0px 5px 15px 0px rgba(48, 54, 62, 0.7);
-    border-radius: 10px;
-}
-.card.hover{
-    transition:box-shadow 0.5s;
-}
-.card-box .card.hover{
-    z-index:10;
-    box-shadow: 0px 20px 40px 10px rgba(48, 54, 62, 0.8);
+  display: grid;
+  grid-template-columns: 300px;
+  grid-template-rows: 210px 210px 80px;
+  grid-template-areas: "image" "text" "stats";
+  border-radius: 18px;
+  background: white;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.9);
+  font-family: roboto;
+  text-align: center;
+    transition: 0.5s ease;
+  cursor: pointer;
+  margin:30px;
 }
 
-.card.ani{
-    transition: 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-    -webkit-transition: 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+.card-image {
+  grid-area: image;
 }
-.card.ani .bg{
-    transition: background-position 0.5s cubic-bezier(0.23, 1, 0.32, 1),opacity 0.5s;
-    -webkit-transition: background-position 0.5s cubic-bezier(0.23, 1, 0.32, 1),opacity 0.5s;
+.card-text {
+  grid-area: text;
 }
-
-.card.hover .bg{
-    opacity: 1;
+.card-stats {
+  grid-area: stats; 
 }
-.card .bg {
-    position: absolute;
-    top: -30px;
-    left: -30px;
-    width: calc(100% + 60px);
-    height: calc(100% + 60px);
-    background-repeat: no-repeat;
-    background-position: 0 0;
-    background-size: cover;
-    opacity: 0.7;
-    transition:opacity 0.3s;
+.card-image {
+  grid-area: image;
+  background: url("../../assets/images/bg_solo.png");
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  background-size: cover;
 }
 
+.card-text {
+  grid-area: text;
+  margin: 25px;
+}
+.card-text .date {
+  color: rgb(255, 7, 110);
+  font-size:13px;
+}
+.card-text p {
+  color: grey;
+  font-size:15px;
+  font-weight: 300;
+}
+.card-text h2 {
+  margin-top:0px;
+  font-size:28px;
+}
 
-.card .info {
-    position: absolute;
-    bottom: 20PX;
-    right: 20PX;
-    transition:all 0.4s ease-out;
+.card-stats {
+  grid-area: stats; 
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background: rgb(255, 7, 110);
 }
-.card.hover .info{
-    text-shadow:rgba(0, 0, 0, 0.5) 0 5px 10px
+
+.card-stats .stat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  padding:10px;
 }
-.card .info h1 {
-    display: inline-block;
-    color: #fff;
-    font-size: 20px;
-    font-weight: normal;
+
+.card:hover {
+  transform: scale(1.15);
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+}
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,600,700');
+
+body{
+    margin:0;
+    padding:0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #383838;
+    font-family:'Poppins',sans-serif;
+}
+
+.card
+{
+    position:relative;
+    background:#fff;
+    width:400px;
+    height:500px;
+    margin:0 auto;
+}
+.card .content
+{
+    width:400px;
+    padding:30px;
+    box-sizing:border-box;
+}
+
+.card .content a{
+    display:inline-block;
+    margin:10px 0 0;
+    padding:10px 20px;
+    text-decoration:none;
+    border:2px solid #000;
+    color: #262626;
+    font-weight:600;
+
+}
+
+.card .sliderText{
+    position:relative;
+    width:100%;
+    height:200px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background:#000;
+} 
+
+.card .sliderText h3{
+    color:#fff;
+    font-size:3em;
+} 
+
+.swiper-slide{
+    width:400px;
+}
+.swiper-slide:nth-child(1) .sliderText
+{
+    background: #2196f3;
+}
+.swiper-slide:nth-child(2) .sliderText
+{
+    background: #e91e63;
+}
+.swiper-slide:nth-child(3) .sliderText
+{
+    background: #c3d41a;
+}
+.swiper-slide:nth-child(4) .sliderText
+{
+    background: #ff9800;
 }
 </style>
