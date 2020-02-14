@@ -6,17 +6,5 @@ export default {
     getToken: state => state.token,
     getUserId: state => state.userId,
     getUserNickname: state => state.userNickname,
-    // options(state) {
-    //     return {
-    //         headers: {
-    //             Authorization: 'JWT ' + state.token
-    //         }
-    //     }
-    // },
-    // userId(state) {
-    //     return state.token ? jwtDecode(state.token).user_id : null
-    // },
-    // isLoggedIn(state) {
-    //     // 삼항연산자 있다면 true 없다면 false
-    //     return state.token ? true : false
+    getSingerOrWatcherStatus: status => status.singerOrWatcherStatus,
 }

@@ -10,7 +10,7 @@
             justify-center
             class="white--text"
           >
-            <h1 class="white--text mb-2 display-1 text-center">ROOM ST★R</h1>
+            <h1 class="white--text mb-2 display-1 text-center">ROOM STAR</h1>
             <h2 class="subheading mb-1 text-center">        </h2>
 
 
@@ -31,8 +31,86 @@
         </v-video-parallax>
       </section>
 
+      <section
+        id="welcome"
+        class="hide-overflow"
+      >
+        <v-layout>
+          <v-flex
+            hidden-sm-and-down
+            md8
+          >
+            <v-img
+              src="../../assets/images/welcome.png"
+              height="100vh"
+            />
+          </v-flex>
+
+          <v-flex
+            xs12
+            md12
+            align-content-space-between
+            layout
+            :pa-5="$vuetify.breakpoint.smAndDown"
+            wrap
+            color="rgba(0,0,0,0.5)"
+          >
+            <base-bubble-1
+              style="transform: rotate(180deg) translateY(25%)"
+            />
+
+            <v-layout
+              align-center
+              justify-center
+            >
+              <v-flex
+                xs10
+                md6
+              >
+                <h2 style="margin-top:13vh;"><b>Sing Battle<br></b></h2><br>
+                <p style="padding-left:2vw;">
+                  내 노래는 세상을 울릴 노래다ㅏ아!<br>
+                  추천을 많이 받은 사람이 승리합니다!<br>
+                </p>
+                <v-btn text large color='rgba(255,138,21)' style="float:right;">
+                  >> 노래 배틀하기!
+                </v-btn>
+                
+<br><br><br><br>
+                <h2><b>Sing Battle<br></b></h2><br>
+                <p style="padding-left:2vw;">
+                  그치만.. 듣지 않으면 알 수 없는걸..<br>
+                  노래 경연을 듣고 투표해주세요!<br>
+                </p>
+                <v-btn text large color='rgba(255,138,21)' style="float:right;">
+                  >> 배틀 시청하기!
+                </v-btn>
+<br><br><br><br>
+                <h2><b>Sing Showoff<br></b></h2><br>
+                <p style="padding-left:2vw;">
+                  오늘따라 노래가 너무 잘된다구?!<br>
+                  내 노래를 모두에게 자랑해보세요!<br>
+                </p>
+                <v-btn text large color='rgba(255,138,21)' style="float:right;">
+                  >> 노래 자랑하기!
+                </v-btn>
+
+
+              </v-flex>
+          <a href="#" id="scroll-down2" class="scroll-down" address="true"></a>
+            </v-layout>
+
+            <base-bubble-2
+              style="transform: rotate(180deg) translate(-200px, -15%)"
+            />
+          </v-flex>
+        </v-layout>
+      </section>
+
+
+
       <section>
-        <v-layout id="ok"
+        <v-layout
           column
           wrap
           class="my-12"
@@ -51,7 +129,7 @@
             <v-container grid-list-xl>
               <v-layout row wrap align-center>
                 <v-flex xs12 md4>
-                  <v-card flat class="mx-auto " elevation="7"  width="90%">
+                  <v-card flat class="mx-auto" elevation="7"  width="90%" id="card-box">
                    <v-img
                       class="white--text align-end"
                       height="500px"
@@ -70,6 +148,7 @@
                         <v-btn
                           color="orange"
                           text
+                          @click="singingButton()"
                         >
                           경연하기
                         </v-btn>
@@ -270,8 +349,14 @@ export default {
   },
   mounted(){   
      $(function() {
-    $('.scroll-down').click (function() {
-      $('html, body').animate({scrollTop: $('#ok').offset().top }, 'slow');
+    $('#scroll-down').click (function() {
+      $('html, body').animate({scrollTop: $('#welcome').offset().top }, 'slow');
+      return false;
+    });
+  });
+      $(function() {
+    $('#scroll-down2').click (function() {
+      $('html, body').animate({scrollTop: $('#HomePage').offset().top }, 'slow');
       return false;
     });
   });
@@ -298,6 +383,9 @@ export default {
 </script>
 
 <style scoped>
+.container{
+  width:100vw;
+}
 section{
   background-color:#ffffff;
 }
@@ -470,7 +558,17 @@ v-content__wrap{
     -ms-transform: translateY(-5px);
     transform: translateY(-5px);
   }
-  }
-  
+}
+#card-box {
+    -webkit-transform: perspective(1000px);
+    transform: perspective(1000px);
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+#card-box .card.hover{
+    z-index:10;
+    box-shadow: 0px 20px 40px 10px rgba(48, 54, 62, 0.8);
+}
+
 
 </style>
