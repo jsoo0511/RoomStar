@@ -65,6 +65,7 @@ export default {
     singingButton() {
       const userid = this.$session.get("userId");
       console.log(userid);
+      this.$store.dispatch("changeToSinger", 1);
       axios
         .put("http://70.12.247.115:8080/Enter_room/" + userid)
         .then(response => {
@@ -76,15 +77,16 @@ export default {
               this.$router.push("/secondGameRoom");
               break;
             case 3:
-              this.$router.push("/thirdGameRoom.vue");
+              this.$router.push("/thirdGameRoom");
               break;
             case 4:
-              this.$router.push("/fourthGameRoom.vue");
+              this.$router.push("/fourthGameRoom");
               break;
           }
         })
         .catch(e => {
           console.log("error: ", e);
+          alert('모든 방이 차있습니다.')
         });
     },
 
@@ -99,8 +101,7 @@ export default {
         room_id,
         vote: 0
       };
-      console.log(data);
-
+      this.$store.dispatch("changeToWatcher", 2);
       axios
         .post("http://70.12.247.115:8080/Insert_watching", data)
         .then(response => {
@@ -131,12 +132,11 @@ export default {
     // 유저가 처음 대기방에 들어왔을때 얻을 수 있는 방들의 정보
     let store = this.$store;
     const userid = this.$session.get("userId");
-    console.log("userId : " + userid);
+    console.log(userid)
     axios
       .post("http://70.12.247.115:8080/Insert_waiting/" + userid)
       .then(response => {
         for (let i = 0; i < 4; i++) {
-          console.log(response.data.roomViewInfo[i]);
           this.allRoomInfo.push(response.data.roomViewInfo[i]);
         }
         // 대기인원수
