@@ -5,17 +5,14 @@
     <div>
       <!-- https://xyxufvchfhks3520734.cdn.ntruss.com/video/ls-20200122105535-tD4G9_1080p_a_l.m3u8 -->
       <div id="firstWebCam">
-        firstWebCam 들어갈자리
-        <video playsinline id="local_video" autoplay preload="metadata" style="width:30%">
-        </video>
-         
-       
-
+        player1 들어갈자리
+        <video playsinline id="p1_video" autoplay preload="metadata" style="width:30%" poster="@/assets/images/camPoster.jpg">
+        </video>``
       </div>
       
       <div id="secondWebCam">
-        secondWebCam 들어갈자리ㅡㅡㅡㅡㅡ
-        <video playsinline id="remote_video" autoplay preload="metadata" style="width:30%">
+        player2 들어갈자리
+        <video playsinline id="p2_video" autoplay preload="metadata" style="width:30%" poster="@/assets/images/camPoster.jpg">
         </video>
       </div>
     </div>
@@ -24,6 +21,9 @@
 
 <script>
 import io from "socket.io-client"
+import axios from "axios";
+import router from "@/routes";
+import { mapState, mapGetters, mapActions } from "vuex";
 
 
 const stun_server = "stun.l.google.com:19302";
@@ -43,29 +43,46 @@ export default {
   data() {
     return {
       //localVideo:null,
-      local_video: null,
-      local_stream: null,
+      p1_video: null,
+      p1_stream: null,
       //connected_users: [-1, null, null, null, null, null],
       //peer_connections: {},
 
+      watchers:[null,null,null,null,null],
+      peer_connections:{},
 
+      room_id: 1,
+      roomInfo: "",
+      singer_num:0,
+
+      user_id:"me",
+      player1:"me",
+      player2:"you",
+
+      user_identification:"singer",
+
+      userState: 0,
       isInitiator:false,
 
-      connected_user:null,
-      peer_connection:null,
+      fight_user:null,
+      fight_connection:null,
 
-      remote_video: null,
-      remote_stream: null,
+      p2_video: null,
+      p2_stream: null,
 
       isStarted : false,
 
     };
   },
+  computed: {
+    ...mapState(["singerOrWatcherStatus", "token"])
+  },
 
   methods:{
+    
     sendMessage(message) {
       //서버로 메세지 보내기
-     // console.log("message를 보내볼까 ");
+     console.log("sedMessage----->5");
       this.socket.emit("message", message);
       // this.socket.broadcast.emit~
       //.broadcase. 를 추가하면 자신을 제외한 나머지 클라이언트에게만 메세지를 전달합니다.  
@@ -73,10 +90,19 @@ export default {
     },
     async get_stream(stream) {
 
-      //console.log("내 화면 송출 중", stream);
-      this.local_video = await document.getElementById("local_video");
-      this.local_video.srcObject = stream;
-      this.local_stream = stream;
+      console.log("get_stream---->3");
+
+      if (player1==user_id){
+        this.p1_video = await document.getElementById("p1_video");
+        this.p1_video.srcObject = stream;
+        this.p1_stream = stream;
+      }else{
+        this.p2_video = await document.getElementById("p2_video");
+        this.p2_video.srcObject = stream;
+        this.p2_stream = stream;
+
+      }
+      
       // if (!this.isInitiator ){
       //   this.maybeStart();
       // }
@@ -105,11 +131,11 @@ export default {
 
     // },
     async getPeerConnection() {
+      console.log("getPeerConnection()----->4");
+      this.fight_connection= await new RTCPeerConnection(pcConfig);
 
-      this.peer_connection= await new RTCPeerConnection(pcConfig);
-
-      console.log("start pc",this.peer_connection);
-      this.peer_connection.onicecandidate = event => {
+      console.log("start pc",this.fight_connection);
+      this.fight_connection.onicecandidate = event => {
         if (event.candidate) {
          //console.log("빠빠바");
 
@@ -125,40 +151,43 @@ export default {
         }
       };
 
-      this.peer_connection.onaddstream = event => {
+      this.fight_connection.onaddstream = event => {
        // console.log(event.stream, 'onaddstream')
-        //this.remote_video = document.getElementById("")
-        this.remote_stream = event.stream;
-        this.remote_video.srcObject = this.remote_stream;
-        
+        //this.p2_video = document.getElementById("")
+        this.p2_stream = event.stream;
+        this.p2_video.srcObject = this.p2_stream;
       }
-      //console.log(this.peer_connection, '1111')
-      this.peer_connection.addStream(this.local_stream);
-      return this.peer_connection;
+      //console.log(this.fight_connection, '1111')
+      this.fight_connection.addStream(this.p1_stream);
+      return this.fight_connection;
     }
   },
   created() {
-    //console.log("시작");
-    this.socket = io.connect('http://70.12.246.73:3001', {transports: ["websocket"]})
+    console.log("created()---->1");
+    this.socket = io.connect('http://70.12.246.73:3001?room_id='+this.room_id+'&user_id='+user_id+'&user_identification='+user_identification, {transports: ["websocket"]})
+ 
   },
   mounted(){
+    console.log("mounted()---->2")
+    this.p2_video = document.getElementById("p2_video");
+    this.p1_video = document.getElementById("p1_video");
     
-    //console.log("뀨?")
-    this.remote_video = document.getElementById("remote_video");
-    this.local_video = document.getElementById("local_video");
-    
-
-    navigator.mediaDevices
+    //player1일때,
+    if (user_identification=="singer"){
+      navigator.mediaDevices
       .getUserMedia({
         audio:true,
         video:true
       })
       .then(this.get_stream);
-
+    }
       this.socket.on("join",message => {
+        const join_id = message.user_id;
+        console.log(join_id+"들어왔숩다.");
+        const join_identification = message.identification;
+
         //const user_id = message.user_id;
         //console.log("새로운 상대가 들어옴!");
-       
         setTimeout(() => {
           this.getPeerConnection()
           .then( t_pc => {
@@ -166,7 +195,8 @@ export default {
               t_pc.setLocalDescription(sdp) 
               this.sendMessage({
                 message: sdp,
-              // study_id: 1,
+                
+                // study_id: 1,
                 // from: this.user_id,
                 // to: user_id
               })
@@ -176,8 +206,8 @@ export default {
       })
 
       this.socket.on('leave', message => {
-      this.remote_video = null;
-      this.remote_stream = null;
+      this.p2_video = null;
+      this.p2_stream = null;
     });
     this.socket.on("message", data => {
       if (data.message.type === "offer") {
@@ -194,7 +224,7 @@ export default {
           });
         });
       } else if (data.message.type === "answer") {
-        let t_pc = this.peer_connection;
+        let t_pc = this.fight_connection;
         t_pc.setRemoteDescription(new RTCSessionDescription(data.message));
       } else if (data.message.type === "candidate") {
         let cand = new RTCIceCandidate({
@@ -204,13 +234,10 @@ export default {
         //let t_pc = this.peer_connection;
         //console.log("여기 캔디데이트", cand);
         //console.log("여기는 pc?", this.peer_connection);
-          this.peer_connection.addIceCandidate(cand);
+          this.fight_connection.addIceCandidate(cand);
       }
     });
     }
-  
-
-
   }
 ;
 
