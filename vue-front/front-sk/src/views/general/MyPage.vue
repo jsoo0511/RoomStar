@@ -166,6 +166,7 @@
 <script>
 import router from "@/routes";
 import axios from "axios";
+import ModalMyPage from "./ModalMyPage.vue";
 
 // let viewMypage =function(response){
 //   let userId1 = response.userid;
@@ -240,6 +241,8 @@ data(){
 
         this.id = id;
         console.log(this.id);
+        
+        
         this.nick = nick;
         this.profile = profile;
         this.thumbnail = thumbnail;
