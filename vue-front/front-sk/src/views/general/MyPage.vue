@@ -1,128 +1,122 @@
 <template>
   <div id="mypages">
-  <v-card
-    max-width="375"
-    class="mx-auto"
-  >
-    <v-img
-      :src="profile"
-      height="300px"
-      dark
-    >
-      <v-row class="fill-height">
-        <v-card-title>
-          <v-btn dark icon>
-            <v-icon>mdi-chevron-left</v-icon>
-          </v-btn>
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <v-card max-width="375" class="mx-auto">
+      
+    
+      <v-img :src="profile" height="300px" dark>
+        <v-row class="fill-height">
+          <v-card-title>
+            <v-btn dark icon>
+              <v-icon>mdi-chevron-left</v-icon>
+            </v-btn>
+
+            <v-spacer></v-spacer>
+
+            <v-btn dark icon class="mr-4">
+              <ModalMyPage />
+            </v-btn>
+
+            <v-btn dark icon>
+              <v-icon>mdi-dots-vertical</v-icon>
+            </v-btn>
+          </v-card-title>
 
           <v-spacer></v-spacer>
 
-          <v-btn dark icon class="mr-4">
-            <v-icon>mdi-pencil</v-icon>
-          </v-btn>
+          <v-card-title class="white--text pl-12 pt-12">
+            <div class="display-1 pl-12 pt-12">{{ nick }}</div>
+          </v-card-title>
+        </v-row>
+      </v-img>
 
-          <v-btn dark icon>
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </v-card-title>
+      <v-list two-line>
+        <v-list-item v-onclick="">
+          <v-list-item-icon>
+            <v-icon color="indigo">mdi-email</v-icon>
+          </v-list-item-icon>
 
-        <v-spacer></v-spacer>
+          <v-list-item-content>
+            <v-list-item-title>Personal</v-list-item-title>
+            <v-list-item-subtitle>{{ email }}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
 
-        <v-card-title class="white--text pl-12 pt-12">
-          <div class="display-1 pl-12 pt-12">{{nick}}</div>
-        </v-card-title>
-      </v-row>
-    </v-img>
+        <v-divider inset></v-divider>
 
-    <v-list two-line>
-      
+        <v-list-item v-onclick="">
+          <v-list-item-icon>
+            <v-icon color="indigo">mdi-map-marker</v-icon>
+          </v-list-item-icon>
 
-      <v-list-item v-onclick="">
-        <v-list-item-icon>
-          <v-icon color="indigo">mdi-email</v-icon>
-        </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Provider</v-list-item-title>
+            <v-list-item-subtitle>{{ provider }}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
 
-        <v-list-item-content>
-          <v-list-item-title>{{email}}</v-list-item-title>
-          <v-list-item-subtitle>Personal</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
+        <v-divider inset></v-divider>
 
-      <v-divider inset></v-divider>
+        <v-list-item v-onclick="">
+          <v-list-item-icon>
+            <v-icon color="indigo">mdi-map-marker</v-icon>
+          </v-list-item-icon>
 
-      <v-list-item v-onclick="">
-        <v-list-item-icon>
-          <v-icon color="indigo">mdi-map-marker</v-icon>
-        </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Grade</v-list-item-title>
+            <v-list-item-subtitle>{{ grade }}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
 
-        <v-list-item-content>
-          <v-list-item-title>Provider</v-list-item-title>
-          <v-list-item-subtitle>{{provider}}</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
+        <v-divider inset></v-divider>
 
-      <v-divider inset></v-divider>
+        <v-list-item v-onclick="">
+          <v-list-item-icon>
+            <v-icon color="indigo">mdi-map-marker</v-icon>
+          </v-list-item-icon>
 
-      <v-list-item v-onclick="">
-        <v-list-item-icon>
-          <v-icon color="indigo">mdi-map-marker</v-icon>
-        </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Win</v-list-item-title>
+            <v-list-item-subtitle>{{ win }}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
 
-        <v-list-item-content>
-          <v-list-item-title>Grade</v-list-item-title>
-          <v-list-item-subtitle>{{grade}}</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
+        <v-divider inset></v-divider>
 
-      <v-divider inset></v-divider>
+        <v-list-item v-onclick="">
+          <v-list-item-icon>
+            <v-icon color="indigo">mdi-map-marker</v-icon>
+          </v-list-item-icon>
 
-      <v-list-item v-onclick="">
-        <v-list-item-icon>
-          <v-icon color="indigo">mdi-map-marker</v-icon>
-        </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Lose</v-list-item-title>
+            <v-list-item-subtitle>{{ lose }}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
 
-        <v-list-item-content>
-          <v-list-item-title>Win</v-list-item-title>
-          <v-list-item-subtitle>{{win}}</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
+        <v-list-item v-onclick="">
+          <v-list-item-icon>
+            <v-icon color="indigo">mdi-map-marker</v-icon>
+          </v-list-item-icon>
 
-      <v-divider inset></v-divider>
-
-      <v-list-item v-onclick="">
-        <v-list-item-icon>
-          <v-icon color="indigo">mdi-map-marker</v-icon>
-        </v-list-item-icon>
-
-        <v-list-item-content>
-          <v-list-item-title>Lose</v-list-item-title>
-          <v-list-item-subtitle>{{lose}}</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-
-       <v-list-item v-onclick="">
-        <v-list-item-icon>
-          <v-icon color="indigo">mdi-map-marker</v-icon>
-        </v-list-item-icon>
-
-        <v-list-item-content>
-          <v-list-item-title>Rate</v-list-item-title>
-          <v-list-item-subtitle>{{winrate}}</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-
-
-
-
-    </v-list>
-  </v-card>
+          <v-list-item-content>
+            <v-list-item-title>Rate</v-list-item-title>
+            <v-list-item-subtitle>{{ winrate }}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-card>
   </div>
 </template>
-
 
 <script>
 import router from "@/routes";
 import axios from "axios";
+import ModalMyPage from "./ModalMyPage.vue";
 
 // let viewMypage =function(response){
 //   let userId1 = response.userid;
@@ -140,20 +134,23 @@ import axios from "axios";
 // }
 
 export default {
-data(){
-  return {
-    id: "",
-        nick: "",
-        profile: "",
-        email: "",
-        provider: "",
-        grade: "",
-        game: "",
-        win: "",
-        lose: "",
-        winrate: ""
-  }
-},
+  data() {
+    return {
+      id: "",
+      nick: "",
+      profile: "",
+      email: "",
+      provider: "",
+      grade: "",
+      game: "",
+      win: "",
+      lose: "",
+      winrate: "",
+    };
+  },
+  components: {
+    ModalMyPage
+  },
 
   name: "mypage",
   // components: {
@@ -171,6 +168,7 @@ data(){
         console.log(id);
         const nick = response.data.user_info.nickname;
         const profile = response.data.user_info.profileimg;
+        console.log(profile);
         const email = response.data.user_info.email;
         const provider = response.data.user_info.provider;
         const grade = response.data.user_info.grade;
@@ -181,8 +179,17 @@ data(){
 
         this.id = id;
         console.log(this.id);
+        
+        
         this.nick = nick;
-        this.profile = profile;
+       
+        //this.profile = profile;
+        this.profile = decodeURIComponent(profile);
+        console.log("mypage");
+        console.log(this.profile);
+        console.log(this.$session.get("profileImg"));
+        
+      
         this.email = email;
         this.provider = provider;
         this.grade = grade;
@@ -201,8 +208,8 @@ data(){
 </script>
 
 <style scoped>
-  #mypages{
-    margin-top:70px !important;
-    padding-top:50px !important;
-  }
+#mypages {
+  margin-top: 70px !important;
+  padding-top: 50px !important;
+}
 </style>

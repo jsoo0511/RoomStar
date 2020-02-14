@@ -3,7 +3,7 @@
     <br />
     <br />
     <h2>노래부르는 버튼 임시 구현</h2>
-    <v-btn @click="SingingButton()">시청하기</v-btn>
+    <v-btn @click="singingButton()">노래부르기</v-btn>
     <br />waitingRoom
     <br />
     <br />
@@ -36,7 +36,7 @@
           참가자 승률: {{roomInfo.user2_win_rate}}
           <br />
 
-          <v-btn @click="WatchingButton(roomInfo.room_id, $event)">시청하기</v-btn>
+          <v-btn @click="watchingButton(roomInfo.room_id, $event)">시청하기</v-btn>
           <!-- <hr> -->
         </li>
       </ul>
@@ -62,7 +62,7 @@ export default {
     };
   },
   methods: {
-    SingingButton() {
+    singingButton() {
       const userid = this.$session.get("userId");
       console.log(userid);
       axios
@@ -89,7 +89,7 @@ export default {
     },
 
     // 시청하기를 누르면 해당 방으로 이동
-    WatchingButton(room_id) {
+    watchingButton(room_id) {
       const userid = this.$session.get("userId");
       const userNickname = this.$session.get("userNickname");
       console.log(userid, userNickname);

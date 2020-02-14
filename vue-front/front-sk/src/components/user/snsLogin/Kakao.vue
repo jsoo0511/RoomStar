@@ -45,7 +45,7 @@ let onSuccess = function(data) {
       profileImage1 = res.properties.profile_image;
       userEmail1 = res.kakao_account.email;
       provider1 = "kakao";
-
+   
       let toStore = {
         one: true,
         two: data.access_token,
@@ -81,7 +81,7 @@ let onSuccess = function(data) {
           session.set("isUser", true);
           session.set("userId", userId1);
           session.set("userNickname", userNickname1);
-          $session.set("profileImg", profileImage1);
+          session.set("profileImg", profileImage1);
           store.dispatch("checkLogin", response.data.token);
           store.dispatch("login", toStore);
         })
@@ -158,7 +158,7 @@ export default {
               let params = {
                 userid: userId1,
                 nickname: userNickname1,
-                profileimg: profileImage1,
+                profileimg: encodeURIComponent(profileImage1),
                 email: userEmail1,
                 pw: "",
                 provider: provider1
@@ -179,6 +179,7 @@ export default {
                   session.set("isUser", true);
                   session.set("userId", userId1);
                   session.set("userNickname", userNickname1);
+                  session.set("profileImg", profileImage1);
                   store.dispatch("checkLogin", response.data.token);
                   store.dispatch("login", toStore);
                 })

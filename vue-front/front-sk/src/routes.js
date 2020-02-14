@@ -16,6 +16,10 @@ import Components from './views/Components.vue'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+//upload
+import FileUploader from './views/FileUploader.vue'
+import Downloader from './views/Downloader.vue'
+
 Vue.use(VueRouter)
 
 export default [
@@ -78,5 +82,15 @@ export default [
     path:"/user/password",
     name:"Password",
     component : Password
+  },
+  {
+    path: '/file',
+    name: 'file',
+    component: FileUploader
+  },
+  {
+    path: '/down',
+    name: 'down',
+    component: Downloader
   },
 ];
