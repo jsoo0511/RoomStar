@@ -88,16 +88,8 @@ export default {
         { title: "홈으로 가기", icon: "mdi-image", links: "/" },
         { title: "마이페이지", icon: "mdi-view-dashboard", links: "/mypage/" },
         { title: "노래 배틀하기", icon: "mdi-image", links: "/gameRoom/" },
-        {
-          title: "배틀 시청하기",
-          icon: "mdi-help-box",
-          links: "/waitingRoom/"
-        },
-        {
-          title: "노래 자랑하기",
-          icon: "mdi-view-dashboard",
-          links: "/SharingPage/"
-        }
+        { title: "배틀 시청하기", icon: "mdi-help-box", links: "/waitingRoom/" },
+        { title: "노래 자랑하기", icon: "mdi-view-dashboard", links: "/SharingPage/" },
       ],
       color: "rgba(253,208,23,0.8)",
       miniVariant: false,

@@ -287,7 +287,8 @@ filter: none;
   padding-top:3em;
 }
 #profile_card{
-  height:44vh;
+  min-height:44vh;
+  max-height:44vh;
   left:1.7vh;
   top:0.8vw;
 }

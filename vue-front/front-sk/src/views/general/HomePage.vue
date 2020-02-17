@@ -3,14 +3,14 @@
    <v-app light id="hp_video">
     <v-content>
       <section>
-		<v-video-parallax height="900">
+		<v-video-parallax height="100vh">
           <v-layout
             column
             align-center
             justify-center
             class="white--text"
           >
-            <h1 class="white--text mb-2 display-1 text-center">ROOM STAR</h1>
+            <h1 class="white--text mb-2 display-1 text-center" style="margin-top:30vh;">ROOM STAR</h1>
             <h2 class="subheading mb-1 text-center">        </h2>
 
 
@@ -24,17 +24,123 @@
             >
               로그인하기
             </v-btn> -->
-
-
            <a href="#" id="scroll-down" class="scroll-down" address="true"></a>
           </v-layout>
         </v-video-parallax>
       </section>
 
+     
+
       <section
-        id="welcome"
-        class="hide-overflow"
-      >
+        id="welcome" style="padding-top:20px;">
+        <v-layout
+          column
+          wrap
+          class="my-12"
+          align-center
+        >
+         <!-- <v-flex xs12 sm4 class="my-4">
+            <div class="text-center">
+              <h1 class="headline">ROOM ★ STAR</h1>
+              <span class="subheading">
+                
+              </span>
+            </div>
+          </v-flex>-->
+          <v-flex xs12>
+          <h1 style="text-align:center; margin-bottom:50px;"> Menu Select </h1>
+            <v-container grid-list-xl>
+              <v-layout row wrap align-center>
+                <v-flex xs12 md4>
+                  <v-card flat class="mx-auto" elevation="7"  width="90%" id="card-box">
+                   <v-img
+                      class="white--text align-end"
+                      height="500px"
+                      width="100%"
+                      src="../../assets/images/singBattle.png"
+                    >
+                      <v-card-title style="margin-left:5px;">Sing Battle</v-card-title>
+                    
+                    <!--<v-card-subtitle class="pb-0">노래 배틀하기</v-card-subtitle>-->
+                      <v-card-text class="white--text" style="height:100px; padding-top:10px; margin-left:10px;">
+                        <div>내 노래는 세상을 울릴 노래다ㅏ아!</div>
+                        <div>추천을 많이 받은 사람이 승리합니다!</div>
+                      </v-card-text>
+
+                      <v-card-actions>
+                        <v-btn
+                          color="orange"
+                          text
+                          @click="singingButton()"
+                        >
+                          경연하기
+                        </v-btn>
+                      </v-card-actions>
+                      </v-img>
+                    </v-card>
+                </v-flex>
+                <v-flex xs12 md4>
+                  <v-card flat class="mx-auto align-center" width="90%" elevation="7" id="card-box">
+                   <v-img
+                      class="white--text align-end"
+                      width="100%"
+                      height="500px"
+                      src="../../assets/images/watchBattle.png"
+                      href="/"
+                    >
+                      <v-card-title style="margin-left:5px;">Watch Battle</v-card-title>
+                    
+                      <v-card-text class="white--text"  style="height:100px; margin-left:10px;padding-top:10px; ">
+                        <div>그치만.. 듣지 않으면 알 수 없는걸..</div>
+                        <div>노래 경연을 듣고 투표해주세요!</div>
+                      </v-card-text>
+
+                      <v-card-actions>
+                        <v-btn
+                          color="orange"
+                          text
+                        >
+                          시청하기
+                        </v-btn>
+                      </v-card-actions>
+                      </v-img>
+                    </v-card>
+                </v-flex>
+                <v-flex xs12 md4>
+                  <v-card flat class="mx-auto" width="90%" elevation="7" id="card-box">
+                   <v-img
+                      class="white--text align-end"
+                      height="500px"
+                      width="100%"
+                      src="../../assets/images/showOff.png"
+                    >
+                      <v-card-title style="margin-left:5px;">Sing Showoff</v-card-title>
+                    
+                      <v-card-text class="white--text"  style="height:100px; margin-left:10px;padding-top:10px; ">
+                        <div>오늘따라 노래가 너무 잘된다구?!</div>
+                        <div>내 노래를 모두에게 자랑해보세요!</div>
+                      </v-card-text>
+
+                      <v-card-actions>
+                        <v-btn
+                          color="orange"
+                          text
+                        >
+                          자랑하기
+                        </v-btn>
+                      </v-card-actions>
+                      </v-img>
+                    </v-card>
+                </v-flex>
+              </v-layout>
+              
+            </v-container>
+          </v-flex>
+        </v-layout>
+      </section>
+<!--
+ <section class="hide-overflow">
+  <v-container grid-list-xl>
         <v-layout>
           <v-flex
             hidden-sm-and-down
@@ -72,30 +178,16 @@
                   내 노래는 세상을 울릴 노래다ㅏ아!<br>
                   추천을 많이 받은 사람이 승리합니다!<br>
                 </p>
-                <v-btn text large color='rgba(255,138,21)' style="float:right;">
-                  >> 노래 배틀하기!
-                </v-btn>
-                
-<br><br><br><br>
                 <h2><b>Sing Battle<br></b></h2><br>
                 <p style="padding-left:2vw;">
                   그치만.. 듣지 않으면 알 수 없는걸..<br>
                   노래 경연을 듣고 투표해주세요!<br>
                 </p>
-                <v-btn text large color='rgba(255,138,21)' style="float:right;">
-                  >> 배틀 시청하기!
-                </v-btn>
-<br><br><br><br>
                 <h2><b>Sing Showoff<br></b></h2><br>
                 <p style="padding-left:2vw;">
                   오늘따라 노래가 너무 잘된다구?!<br>
                   내 노래를 모두에게 자랑해보세요!<br>
                 </p>
-                <v-btn text large color='rgba(255,138,21)' style="float:right;">
-                  >> 노래 자랑하기!
-                </v-btn>
-
-
               </v-flex>
           <a href="#" id="scroll-down2" class="scroll-down" address="true"></a>
             </v-layout>
@@ -105,116 +197,10 @@
             />
           </v-flex>
         </v-layout>
-      </section>
-
-
-
-      <section>
-        <v-layout
-          column
-          wrap
-          class="my-12"
-          align-center
-        >
-         <!-- <v-flex xs12 sm4 class="my-4">
-            <div class="text-center">
-              <h1 class="headline">ROOM ★ STAR</h1>
-              <span class="subheading">
-                
-              </span>
-            </div>
-          </v-flex>-->
-          <v-flex xs12>
-          <h1 style="text-align:center; margin-top:30px;margin-bottom:-20px"> Menu Select </h1>
-            <v-container grid-list-xl>
-              <v-layout row wrap align-center>
-                <v-flex xs12 md4>
-                  <v-card flat class="mx-auto" elevation="7"  width="90%" id="card-box">
-                   <v-img
-                      class="white--text align-end"
-                      height="500px"
-                      width="100%"
-                      src="../../assets/images/singBattle.png"
-                    >
-                      <v-card-title style="margin-left:5px;">Sing Battle</v-card-title>
-                    
-                    <!--<v-card-subtitle class="pb-0">노래 배틀하기</v-card-subtitle>-->
-                      <v-card-text class="white--text" style="height:100px; padding-top:10px; margin-left:10px;">
-                        <div>내 노래는 세상을 울릴 노래다ㅏ아!</div>
-                        <div>추천을 많이 받은 사람이 승리합니다!</div>
-                      </v-card-text>
-
-                      <v-card-actions>
-                        <v-btn
-                          color="orange"
-                          text
-                          @click="singingButton()"
-                        >
-                          경연하기
-                        </v-btn>
-                      </v-card-actions>
-                      </v-img>
-                    </v-card>
-                </v-flex>
-                <v-flex xs12 md4>
-                  <v-card flat class="mx-auto align-center" width="90%" elevation="7">
-                   <v-img
-                      class="white--text align-end"
-                      width="100%"
-                      height="500px"
-                      src="../../assets/images/watchBattle.png"
-                      href="/"
-                    >
-                      <v-card-title style="margin-left:5px;">Watch Battle</v-card-title>
-                    
-                      <v-card-text class="white--text"  style="height:100px; margin-left:10px;padding-top:10px; ">
-                        <div>그치만.. 듣지 않으면 알 수 없는걸..</div>
-                        <div>노래 경연을 듣고 투표해주세요!</div>
-                      </v-card-text>
-
-                      <v-card-actions>
-                        <v-btn
-                          color="orange"
-                          text
-                        >
-                          시청하기
-                        </v-btn>
-                      </v-card-actions>
-                      </v-img>
-                    </v-card>
-                </v-flex>
-                <v-flex xs12 md4>
-                  <v-card flat class="mx-auto" width="90%" elevation="7">
-                   <v-img
-                      class="white--text align-end"
-                      height="500px"
-                      width="100%"
-                      src="../../assets/images/showOff.png"
-                    >
-                      <v-card-title style="margin-left:5px;">Sing Showoff</v-card-title>
-                    
-                      <v-card-text class="white--text"  style="height:100px; margin-left:10px;padding-top:10px; ">
-                        <div>오늘따라 노래가 너무 잘된다구?!</div>
-                        <div>내 노래를 모두에게 자랑해보세요!</div>
-                      </v-card-text>
-
-                      <v-card-actions>
-                        <v-btn
-                          color="orange"
-                          text
-                        >
-                          자랑하기
-                        </v-btn>
-                      </v-card-actions>
-                      </v-img>
-                    </v-card>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-flex>
-        </v-layout>
-      </section>
-
+      </v-container>
+    </section>
+-->
+<!--
       <section>
       <v-container grid-list-xl>
         <v-parallax src="../../assets/images/hero.jpeg" height="380">
@@ -292,6 +278,78 @@
             </v-flex>
           </v-layout>
         </v-container>
+      </section>-->
+<!--
+      <section id="paral_section" style="padding-top:100px;">
+        <v-container grid-list-xl>
+        <v-layout column wrap>
+        <v-flex>
+        <v-parallax src="../../assets/images/welcome.png" id="paral"> 
+        <h1 style="color:#fff; text-align:center;">ROOM ☆ STAR</h1>
+        </v-parallax>
+         </v-flex>
+         <v-flex>
+          <v-layout row wrap justify-center class="my-12">
+            <v-flex xs12 sm4>
+              <v-card flat class="transparent">
+                <v-card-title primary-title class="layout justify-center">
+                  <div class="headline">Information</div>
+                </v-card-title>
+                <v-card-text>
+                  InformationInformationInformationInformationInfo
+                  InformationInformationInformationInformationInfo
+                  InformationInformationInformationInformationInfo
+                  InformationInformationInformationInformationInfo
+                  InformationInformationInformationInformationInfo
+                  InformationInformationInformationInformationInfo
+                  InformationInformationInformation
+                </v-card-text>
+              </v-card>
+            </v-flex>
+            <v-flex xs12 sm4 offset-sm1>
+              <v-card flat class="transparent">
+                <v-card-title primary-title class="layout justify-center">
+                  <div class="headline">Contact us</div>
+                </v-card-title>
+                <v-card-text>
+                  삼성 청년 SW 아카데미 2기 4반 ★7조★ 1등 ㄱㄱ!!
+                </v-card-text>
+                <v-list class="transparent">
+                  <v-list-item>
+                    <v-list-item-action>
+                      <v-icon class="blue--text text--lighten-2">mdi-phone</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                      <v-list-item-title>010-9559-5296</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                  <v-list-item>
+                    <v-list-item-action>
+                      <v-icon class="blue--text text--lighten-2">mdi-map-marker</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                      <v-list-item-title>서울특별시 강남구 역삼동 테헤란로 212</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                  <v-list-item>
+                    <v-list-item-action>
+                      <v-icon class="blue--text text--lighten-2">mdi-email</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                      <v-list-item-title>qpalzmfghtgv@naver.com</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-list>
+              </v-card>
+            </v-flex>
+          </v-layout>
+          </v-flex>
+          </v-layout>
+        </v-container>
+      </section>
+-->
+      <section id="introduce">
+        <Introduce />
       </section>
 
 
@@ -324,6 +382,7 @@ Vue.use(Vuetify, {
   }
 })
 import VuetifyVideoParallax from './VuetifyVideoParallax.vue'
+import Introduce from "./Introduce.vue";
 Vue.component('v-video-parallax', VuetifyVideoParallax)
 import VueLoading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css';
@@ -335,6 +394,7 @@ export default {
   vuetify: new Vuetify(),
   components: {
     // ModalLogin
+    Introduce
   },
   data () {
     return {
@@ -351,12 +411,6 @@ export default {
      $(function() {
     $('#scroll-down').click (function() {
       $('html, body').animate({scrollTop: $('#welcome').offset().top }, 'slow');
-      return false;
-    });
-  });
-      $(function() {
-    $('#scroll-down2').click (function() {
-      $('html, body').animate({scrollTop: $('#HomePage').offset().top }, 'slow');
       return false;
     });
   });
@@ -383,11 +437,27 @@ export default {
 </script>
 
 <style scoped>
-.container{
+.container {
   width:100vw;
+  float: center;
+  box-sizing: border-box;
+  min-height: 100vh;
+  }
+.container > div {
+  padding-top: 0px; }
+#welcome{
+  background-color:#fff;
 }
 section{
-  background-color:#ffffff;
+  background-color:#fff;
+  min-height:100vh;
+  overflow:hidden;
+}
+#introduce{
+  padding-top:100px;
+  min-height:120vh;
+  max-height:120vh;
+  overflow:visible;
 }
 v-content__wrap{
   background-color:black;
@@ -508,7 +578,7 @@ v-content__wrap{
 
 .scroll-down {
   position: absolute;
-  bottom: 250px;
+  bottom: 150px;
   left: 50%;
   margin-left: -16px;
   display: block;
@@ -538,6 +608,44 @@ v-content__wrap{
     border-width: 0px 0 2px 2px;
 }
 
+.scroll-down2 {
+  opacity: 1;
+  -webkit-transition: all .5s ease-in 3s;
+  transition: all .5s ease-in 3s;
+}
+
+.scroll-down2 {
+  position: absolute;
+  bottom: 150px;
+  left: 50%;
+  margin-left: -16px;
+  display: block;
+  width: 32px;
+  height: 32px;
+  border: 2px solid #000;
+  background-size: 14px auto;
+  border-radius: 50%;
+  z-index: 2;
+  -webkit-animation: bounce 2s infinite 2s;
+  animation: bounce 2s infinite 2s;
+  -webkit-transition: all .2s ease-in;
+  transition: all .2s ease-in;
+  transform: scale(1)
+}
+
+.scroll-down2:before {
+    position: absolute;
+    top: calc(50% - 8px);
+    left: calc(50% - 6px);
+    transform: rotate(-45deg);
+    display: block;
+    width: 12px;
+    height: 12px;
+    content: "";
+    border: 2px solid black;
+    border-width: 0px 0 2px 2px;
+}
+
 @keyframes bounce {
   0%,
   100%,
@@ -560,15 +668,17 @@ v-content__wrap{
   }
 }
 #card-box {
-    -webkit-transform: perspective(1000px);
-    transform: perspective(1000px);
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
+  transition: 0.5s ease;
+  filter:grayscale(40%);
 }
-#card-box .card.hover{
-    z-index:10;
-    box-shadow: 0px 20px 40px 10px rgba(48, 54, 62, 0.8);
+#card-box:hover{
+  transform: scale(1.1);
+  box-shadow: 5px 5px 15px rgba(0,0,0,0);
+  filter:grayscale(0%);
 }
-
+#paral{
+   height:150px !important;
+}
 
 </style>
+

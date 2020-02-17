@@ -1,88 +1,99 @@
 <template>
-  <div id="waitingRoom">
-    <br />
-    <br />
-    <h2>노래부르는 버튼 임시 구현</h2>
-    <v-btn @click="singingButton()">노래부르기</v-btn>
-    <br />waitingRoom
-    <br />
-    <br />
-    <section>
-
-  <div class="card-box"
-            onmouseenter="hoverCard.handleEnter(this,event)" onmousemove="hoverCard.handleMove(this,event)" onmouseleave="hoverCard.handleLeave(this)">
-            <div class="card ani">
-                <div class="bg" style="background-image:url('../assets/images/showOff.png')"></div>
-                <div class="info">
-                    <h1>HOVER ME</h1>
-                </div>
+  <div id="waitingRooms">
+    <swiper :options="swiperOption">
+      <!-- swipter-slide 부분을 v-for로 처리해야 할 것 같은데, -->
+      <swiper-slide @click="watchingButton(roomInfo.room_id, $event)" :key="index" v-for="(roomInfo, index) in allRoomInfo">
+        <v-row id="swiper_row">
+          <div class="card marginR">
+            <div class="card-image"></div>
+            <div class="card-text">
+              <span class="rank">{{roomInfo.user1_grade}}</span>
+              <h2>{{roomInfo.user1}}</h2>
+              <h4>{{roomInfo.music1}}</h4>
             </div>
-    </div>
+            <div class="card-stats">
+              <div class="stat">
+                <div class="value">{{roomInfo.win1}}</div>
+                <div class="type">win</div>
+              </div>
+              <div class="stat border">
+                <div class="value">{{roomInfo.lose1}}</div>
+                <div class="type">lose</div>
+              </div>
+              <div class="stat">
+                <div class="value">{{roomInfo.user1_win_rate}} %</div>
+                <div class="type">winrate</div>
+              </div>
+            </div>
+          </div>
+          <v-img src="../../assets/images/battle_vs2.png" id="vs_img"></v-img>
 
+          <div class="card marginL">
+            <div class="card-image"></div>
+            <div class="card-text">
+              <span class="rank">{{roomInfo.user2_grade}}</span>
+              <h2>{{roomInfo.user2}}</h2>
+              <h4>{{roomInfo.music2}}</h4>
+            </div>
+            <div class="card-stats">
+              <div class="stat">
+                <div class="value">{{roomInfo.win2}}</div>
+                <div class="type">win</div>
+              </div>
+              <div class="stat border">
+                <div class="value">{{roomInfo.lose2}}</div>
+                <div class="type">lose</div>
+              </div>
+              <div class="stat">
+                <div class="value">{{roomInfo.user2_win_rate}} %</div>
+                <div class="type">winrate</div>
+              </div>
+            </div>
+          </div>
+        </v-row>
+      </swiper-slide>
+      <!-- 여기까지가 v-for로 반복시킬 부분 -->
+    </swiper>
 
-
-      <ul>
-        <!-- {{allRoomInfo }} array인 경우 key가 반드시 필요하다.-->
-        <li :key="index" v-for="(roomInfo, index) in allRoomInfo">
-          방정보: {{roomInfo}}
-          <br />
-          방번호: {{roomInfo.room_id}}
-          <br />
-          시청자수: {{roomInfo.watching_num}}
-          <br />
-          부르는사람수: {{roomInfo.singer_num}}
-          <br />
-
-          참가자1: {{roomInfo.user1}}
-          <br />
-          참가자 선곡: {{roomInfo.music1}}
-          <br />
-          참가자 등급: {{roomInfo.user1_grade}}
-          <br />
-          참가자 승률: {{roomInfo.user1_win_rate}}
-          <br />
-
-          참가자2: {{roomInfo.user2}}
-          <br />
-          참가자2 선곡: {{roomInfo.music2}}
-          <br />
-          참가자2 등급: {{roomInfo.user2_grade}}
-          <br />
-          참가자2 승률: {{roomInfo.user2_win_rate}}
-          <br />
-
+    <!--
+     <ul>
           <v-btn @click="watchingButton(roomInfo.room_id, $event)">시청하기</v-btn>
-          <!-- <hr> -->
-        </li>
       </ul>
-    </section>
-
+    -->
     <p>대기인원: {{ waitingNumofPeople }}</p>
   </div>
 </template>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 import router from "@/routes";
 import axios from "axios";
 
+var swiper = null;
+
 var waitingNumofPeople = 0;
-
-var hoverCard = {
-    width: 0,
-    height: 0,
-    startX:0,
-    startY:0,
-    mouseX: 0,
-    mouseY: 0,
-}
-
 export default {
   name: "WaitingRoom",
   components: {},
   data() {
     return {
-      allRoomInfo: []
+      allRoomInfo: [],
       // waitingNumofPeople: 0
+      swiperOption: {
+        effect: "coverflow",
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        coverflowEffect: {
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true
+        },
+        pagination: {
+          el: ".swiper-pagination"
+        }
+      }
     };
   },
   methods: {
@@ -110,7 +121,7 @@ export default {
         })
         .catch(e => {
           console.log("error: ", e);
-          alert('모든 방이 차있습니다.')
+          alert("모든 방이 차있습니다.");
         });
     },
     // 시청하기를 누르면 해당 방으로 이동
@@ -150,55 +161,11 @@ export default {
         });
     }
   },
-  mounted:{
-   postionX: function () {
-        return this.mouseX / this.width;
-    },
-    positionY: function () {
-        return this.mouseY / this.height;
-    },
-    cardTransform: function (target) {
-        var rx = this.postionX() * 30;
-        var ry = this.positionY() * -30;
-        return target.children[0].style.transform = 'rotateY(' + rx + 'deg)' + ' ' + 'rotateX(' + ry + 'deg)';
-    },
-    cardBgTransform: function (target) {
-        var bx = this.postionX() * -50;
-        var by = this.positionY() * -50;
-        return target.children[0].children[0].style.backgroundPosition = bx + 'px' + ' ' + by + 'px';
-    },
-    handleEnter: function (target, e) {
-        this.width = target.clientWidth;
-        this.height = target.clientHeight;
-        this.startX=e.pageX;
-        this.startY=e.pageY;
-        target.children[0].classList.add('hover');
-    },
-    handleMove: function (target, e) {
-        if(Math.abs(this.startX-e.pageX)>50){
-            target.children[0].classList.remove('ani');
-        }
-        this.mouseX = e.pageX - target.offsetLeft - this.width / 2;
-        this.mouseY = e.pageY - target.offsetTop - this.height / 2;
-        this.cardTransform(target);
-        this.cardBgTransform(target);
-    },
-    handleLeave: function (target) {
-        this.mouseX = 0;
-        this.mouseY = 0;
-        target.children[0].classList.add('ani');
-        target.children[0].classList.remove('hover');
-        this.cardTransform(target);
-        this.cardBgTransform(target);
-    },
-
-
-  },
   created() {
     // 유저가 처음 대기방에 들어왔을때 얻을 수 있는 방들의 정보
     let store = this.$store;
     const userid = this.$session.get("userId");
-    console.log(userid)
+    console.log(userid);
     axios
       .post("http://70.12.247.115:8080/Insert_waiting/" + userid)
       .then(response => {
@@ -218,95 +185,122 @@ export default {
   // viewMypage
 };
 </script>
-<script>
-
-</script>
-
-
 <style scoped>
-ul {
-  list-style-type: none;
-  padding-left: 0px;
-  margin-top: 0;
-  text-align: left;
-}
-
-li {
-  display: flex;
-  min-height: 50px;
-  margin: 0.5rem 0;
-  padding: 0 0.9rem;
-  background: white;
-  border-radius: 5px;
-  border: 3px dashed #bcbcbc;
-}
-
-.card-box {
-    margin: 10px;
-    -webkit-transform: perspective(1000px);
-    transform: perspective(1000px);
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    min-width: 300px;
-    max-width: 380px;
-}
-
 .card {
-    position: relative;
-    width: 100%;
-    height: 350px;
-    overflow: hidden;
-    background-color: #000;
-    box-shadow: 0px 5px 15px 0px rgba(48, 54, 62, 0.7);
-    border-radius: 10px;
-}
-.card.hover{
-    transition:box-shadow 0.5s;
-}
-.card-box .card.hover{
-    z-index:10;
-    box-shadow: 0px 20px 40px 10px rgba(48, 54, 62, 0.8);
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 40vh 8vw 4vw;
+  grid-template-areas: "image" "text" "stats";
+  border-radius: 1rem;
+  background: white;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
+  font-family: roboto;
+  text-align: center;
+  transition: 0.5s ease;
+  cursor: pointer;
+  min-width: 20vw;
 }
 
-.card.ani{
-    transition: 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-    -webkit-transition: 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-}
-.card.ani .bg{
-    transition: background-position 0.5s cubic-bezier(0.23, 1, 0.32, 1),opacity 0.5s;
-    -webkit-transition: background-position 0.5s cubic-bezier(0.23, 1, 0.32, 1),opacity 0.5s;
+.marginL {
+  margin-left: 1em;
 }
 
-.card.hover .bg{
-    opacity: 1;
-}
-.card .bg {
-    position: absolute;
-    top: -30px;
-    left: -30px;
-    width: calc(100% + 60px);
-    height: calc(100% + 60px);
-    background-repeat: no-repeat;
-    background-position: 0 0;
-    background-size: cover;
-    opacity: 0.7;
-    transition:opacity 0.3s;
+.marginR {
+  margin-right: 1em;
 }
 
+.card-image {
+  grid-area: image;
+}
+.card-text {
+  grid-area: text;
+}
+.card-image {
+  grid-area: image;
+  background: url("../../assets/images/bg_solo2.png");
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  background-size: cover;
+}
 
-.card .info {
-    position: absolute;
-    bottom: 20PX;
-    right: 20PX;
-    transition:all 0.4s ease-out;
+.card-text {
+  grid-area: text;
+  margin: 0.5rem;
 }
-.card.hover .info{
-    text-shadow:rgba(0, 0, 0, 0.5) 0 5px 10px
+.card-text .rank {
+  color: rgb(255, 7, 110);
+  font-size: 0.9rem;
 }
-.card .info h1 {
-    display: inline-block;
-    color: #fff;
-    font-size: 20px;
-    font-weight: normal;
+.card-text h2 {
+  margin-top: 0px;
+  font-size: 1.6rem;
+}
+
+.card-text h4 {
+  margin-top: 0.8rem;
+  font-size: 0.9rem;
+  overflow: hidden;
+}
+
+.card-stats {
+  font-size: 0.85rem;
+  font-weight: 500;
+  grid-area: stats;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  background: rgb(255, 7, 110);
+}
+
+.card-stats .stat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  padding: 1rem;
+}
+/*
+.card:hover {
+  transform: scale(1.15);
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+}
+*/
+#waitingRooms {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url("../../assets/images/see_bg70.png");
+  font-family: "Poppins", sans-serif;
+}
+
+.swiper-inner {
+  width: 100%;
+  height: 400px;
+}
+.swiper-slide {
+  background-position: center;
+  background-size: center;
+  width: auto;
+  padding-top: 6vh;
+  height: 76vh;
+}
+#vs_img {
+  position: fixed;
+  margin-top: 41%;
+  margin-left: 43%;
+}
+#swiper_row {
+  transition: 0.5s ease;
+  width: auto !important;
+}
+#swiper_row:hover {
+  transform: scale(1.15);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0);
 }
 </style>

@@ -12,7 +12,7 @@
 <script>
 export default {
   components: {
-    Feed: () => import("./Feed.vue")
+    Feed: () => import("./MixFeed.vue")
   }
 };
 </script>

@@ -57,17 +57,17 @@
 
                   <!-- video에는 mp4 관련 정보 music에는 jpg관련 정보가 들어있음-->
 
-                  <a
+                  <!-- <a
                     v-if="
                       video.title.substring(0, video.title.length - 4) ===
                         music.title.substring(0, music.title.length - 4)
                     "
                     v-bind:href="video.url"
                     >링크</a
-                  >
+                  > -->
                   <br />
                   <!-- 해당 링크의 비디오가 그려지는 곳으로 이동 // 모달을 띄우자 -->
-                  <v-dialog v-model="dialog" id="dialog" max-width="350">
+                  <v-dialog v-model="dialog" id="dialog" max-width="500" >
                     <template v-slot:activator="{ on }">
                       <v-btn
                         color="transparent"
@@ -78,9 +78,14 @@
                     </template>
 
                     <v-card>
+                    <p>{{video.title}}</p>
+                    <p>{{music.title}}</p>
+                    
                       <div>
                         <!-- 비디오 src 추가 -->
-                        <video></video>
+                        <video width="500" ref="video" :loop="loop" :muted="muted" :style="videoStyles">
+                          <source :src="video.url" type="video/mp4" >
+                        </video>
                         <!-- axios 좋아요 연결 -->
                         <v-btn></v-btn>
                       동영상 좋아요
