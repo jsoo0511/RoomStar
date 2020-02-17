@@ -138,8 +138,24 @@ export default {
     }
   },
   created() {
-    //console.log("시작");
-   // this.socket = io.connect('http://70.12.246.73:3001', {transports: ["websocket"]})
+       console.log("created()---->1",this.battle_id);
+    this.socket = io.connect(
+      "http://70.12.246.73:8088?room_id=" +
+        this.room_id +
+        "&user_id=" +
+        this.user_id +
+        "&user_identification=" +
+        this.user_identification+
+        "&player_idx="+
+        this.player_idx,
+      { transports: ["websocket"] }
+    );
+    // this.socket = io.connect(
+    //   "http://172.30.123.158:3001",
+    //   { transports: ["websocket"] }
+    // );
+    //console.log("dhdhdh");
+
   },
   mounted(){
     
