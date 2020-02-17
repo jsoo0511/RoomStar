@@ -20,6 +20,10 @@ import VueRouter from 'vue-router'
 import FileUploader from './views/FileUploader.vue'
 import Downloader from './views/Downloader.vue'
 
+// test(bumi)
+import tempFeed from './views/general/tempFeed.vue'
+import MixFeed from './views/general/MixFeed.vue'
+
 Vue.use(VueRouter)
 
 export default [
@@ -92,5 +96,16 @@ export default [
     path: '/down',
     name: 'down',
     component: Downloader
+  },
+
+  //test
+  {
+    path:"/test",
+    name:"test",
+    component : tempFeed
+  },{
+    path:"/test2",
+    name:"test2",
+    component : MixFeed
   },
 ];

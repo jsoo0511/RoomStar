@@ -76,9 +76,19 @@ import "firebase/storage";
       storageRef
       .listAll()
       .then(result =>{
-        let video={};
+
+        result.items.forEach(videoRef =>{
+          let video={};
+          video.title=videoRef.name;
+
+          videoRef.getDownloadURL().then(url=>{
+            video.url=url;
+            this.videoList.push(video);
+          });
+        });
         
       })
+      .catch(function(error){});
 
 
     },
