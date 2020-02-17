@@ -8,8 +8,8 @@ import VideoBg from 'vue-videobg'
 import io from 'socket.io-client'
 //import VueMaterial from 'vue-material' 
 
-const socket = io("http://70.12.246.73:3001");
-Vue.prototype.$socket = socket;
+//const socket = io("http://70.12.246.73:3001");
+//Vue.prototype.$socket = socket;
 
 
 Vue.config.productionTip = false
