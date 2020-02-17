@@ -1,32 +1,35 @@
 <template>
   <div id="gameRoom">
-    GameRoom
-    <div>
-      <!-- https://xyxufvchfhks3520734.cdn.ntruss.com/video/ls-20200122105535-tD4G9_1080p_a_l.m3u8 -->
-      <div id="firstWebCam">
-        player1 들어갈자리
-        <video
-          playsinline
-          id="p1_video"
-          autoplay
-          preload="metadata"
-          style="width:30%"
-          poster="@/assets/images/camPoster.jpg"
-        ></video>
+      <v-layout row wrap align-center>
+        <v-flex xs6 md6>
+          <!-- https://xyxufvchfhks3520734.cdn.ntruss.com/video/ls-20200122105535-tD4G9_1080p_a_l.m3u8 -->
+          <div id="firstWebCam">
+            <video
+              playsinline
+              id="p1_video"
+              autoplay
+              preload="metadata"
+              style="height:100vh; width:50vw;"
+              poster="@/assets/images/camPoster.jpg"
+            ></video>
+          </div>
+        </v-flex>
+        <v-flex xs6 md6>
+          <div id="secondWebCam">
+            <video
+              playsinline
+              id="p2_video"
+              autoplay
+              preload="metadata"
+              style="height:100vh; width:50vw;"
+              poster="@/assets/images/camPoster.jpg"
+            ></video>
+          </div>
+        </v-flex>
+      </v-layout>
+      <div class="chat_component">
+        <Chat />
       </div>
-
-      <div id="secondWebCam">
-        player2 들어갈자리
-        <video
-          playsinline
-          id="p2_video"
-          autoplay
-          preload="metadata"
-          style="width:30%"
-          poster="@/assets/images/camPoster.jpg"
-        ></video>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -34,6 +37,7 @@
 import io from "socket.io-client";
 import axios from "axios";
 import router from "@/routes";
+import Chat from "./Chat.vue";
 import { mapState, mapGetters, mapActions } from "vuex";
 
 const stun_server = "stun.l.google.com:19302";
@@ -80,7 +84,9 @@ export default {
   computed: {
     ...mapState(["singerOrWatcherStatus", "token"])
   },
-
+  components:{
+    Chat
+  },
   methods: {
     sendMessage(message) {
       //서버로 메세지 보내기
@@ -388,3 +394,15 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.container{
+  width:100vw;
+}
+.chat_component{
+  position:fixed;
+  height:50%;
+  background-color:rgba(0,0,0,0.5);
+  width:100vw;
+}
+</style>
