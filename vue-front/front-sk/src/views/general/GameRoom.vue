@@ -154,7 +154,7 @@ export default {
   created() {
     console.log("created()---->1",this.battle_id);
     this.socket = io.connect(
-      "http://70.12.246.73:8088?room_id=" +
+      "http://70.12.246.73?room_id=" +
         this.room_id +
         "&user_id=" +
         this.user_id +
@@ -163,7 +163,7 @@ export default {
         "&player_idx="+
         this.player_idx,
       { transports: ["websocket"] }
-    );
+    );//ip주소 수정 필요
     // this.socket = io.connect(
     //   "http://172.30.123.158:3001",
     //   { transports: ["websocket"] }
