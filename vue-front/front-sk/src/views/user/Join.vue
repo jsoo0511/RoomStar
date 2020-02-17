@@ -127,10 +127,9 @@ export default {
         axios
           .post(SERVER_IP, data)
           .then(response => {
-            console.log(response)
-            this.$router.push("/").catch(err => {
-              console.log(err);
-            });
+            console.log(response);
+            this.joinDialog = false
+            this.$emit('update');
           })
           .catch(error => {
             console.log(error);
@@ -141,6 +140,10 @@ export default {
       this.$nextTick(() => {
         console.log("error");
       });
+      console.log(this.$router)
+      // this.$router.push("/").catch(err => {
+      //   console.log(err);
+      // });
     },
 
     checkForm() {
@@ -194,7 +197,7 @@ export default {
       passwordType: "password",
       passwordConfirmType: "password",
       termPopup: false,
-      dialog: false
+      dialog: false,
     };
   }
 };
