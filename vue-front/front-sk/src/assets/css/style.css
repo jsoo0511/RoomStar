@@ -511,10 +511,10 @@ p {
   float: left;
   box-sizing: border-box;
   min-height: 100vh; }
-  .container > div {
-    padding-top: 80px; }
-    .container > div.tab_wrap {
-      padding-top: 50px; }
+.container > div {
+  padding-top: 80px; }
+.container > div.tab_wrap {
+  padding-top: 50px; }
 
 .tab_wrap {
   width: 100%;
