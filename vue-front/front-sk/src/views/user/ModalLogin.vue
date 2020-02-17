@@ -1,88 +1,92 @@
 <template>
   <div>
-  <v-row justify="center">
-    <v-dialog v-model="dialog" id="dialog" max-width="350">
-      <template v-slot:activator="{ on }">
-        <v-btn color="transparent" dark v-on="on">로그인</v-btn>
-      </template>
+    <v-row justify="center">
+      <v-dialog v-model="dialog" id="dialog" max-width="350">
+        <template v-slot:activator="{ on }">
+          <v-btn color="transparent" dark v-on="on">로그인</v-btn>
+        </template>
 
+        <v-card z-index="1" id="modalLogin">
+          <h2>
+            <b>Login with</b>
+          </h2>
+          <br />
 
-      <v-card z-index="1" id="modalLogin">
-      <h2><b> Login with </b></h2>
-        <br />
+          <v-row justify="center">
+            <kakaoLogin />
+            <GoogleLogin />
+          </v-row>
+          <br />
+          <p style="text-align:center; color:rgba(0,0,0,0.2);">
+            ------------
+            <b style="color:rgba(0,0,0,0.6); padding-left:2.6em; padding-right:2.6em;">or</b>------------
+          </p>
+          <v-text-field
+            v-model="email"
+            v-bind:class="{error : error.email, complete:!error.email&&email.length!==0}"
+            @keyup.enter="login"
+            id="email"
+            placeholder="이메일을 입력하세요."
+            type="text"
+          />
 
-        <v-row justify="center">
-          <kakaoLogin />
-          <GoogleLogin />
-        </v-row>
-        <br>
-        <p style="text-align:center; color:rgba(0,0,0,0.2);">------------<b style="color:rgba(0,0,0,0.6); padding-left:2.6em; padding-right:2.6em;">or</b>------------</p>
-        <v-text-field
-          v-model="email"
-          v-bind:class="{error : error.email, complete:!error.email&&email.length!==0}"
-          @keyup.enter="login"
-          id="email"
-          placeholder="이메일을 입력하세요."
-          type="text"
-        />
+          <div class="error-text" v-if="error.email">{{error.email}}</div>
+          <v-text-field
+            v-model="password"
+            type="password"
+            v-bind:class="{error : error.password, complete:!error.password&&password.length!==0}"
+            id="password"
+            @keyup.enter="login"
+            placeholder="비밀번호를 입력하세요."
+          />
 
-        <div class="error-text" v-if="error.email">{{error.email}}</div>
-        <v-text-field
-          v-model="password"
-          type="password"
-          v-bind:class="{error : error.password, complete:!error.password&&password.length!==0}"
-          id="password"
-          @keyup.enter="login"
-          placeholder="비밀번호를 입력하세요."
-        />
+          <div class="error-text" v-if="error.password">{{error.password}}</div>
 
-        <div class="error-text" v-if="error.password">{{error.password}}</div>
+          <button
+            class="btn btn--back btn--login"
+            v-on:click="login"
+            @click="dialog = false"
+            :disabled="!isSubmit"
+            :class="{disabled : !isSubmit}"
+            color="black darken-1"
+            text
+            small
+          >로그인</button>
 
-        <button
-          class="btn btn--back btn--login"
-          v-on:click="login"
-          @click="dialog = false"
-          :disabled="!isSubmit"
-          :class="{disabled : !isSubmit}"
-          color="black darken-1"
-          text
-          small
-        >로그인</button>
+          <div class="add-option">
+            <div class="text-center">
+              <v-btn
+                text
+                small
+                color="black"
+                dark
+                to="/user/password"
+                v-on:click="dialog = false"
+              >비밀번호 찾기</v-btn>
 
-        <div class="add-option">
-          <div class="text-center">
-            <v-btn
-              text
-              small
-              color="black"
-              dark
-              to="/user/password"
-              v-on:click="dialog = false"
-            >비밀번호 찾기</v-btn>
+              <v-dialog v-model="joinDialog" max-width="400px">
+                <template v-slot:activator="{ on }">
+                  <v-btn text small color="black" dark v-on="on" v-on:click="joinDialog = true">가입하기</v-btn>
+                </template>
 
-            <v-dialog v-model="joinDialog" max-width="400px">
-              <template v-slot:activator="{ on }">
-                <v-btn text small color="black" dark v-on="on" v-on:click="joinDialog = true">가입하기</v-btn>
-              </template>
+                <v-card z-index="2">
+                  <br />
+                  <Join v-on:update="joinDialog = false"/>
+                </v-card>
+              </v-dialog>
 
-              <v-card z-index="2">
-                <br />
-                <Join />
-              </v-card>
-            </v-dialog>
-
-            <!-- <v-btn text small color="black" dark to="/user/join" v-on:click="dialog = false">가입하기</v-btn> -->
-            <v-btn text small color="black" dark to="#" v-on:click="dialog = false">서비스소개</v-btn>
+              <!-- <v-btn text small color="black" dark to="/user/join" v-on:click="dialog = false">가입하기</v-btn> -->
+              <v-btn text small color="black" dark to="#" v-on:click="dialog = false">서비스소개</v-btn>
+            </div>
           </div>
-        </div>
 
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false">취소</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </v-row>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" text @click="dialog = false">취소</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-row>
   </div>
 </template>
 
@@ -183,7 +187,7 @@ export default {
             // true, jwt-auth-token, email, nickname
             // 로딩 로직 짜는데 사용
             this.loading = false;
-            this.$router.push("/");
+
             return true;
           })
           .catch(error => {
@@ -200,7 +204,7 @@ export default {
             // this.loading = false;
             return false;
           });
-
+        this.$router.push("/");
         //요청 후에는 버튼 비활성화
         this.isSubmit = false;
 
@@ -238,7 +242,7 @@ export default {
 </script>
 
 <style scoped>
-#modalLogin{
+#modalLogin {
   padding: 30px;
   max-width: 350px;
   width: 100% !important;
@@ -247,7 +251,7 @@ export default {
   overflow: hidden;
 }
 
-#dialog{ 
+#dialog {
   max-width: 350px;
 }
 </style>
