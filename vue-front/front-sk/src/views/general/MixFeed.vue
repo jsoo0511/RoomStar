@@ -1,6 +1,9 @@
 <template>
+
   <v-card max-width="400" class="mx-auto">
+    
     <v-system-bar color="pink darken-2" dark>
+      
       <v-spacer></v-spacer>
 
       <v-icon>mdi-window-minimize</v-icon>
@@ -21,6 +24,14 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
     </v-app-bar>
+ 
+ 
+ <!-- 업로드 부분-->
+ <div id="testt">
+    <input type="file" multiple accept="image/jpeg" @change="detectFiles($event.target.files)">
+    <div class="progress-bar" >{{ progressUpload }}% 완료</div> 
+  </div>
+ <!--             -->
 
     <v-container>
       <v-row dense>
@@ -51,6 +62,8 @@
       </v-row>
     </v-container>
   </v-card>
+
+  
 </template>
 
 
@@ -67,8 +80,37 @@ export default {
   data() {
     return {
       musicTitle: [],
-      videoUrl: []
+      videoUrl: [],
+      progressUpload: 0,
+      file: File,
+      uploadTask: '',
     };
+  },
+  
+   methods: {
+    detectFiles (fileList) {
+      Array.from(Array(fileList.length).keys()).map( x => {
+        this.upload(fileList[x])
+      })
+    },
+    upload (file) {
+      this.uploadTask = firebase.storage(app).ref(file.name).put(file);
+    }
+
+  },
+  
+  watch: {
+    uploadTask: function() {
+      this.uploadTask.on('state_changed', sp => {
+        this.progressUpload = Math.floor(sp.bytesTransferred / sp.totalBytes * 100)
+      }, 
+      null, 
+      () => {
+        this.uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+          this.$emit('url', downloadURL)
+        })
+      })
+    }
   },
   created() {
     // fire base list에 있는 항목들을 불러옴
@@ -134,10 +176,5 @@ export default {
   }
 };
 </script>
-<style lang="scss"></style>
-<style scoped>
-#testt {
-  margin-top: 70px !important;
-  padding-top: 50px !important;
-}
-</style>
+
+
