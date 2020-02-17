@@ -1,7 +1,9 @@
 <template>
-    <v-container class="gallery">
-        <v-col v-for="(music, i) in musicTitle" :key="i" cols="4" width="auto">
-        <v-row>
+  <v-card max-width="400" class="mx-auto">
+    <v-container>
+      <v-row dense>
+        
+        <v-col v-for="(music, i) in musicTitle" :key="i" cols="12">
           <v-card :color="'purple'" dark>
             <div class="d-flex flex-no-wrap justify-space-between">
               <div>
@@ -23,9 +25,10 @@
               </v-avatar>
             </div>
           </v-card>
-          </v-row>
         </v-col>
+      </v-row>
     </v-container>
+  </v-card>
 </template>
 
 
@@ -106,17 +109,23 @@ export default {
         });
       })
       .catch(function(error) {});
+  },
+  props: {
+    key:{
+      type:Number,
+      required:true
+    },
+    music:{
+      type:Object,
+      default:  () => ({})
+    }
   }
 };
 </script>
 <style lang="scss"></style>
 <style scoped>
-.container{
-  width:100vw;
-  height:auto;
-}
-.gallery{
-  display:grid;
-  grid-gap:10px;
+#testt {
+  margin-top: 70px !important;
+  padding-top: 50px !important;
 }
 </style>
