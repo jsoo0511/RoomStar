@@ -139,7 +139,7 @@ export default {
   },
   created() {
     //console.log("시작");
-    this.socket = io.connect('http://70.12.246.73:3001', {transports: ["websocket"]})
+   // this.socket = io.connect('http://70.12.246.73:3001', {transports: ["websocket"]})
   },
   mounted(){
     

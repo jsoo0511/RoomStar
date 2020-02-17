@@ -14,8 +14,8 @@ import 'swiper/dist/css/swiper.css'
 Vue.use(VueAwesomeSwiper, /* { default global options } */)
 //import VueMaterial from 'vue-material' 
 
-const socket = io("http://70.12.246.73:3001");
-Vue.prototype.$socket = socket;
+// const socket = io("http://70.12.246.73:3001");
+// Vue.prototype.$socket = socket;
 
 
 Vue.config.productionTip = false

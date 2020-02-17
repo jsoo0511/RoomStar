@@ -8,13 +8,10 @@
       </v-flex>
 
       <feed-card
-      v-for="(article, i) in paginatedArticles"
-        :key="article.title"
-        :size="layout[i]"
-        :value="article"
+        v-for="(music, i) in musicTitle" 
+        :key="i" 
+        :music="music"
       />
-      <!--
-        -->
     </v-layout>
 
     <v-layout align-center>
@@ -49,7 +46,7 @@
           square
           @click="page++"
         >
-          <v-icon>mdi-chevron-right</v-icon>  
+          <v-icon>mdi-chevron-right</v-icon>
         </base-btn>
       </v-flex>
     </v-layout>
@@ -64,11 +61,13 @@
   export default {
     name: 'Feed',
     components: {
-      FeedCard: () => import('./MixFeed.vue')
+      FeedCard: () => import('./FeedCard2.vue')
     },
     data: () => ({
       layout: [2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 3],
-      page: 1
+      page: 1,
+      musicTitle: [],
+      videoUrl: []
     }),
     computed: {
       ...mapState(['articles']),

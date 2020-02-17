@@ -32,7 +32,7 @@
      
 
       <section
-        id="welcome">
+        id="welcome" style="padding-top:20px;">
         <v-layout
           column
           wrap
@@ -48,7 +48,7 @@
             </div>
           </v-flex>-->
           <v-flex xs12>
-          <h1 style="text-align:center; margin-bottom:20px;"> Menu Select </h1>
+          <h1 style="text-align:center; margin-bottom:50px;"> Menu Select </h1>
             <v-container grid-list-xl>
               <v-layout row wrap align-center>
                 <v-flex xs12 md4>
@@ -279,8 +279,8 @@
           </v-layout>
         </v-container>
       </section>-->
-
-      <section id="paral_section">
+<!--
+      <section id="paral_section" style="padding-top:100px;">
         <v-container grid-list-xl>
         <v-layout column wrap>
         <v-flex>
@@ -347,6 +347,12 @@
           </v-layout>
         </v-container>
       </section>
+-->
+      <section id="introduce">
+        <Introduce />
+      </section>
+
+
     </v-content>
   </v-app>
  </div>
@@ -376,6 +382,7 @@ Vue.use(Vuetify, {
   }
 })
 import VuetifyVideoParallax from './VuetifyVideoParallax.vue'
+import Introduce from "./Introduce.vue";
 Vue.component('v-video-parallax', VuetifyVideoParallax)
 import VueLoading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css';
@@ -387,6 +394,7 @@ export default {
   vuetify: new Vuetify(),
   components: {
     // ModalLogin
+    Introduce
   },
   data () {
     return {
@@ -433,15 +441,23 @@ export default {
   width:100vw;
   float: center;
   box-sizing: border-box;
-  min-height: 100vh; }
+  min-height: 100vh;
+  }
 .container > div {
   padding-top: 0px; }
 #welcome{
-  background-color:#eeeeee;
+  background-color:#fff;
 }
 section{
   background-color:#fff;
   min-height:100vh;
+  overflow:hidden;
+}
+#introduce{
+  padding-top:100px;
+  min-height:120vh;
+  max-height:120vh;
+  overflow:visible;
 }
 v-content__wrap{
   background-color:black;
@@ -653,12 +669,16 @@ v-content__wrap{
 }
 #card-box {
   transition: 0.5s ease;
+  filter:grayscale(40%);
 }
 #card-box:hover{
   transform: scale(1.1);
   box-shadow: 5px 5px 15px rgba(0,0,0,0);
+  filter:grayscale(0%);
 }
 #paral{
    height:150px !important;
 }
+
 </style>
+
