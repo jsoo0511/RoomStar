@@ -68,11 +68,3 @@ export default {
 }
 </style>
 
-<style lang="scss"></style>
-<style scoped>
-#testt {
-  margin-top: 70px !important;
-  padding-top: 50px !important;
-}
-</style>
-

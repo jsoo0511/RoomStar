@@ -50,6 +50,7 @@
                     v-if="video.title.substring(0,video.title.length-4)===music.title.substring(0,music.title.length-4)"
                     v-bind:href="video.url"
                   >링크</a>
+                
                 </div>
               </div>
 
@@ -101,6 +102,7 @@ export default {
   
   watch: {
     uploadTask: function() {
+      const userId = this.$session.get("userId");
       this.uploadTask.on('state_changed', sp => {
         this.progressUpload = Math.floor(sp.bytesTransferred / sp.totalBytes * 100)
       }, 
@@ -108,7 +110,31 @@ export default {
       () => {
         this.uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
           this.$emit('url', downloadURL)
+          console.log("여기가 ");
+          console.log(downloadURL);
+
+        
+        // DB에 사용자, 동영상의 URL 전송
+          const SERVER_IP = "http://70.12.247.115:8080/insert_burst";
+
+          let data={
+            userid: userId,
+            videoURL:downloadURL
+          };
+
+           axios
+          .post(SERVER_IP, data)
+          .then(response => {
+            this.$router.push("/");
+          })
+          .catch(error => {
+            console.log(error);
+            // this.loading = false;
+          });
+
         })
+
+       
       })
     }
   },
