@@ -9,11 +9,14 @@
               id="p1_video"
               autoplay
               preload="metadata"
-              style="height:100vh; width:50vw;"
+              style="height:100vh; width:auto;"
               poster="@/assets/images/camPoster.jpg"
             ></video>
           </div>
         </v-flex>
+          <div class="vote1_component">
+            <Vote />
+          </div>
         <v-flex xs6 md6>
           <div id="secondWebCam">
             <video
@@ -21,11 +24,14 @@
               id="p2_video"
               autoplay
               preload="metadata"
-              style="height:100vh; width:50vw;"
+              style="height:100vh; width:auto;"
               poster="@/assets/images/camPoster.jpg"
             ></video>
           </div>
         </v-flex>
+          <div class="vote2_component">
+            <Vote />
+          </div>
       </v-layout>
       <div class="chat_component">
         <Chat />
@@ -38,6 +44,8 @@ import io from "socket.io-client";
 import axios from "axios";
 import router from "@/routes";
 import Chat from "./Chat.vue";
+import Vote from "./Vote.vue";
+
 import { mapState, mapGetters, mapActions } from "vuex";
 
 const stun_server = "stun.l.google.com:19302";
@@ -85,7 +93,8 @@ export default {
     ...mapState(["singerOrWatcherStatus", "token"])
   },
   components:{
-    Chat
+    Chat,
+    Vote,
   },
   methods: {
     sendMessage(message) {
@@ -388,7 +397,6 @@ export default {
             }
           }
         
-        
       }
     });
   }
@@ -400,9 +408,22 @@ export default {
   width:100vw;
 }
 .chat_component{
+  margin-top:50vh;
   position:fixed;
   height:50%;
-  background-color:rgba(0,0,0,0.5);
+  background-color:rgba(0,0,0,0.05);
   width:100vw;
+}
+.vote1_component{
+  margin-top:3vh;
+  position:fixed;
+  margin-left:38vw;
+  background-color:rgba(0,0,0,0);
+}
+.vote2_component{
+  margin-top:3vh;
+  position:fixed;
+  margin-left:88vw;
+  background-color:rgba(0,0,0,0);
 }
 </style>

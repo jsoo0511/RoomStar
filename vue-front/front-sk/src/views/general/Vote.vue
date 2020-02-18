@@ -1,14 +1,9 @@
 <template>
   <div>
-    <br />
-    <br />
-    <br />
     <div>{{vote}}</div>
     <v-btn type="submit" @click="plus(vote)">plus</v-btn>
     <v-btn type="submit" @click="minus(vote)">minus</v-btn>
 
-    <br />
-    <br />
     <div>chat</div>
   </div>
 </template>

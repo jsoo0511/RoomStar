@@ -8,19 +8,16 @@
       <app-content>
         <field>
           <textarea
+            class="chat_text"
             v-model="textarea"
             disabled
             v-auto-scroll-bottom
-            style="height:100vh; width:100vw; border: 4px"
           ></textarea>
         </field>
-        <field>
-          <br />
-          <label>Your Message</label>
-
-          <input v-model="message" />
-          <button type="submit" class="md-primary md-raised" @click="sendMessage()">Submit</button>
-        </field>
+        <v-row>
+          <input v-model="message" class="chat_input" />
+          <v-btn type="submit" class="md-primary md-raised secondary" @click="sendMessage()">Submit</v-btn>
+        </v-row>
       </app-content>
     </app>
   </div>
@@ -28,7 +25,6 @@
 <script>
 import io from "socket.io-client";
 import net from "net";
-
 export default {
   name: "Chat",
   data() {
@@ -65,10 +61,26 @@ export default {
 </script> 
 <style scoped>
 .page-container{
-  padding-top:30vh;
 }
 .md-app {
-  height: 400px;
+  height: 50%;
   border: 1px solid rgba(#000, 0.12);
+}
+.chat_input{
+  width:91vw;
+  background-color:white; 
+  border-radius: 4px; 
+  height:35px;
+  margin-right:5px;
+  margin-left:1.5vw;
+}
+.chat_text{
+  height:35vh; 
+  width:100vw; 
+  border: 1px; 
+  border-color:red; 
+  border-style: none;
+  padding:1.5vw 2vw;
+  overflow-y: scroll;
 }
 </style>
