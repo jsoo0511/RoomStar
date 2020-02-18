@@ -36,6 +36,74 @@
   </div>
 </div>
 <!-- /flip-card-container -->
+<div class="flip-card-container" style="--hue: 220">
+  <div class="flip-card">
+
+    <div class="card-front">
+      <figure>
+        <div class="img-bg"></div>
+        <img src="../../assets/images/singBattle.png" alt="Brohm Lake">
+      </figure>
+
+      <figcaption style="font-size:0.9rem; margin-top:">경연하기</figcaption>
+    </div>
+
+    <div class="card-back">
+      <figure>
+        <div class="img-bg"></div>
+        <img src="../../assets/images/singBattle.png" alt="Brohm Lake">
+      </figure>
+
+      <button>경연하기</button>
+
+      <div class="design-container">
+        <span class="design design--1"></span>
+        <span class="design design--2"></span>
+        <span class="design design--3"></span>
+        <span class="design design--4"></span>
+        <span class="design design--5"></span>
+        <span class="design design--6"></span>
+        <span class="design design--7"></span>
+        <span class="design design--8"></span>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="flip-card-container" style="--hue: 220">
+  <div class="flip-card">
+
+    <div class="card-front">
+      <figure>
+        <div class="img-bg"></div>
+        <img src="../../assets/images/singBattle.png" alt="Brohm Lake">
+      </figure>
+
+      <figcaption style="font-size:0.9rem; margin-top:">경연하기</figcaption>
+    </div>
+
+    <div class="card-back">
+      <figure>
+        <div class="img-bg"></div>
+        <img src="../../assets/images/singBattle.png" alt="Brohm Lake">
+      </figure>
+
+      <button>경연하기</button>
+
+      <div class="design-container">
+        <span class="design design--1"></span>
+        <span class="design design--2"></span>
+        <span class="design design--3"></span>
+        <span class="design design--4"></span>
+        <span class="design design--5"></span>
+        <span class="design design--6"></span>
+        <span class="design design--7"></span>
+        <span class="design design--8"></span>
+      </div>
+    </div>
+
+  </div>
+</div>
 </v-container>
 </template>
 
@@ -67,7 +135,6 @@
   width:100vw;
 
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   font-family: "Lato", "Segoe Ui", -apple-system, BlinkMacSystemFont, sans-serif;

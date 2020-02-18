@@ -345,7 +345,7 @@ img {
 .item {
   display: inline-block;
   margin-top: 2rem;
-  filter: grayscale(100%);
+  filter: grayscale(50%);
 }
 .item .polaroid:before {
   content: "";
