@@ -1,7 +1,7 @@
 var app = require('express')();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-var port = 8088;
+var port = 3001;
 
 let rooms = [null,null,null,null,null];
 
@@ -20,7 +20,7 @@ io.on('connection' , function(socket) {
     let user_identification = socket.handshake.query.user_identification;
     let player_idx = socket.handshake.query.player_idx;
 
-    console.log("didiidi"+room_id,user_id);
+    console.log("새로운 입장 : "+room_id,user_id);
     let room = rooms[room_id];
     //let watcher_cnt = 0;
 
@@ -37,6 +37,7 @@ io.on('connection' , function(socket) {
             }else {
                 room.singer1=user_id;
             }
+            room.singer_num = 2;
         }else if (user_identification=="watcher"){//시청자일 때,
             
             if (room.watcher_cnt>=6){
@@ -45,20 +46,8 @@ io.on('connection' , function(socket) {
             
             room.watchers[room.watcher_cnt] = user_id;
             room.watcher_cnt++;
-            console.log(room.watcher_cnt);
-            console.log(room.watchers);
-            //room.watcher_cnt += 1;
         }
-        
-        // room
-        //     .members
-        //     .push(user_id);
-
         room.sockets.push(socket);
-
-        
-        //user_num = room.member_cnt;
-        //user = 'user ' + user_num;
 
     } else{
         //방이 존재하지 않을 때,
@@ -68,8 +57,9 @@ io.on('connection' , function(socket) {
                 singer1: user_id,
                 singer2: null,
                 watcher_cnt: 0,
-                watchers: {},
-                sockets:[socket]
+                watchers: [],
+                sockets:[socket],
+                singer_num:1
             }   
         }else{
             //시청자일 때,
@@ -78,7 +68,8 @@ io.on('connection' , function(socket) {
                 singer2: null,
                 watcher_cnt: 1,
                 watchers: [user_id],
-                sockets:[socket]
+                sockets:[socket],
+                singer_num:0
             }   
         }
             rooms[room_id] = room;
@@ -98,13 +89,7 @@ io.on('connection' , function(socket) {
     //chat
     socket.on('chat', function(data){
         console.log('message from Client: '+data.message)
-
-        var rtnMessage = {
-            message: data.message
-        };
-
-        // 클라이언트에게 메시지를 전송한다
-        socket.broadcast.emit('chat', rtnMessage);
+        socket.broadcast.emit('chat', data);
     });
 
     //실시간 투표
@@ -131,6 +116,37 @@ io.on('connection' , function(socket) {
         socket.broadcast.emit('message', data);
     });
 
+
+    //gameroom 나가기
+    socket.on('leave', data =>{
+        console.log("leaveeeeeeeeeeeeee ",data);
+        
+        let room_id = data.room_id;
+        let room = rooms[room_id];
+        let socket_id = socket.id;
+
+        if (data.user_identification=="singer"){
+            if (room.singer_num==1){
+                rooms[room_id] = null;
+                console.log('room destroy');
+            }else{
+                room.singer_num = 1;
+                if (data.player_idx==0){
+                    singer1 = null;
+                }else{
+                    singer2 = null;
+                }
+                io.sockets.to(room_id).emit('leave',data);
+                room.sockets = room.sockets.filter(socket => (socket.id != socket_id))
+            }
+        }else{
+            room.watchers = room.watchers.filter(watcher => (watcher != data.user_id))
+            room.sockets = room.sockets.filter(socket => (socket.id != socket_id))
+            room.watcher_cnt--;
+            io.sockets.to(room_id).emit('leave',data);
+        }
+        console.log(rooms);
+     });
 
 })
 
