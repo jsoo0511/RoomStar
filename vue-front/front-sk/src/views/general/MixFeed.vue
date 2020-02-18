@@ -4,23 +4,30 @@
     <br />
     <br />
     <!-- 업로드 하는 곳 따로 만들기 -->
-    <!-- 제목, 내용, 게시자이름, 이미지 == null 이면 profile사진으로, (필수)동영상파일, 좋아요수-->
+    <!-- 제목, 내용, 게시자닉네임, 게시자아이디, 이미지 == null 이면 profile사진으로, (필수)동영상파일, 좋아요수-->
     <!-- crud -->
 
-    <v-dialog v-model="uploadDialog" max-width="500">
+    <v-dialog v-model="uploadDialog" id="dialog" max-width="350">
       <template v-slot:activator="{ on }">
         <v-btn class="download" v-on="on">등록하기</v-btn>
       </template>
-      <v-card>
-        <div>파일업로드하는곳</div>
+      <v-card id="modalUpload">
+        <div>파일업로드하는곳</div>-----
         <input placeholder="제목" v-model="newTitle" />
         <br />
-        <textarea placeholder="내용" v-model="newContent"></textarea>
+        <!-- <textarea placeholder="내용" v-model="newContent"></textarea> -->
+        <v-text-field v-model="newContent" placeholder="내용" Solo max="500"></v-text-field>
         <br />
         <!-- 동영상 -->
         <span>동영상</span>
         <!-- change되면 무조건 업로드됨 -->
-        <input type="file" accept="video/mp4" @change="detectFilesVideo($event.target.files)" />
+        <v-file-input
+          type="file"
+          accept="video/mp4"
+          @change="detectFilesVideo($event.target.files)"
+          label="동영상 업로드"
+        ></v-file-input>
+        <!-- <input type="file" accept="video/mp4" @change="detectFilesVideo($event.target.files)" /> -->
         <v-progress-linear
           class="progress-bar"
           :active="active"
@@ -36,12 +43,33 @@
         </v-progress-linear>
         <!-- 사진 -->
         <span>사진</span>
-        <input type="file" accept="image/jpeg" @change="detectFilesImage($event.target.files)" />
+        <v-file-input
+          type="file"
+          accept="image/jpeg"
+          @change="detectFilesImage($event.target.files)"
+          label="사진 업로드"
+        ></v-file-input>
+        <!-- <input type="file" accept="image/jpeg" @change="detectFilesImage($event.target.files)" /> -->
         <br />
 
-        <v-btn @click="uploadDialog = false">취소</v-btn>
-        <br />
-        <v-btn type="submit" @click="uploadContent({newTitle, newContent})">등록</v-btn>
+        <v-btn text small color="black" dark @click="uploadDialog = false">취소</v-btn>
+        <v-btn
+          text
+          small
+          color="black"
+          type="submit"
+          @click="uploadContent({newTitle, newContent})"
+          v-if="progressUpload !== 100"
+          disabled
+        >등록</v-btn>
+        <v-btn
+          text
+          small
+          color="black"
+          type="submit"
+          @click="uploadContent({newTitle, newContent})"
+          v-if="progressUpload === 100"
+        >등록</v-btn>
       </v-card>
     </v-dialog>
 
@@ -59,6 +87,8 @@
             >
               <v-dialog max-width="500">
                 <template v-slot:activator="{ on }">
+                  <!-- 이걸 클릭할때 해당것에 필요한 정보를 가져오게 한다. -->
+                  <!-- methods 필요 -->
                   <div class="polaroid" v-on="on">
                     <img :src="music.url" />
                     <br />
@@ -66,7 +96,7 @@
                     <span class="caption" v-text="music.title.substring(0, music.title.length - 4)"></span>
                   </div>
                 </template>
-                <v-card>
+                <v-card id="modal">
                   <p>{{video.title}}</p>
                   <p>{{music.title}}</p>
 
@@ -81,10 +111,13 @@
 
                     <span>좋아요 수</span>
                     <br />
-                    <v-icon color="pink">mdi-thumb-up</v-icon>
-                    <v-icon color="gray">mdi-thumb-down</v-icon>
+                    <!-- true면 -->
+                    <v-icon color="pink" v-if="!like()">mdi-thumb-up</v-icon>
+                    <!-- false면 -->
+                    <v-icon color="gray" v-if="!like()">mdi-thumb-down</v-icon>
                     <br />
                     <!-- axios 좋아요 연결 -->
+                    <!-- 이미 사용자가 좋아요를 한 번 누른 영상이라면 더이상 누룰 수 없게 조절해야한다. -->
                     <v-btn @click="like">동영상 좋아요</v-btn>
 
                     <v-btn>나가기</v-btn>
@@ -102,9 +135,7 @@
 
 <script>
 import { app } from "../../services/FirebaseServices";
-
 import * as firebase from "firebase/app";
-//import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/storage";
 import axios from "axios";
@@ -152,6 +183,11 @@ export default {
         .put(file);
     },
     like() {
+      //  아이디를 보내서 해당 유저가 좋아요를 누른 사람인지 아닌지를 확인해서 true false를 받아야한다.
+      //  좋아요를 누른사람이라면 true와 현재 숫자를
+      //  좋아요를 누르지않은사람이라면 false와 현재숫자를
+      //  받은거에따라 return true or false 를 해서 보여주고 말고를 해야한다.
+
       const SERVER_IP = "http://70.12.247.115:8080/count_like_video/";
       // 보내서 확인
       axios
@@ -163,20 +199,36 @@ export default {
           console.log(error);
           // this.loading = false;
         });
+
       // const SERVER_IP = "http://70.12.247.115:8080/get_lyric/{title}";
+
       // const SERVER_IP = "http://70.12.247.115:8080/insert_burst";
       // const SERVER_IP = "http://70.12.247.115:8080/play_burst";
       // const SERVER_IP = "http://70.12.247.115:8080/update_like_video";
     },
     uploadContent(data) {
       // if imageDownloadUrl === null  => profile default image 전달
-      console.log(data['newTitle'], data['newContent']);
+      console.log(data["newTitle"], data["newContent"]);
+      console.log(this.userNickname, this.userId, this.profile);
+      console.log(this.videoDownloadUrl, this.imageDownloadUrl);
+      // 안들어오면 user profile로 대신 넣어준다.
+      if (this.imageDownloadUrl === null) {
+        this.imageDownloadUrl = this.profile;
+      }
+
+      data = {
+        title: data["newTitle"],
+        content: data["newContent"],
+        usernickname: this.userNickname,
+        userid: this.userId,
+        videoUrl: this.videoDownloadUrl,
+        imageUrl: this.imageDownloadUrl,
+        like: 0
+      };
+      console.log(data);
 
       const SERVER_IP = "http://70.12.247.115:8080/count_like_video/";
       // 보내서 확인
-
-      // 여기서는 글, 제목, 게시자 추가 가능
-      // 갱신된 this.url들을 가져와서 추가
       axios
         .get(SERVER_IP)
         .then(response => {
@@ -241,6 +293,7 @@ export default {
   },
   created() {
     // 모른 정보를 DB에서 불러온다.
+
     // 다른 api로 변경될 것
     // const SERVER_IP = "http://70.12.247.115:8080/insert_burst";
     axios
@@ -308,6 +361,18 @@ export default {
 </script>
 
 <style scoped>
+#modalUpload {
+  padding: 30px;
+  max-width: 350px;
+  width: 100% !important;
+  margin: 0 auto;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+#dialog {
+  max-width: 350px;
+}
 * {
   box-sizing: border-box;
 }
