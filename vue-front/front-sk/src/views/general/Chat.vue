@@ -67,12 +67,11 @@ export default {
   border: 1px solid rgba(#000, 0.12);
 }
 .chat_input{
-  width:91vw;
+  width:40vw;
   background-color:white; 
   border-radius: 4px; 
   height:35px;
-  margin-right:5px;
-  margin-left:1.5vw;
+  margin-left:2.5vw;
 }
 .chat_text{
   height:35vh; 

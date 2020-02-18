@@ -3,12 +3,12 @@
     xs12
     :class="classes"
   >
-    <base-card
+    <!-- <base-card
       :height="value.prominent ? 450 : 350"
       color="grey lighten-1"
       dark
       href="#!"
-    >
+    > -->
       <v-img
         :src="require(`@/assets/articles/${value.hero}`)"
         height="100%"
@@ -52,7 +52,7 @@
           </v-flex>
         </v-layout>
       </v-img>
-    </base-card>
+    
   </v-flex>
 </template>
 
@@ -76,17 +76,18 @@ import "firebase/storage";
       storageRef
       .listAll()
       .then(result =>{
-
-        result.items.forEach(videoRef =>{
+        result.items.forEach(videoRef=>{
           let video={};
-          video.title=videoRef.name;
+          video.title = videoRef.name;
 
-          videoRef.getDownloadURL().then(url=>{
+          videoRef
+          .getDownloadURL()
+          .then(url=>{
             video.url=url;
             this.videoList.push(video);
           });
+          
         });
-        
       })
       .catch(function(error){});
 

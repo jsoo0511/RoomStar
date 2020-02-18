@@ -38,6 +38,7 @@ export default {
     }
 
   },
+
   watch: {
     uploadTask: function() {
       this.uploadTask.on('state_changed', sp => {
@@ -66,3 +67,4 @@ export default {
     padding-top:50px !important;
 }
 </style>
+
