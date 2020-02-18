@@ -109,7 +109,7 @@ export default {
       if (this.checkForm()) {
         // true라면,
         // this.loading = true;
-        const SERVER_IP = "http://70.12.247.115:8080/insert/";
+        const SERVER_IP = "http://192.168.0.9:8080/insert/";
         console.log(this.email, this.password, this.nickName);
         //email, nickname, profileimg, pw
         // provider = local

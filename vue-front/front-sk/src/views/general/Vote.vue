@@ -1,0 +1,49 @@
+<template>
+  <div>
+    <div>{{vote}}</div>
+    <v-btn type="submit" @click="plus(vote)">plus</v-btn>
+    <v-btn type="submit" @click="minus(vote)">minus</v-btn>
+
+    <div>chat</div>
+  </div>
+</template>
+
+<script>
+// socket
+import io from "socket.io-client";
+import net from "net";
+
+export default {
+  data() {
+    return { vote: 0 };
+  },
+  computed: {},
+  created() {
+    this.socket = io.connect("http://localhost:8082", {
+      transports: ["websocket"]
+    });
+  },
+  methods: {
+    plus: function(data) {
+      data += 1;
+      console.log("plus", data);
+      this.socket.emit("SEND_VOTE_SELECTED", { data });
+      console.log("데이터 선택========", data);
+    },
+    minus: function(data) {
+      data -= 1;
+      console.log("minus", data);
+      this.socket.emit("SEND_VOTE_SELECTED", { data });
+      console.log("데이터 선택========", data);
+    }
+  },
+  mounted() {
+    //서버의 변경사항을 수신
+    this.socket.on("GET_VOTE_SELECTED", data => {
+      console.log('GET_VOTE_SELECTED')
+      console.log(this.vote)
+      this.vote = data["data"];
+    });
+  }
+};
+</script>
