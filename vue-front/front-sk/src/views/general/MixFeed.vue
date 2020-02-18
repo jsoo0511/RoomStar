@@ -20,74 +20,80 @@
         <!-- 동영상 -->
         <span>동영상</span>
         <!-- change되면 무조건 업로드됨 -->
-        <input type="file" multiple accept="image/jpeg" @change="detectFiles($event.target.files)" />
-        <div class="progress-bar">{{ progressUpload }}% 완료</div>
+        <input type="file" accept="video/mp4" @change="detectFilesVideo($event.target.files)" />
+        <v-progress-linear
+          class="progress-bar"
+          :active="active"
+          :background-opacity="opacity"
+          :height="20"
+          :query="query"
+          :rounded="rounded"
+          :striped="striped"
+          :value="progressUpload"
+          color="purple"
+        >
+          <strong>{{ progressUpload }}% 완료</strong>
+        </v-progress-linear>
         <!-- 사진 -->
         <span>사진</span>
-        <input type="file" multiple accept="image/jpeg" @change="detectFiles($event.target.files)" />
-        <div class="progress-bar">{{ progressUpload }}% 완료</div>
+        <input type="file" accept="image/jpeg" @change="detectFilesImage($event.target.files)" />
+        <br />
 
         <v-btn @click="uploadDialog = false">취소</v-btn>
         <br />
-        <v-btn type="submit">등록</v-btn>
+        <v-btn type="submit" @click="uploadContent({newTitle, newContent})">등록</v-btn>
       </v-card>
     </v-dialog>
 
     <div class="wrapper">
+      <!-- 파이어베이스로 바꿔서 가져온애들을 나열하는 걸로 수정해야한다. -->
       <div v-for="(music, i) in musicTitle" :key="i">
         <div v-for="(video, ii) in videoUrl" :key="ii">
-
-            <v-flex xs12 sm6 md3 style="float:left">
-                <div
-                 
-                  class="item"
-                  v-if="
+          <v-flex xs12 sm6 md3 style="float:left">
+            <div
+              class="item"
+              v-if="
                 video.title.substring(0, video.title.length - 4) ===
                   music.title.substring(0, music.title.length - 4)
               "
-                >
-                  <v-dialog max-width="500">
-                    <template v-slot:activator="{ on }">
-                      <div class="polaroid" v-on="on">
-                        <img :src="music.url" />
-                        <br />
-                        <!-- title을 각 제목으로 수정 -->
-                        <span
-                          class="caption"
-                          v-text="music.title.substring(0, music.title.length - 4)"
-                        ></span>
-                      </div>
-                    </template>
-                    <v-card>
-                      <p>{{video.title}}</p>
-                      <p>{{music.title}}</p>
+            >
+              <v-dialog max-width="500">
+                <template v-slot:activator="{ on }">
+                  <div class="polaroid" v-on="on">
+                    <img :src="music.url" />
+                    <br />
+                    <!-- title을 각 제목으로 수정 -->
+                    <span class="caption" v-text="music.title.substring(0, music.title.length - 4)"></span>
+                  </div>
+                </template>
+                <v-card>
+                  <p>{{video.title}}</p>
+                  <p>{{music.title}}</p>
 
-                      <div>
-                        <p>제목</p>
-                        <!-- 비디오 src 추가 -->
-                        <video width="500" ref="video" controls :style="videoStyles">
-                          <source :src="video.url" type="video/mp4" />
-                        </video>
-                        <p>게시자</p>
-                        <p>내용</p>
+                  <div>
+                    <p>제목</p>
+                    <!-- 비디오 src 추가 -->
+                    <video width="500" ref="video" controls :style="videoStyles">
+                      <source :src="video.url" type="video/mp4" />
+                    </video>
+                    <p>게시자</p>
+                    <p>내용</p>
 
-                        <span>좋아요 수</span>
-                        <br />
-                        <v-icon color="pink">mdi-thumb-up</v-icon>
-                        <v-icon color="gray">mdi-thumb-down</v-icon>
-                        <br />
-                        <!-- axios 좋아요 연결 -->
-                        <v-btn @click="like">동영상 좋아요</v-btn>
+                    <span>좋아요 수</span>
+                    <br />
+                    <v-icon color="pink">mdi-thumb-up</v-icon>
+                    <v-icon color="gray">mdi-thumb-down</v-icon>
+                    <br />
+                    <!-- axios 좋아요 연결 -->
+                    <v-btn @click="like">동영상 좋아요</v-btn>
 
-                        <v-btn>나가기</v-btn>
-                        <br />
-                      </div>
-                    </v-card>
-                  </v-dialog>
-                </div>
-
-            </v-flex>
-
+                    <v-btn>나가기</v-btn>
+                    <br />
+                  </div>
+                </v-card>
+              </v-dialog>
+            </div>
+          </v-flex>
         </div>
       </div>
     </div>
@@ -111,19 +117,36 @@ export default {
       videoUrl: [],
       progressUpload: 0,
       file: File,
-      uploadTask: "",
-      uploadDialog: ""
+      uploadTaskVideo: "",
+      uploadTaskImage: "",
+      uploadDialog: false,
+      userId: this.$session.get("userId"),
+      profile: this.$session.get("profileImg"),
+      userNickname: this.$session.get("userNickname"),
+      videoDownloadUrl: null,
+      imageDownloadUrl: null
     };
   },
 
   methods: {
-    detectFiles(fileList) {
+    detectFilesVideo(fileList) {
       Array.from(Array(fileList.length).keys()).map(x => {
-        this.upload(fileList[x]);
+        this.uploadVideo(fileList[x]);
       });
     },
-    upload(file) {
-      this.uploadTask = firebase
+    detectFilesImage(fileList) {
+      Array.from(Array(fileList.length).keys()).map(x => {
+        this.uploadImage(fileList[x]);
+      });
+    },
+    uploadVideo(file) {
+      this.uploadTaskVideo = firebase
+        .storage(app)
+        .ref(file.name)
+        .put(file);
+    },
+    uploadImage(file) {
+      this.uploadTaskImage = firebase
         .storage(app)
         .ref(file.name)
         .put(file);
@@ -144,13 +167,31 @@ export default {
       // const SERVER_IP = "http://70.12.247.115:8080/insert_burst";
       // const SERVER_IP = "http://70.12.247.115:8080/play_burst";
       // const SERVER_IP = "http://70.12.247.115:8080/update_like_video";
+    },
+    uploadContent(data) {
+      // if imageDownloadUrl === null  => profile default image 전달
+      console.log(data['newTitle'], data['newContent']);
+
+      const SERVER_IP = "http://70.12.247.115:8080/count_like_video/";
+      // 보내서 확인
+
+      // 여기서는 글, 제목, 게시자 추가 가능
+      // 갱신된 this.url들을 가져와서 추가
+      axios
+        .get(SERVER_IP)
+        .then(response => {
+          console.log(response);
+        })
+        .catch(error => {
+          console.log(error);
+          // this.loading = false;
+        });
     }
   },
 
   watch: {
-    uploadTask: function() {
-      const userId = this.$session.get("userId");
-      this.uploadTask.on(
+    uploadTaskVideo: function() {
+      this.uploadTaskVideo.on(
         "state_changed",
         sp => {
           this.progressUpload = Math.floor(
@@ -159,31 +200,41 @@ export default {
         },
         null,
         () => {
-          this.uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
-            this.$emit("url", downloadURL);
-            console.log("여기가 ");
-            console.log(downloadURL);
-
-            // DB에 사용자, 동영상의 URL 전송
-
-            // ? 여기에?
-            const SERVER_IP = "http://70.12.247.115:8080/insert_burst";
-
-            let data = {
-              userid: userId,
-              videoURL: downloadURL
-            };
-
-            axios
-              .post(SERVER_IP, data)
-              .then(response => {
-                console.log(response);
-              })
-              .catch(error => {
-                console.log(error);
-                // this.loading = false;
-              });
-          });
+          this.uploadTaskVideo.snapshot.ref
+            .getDownloadURL()
+            .then(downloadURL => {
+              this.$emit("url", downloadURL);
+              console.log("여기가 ");
+              //videoUrl 저장, 게시자이름도 함께
+              console.log(downloadURL);
+              this.videoDownloadUrl = downloadURL;
+              console.log(this.videoDownloadUrl);
+              // *********************생성된 url 정보를 데이터에서 갱신하고 버튼이 눌리면 그때 같이 보내도록 하자
+            });
+        }
+      );
+    },
+    uploadTaskImage: function() {
+      this.uploadTaskImage.on(
+        "state_changed",
+        sp => {
+          this.progressUpload = Math.floor(
+            (sp.bytesTransferred / sp.totalBytes) * 100
+          );
+        },
+        null,
+        () => {
+          this.uploadTaskImage.snapshot.ref
+            .getDownloadURL()
+            .then(downloadURL => {
+              this.$emit("url", downloadURL);
+              console.log("여기가 ");
+              //imageUrl 저장, 게시자이름도 함께
+              console.log(downloadURL);
+              this.imageDownloadUrl = downloadURL;
+              // *********************생성된 url 정보를 데이터에서 갱신하고 버튼이 눌리면 그때 같이 보내도록 하자
+              // DB에 사용자, 이미지의 URL 전송
+            });
         }
       );
     }
@@ -191,9 +242,9 @@ export default {
   created() {
     // 모른 정보를 DB에서 불러온다.
     // 다른 api로 변경될 것
-    const SERVER_IP = "http://70.12.247.115:8080/insert_burst";
+    // const SERVER_IP = "http://70.12.247.115:8080/insert_burst";
     axios
-      .post(SERVER_IP)
+      .post()
       .then(response => {
         console.log(response);
       })
