@@ -7,24 +7,19 @@
     <div class="card-front">
       <figure>
         <div class="img-bg"></div>
-        <img src="https://images.unsplash.com/photo-1486162928267-e6274cb3106f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="Brohm Lake">
-        <figcaption>Brohm Lake</figcaption>
+        <img src="../../assets/images/singBattle.png" alt="Brohm Lake">
       </figure>
 
-      <ul>
-        <li></li>
-        <li>Detail 2</li>
-        <li>Detail 3</li>
-      </ul>
+      <figcaption style="font-size:0.9rem; margin-top:">경연하기</figcaption>
     </div>
 
     <div class="card-back">
       <figure>
         <div class="img-bg"></div>
-        <img src="https://images.unsplash.com/photo-1486162928267-e6274cb3106f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="Brohm Lake">
+        <img src="../../assets/images/singBattle.png" alt="Brohm Lake">
       </figure>
 
-      <button>Book</button>
+      <button>경연하기</button>
 
       <div class="design-container">
         <span class="design design--1"></span>
@@ -192,7 +187,7 @@ figcaption {
 }
 
 .card-front .img-bg {
-  clip-path: polygon(0 20%, 100% 40%, 100% 100%, 0 100%);
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
 }
 
 .card-front .img-bg::before {
