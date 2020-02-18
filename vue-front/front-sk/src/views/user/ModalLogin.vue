@@ -1,86 +1,93 @@
 <template>
-  <v-row justify="center">
-    <v-dialog v-model="dialog">
-      <template v-slot:activator="{ on }">
-        <v-btn color="transparent" dark v-on="on" x-large >로그인</v-btn>
-      </template>
+  <div>
+    <v-row justify="center">
+      <v-dialog v-model="dialog" id="dialog" max-width="350">
+        <template v-slot:activator="{ on }">
+          <v-btn color="transparent" dark v-on="on">로그인</v-btn>
+        </template>
 
-      <v-card z-index="1">
-        <br />
+        <v-card z-index="1" id="modalLogin">
+          <h2>
+            <b>Login with</b>
+          </h2>
+          <br />
 
-        <div class="snsLogin">
-          <kakaoLogin />
-          <GoogleLogin />
-        </div>
+          <v-row justify="center">
+            <kakaoLogin />
+            <GoogleLogin />
+          </v-row>
+          <br />
+          <p style="text-align:center; color:rgba(0,0,0,0.2);">
+            ------------
+            <b style="color:rgba(0,0,0,0.6); padding-left:2.6em; padding-right:2.6em;">or</b>------------
+          </p>
+          <v-text-field
+            v-model="email"
+            v-bind:class="{error : error.email, complete:!error.email&&email.length!==0}"
+            @keyup.enter="login"
+            id="email"
+            placeholder="이메일을 입력하세요."
+            type="text"
+          />
 
-        <p style="text-align:center;">또는</p>
+          <div class="error-text" v-if="error.email">{{error.email}}</div>
+          <v-text-field
+            v-model="password"
+            type="password"
+            v-bind:class="{error : error.password, complete:!error.password&&password.length!==0}"
+            id="password"
+            @keyup.enter="login"
+            placeholder="비밀번호를 입력하세요."
+          />
 
-        <v-text-field
-          v-model="email"
-          v-bind:class="{error : error.email, complete:!error.email&&email.length!==0}"
-          @keyup.enter="login"
-          id="email"
-          placeholder="이메일을 입력하세요."
-          type="text"
-        />
+          <div class="error-text" v-if="error.password">{{error.password}}</div>
 
-        <div class="error-text" v-if="error.email">{{error.email}}</div>
-        <v-text-field
-          v-model="password"
-          type="password"
-          v-bind:class="{error : error.password, complete:!error.password&&password.length!==0}"
-          id="password"
-          @keyup.enter="login"
-          placeholder="비밀번호를 입력하세요."
-        />
+          <button
+            class="btn btn--back btn--login"
+            v-on:click="login"
+            @click="dialog = false"
+            :disabled="!isSubmit"
+            :class="{disabled : !isSubmit}"
+            color="black darken-1"
+            text
+            small
+          >로그인</button>
 
-        <div class="error-text" v-if="error.password">{{error.password}}</div>
+          <div class="add-option">
+            <div class="text-center">
+              <v-btn
+                text
+                small
+                color="black"
+                dark
+                to="/user/password"
+                v-on:click="dialog = false"
+              >비밀번호 찾기</v-btn>
 
-        <button
-          class="btn btn--back btn--login"
-          v-on:click="login"
-          @click="dialog = false"
-          :disabled="!isSubmit"
-          :class="{disabled : !isSubmit}"
-          color="black darken-1"
-          text
-          small
-        >로그인</button>
+              <v-dialog v-model="joinDialog" max-width="400px">
+                <template v-slot:activator="{ on }">
+                  <v-btn text small color="black" dark v-on="on" v-on:click="joinDialog = true">가입하기</v-btn>
+                </template>
 
-        <div class="add-option">
-          <div class="text-center">
-            <v-btn
-              text
-              small
-              color="black"
-              dark
-              to="/user/password"
-              v-on:click="dialog = false"
-            >비밀번호 찾기</v-btn>
+                <v-card z-index="2">
+                  <br />
+                  <Join v-on:update="joinDialog = false"/>
+                </v-card>
+              </v-dialog>
 
-            <v-dialog v-model="joinDialog" max-width="400px">
-              <template v-slot:activator="{ on }">
-                <v-btn text small color="black" dark v-on="on" v-on:click="joinDialog = true">가입하기</v-btn>
-              </template>
-
-              <v-card z-index="2">
-                <br />
-                <Join />
-              </v-card>
-            </v-dialog>
-
-            <!-- <v-btn text small color="black" dark to="/user/join" v-on:click="dialog = false">가입하기</v-btn> -->
-            <v-btn text small color="black" dark to="#" v-on:click="dialog = false">서비스소개</v-btn>
+              <!-- <v-btn text small color="black" dark to="/user/join" v-on:click="dialog = false">가입하기</v-btn> -->
+              <v-btn text small color="black" dark to="#" v-on:click="dialog = false">서비스소개</v-btn>
+            </div>
           </div>
-        </div>
 
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false">취소</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </v-row>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" text @click="dialog = false">취소</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-row>
+  </div>
 </template>
 
 <script>
@@ -91,7 +98,7 @@ import axios from "axios";
 import PV from "password-validator";
 import * as EmailValidator from "email-validator";
 import swal from "sweetalert";
-import jwt_decode from 'jwt-decode';
+
 import KakaoLogin from "../../components/user/snsLogin/Kakao.vue";
 import GoogleLogin from "../../components/user/snsLogin/Google.vue";
 import UserApi from "../../apis/UserApi";
@@ -157,43 +164,30 @@ export default {
           pw,
           userid
         };
-        const SERVER_IP = "http://70.12.247.115:8080/login/";
+        const SERVER_IP = "http://192.168.0.9:8080/login/";
         axios
           .post(SERVER_IP, data)
           .then(response => {
-            console.log('-----------', response)
-            userNickname1 = response.data.nickname;
-            console.log(userNickname1)
+            userNickname1 = response.data.nickName;
             token = response.data.token;
             let toStore = {
               one: true,
               two: token,
               three: email,
               four: userNickname1
-
             };
             this.$session.start();
             // session에 저장
             this.$session.set("isUser", true);
             this.$session.set("jwt", token);
-            console.log('local login, using jwt decode', jwt_decode(token))
             this.$session.set("userId", email);
             this.$session.set("userNickname", userNickname1);
-            let userInfo = jwt_decode(token)
-            console.log(userInfo.User.profileimg)
-            this.$session.set("profileImg", userInfo.User.profileimg);
-
-            // localStorage 저장
-            localStorage.setItem('jwt', token)
-
-
-      
             this.$store.dispatch("checkLogin", token);
             this.$store.dispatch("login", toStore);
             // true, jwt-auth-token, email, nickname
             // 로딩 로직 짜는데 사용
             this.loading = false;
-            this.$router.push("/");
+
             return true;
           })
           .catch(error => {
@@ -210,7 +204,7 @@ export default {
             // this.loading = false;
             return false;
           });
-
+        this.$router.push("/");
         //요청 후에는 버튼 비활성화
         this.isSubmit = false;
 
@@ -248,10 +242,16 @@ export default {
 </script>
 
 <style scoped>
-.snsLogin {
-  text-align: center;
-  align-content: center;
+#modalLogin {
+  padding: 30px;
+  max-width: 350px;
+  width: 100% !important;
+  margin: 0 auto;
+  border-radius: 2px;
+  overflow: hidden;
 }
 
-
+#dialog {
+  max-width: 350px;
+}
 </style>

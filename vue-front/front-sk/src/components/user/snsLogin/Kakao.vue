@@ -43,7 +43,7 @@ let onSuccess = function(data) {
       profileImage1 = res.properties.profile_image;
       userEmail1 = res.kakao_account.email;
       provider1 = "kakao";
-
+   
       let toStore = {
         one: true,
         two: data.access_token,
@@ -199,3 +199,8 @@ export default {
   }
 };
 </script>
+<style>
+#kakao-login{
+  margin-right:20px;
+}
+</style>

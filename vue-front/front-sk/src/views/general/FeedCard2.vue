@@ -9,49 +9,25 @@
       dark
       href="#!"
     >
-      <v-img
-        :src="require(`@/assets/articles/${value.hero}`)"
-        height="100%"
-        gradient="rgba(0, 0, 0, .42), rgba(0, 0, 0, .42)"
-      >
-        <v-layout
-          v-if="!value.prominent"
-          fill-height
-          wrap
-          text-xs-right
-          ma-0
-        >
-          <v-flex xs12>
-            <v-chip
-              label
-              class="mx-0 mb-2 text-uppercase"
-              color="grey darken-3"
-              text-color="white"
-              small
-              @click.stop=""
-            >
-              {{ value.category }}
-            </v-chip>
-            <h3 class="title font-weight-bold mb-2">
-              {{ value.title }}
-            </h3>
-            <div class="caption">
-              {{ value.author }}<br>Date
+        <div class="d-flex flex-no-wrap justify-space-between">
+          <div>
+            <v-card-title class="headline" v-text="music.title.substring(0,music.title.length-4)"></v-card-title>
+
+            <v-card-subtitle v-text="music.title.substring(0,music.title.length-4)"></v-card-subtitle>
+
+            <div v-for="(video, ii) in videoUrl" :key="ii">
+                <!-- video에는 mp4 관련 정보 music에는 jpg관련 정보가 들어있음-->
+              <a
+                v-if="video.title.substring(0,video.title.length-4)===music.title.substring(0,music.title.length-4)"
+                v-bind:href="video.url"
+              >링크</a>
             </div>
-          </v-flex>
-          <v-flex align-self-end>
-            <v-chip
-              class="text-uppercase ma-0"
-              color="primary"
-              label
-              small
-              @click.stop=""
-            >
-              시청하기
-            </v-chip>
-          </v-flex>
-        </v-layout>
-      </v-img>
+          </div>
+
+          <v-avatar class="ma-3" size="125" tile>
+            <v-img :src="music.url"></v-img>
+          </v-avatar>
+        </div>
     </base-card>
   </v-flex>
 </template>
@@ -93,14 +69,14 @@ import "firebase/storage";
 
     },
     props: {
-      size: {
-        type: Number,
-        required: true
-      },
-      value: {
-        type: Object,
-        default: () => ({})
-      }
+    key:{
+      type:Number,
+      required:true
+    },
+    music:{
+      type:Object,
+      default:  () => ({})
+    }
     },
     computed: {
       classes () {
@@ -114,7 +90,14 @@ import "firebase/storage";
 </script>
 
 <style scoped>
+.container{
+  width:100vw;
+}
 .v-image__image {
   transition: .3s linear;
+}
+#testt {
+  margin-top: 70px !important;
+  padding-top: 50px !important;
 }
 </style>

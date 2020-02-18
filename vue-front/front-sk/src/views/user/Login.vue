@@ -1,7 +1,7 @@
 
 <template>
-  <div class="user" id="login">
-    <div class="wrapC">
+  <div class="user" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="loginmodal-container">
       <h1>RoomSTAR</h1>
       <div class="input-with-label">
         <input
@@ -9,7 +9,7 @@
           v-bind:class="{error : error.email, complete:!error.email&&email.length!==0}"
           @keyup.enter="login"
           id="email"
-          placeholder="이메일을 입력하세요."
+          placeholder="웨일을 입력하세요."
           type="text"
         />
         <label for="email">이메일</label>
@@ -139,7 +139,7 @@ export default {
           pw,
           userid
         };
-        const SERVER_IP = "http://70.12.247.115:8080/login/";
+        const SERVER_IP = "http://192.168.0.9:8080/login/";
         axios
           .post(SERVER_IP, data)
           .then(response => {
@@ -204,4 +204,16 @@ export default {
 };
 </script>
 
-
+<style scoped>
+.loginmodal-container {
+  padding: 30px;
+  max-width: 150px;
+  width: 100% !important;
+  background-color: #F7F7F7;
+  margin: 0 auto;
+  border-radius: 2px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  font-family: roboto;
+} 
+</style>

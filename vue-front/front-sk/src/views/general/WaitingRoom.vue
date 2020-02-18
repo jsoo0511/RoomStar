@@ -1,64 +1,99 @@
 <template>
-  <div id="waitingRoom">
-    <br />
-    <br />
-    <h2>노래부르는 버튼 임시 구현</h2>
-    <v-btn @click="singingButton()">노래부르기</v-btn>
-    <br />waitingRoom
-    <br />
-    <br />
-    <section>
-      <ul>
-        <!-- {{allRoomInfo }} array인 경우 key가 반드시 필요하다.-->
-        <li :key="index" v-for="(roomInfo, index) in allRoomInfo">
-          방정보: {{roomInfo}}
-          <br />
-          방번호: {{roomInfo.room_id}}
-          <br />
-          시청자수: {{roomInfo.watching_num}}
-          <br />
-          부르는사람수: {{roomInfo.singer_num}}
-          <br />
-          참가자1: {{roomInfo.user1}}
-          <br />
-          참가자 선곡: {{roomInfo.music1}}
-          <br />
-          참가자 등급: {{roomInfo.user1_grade}}
-          <br />
-          참가자 승률: {{roomInfo.user1_win_rate}}
-          <br />
-          참가자1: {{roomInfo.user2}}
-          <br />
-          참가자 선곡: {{roomInfo.music2}}
-          <br />
-          참가자 등급: {{roomInfo.user2_grade}}
-          <br />
-          참가자 승률: {{roomInfo.user2_win_rate}}
-          <br />
+  <div id="waitingRooms">
+    <swiper :options="swiperOption">
+      <!-- swipter-slide 부분을 v-for로 처리해야 할 것 같은데, -->
+      <swiper-slide @click="watchingButton(roomInfo.room_id, $event)" :key="index" v-for="(roomInfo, index) in allRoomInfo">
+        <v-row id="swiper_row">
+          <div class="card marginR">
+            <div class="card-image"></div>
+            <div class="card-text">
+              <span class="rank">{{roomInfo.user1_grade}}</span>
+              <h2>{{roomInfo.user1}}</h2>
+              <h4>{{roomInfo.music1}}</h4>
+            </div>
+            <div class="card-stats">
+              <div class="stat">
+                <div class="value">{{roomInfo.win1}}</div>
+                <div class="type">win</div>
+              </div>
+              <div class="stat border">
+                <div class="value">{{roomInfo.lose1}}</div>
+                <div class="type">lose</div>
+              </div>
+              <div class="stat">
+                <div class="value">{{roomInfo.user1_win_rate}} %</div>
+                <div class="type">winrate</div>
+              </div>
+            </div>
+          </div>
+          <v-img src="../../assets/images/battle_vs2.png" id="vs_img"></v-img>
 
+          <div class="card marginL">
+            <div class="card-image"></div>
+            <div class="card-text">
+              <span class="rank">{{roomInfo.user2_grade}}</span>
+              <h2>{{roomInfo.user2}}</h2>
+              <h4>{{roomInfo.music2}}</h4>
+            </div>
+            <div class="card-stats">
+              <div class="stat">
+                <div class="value">{{roomInfo.win2}}</div>
+                <div class="type">win</div>
+              </div>
+              <div class="stat border">
+                <div class="value">{{roomInfo.lose2}}</div>
+                <div class="type">lose</div>
+              </div>
+              <div class="stat">
+                <div class="value">{{roomInfo.user2_win_rate}} %</div>
+                <div class="type">winrate</div>
+              </div>
+            </div>
+          </div>
+        </v-row>
+      </swiper-slide>
+      <!-- 여기까지가 v-for로 반복시킬 부분 -->
+    </swiper>
+
+    <!--
+     <ul>
           <v-btn @click="watchingButton(roomInfo.room_id, $event)">시청하기</v-btn>
-          <!-- <hr> -->
-        </li>
       </ul>
-    </section>
-
+    -->
     <p>대기인원: {{ waitingNumofPeople }}</p>
   </div>
 </template>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 import router from "@/routes";
 import axios from "axios";
 
-var waitingNumofPeople = 0;
+var swiper = null;
 
+var waitingNumofPeople = 0;
 export default {
   name: "WaitingRoom",
   components: {},
   data() {
     return {
-      allRoomInfo: []
+      allRoomInfo: [],
       // waitingNumofPeople: 0
+      swiperOption: {
+        effect: "coverflow",
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        coverflowEffect: {
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true
+        },
+        pagination: {
+          el: ".swiper-pagination"
+        }
+      }
     };
   },
   methods: {
@@ -86,10 +121,9 @@ export default {
         })
         .catch(e => {
           console.log("error: ", e);
-          alert('모든 방이 차있습니다.')
+          alert("모든 방이 차있습니다.");
         });
     },
-
     // 시청하기를 누르면 해당 방으로 이동
     watchingButton(room_id) {
       const userid = this.$session.get("userId");
@@ -127,12 +161,11 @@ export default {
         });
     }
   },
-
   created() {
     // 유저가 처음 대기방에 들어왔을때 얻을 수 있는 방들의 정보
     let store = this.$store;
     const userid = this.$session.get("userId");
-    console.log(userid)
+    console.log(userid);
     axios
       .post("http://70.12.247.115:8080/Insert_waiting/" + userid)
       .then(response => {
@@ -152,23 +185,122 @@ export default {
   // viewMypage
 };
 </script>
-
-
 <style scoped>
-ul {
-  list-style-type: none;
-  padding-left: 0px;
-  margin-top: 0;
-  text-align: left;
+.card {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 40vh 8vw 4vw;
+  grid-template-areas: "image" "text" "stats";
+  border-radius: 1rem;
+  background: white;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
+  font-family: roboto;
+  text-align: center;
+  transition: 0.5s ease;
+  cursor: pointer;
+  min-width: 20vw;
 }
 
-li {
+.marginL {
+  margin-left: 1em;
+}
+
+.marginR {
+  margin-right: 1em;
+}
+
+.card-image {
+  grid-area: image;
+}
+.card-text {
+  grid-area: text;
+}
+.card-image {
+  grid-area: image;
+  background: url("../../assets/images/bg_solo2.png");
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  background-size: cover;
+}
+
+.card-text {
+  grid-area: text;
+  margin: 0.5rem;
+}
+.card-text .rank {
+  color: rgb(255, 7, 110);
+  font-size: 0.9rem;
+}
+.card-text h2 {
+  margin-top: 0px;
+  font-size: 1.6rem;
+}
+
+.card-text h4 {
+  margin-top: 0.8rem;
+  font-size: 0.9rem;
+  overflow: hidden;
+}
+
+.card-stats {
+  font-size: 0.85rem;
+  font-weight: 500;
+  grid-area: stats;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  background: rgb(255, 7, 110);
+}
+
+.card-stats .stat {
   display: flex;
-  min-height: 50px;
-  margin: 0.5rem 0;
-  padding: 0 0.9rem;
-  background: white;
-  border-radius: 5px;
-  border: 3px dashed #bcbcbc;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  padding: 1rem;
+}
+/*
+.card:hover {
+  transform: scale(1.15);
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+}
+*/
+#waitingRooms {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url("../../assets/images/see_bg70.png");
+  font-family: "Poppins", sans-serif;
+}
+
+.swiper-inner {
+  width: 100%;
+  height: 400px;
+}
+.swiper-slide {
+  background-position: center;
+  background-size: center;
+  width: auto;
+  padding-top: 6vh;
+  height: 76vh;
+}
+#vs_img {
+  position: fixed;
+  margin-top: 41%;
+  margin-left: 43%;
+}
+#swiper_row {
+  transition: 0.5s ease;
+  width: auto !important;
+}
+#swiper_row:hover {
+  transform: scale(1.15);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0);
 }
 </style>

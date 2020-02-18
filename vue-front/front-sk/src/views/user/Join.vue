@@ -109,7 +109,7 @@ export default {
       if (this.checkForm()) {
         // true라면,
         // this.loading = true;
-        const SERVER_IP = "http://70.12.247.115:8080/insert/";
+        const SERVER_IP = "http://192.168.0.9:8080/insert/";
         console.log(this.email, this.password, this.nickName);
         //email, nickname, profileimg, pw
         // provider = local
@@ -127,10 +127,9 @@ export default {
         axios
           .post(SERVER_IP, data)
           .then(response => {
-            console.log(response)
-            this.$router.push("/").catch(err => {
-              console.log(err);
-            });
+            console.log(response);
+            this.joinDialog = false
+            this.$emit('update');
           })
           .catch(error => {
             console.log(error);
@@ -141,6 +140,10 @@ export default {
       this.$nextTick(() => {
         console.log("error");
       });
+      console.log(this.$router)
+      // this.$router.push("/").catch(err => {
+      //   console.log(err);
+      // });
     },
 
     checkForm() {
@@ -194,10 +197,9 @@ export default {
       passwordType: "password",
       passwordConfirmType: "password",
       termPopup: false,
-      dialog: false
+      dialog: false,
     };
   }
 };
 </script>
-
 
