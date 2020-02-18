@@ -12,15 +12,11 @@ import io from "socket.io-client";
 import net from "net";
 
 export default {
+  props: ['socket'],
   data() {
     return { vote: 0 };
   },
   computed: {},
-  created() {
-    this.socket = io.connect("http://localhost:8082", {
-      transports: ["websocket"]
-    });
-  },
   methods: {
     plus: function(data) {
       data += 1;
