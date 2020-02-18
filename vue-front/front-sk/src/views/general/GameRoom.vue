@@ -169,7 +169,7 @@ export default {
   created() {
        console.log("created()---->1",this.battle_id);
     this.socket = io.connect(
-      "http://70.12.246.73:?room_id=" +
+      "http://70.12.246.73:3000?room_id=" +
         this.room_id +
         "&user_id=" +
         this.user_id +
