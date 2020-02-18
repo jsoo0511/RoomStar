@@ -21,7 +21,7 @@
               </li>
             </ul>
           </v-radio-group>
-        <div> 
+
           <div class="wrapper">
             <div class="cols" v-for="(music, i) in musicTitle" :key="i">
 
@@ -50,7 +50,6 @@
                 <!-- -->
               </div>
             </div>
-          </div>
           </div>
           <!-- 선택하면 선택한 것만 music.url을 보내기 -->
           <!-- <v-btn type="submit" @click="trigger(musicSelectedOne)">선택완료1</v-btn> -->
@@ -159,10 +158,6 @@ export default {
   box-sizing: border-box;
 }
 
-.container{
-  height:100px !important;
-}
-
 h1 {
   font-size: 1.5rem;
   font-family: "Montserrat";
@@ -177,9 +172,7 @@ h1 {
   margin: 0 auto;
   max-width: 100rem;
 }
-.wrapper > div{
-  max-height:200px;
-}
+
 .cols {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -200,8 +193,8 @@ h1 {
 .container {
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
-  -webkit-perspective: 4000px;
-  perspective: 4000px;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
 }
 
 .front,

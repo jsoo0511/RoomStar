@@ -14,7 +14,6 @@
             <!--<h1 class="white--text mb-2 display-1 text-center" style="margin-top:30vh;">ROOM STAR</h1>-->
             <h2 class="subheading mb-1 text-center">        </h2>
 
-
             <!-- <v-btn
               class="mt-12"
               color="orange lighten-1"
@@ -33,8 +32,12 @@
      
 
       <section
-        id="welcome" style="padding-top:20px;">
-        
+        id="welcome" style="">
+        <div class="loading_wrap">
+          <h3 data-back="Select Menu" class="h2_loading">Select Menu</h3>
+       </div>
+        <FlipCard />
+      </section>
         <!--<v-layout
           column
           wrap
@@ -130,7 +133,6 @@
             </v-container>
           </v-flex>
         </v-layout>-->
-      </section>
 <!--
  <section class="hide-overflow">
   <v-container grid-list-xl>
@@ -272,13 +274,13 @@
           </v-layout>
         </v-container>
       </section>-->
-      <section id="paral_section" style="padding-top:100px;">
-        <v-container grid-list-xl>
-        <v-layout column wrap>
-        <v-flex>
+      <section id="paral_section" style="padding-top:50px;">
         <v-parallax src="../../assets/images/welcome.png" id="paral"> 
         <h1 style="color:#fff; text-align:center;">ROOM ☆ STAR</h1>
         </v-parallax>
+        <v-container grid-list-xl>
+        <v-layout column wrap>
+        <v-flex>
          </v-flex>
          <v-flex>
           <v-layout row wrap justify-center class="my-12">
@@ -428,7 +430,7 @@ export default {
   width:100vw;
   float: center;
   box-sizing: border-box;
-  min-height: 100vh;
+  min-height: auto;
   }
 .container > div {
   padding-top: 0px; }
@@ -557,7 +559,6 @@ v-content__wrap{
   margin: 0;
   padding: 0;
 }
-
 .scroll-down {
   opacity: 1;
   -webkit-transition: all .5s ease-in 3s;
@@ -664,10 +665,66 @@ v-content__wrap{
   box-shadow: 5px 5px 15px rgba(0,0,0,0);
   filter:grayscale(0%);
 }
+#paral_section{
+  background-color:#eee;
+}
 #paral{
    height:200px !important;
+   margin-left:0vw;
    width:100vw;
 }
 
 </style>
 
+<style scoped lang="scss">
+ * {
+  box-sizing:border-box;
+}
+
+.loading_wrap{
+  padding-top:5vh;
+  margin-bottom:-15vh;
+}
+.h2_loading {
+    text-align:center;
+    font-size:3em;
+    color :rgba(0,0,0,0.3);
+    position:relative;
+    margin:0px;
+    &:after {
+      text-align:left;
+      content:attr(data-back);
+      width:0%;
+      height:100%;
+      background:rgba(0,0,0,0.8);
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      position:absolute;
+      left:42.1%;
+      top:0px;
+      animation: backMasking 4s infinite;
+    }
+}
+
+
+@keyframes backMasking {
+  0% {
+    width:0%;
+  }
+  100% {
+    width:100%;
+  }
+  
+}
+
+@-webkit-keyframes backMasking {
+  0% {
+    width:0%;
+  }
+  100% {
+    width:100%;
+  }
+  
+}
+
+</style>
