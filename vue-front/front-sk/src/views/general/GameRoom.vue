@@ -169,7 +169,7 @@ export default {
   created() {
        console.log("created()---->1",this.battle_id);
     this.socket = io.connect(
-      "http://70.12.246.73:8088?room_id=" +
+      "http://70.12.246.73:?room_id=" +
         this.room_id +
         "&user_id=" +
         this.user_id +
@@ -409,19 +409,20 @@ export default {
 }
 .chat_component{
   margin-top:50vh;
+  margin-left:25vw;
   position:fixed;
   height:50%;
   background-color:rgba(0,0,0,0.05);
-  width:100vw;
+  width:50vw;
 }
 .vote1_component{
-  margin-top:3vh;
+  margin-top:35vh;
   position:fixed;
-  margin-left:38vw;
+  margin-left:2vw;
   background-color:rgba(0,0,0,0);
 }
 .vote2_component{
-  margin-top:3vh;
+  margin-top:35vh;
   position:fixed;
   margin-left:88vw;
   background-color:rgba(0,0,0,0);

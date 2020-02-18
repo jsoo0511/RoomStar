@@ -10,7 +10,8 @@
             justify-center
             class="white--text"
           >
-            <h1 class="white--text mb-2 display-1 text-center" style="margin-top:30vh;">ROOM STAR</h1>
+            <img src="../../assets/images/rs_logo1.png" style="margin-top:35vh; width:230px; height:auto;" />
+            <!--<h1 class="white--text mb-2 display-1 text-center" style="margin-top:30vh;">ROOM STAR</h1>-->
             <h2 class="subheading mb-1 text-center">        </h2>
 
 
@@ -33,20 +34,13 @@
 
       <section
         id="welcome" style="padding-top:20px;">
-        <v-layout
+        
+        <!--<v-layout
           column
           wrap
           class="my-12"
           align-center
         >
-         <!-- <v-flex xs12 sm4 class="my-4">
-            <div class="text-center">
-              <h1 class="headline">ROOM ★ STAR</h1>
-              <span class="subheading">
-                
-              </span>
-            </div>
-          </v-flex>-->
           <v-flex xs12>
           <h1 style="text-align:center; margin-bottom:50px;"> Menu Select </h1>
             <v-container grid-list-xl>
@@ -61,7 +55,6 @@
                     >
                       <v-card-title style="margin-left:5px;">Sing Battle</v-card-title>
                     
-                    <!--<v-card-subtitle class="pb-0">노래 배틀하기</v-card-subtitle>-->
                       <v-card-text class="white--text" style="height:100px; padding-top:10px; margin-left:10px;">
                         <div>내 노래는 세상을 울릴 노래다ㅏ아!</div>
                         <div>추천을 많이 받은 사람이 승리합니다!</div>
@@ -136,7 +129,7 @@
               
             </v-container>
           </v-flex>
-        </v-layout>
+        </v-layout>-->
       </section>
 <!--
  <section class="hide-overflow">
@@ -279,7 +272,6 @@
           </v-layout>
         </v-container>
       </section>-->
-<!--
       <section id="paral_section" style="padding-top:100px;">
         <v-container grid-list-xl>
         <v-layout column wrap>
@@ -347,11 +339,6 @@
           </v-layout>
         </v-container>
       </section>
--->
-      <section id="introduce">
-        <Introduce />
-      </section>
-
 
     </v-content>
   </v-app>
@@ -382,11 +369,11 @@ Vue.use(Vuetify, {
   }
 })
 import VuetifyVideoParallax from './VuetifyVideoParallax.vue'
-import Introduce from "./Introduce.vue";
 Vue.component('v-video-parallax', VuetifyVideoParallax)
 import VueLoading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css';
 import $ from 'jquery';
+import FlipCard from './FlipCard.vue'
 Vue.use(VueLoading);
 Vue.component('loading', VueLoading)
 export default {
@@ -394,7 +381,7 @@ export default {
   vuetify: new Vuetify(),
   components: {
     // ModalLogin
-    Introduce
+    FlipCard
   },
   data () {
     return {
@@ -453,12 +440,13 @@ section{
   min-height:100vh;
   overflow:hidden;
 }
+/*
 #introduce{
   padding-top:100px;
   min-height:120vh;
   max-height:120vh;
   overflow:visible;
-}
+}*/
 v-content__wrap{
   background-color:black;
 }
@@ -677,7 +665,8 @@ v-content__wrap{
   filter:grayscale(0%);
 }
 #paral{
-   height:150px !important;
+   height:200px !important;
+   width:100vw;
 }
 
 </style>
