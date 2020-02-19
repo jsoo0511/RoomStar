@@ -1,7 +1,7 @@
 var app = require('express')();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-var port = 3001;
+var port = 3030;
 
 let rooms = [null,null,null,null,null];
 
@@ -85,15 +85,15 @@ io.on('connection' , function(socket) {
         player_idx: player_idx
     });
 
-
     //chat
     socket.on('chat', function(data){
-        console.log('message from Client: '+data.message)
+        console.log('message from '+data.userNickname+': '+data.message)
         socket.broadcast.emit('chat', data);
     });
 
     //실시간 투표
     socket.on('VOTE_SELECTED', function (data) {
+        console.log("get vote change")
         socket.emit('VOTE_SELECTED', data)
         //io.emit('GET_VOTE_SELECTED', data)
         console.log('server', data)
@@ -101,18 +101,15 @@ io.on('connection' , function(socket) {
 
 
     //음악 선택
-    socket.on('SEND_MUSIC_SELECTED', function(data) {
-        socket.emit('GET_MUSIC_SELECTED', data)
-        io.emit('GET_MUSIC_SELECTED', data)
-        console.log('server', data)
+    socket.on('MUSIC_SELECTED', function(data) {
+        socket.emit('MUSIC_SELECTED', data);
+        console.log('server', data);
     });
 
 
     //webRTC
     socket.on('message', data =>{
        console.log("message in", data.message.type);
-       
-        
         socket.broadcast.emit('message', data);
     });
 
