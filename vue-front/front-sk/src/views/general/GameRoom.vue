@@ -28,10 +28,12 @@
             ></video>
           </div>
         </v-flex>
+      <button id="outbtn" @click="$router.push('/')">나가기</button>
           <div class="vote2_component">
             <Vote2 :socket="this.socket"/>
           </div>
-      </v-layout>
+      </v-layout>    
+      
       <div class="chat_component">
         <Chat :socket="this.socket"/>
       </div>
@@ -39,9 +41,9 @@
 </template>
 
 <script>
+import router from "@/routes";
 import io from "socket.io-client";
 import axios from "axios";
-import router from "@/routes";
 import Chat from "./Chat.vue";
 import Vote1 from "./Vote1.vue";
 import Vote2 from "./Vote2.vue";
@@ -433,5 +435,39 @@ export default {
   position:fixed;
   margin-left:88vw;
   background-color:rgba(0,0,0,0);
+}
+button {
+  position: fixed;
+  font-family: inherit;
+  font-weight: bold;
+  color: var(--white-1);
+
+  letter-spacing: 2px;
+
+  margin-left: 1vw;
+  margin-top : -39vh;
+  font-size: 1.3rem;
+
+  padding: 9px 20px;
+  border: 1px solid var(--grey);
+  border-radius: 1000px;
+  background: transparent;
+  transition: .3s;
+
+  cursor: pointer;
+}
+#outbtn{
+    background-color:rgba(207,156,1,0.5) !important;
+    color:white;
+}
+button:hover,
+button:focus {
+  color: black;
+  background: hsla(var(--hue), 25%, 10%, .2);
+  border-color: currentColor;
+}
+
+button:active {
+  transform: translate(2px);
 }
 </style>
