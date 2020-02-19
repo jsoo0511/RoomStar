@@ -71,7 +71,7 @@
 
                 <v-card z-index="2">
                   <br />
-                  <Join v-on:update="joinDialog = false"/>
+                  <Join v-on:update="joinDialog = false" id="modalJoin"/>
                 </v-card>
               </v-dialog>
 
@@ -242,6 +242,15 @@ export default {
 
 <style scoped>
 #modalLogin {
+  padding: 30px;
+  max-width: 350px;
+  width: 100% !important;
+  margin: 0 auto;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+#modalJoin {
   padding: 30px;
   max-width: 350px;
   width: 100% !important;
