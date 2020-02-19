@@ -72,7 +72,7 @@ export default {
 
 
       axios
-        .post("http://70.12.247.115:8080/login", params)
+        .post(process.env.VUE_APP_SERVER_IP+"/login", params)
         .then(response => {
           console.log(response)
           let toStore = {

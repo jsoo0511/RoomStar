@@ -222,7 +222,7 @@ data(){
     // 승원 수정
     const userId = this.$session.get("userId");
     axios
-      .get("http://70.12.247.115:8080/mypage/" + userId)
+      .get(process.env.VUE_APP_SERVER_IP+"/mypage/" + userId)
       .then(response => {
         console.log("success2: ", response);
         const id = response.data.user_info.userid;

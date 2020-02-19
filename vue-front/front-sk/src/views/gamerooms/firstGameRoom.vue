@@ -55,8 +55,6 @@ export default {
   },
   methods: {
     backButton() {
-      // http://localhost:8080/Out_room/
-
       // put path variable 보내기
       // 나갈때 user정보 변경 요청
       // 안나가진다!
@@ -74,7 +72,7 @@ export default {
         case 1:
           console.log(userid);
           axios
-            .put("http://70.12.247.115:8080/Out_room/" + userid)
+            .put(process.env.VUE_APP_SERVER_IP+"/Out_room/"+ userid)
             .then(response => {
               console.log(response);
               this.$router.push("/");
@@ -87,7 +85,7 @@ export default {
           console.log(this.$router);
 
           axios
-            .put("http://70.12.247.115:8080/Delete_watching/", params)
+            .put(process.env.VUE_APP_SERVER_IP+"/Delete_watching/", params)
             .then(response => {
               console.log(response);
               this.$router.push("/");
@@ -107,7 +105,7 @@ export default {
     console.log(this.$store.state);
     console.log("---store----", this.singerOrWatcherStatus);
     axios
-      .get("http://70.12.247.115:8080/get_room_by_room_id/" + this.room_id)
+      .get(process.env.VUE_APP_SERVER_IP+"/get_room_by_room_id/" + this.room_id)
       .then(response => {
         console.log(response);
         this.roomInfo = response;
@@ -116,13 +114,6 @@ export default {
         console.error(error);
       });
   }
-
-  // 방정보 받아오는 로직
-
-  // 처음 create 됐을때 방 정보를 가져오고,
-  // 방 정보에서
-  //http://70.12.247.115:8080/get_room_by_room_id/2
-  //get
 };
 </script>
 

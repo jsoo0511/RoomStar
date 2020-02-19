@@ -139,9 +139,9 @@ export default {
 
       // axios.get(URL, 옵션)
       axios
-        .post("http://70.12.247.115:8080/info", options)
+        .post(process.env.VUE_APP_SERVER_IP+"/info", options)
         .then(response => {
-          console.log("http://70.12.247.115:8080/info", options);
+          console.log(process.env.VUE_APP_SERVER_IP+"/info", options);
         })
         .catch(error => {
           console.error(error);
@@ -162,7 +162,7 @@ export default {
       // 근데 값이 자주 바뀔 수도 있으니까 그냥 MOUNTED? CREATED하는게 좋을 것 같음
       const userId = this.$session.get("userId");
       axios
-        .get("http://70.12.247.115:8080/mypage/" + userId)
+        .get(process.env.VUE_APP_SERVER_IP+"/mypage/" + userId)
         .then(response => {
           console.log("success2: ", response);
           const email = response.data.user_info.email;
@@ -187,7 +187,7 @@ export default {
       // 근데 값이 자주 바뀔 수도 있으니까 그냥 MOUNTED? CREATED하는게 좋을 것 같음
       const userId = this.$session.get("userId");
       axios
-        .get("http://70.12.247.115:8080/mypage/" + userId)
+        .get(process.env.VUE_APP_SERVER_IP+"/mypage/" + userId)
         .then(response => {
           console.log("success2: ", response);
           const email = response.data.user_info.email;

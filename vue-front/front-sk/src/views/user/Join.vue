@@ -109,7 +109,6 @@ export default {
       if (this.checkForm()) {
         // true라면,
         // this.loading = true;
-        const SERVER_IP = "http://70.12.247.115:8080/insert/";
         console.log(this.email, this.password, this.nickName);
         //email, nickname, profileimg, pw
         // provider = local
@@ -125,7 +124,7 @@ export default {
         };
 
         axios
-          .post(SERVER_IP, data)
+          .post(process.env.VUE_APP_SERVER_IP+"/insert/", data)
           .then(response => {
             console.log(response);
             this.joinDialog = false

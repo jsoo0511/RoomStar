@@ -188,10 +188,9 @@ export default {
       //  좋아요를 누르지않은사람이라면 false와 현재숫자를
       //  받은거에따라 return true or false 를 해서 보여주고 말고를 해야한다.
 
-      const SERVER_IP = "http://70.12.247.115:8080/count_like_video/";
       // 보내서 확인
       axios
-        .get(SERVER_IP)
+        .get(process.env.VUE_APP_SERVER_IP+"/count_like_video/")
         .then(response => {
           console.log(response);
         })
@@ -200,11 +199,6 @@ export default {
           // this.loading = false;
         });
 
-      // const SERVER_IP = "http://70.12.247.115:8080/get_lyric/{title}";
-
-      // const SERVER_IP = "http://70.12.247.115:8080/insert_burst";
-      // const SERVER_IP = "http://70.12.247.115:8080/play_burst";
-      // const SERVER_IP = "http://70.12.247.115:8080/update_like_video";
     },
     uploadContent(data) {
       // if imageDownloadUrl === null  => profile default image 전달
@@ -226,11 +220,9 @@ export default {
         like: 0
       };
       console.log(data);
-
-      const SERVER_IP = "http://70.12.247.115:8080/count_like_video/";
       // 보내서 확인
       axios
-        .get(SERVER_IP)
+        .get(process.env.VUE_APP_SERVER_IP+"/count_like_video/")
         .then(response => {
           console.log(response);
         })

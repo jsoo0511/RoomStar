@@ -164,9 +164,8 @@ export default {
           pw,
           userid
         };
-        const SERVER_IP = "http://192.168.0.9:8080/login/";
         axios
-          .post(SERVER_IP, data)
+          .post(process.env.VUE_APP_SERVER_IP+"/login/", data)
           .then(response => {
             userNickname1 = response.data.nickName;
             token = response.data.token;
