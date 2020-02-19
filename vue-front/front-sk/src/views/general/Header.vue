@@ -86,7 +86,7 @@ export default {
       drawer: false,
       items: [
         { title: "홈으로 가기", icon: "mdi-home-variant", links: "/" },
-        { title: "마이페이지", icon: "mdi-panda", links: "/mypage/" },
+        { title: "마이페이지", icon: "mdi-panda", links: "/mypage2/" },
         { title: "노래 배틀하기", icon: "mdi-microphone", links: "/gameRoom/" },
         { title: "배틀 시청하기", icon: "mdi-comment-alert-outline", links: "/waitingRoom/" },
         { title: "노래 자랑하기", icon: "mdi-view-dashboard", links: "/SharingPage/" },

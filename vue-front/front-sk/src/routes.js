@@ -25,6 +25,7 @@ import Downloader from './views/Downloader.vue'
 // test(bumi)
 import tempFeed from './views/general/tempFeed.vue'
 import MixFeed from './views/general/MixFeed.vue'
+import MyPage2 from "./views/general/MyPage2.vue";
 
 Vue.use(VueRouter)
 
@@ -119,5 +120,10 @@ export default [
     path:"/test2",
     name:"test2",
     component : MixFeed
+  },
+  {
+    path:"/myPage2",
+    name:"myPage2",
+    component : MyPage2
   },
 ];

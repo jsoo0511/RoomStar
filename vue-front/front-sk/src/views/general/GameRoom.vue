@@ -66,7 +66,7 @@ export default {
       //video, stream
       player_videos:[null,null],
       player_streams:[null,null],
-      player_idx:0,
+      player_idx:1,
 
 
       //대결하는 사람들의 정보
