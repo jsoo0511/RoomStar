@@ -96,29 +96,29 @@ export default {
   methods: {
     getData(){
      // 스토어 연결...?
-      // let store = this.$store;
-      // this.user_id = this.$session.get("userId");
-      // this.room_id = this.$session.get("roomId");
-      // console.log(this.$session.get("singerOrWatcherStatus"))
+      let store = this.$store;
+      this.user_id = this.$session.get("userId");
+      this.room_id = this.$session.get("roomId");
+      console.log(this.$session.get("singerOrWatcherStatus"))
 
 
-      // if (this.$session.get("singerOrWatcherStatus")==1){
-      //   this.user_identification = "singer";
-      // }else{
-      //   this.user_identification = "watcher";
-      // }
+      if (this.$session.get("singerOrWatcherStatus")==1){
+        this.user_identification = "singer";
+      }else{
+        this.user_identification = "watcher";
+      }
 
-      // if (this.user_identification === "singer"){
-      //     if (this.battle_id[0]){
-      //       this.player_idx = 1;
-      //     }else{
-      //       this.player_idx =0;
-      //     }
-      // }
+      if (this.user_identification === "singer"){
+          if (this.battle_id[0]){
+            this.player_idx = 1;
+          }else{
+            this.player_idx =0;
+          }
+      }
       
-      this.room_id = 1;
-      this.user_id = "hajung";
-      this.user_identification = "watcher";
+      // this.room_id = 1;
+      // this.user_id = "hajung";
+      // this.user_identification = "watcher";
     },
 
     sendMessage(message) {
@@ -193,7 +193,7 @@ export default {
     this.getData();
        console.log("created()---->1",this.battle_id);
     this.socket = io.connect(
-      "http://192.168.0.102:3001?room_id=" +
+        process.env.VUE_APP_SOCKET_IP+"?room_id=" +
         this.room_id +
         "&user_id=" +
         this.user_id +
@@ -385,7 +385,7 @@ export default {
           if (this.user_identification=="singer"){
             if (data.from_identification=="singer"){
               t_pc = this.battle_connections[(this.player_idx+1)%2]; 
-              console.log("여기가가가가가가가가가 t_pc",t_pc)
+              
               t_pc.addIceCandidate(candidate);
             }else{
               t_pc = this.watchers_connections[this.watcher_cnt-1];
