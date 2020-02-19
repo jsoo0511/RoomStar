@@ -86,6 +86,10 @@ export default {
       user_id: "",
       user_identification: "",
 
+      vote1:0,
+      vote2:0,
+      result:""
+
     };
   },
   components:{
@@ -94,12 +98,75 @@ export default {
     Vote2
   },
   methods: {
+    finish(){
+      axios
+      .get(process.env.VUE_APP_SERVER_IP+"/get_vote/" + this.room_id)
+      .then(response => {
+        //this.$router.push("/");
+        console.log("finish : ", response);
+        this.vote1 = response.data.data.vote1;
+        this.vote2 = response.data.data.vote2;
+      })
+      .catch(e => {
+        console.log("error: ", e);
+      });
+
+      if(this.vote1>this.vote2){
+        if (this.user_id==this.battle_id[0]){
+          this.result = "win";
+
+        }else if (this.user_id==this.battle_id[1]){
+          this.result = "lose;"
+        }
+        //여기에 화면 변화/??????
+
+      }else{
+        if (this.user_id==this.battle_id[0]){
+          this.result = "lose";
+
+        }else if (this.user_id==this.battle_id[1]){
+          this.result = "win;"
+        }
+
+      }
+
+
+      if (this.user_identification=="singer"){
+          axios
+          .put(process.env.VUE_APP_SERVER_IP+"/승패 결과 저장 함수/", {user_id: this.user_id, result:this.result})
+          .then(response => {
+            //this.$router.push("/");
+          })
+          .catch(error => {
+            console.log(error);
+            // this.loading = false;
+          });
+        }
+    },
+    leave(){
+      axios
+        .put(process.env.VUE_APP_SERVER_IP+"/Out_room/"+ this.user_id)
+        .then(response => {
+          console.log(response);
+          this.$router.push("/");
+        })
+        .catch(e => {
+          console.log("error: ", e);
+        });
+      this.socket.emit("leave", {
+        room_id:this.room_id,
+        user_identification:this.user_identification,
+        user_id:this.user_id,
+        player_idx:this.player_idx
+      });
+    },
     getData(){
      // 스토어 연결...?
       let store = this.$store;
       this.user_id = this.$session.get("userId");
       this.room_id = this.$session.get("roomId");
       console.log(this.$session.get("singerOrWatcherStatus"))
+
 
 
       if (this.$session.get("singerOrWatcherStatus")==1){
@@ -139,8 +206,8 @@ export default {
         let bat_id = 0;
 
 
-      if (this.user_identification=="singer"){
-        if (join_identification=="singer"){
+      if (this.user_identification==="singer"){
+        if (join_identification==="singer"){
           bat_id = (this.player_idx+1)%2;
           this.battle_connections[bat_id] = t_pc;
           this.battle_id[bat_id] = join_id;
@@ -182,7 +249,7 @@ export default {
         
       }
 
-     if (this.user_identification=="singer"){
+     if (this.user_identification==="singer"){
 
         t_pc.addStream(this.player_streams[this.player_idx]);
       }
@@ -221,7 +288,7 @@ export default {
     this.player_videos[1] = document.getElementById("p2_video");
     
     //player1일때,
-    if (this.user_identification == "singer") {
+    if (this.user_identification === "singer") {
       console.log("가수");
       navigator.mediaDevices
         .getUserMedia({
@@ -265,7 +332,7 @@ export default {
           });
         }, 1000);
       } else {
-        if (join_identification == "singer") {
+        if (join_identification === "singer") {
           setTimeout(() => {
             this.getPeerConnection(join_id,join_identification,join_idx).then(t_pc => {
               t_pc.createOffer(
@@ -293,27 +360,27 @@ export default {
     });
 
     this.socket.on("leave", message => {
-      if (message.user_identification=="singer"){
+      if (message.user_identification==="singer"){
         this.player_videos[message.player_idx] = null;
         this.player_streams[message.player_idx] = null;
         this.battle_id[message.player_idx] = null;
         this.battle_connections[message.player_idx] = null;
       }
       else{
-        if (this.user_identification=="singer"){
+        if (this.user_identification==="singer"){
           this.watchers_id[--this.watcher_cnt] = null;
           this.watchers_connections[this.watcher_cnt] = null;
         }
       }
     });
     this.socket.on("message", data => {
-      if (data.message.type == "offer") {
+      if (data.message.type === "offer") {
           //내가 새로 들어왔을 때, join 메세지를 보내면,
           //기존의 사용자들이 나의 join을 받고 
           //자신의 정보를 담은 offer를 보낸다.
-        if (this.user_identification=="singer"){
+        if (this.user_identification==="singer"){
             //내가 가수이고
-          if (data.from_identification=="singer"){
+          if (data.from_identification==="singer"){
               //상대도 가수
               console.log("오퍼를 받앗습니다.답장을 해요",data);
               this.battle_id[(this.player_idx+1)%2] = data.from;
@@ -376,7 +443,9 @@ export default {
             
           }
         }
-        t_pc.setRemoteDescription(new RTCSessionDescription(data.message));
+        if (this.user_identification==="singer"){
+          t_pc.setRemoteDescription(new RTCSessionDescription(data.message));
+        }
       } else if (data.message.type === "candidate") {
         let candidate = new RTCIceCandidate({
           sdpMLineIndex: data.message.label,
