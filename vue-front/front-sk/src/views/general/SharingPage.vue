@@ -66,23 +66,28 @@
 
     <div class="wrapper">
       <div v-for="(item, i) in info[0]" :key="i">
-        <!-- {{info}} -->
+        <!-- {{item}}
+        {{item.id}}-->
+        {{ i}}-----------------------{{ itemDialog[i]}}
         <v-flex xs12 sm6 md3 style="float:left">
           <div class="item">
-            <v-dialog v-model="itemDialog" max-width="350">
+            <v-dialog v-model="itemDialog[i]" max-width="350" max-height="350">
+              <!--  -->
               <template v-slot:activator="{ on }">
                 <!-- 이걸 클릭할때 해당것에 필요한 정보를 가져오게 한다. -->
                 <!-- methods 필요 -->
 
-                <div class="polaroid" v-on="on" @click="checkLike(userId, item.videoURL)">
+                <div @click="checkLike(userId, item.id)" class="polaroid" v-on="on">
                   <img :src="item.imgURL" />
                   <br />
                   <!-- title을 각 제목으로 수정 -->
                   <span class="caption" v-text="item.title"></span>
                 </div>
               </template>
+              <!-- item하나 선택하고 -> 그 아이템에 관한 id값으로 axios로 데이터 받고
+              그 데이터 받은걸 v-card에 갱신-->
+
               <v-card id="modal">
-                {{item}}
                 <div>
                   <p>{{item.title}}</p>
                   <!-- 비디오 src 추가 -->
@@ -97,21 +102,22 @@
                   <!-- true면 -->
                   <v-icon
                     color="pink"
-                    @click="like(item.videoURL) & item.like_num - 1"
+                    @click="like(item.id) & item.like_num - 1"
                     v-if="checkLikeStatus === 'false'"
                   >mdi-thumb-up</v-icon>
                   <!-- false면 -->
                   <v-icon
                     color="gray"
-                    @click="like(item.videoURL) & item.like_num + 1"
+                    @click="like(item.id) & item.like_num + 1"
                     v-else-if="checkLikeStatus === 'true'"
                   >mdi-thumb-up</v-icon>
                   <br />
-                  <!-- axios 좋아요 연결 -->
-                  <!-- 이미 사용자가 좋아요를 한 번 누른 영상이라면 더이상 누룰 수 없게 조절해야한다. -->
-                  <!-- <v-btn @click="like">동영상 좋아요</v-btn> -->
+                  <v-btn @click="dClose(i)">나가기</v-btn>
 
-                  <v-btn @click="itemDialog = false">나가기</v-btn>
+                  <br />
+                  {{userId}}
+                  {{ item.userid}}
+                  <v-btn v-if="userId == item.userid" @click="deleteItem(item.id)">삭제</v-btn>
                   <br />
                 </div>
               </v-card>
@@ -197,7 +203,7 @@ export default {
       info: [],
       progressUpload: 0,
       file: File,
-      itemDialog: false,
+      itemDialog: [],
       checkLikeStatus: "false",
       uploadTaskVideo: "",
       uploadTaskImage: "",
@@ -213,6 +219,16 @@ export default {
   },
 
   methods: {
+    dClose(idx) {
+      console.log("idx = ", idx);
+      console.log(this.itemDialog[idx]);
+      console.log(this);
+      // this.itemDialog[idx] = false;
+      // 값도 바뀌고 인지도 하도록 해야함
+      // https://kr.vuejs.org/v2/guide/reactivity.html
+      this.$set(this.itemDialog,idx,false)
+      console.log(this.itemDialog[idx]);
+    },
     detectFilesVideo(fileList) {
       Array.from(Array(fileList.length).keys()).map(x => {
         this.uploadVideo(fileList[x]);
@@ -243,16 +259,17 @@ export default {
       // 보내서 확인
       let params = {
         userid: this.userId,
-        videoURL: data
+        id: data
       };
-      // console.log(params);
+      console.log(params);
       // userid videoURL
 
       axios
-        .put(process.env.VUE_APP_SERVER_IP+ "/update_like_video", params)
+        .put(process.env.VUE_APP_SERVER_IP + "/update_like_video", params)
         .then(response => {
           console.log(
             "response for update_like_video",
+            response,
             response.data.data,
             response.data,
             response.data.num
@@ -268,18 +285,40 @@ export default {
           // this.loading = false;
         });
     },
-    checkLike(userid, videoURL) {
+    checkLike(userid, id) {
       // checkLikeStatus
-      console.log("data", userid, videoURL);
+      console.log("data", userid, id);
       let params = {
         userid,
-        videoURL
+        id
       };
+      console.log(params);
       axios
-        .post(process.env.VUE_APP_SERVER_IP+ "/check", params)
+        .post(process.env.VUE_APP_SERVER_IP + "/check", params)
         .then(response => {
           this.checkLikeStatus = response.data.data;
           console.log(this.checkLikeStatus);
+        })
+        .catch(error => {
+          console.log(error);
+          // this.loading = false;
+        });
+      // 데이터도 새로 그리기
+      axios
+        .get(process.env.VUE_APP_SERVER_IP + "/get_burst/" + id)
+        .then(response => {
+          return response.data.data;
+        })
+        .catch(error => {
+          console.log(error);
+          // this.loading = false;
+        });
+    },
+    deleteItem(id) {
+      axios
+        .delete(process.env.VUE_APP_SERVER_IP + "/delete_burst/" + id)
+        .then(response => {
+          console.log("response for delete_burst", response);
         })
         .catch(error => {
           console.log(error);
@@ -316,7 +355,7 @@ export default {
       // 보내서 확인
       console.log("sdds");
       axios
-        .post(process.env.VUE_APP_SERVER_IP+ "/insert_burst", params)
+        .post(process.env.VUE_APP_SERVER_IP + "/insert_burst", params)
         .then(response => {
           console.log("response for insert_burst", response);
           // 등록이 되면 바로 동적으로 씌워져야하는데, update를 하게 해야한다.
@@ -333,6 +372,7 @@ export default {
 
   watch: {
     uploadTaskVideo: function() {
+      console.log("-----------------");
       this.uploadTaskVideo.on(
         "state_changed",
         sp => {
@@ -386,14 +426,21 @@ export default {
 
     // 다른 api로 변경될 것
     axios
-      .get(process.env.VUE_APP_SERVER_IP+ "/get_burst")
+      .get(process.env.VUE_APP_SERVER_IP + "/get_burst")
       .then(response => {
         console.log("get_burst", response);
+        console.log("--------------------", response);
         // db 정보를 나열하기
-        console.log(response.data.data);
-
+        console.log(response.data.data.length);
+        for (let i = 0; i < response.data.data.length; i++) {
+          this.itemDialog.push(false);
+          console.log(this.itemDialog[i]);
+          console.log("=================");
+        }
+        console.log(this.itemDialog);
+        // this.itemDialog
         this.info.push(response.data.data);
-        console.log("clean", this.info);
+        console.log("clean", this.info[0]);
 
         //
         // if (music.title[music.title.length - 1] == "g") {
