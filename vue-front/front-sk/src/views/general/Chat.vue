@@ -86,7 +86,7 @@ export default {
 }
 .chat_text{
   height:35vh; 
-  width:100vw;
+  width:100%;
   border: 1px; 
   border-color:red; 
   border-style: none;

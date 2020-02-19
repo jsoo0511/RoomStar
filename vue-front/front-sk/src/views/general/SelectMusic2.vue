@@ -421,8 +421,4 @@ dt.open + dd{
   margin-bottom:1vh;
   margin-left:12vw;
 }
-#btnSelect{
-  height:auto;
-  width:auto;
-}
 </style>
