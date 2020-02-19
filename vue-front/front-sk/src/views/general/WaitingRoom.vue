@@ -1,6 +1,6 @@
 <template>
   <div id="waitingRooms">
-    <v-btn @click="singingButton()">노래하기</v-btn>
+    <!-- <v-btn @click="singingButton()">노래하기</v-btn> -->
     <swiper :options="swiperOption">
       <!-- swipter-slide 부분을 v-for로 처리해야 할 것 같은데, -->
       <swiper-slide
@@ -107,10 +107,10 @@ export default {
       console.log(userid);
       this.$store.dispatch("changeToSinger", 1);
       this.$session.set("singerOrWatcherStatus", 1);
-      
+      // this.$store.dispatch("changeToSinger", 1);
 
       axios
-        .put(process.env.VUE_APP_SERVER_IP+"/Enter_room/" + userid)
+        .put(process.env.VUE_APP_SERVER_IP + "/Enter_room/" + userid)
         .then(response => {
           this.$session.set("roomid", response.data.room_id);
           this.$router.push("/GameRoom");
@@ -133,25 +133,14 @@ export default {
       };
       this.$store.dispatch("changeToWatcher", 2);
       this.$session.set("singerOrWatcherStatus", 2);
+
       axios
-        .post(process.env.VUE_APP_SERVER_IP+"/Insert_watching", data)
+        .post(process.env.VUE_APP_SERVER_IP + "/Insert_watching", data)
         .then(response => {
           console.log(response);
           // 해당 room으로 이동
-          switch (room_id) {
-            case 1:
-              this.$router.push("/firstGameRoom"); // firstGameRoom
-              break;
-            case 2:
-              this.$router.push("/secondGameRoom");
-              break;
-            case 3:
-              this.$router.push("/thirdGameRoom.vue");
-              break;
-            case 4:
-              this.$router.push("/fourthGameRoom.vue");
-              break;
-          }
+          this.$session.set("roomid", response.data.room_id);
+          this.$router.push("/GameRoom");
         })
         .catch(e => {
           console.log("error: ", e);
@@ -164,7 +153,7 @@ export default {
     const userid = this.$session.get("userId");
     console.log(userid);
     axios
-      .post(process.env.VUE_APP_SERVER_IP+"/Insert_waiting/" + userid)
+      .post(process.env.VUE_APP_SERVER_IP + "/Insert_waiting/" + userid)
       .then(response => {
         for (let i = 0; i < 4; i++) {
           this.allRoomInfo.push(response.data.roomViewInfo[i]);
