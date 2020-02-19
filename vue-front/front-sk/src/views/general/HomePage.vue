@@ -10,7 +10,7 @@
             justify-center
             class="white--text"
           >
-            <img src="../../assets/images/rs_logo1.png" style="margin-top:35vh; width:230px; height:auto;" />
+            <img src="../../assets/images/roomstar.png" style="margin-top:35vh; width:230px; height:auto;" />
             <!--<h1 class="white--text mb-2 display-1 text-center" style="margin-top:30vh;">ROOM STAR</h1>-->
             <h2 class="subheading mb-1 text-center">        </h2>
 
@@ -32,11 +32,8 @@
      
 
       <section
-        id="welcome" style="">
-        <div class="loading_wrap">
-          <h3 data-back="Select Menu" class="h2_loading">Select Menu</h3>
-       </div>
-        <FlipCard />
+        id="welcome">
+        <FlipCard3 />
       </section>
         <!--<v-layout
           column
@@ -376,6 +373,8 @@ import VueLoading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css';
 import $ from 'jquery';
 import FlipCard from './FlipCard.vue'
+import FlipCard2 from './FlipCard2.vue'
+import FlipCard3 from './FlipCard3.vue'
 Vue.use(VueLoading);
 Vue.component('loading', VueLoading)
 export default {
@@ -383,7 +382,9 @@ export default {
   vuetify: new Vuetify(),
   components: {
     // ModalLogin
-    FlipCard
+    FlipCard,
+    FlipCard2,
+    FlipCard3,
   },
   data () {
     return {

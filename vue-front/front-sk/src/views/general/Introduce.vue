@@ -226,10 +226,9 @@ export default {
 }
 
 #HomePage {
-  width: 100vw;
   height: 100vh;
+  width: 100vw;
 
-  margin: 0;
 }
 
 main {
@@ -498,8 +497,8 @@ main {
 
     .portrait {
       position: absolute;
-      top: -50%;
-      left: 47%;
+      top: -40%;
+      left: 40%;
       width: 10%;
       height: 100%;
 

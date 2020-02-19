@@ -7,7 +7,7 @@
     <div class="card-front">
       <figure>
         <div class="img-bg"></div>
-        <img src="../../assets/images/singBattle.png" alt="Brohm Lake">
+        <img src="../../assets/images/singBattle.png" style="height:100%; width:auto;" alt="Brohm Lake">
       </figure>
 
       <figcaption style="font-size:0.9rem; margin-top:">경연하기</figcaption>
@@ -42,7 +42,7 @@
     <div class="card-front">
       <figure>
         <div class="img-bg"></div>
-        <img src="../../assets/images/singBattle.png" alt="Brohm Lake">
+        <img src="../../assets/images/showOff.png" alt="Brohm Lake">
       </figure>
 
       <figcaption style="font-size:0.9rem; margin-top:">경연하기</figcaption>
@@ -51,7 +51,7 @@
     <div class="card-back">
       <figure>
         <div class="img-bg"></div>
-        <img src="../../assets/images/singBattle.png" alt="Brohm Lake">
+        <img src="../../assets/images/showOff.png" alt="Brohm Lake">
       </figure>
 
       <button>경연하기</button>

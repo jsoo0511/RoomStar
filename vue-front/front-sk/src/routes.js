@@ -13,6 +13,7 @@ import firstGameRoom from "./views/gamerooms/firstGameRoom.vue"
 import secondGameRoom from "./views/gamerooms/secondGameRoom.vue"
 import thirdGameRoom from "./views/gamerooms/thirdGameRoom.vue"
 import fourthGameRoom from "./views/gamerooms/fourthGameRoom.vue"
+import MusicSelect from "./views/general/MusicSelect2.vue"
 
 import Components from './views/Components.vue'
 import Vue from 'vue'
@@ -63,6 +64,11 @@ export default [
     path:"/gameRoom",
     name:"gameRoom",
     component : GameRoom
+  },
+  {
+    path:"/MusicSelect",
+    name:"MusicSelect",
+    component : MusicSelect
   },
   {
     path:"/firstGameRoom",
