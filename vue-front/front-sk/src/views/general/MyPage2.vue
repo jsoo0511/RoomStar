@@ -87,11 +87,11 @@
   </h1>
   <ol>
     <li>
-      <mark>원범희</mark>
+      <mark>정하정</mark>
       <small>315</small>
     </li>
     <li>
-      <mark>이정수</mark>
+      <mark>원범희</mark>
       <small>301</small>
     </li>
     <li>
@@ -103,7 +103,7 @@
       <small>245</small>
     </li>
     <li>
-      <mark>정하정</mark>
+      <mark>이정수</mark>
       <small>203</small>
     </li>
   </ol>
