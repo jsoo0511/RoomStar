@@ -14,7 +14,7 @@
           </div>
         </v-flex>
           <div class="vote1_component">
-            <Vote :socket="this.socket"/>
+            <Vote1 :socket="this.socket"/>
           </div>
         <v-flex xs6 md6>
           <div id="secondWebCam">
@@ -29,7 +29,7 @@
           </div>
         </v-flex>
           <div class="vote2_component">
-            <Vote :socket="this.socket"/>
+            <Vote2 :socket="this.socket"/>
           </div>
       </v-layout>
       <div class="chat_component">
@@ -43,7 +43,8 @@ import io from "socket.io-client";
 import axios from "axios";
 import router from "@/routes";
 import Chat from "./Chat.vue";
-import Vote from "./Vote.vue";
+import Vote1 from "./Vote1.vue";
+import Vote2 from "./Vote2.vue";
 
 import { mapState, mapGetters, mapActions } from "vuex";
 
@@ -89,34 +90,35 @@ export default {
   },
   components:{
     Chat,
-    Vote,
+    Vote1,
+    Vote2
   },
   methods: {
     getData(){
      // 스토어 연결...?
-      let store = this.$store;
-      this.user_id = this.$session.get("userId");
-      this.room_id = this.$session.get("roomId");
-      console.log(this.$session.get("singerOrWatcherStatus"))
+      // let store = this.$store;
+      // this.user_id = this.$session.get("userId");
+      // this.room_id = this.$session.get("roomId");
+      // console.log(this.$session.get("singerOrWatcherStatus"))
 
 
-      if (this.$session.get("singerOrWatcherStatus")==1){
-        this.user_identification = "singer";
-      }else{
-        this.user_identification = "watcher";
-      }
+      // if (this.$session.get("singerOrWatcherStatus")==1){
+      //   this.user_identification = "singer";
+      // }else{
+      //   this.user_identification = "watcher";
+      // }
 
-      if (this.user_identification === "singer"){
-          if (this.battle_id[0]){
-            this.player_idx = 1;
-          }else{
-            this.player_idx =0;
-          }
-      }
+      // if (this.user_identification === "singer"){
+      //     if (this.battle_id[0]){
+      //       this.player_idx = 1;
+      //     }else{
+      //       this.player_idx =0;
+      //     }
+      // }
       
-      // this.room_id = 1;
-      // this.user_id = "hajung";
-      // this.user_identification = "watcher";
+      this.room_id = 1;
+      this.user_id = "hajung";
+      this.user_identification = "watcher";
     },
 
     sendMessage(message) {
@@ -191,7 +193,7 @@ export default {
     this.getData();
        console.log("created()---->1",this.battle_id);
     this.socket = io.connect(
-      "http://70.12.246.73:3001?room_id=" +
+      "http://192.168.0.102:3001?room_id=" +
         this.room_id +
         "&user_id=" +
         this.user_id +
@@ -217,12 +219,12 @@ export default {
     this.player_videos[0] = document.getElementById("p1_video");
     this.player_videos[1] = document.getElementById("p2_video");
     
-    console.log("가수??????");
     //player1일때,
     if (this.user_identification == "singer") {
       console.log("가수");
       navigator.mediaDevices
         .getUserMedia({
+          
           audio: true,
           video: true
         })
