@@ -2,9 +2,11 @@
 <div id="mypage2">
 <div class="max" style="height:100vh;" >
    <h1 class="mypage_text">My Page</h1>
-   <v-list-item-avatar style="margin-top:1px;">
+   <v-list-item-avatar style="margin-top:-20px;"> 
             <img src="../../assets/images/rs_logo2.png" />
+           
           </v-list-item-avatar>
+           이거 위치 옮기기
 
 <div class="options" >
    <div class="option active" id="profile_once" :style="{'--optionBackground':'url('+profile+')'}">

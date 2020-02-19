@@ -86,7 +86,7 @@ export default {
       drawer: false,
       items: [
         { title: "홈으로 가기", icon: "mdi-home-variant", links: "/" },
-        { title: "마이페이지", icon: "mdi-panda", links: "/mypage/" },
+        { title: "마이페이지", icon: "mdi-panda", links: "/mypage2/" },
         { title: "노래 배틀하기", icon: "mdi-microphone", links: "/gameRoom/" },
         { title: "배틀 시청하기", icon: "mdi-comment-alert-outline", links: "/waitingRoom/" },
         { title: "노래 자랑하기", icon: "mdi-view-dashboard", links: "/SharingPage/" },
@@ -162,7 +162,7 @@ export default {
       // 근데 값이 자주 바뀔 수도 있으니까 그냥 MOUNTED? CREATED하는게 좋을 것 같음
       const userId = this.$session.get("userId");
       axios
-        .get(process.env.VUE_APP_SERVER_IP+"/mypage/" + userId)
+        .get(process.env.VUE_APP_SERVER_IP+"/mypage2/" + userId)
         .then(response => {
           console.log("success2: ", response);
           const email = response.data.user_info.email;
@@ -187,7 +187,7 @@ export default {
       // 근데 값이 자주 바뀔 수도 있으니까 그냥 MOUNTED? CREATED하는게 좋을 것 같음
       const userId = this.$session.get("userId");
       axios
-        .get(process.env.VUE_APP_SERVER_IP+"/mypage/" + userId)
+        .get(process.env.VUE_APP_SERVER_IP+"/mypage2/" + userId)
         .then(response => {
           console.log("success2: ", response);
           const email = response.data.user_info.email;
