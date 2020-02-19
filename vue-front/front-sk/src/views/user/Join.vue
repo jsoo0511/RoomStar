@@ -15,9 +15,9 @@
           placeholder="이메일을 입력하세요."
           type="text"
         />
-        <label for="email">이메일</label>
+        <label for="email">이메일이다</label>
         <div class="error-text" v-if="error.email">{{error.email}}</div>
-      </div>
+      </div> 
 
       <div>
         <input
