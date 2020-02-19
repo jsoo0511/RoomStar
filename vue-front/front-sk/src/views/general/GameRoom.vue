@@ -66,7 +66,7 @@ export default {
       //video, stream
       player_videos:[null,null],
       player_streams:[null,null],
-      player_idx:0,
+      player_idx:1,
 
 
       //대결하는 사람들의 정보
@@ -116,7 +116,7 @@ export default {
       //     }
       // }
       
-      this.room_id = 1;
+      this.room_id = 4;
       this.user_id = "hajung";
       this.user_identification = "singer";
     },
