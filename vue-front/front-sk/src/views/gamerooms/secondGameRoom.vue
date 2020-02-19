@@ -4,7 +4,7 @@
     <br />
     <br />
 
-    <v-dialog v-model="dialog" id="dialog" max-width="500">
+    <v-dialog v-model="dialog" id="dialog" max-width="30vw">
       <template v-slot:activator="{ on }">
         <v-btn dark v-on="on">노래고르는버튼</v-btn>
       </template>
@@ -22,39 +22,10 @@
             </ul>
           </v-radio-group>
         <div> 
-          <div class="wrapper">
-            <div class="cols" v-for="(music, i) in musicTitle" :key="i">
-
-              <div v-for="(image, ii) in imageUrl" :key="ii">
-                <!-- v-if="image.title.substring(0,image.title.length-4)===music.title.substring(0,music.title.length-4)" -->
-
-                <div
-                  class="col"
-                  v-if="music.title != '창모- meteor.mp3'&music.title[music.title.length-1]==='3'&image.title.substring(0,image.title.length-4)===music.title.substring(0,music.title.length-4)"
-                  ontouchstart="this.classList.toggle('hover');"
-                >
-                  <div class="container">
-                    <div class="front" :style="{ 'background-image': 'url(' + image.url + ')' }">
-                      <div class="inner">
-                        <p>{{ music.title }}</p>
-                      </div>
-                    </div>
-
-                    <div class="back">
-                      <div class="inner">
-                        <p>{{ music.title }}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- -->
-              </div>
-            </div>
-          </div>
-          </div>
+      </div>
           <!-- 선택하면 선택한 것만 music.url을 보내기 -->
           <!-- <v-btn type="submit" @click="trigger(musicSelectedOne)">선택완료1</v-btn> -->
-          <v-btn type="submit" @click="dialog = false & trigger(musicSelectedOne.url)">선택완료</v-btn>
+          <v-btn class="btnCenter" type="submit" color="primary" @click="dialog = false & trigger(musicSelectedOne.url)">선택완료</v-btn>
         </div>
       </v-card>
     </v-dialog>
@@ -80,6 +51,7 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/storage";
 import axios from "axios";
+import $ from "jquery";
 
 // socket
 import io from "socket.io-client";
@@ -104,6 +76,8 @@ export default {
       this.musicSelectedOne = data["data"];
       console.log(data);
     });
+    console.log("bb"+this);
+
   },
   created() {
     this.socket = io.connect("http://localhost:8080", {
@@ -146,6 +120,13 @@ export default {
 
       // musicSelectedOne.title 로 검색해서 lyrics
       // axios 로 받아서 lyrics 보여주기
+    },
+    openClick : function(event){
+        console.log("dd"+event);
+        $(event.currentTarget).toggleClass("open");
+        console.log("aa"+event.currentTarget);
+        if($(event.currentTarget).hasClass("open"))
+          $("dt").not(event.currentTarget).removeClass("open");      
     }
   }
 };
@@ -171,7 +152,9 @@ h1 {
   text-align: center;
   margin: 2rem 0;
 }
-
+ul{
+  padding:0px !important;
+}
 .wrapper {
   width: 90%;
   margin: 0 auto;
@@ -204,8 +187,8 @@ h1 {
   perspective: 4000px;
 }
 
-.front,
-.back {
+.front
+ {
   background-size: cover;
   background-position: center;
   -webkit-transition: -webkit-transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
@@ -223,14 +206,14 @@ h1 {
   color: #fff;
   font-size: 1.5rem;
 }
-
+/*
 .back {
   background: #cedce7;
   background: -webkit-linear-gradient(45deg, #cedce7 0%, #596a72 100%);
   background: -o-linear-gradient(45deg, #cedce7 0%, #596a72 100%);
   background: linear-gradient(45deg, #cedce7 0%, #596a72 100%);
 }
-
+*/
 .front:after {
   position: absolute;
   top: 0;
@@ -246,8 +229,7 @@ h1 {
   backface-visibility: hidden;
   border-radius: 10px;
 }
-.container:hover .front,
-.container:hover .back {
+.container:hover .front{
   -webkit-transition: -webkit-transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
   transition: -webkit-transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
   -o-transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
@@ -255,14 +237,14 @@ h1 {
   transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1),
     -webkit-transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
-
+/*
 .back {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
 }
-
+*/
 .inner {
   -webkit-transform: translateY(-50%) translateZ(60px) scale(0.94);
   transform: translateY(-50%) translateZ(60px) scale(0.94);
@@ -349,5 +331,96 @@ h1 {
     width: 100%;
     margin: 0 0 2rem 0;
   }
+}
+
+
+
+h1{
+  margin-bottom:5px;
+}
+.subheading{
+  font-size:.9em;
+  margin-top:0;
+  text-transform:uppercase;
+}
+
+dl{
+  margin:30px auto 60px;
+  max-width:300px;
+}
+
+dt{
+  background:rgba(0,0,0,0);
+  border-left:8px solid #1F2024;
+  color:#111;
+  font-weight:600;
+  padding:15px;
+  position:relative;
+  text-align:left;
+  text-transform:uppercase;
+  transition: all .5s;
+}
+
+dt:after,dt:before{
+  content:"\f078";
+  font-family:fontAwesome;
+  position:absolute;
+  right:15px;
+  height:28px;
+  top:0;
+  bottom:0;
+  margin:auto;
+  
+  transition:all .7s ease-in-out;
+}
+
+dt:before{
+  opacity:0;
+  transition:all .4s ease-in-out;
+}
+
+dt:hover{
+  cursor:pointer;
+}
+
+dt + dd{
+  max-height:0;
+}
+
+dd{
+  background:#1C1C1C;
+  color:#edeff3;
+  margin:0;
+  overflow:hidden;
+  padding:1px 15px;
+  
+  transition: all .5s;
+}
+
+dt.open{
+  background:#0E0C0D;
+  border-color:#0E0C0D;
+  color:#edeff3;
+  margin:-5px;
+}
+
+dt.open:after{
+  transform:rotate(180deg) translateY(-2px);
+}
+dt.open:before{
+  opacity:1;
+  transform:rotate(-360deg) translateY(-3px);
+}
+
+dt.open + dd{
+  padding:15px 15px 30px;
+  margin:0 -5px;
+  max-height:200px;
+}
+
+.btnCenter{
+  margin-top:1vh;
+  margin-bottom:1vh;
+  margin-left:12vw;
 }
 </style>
