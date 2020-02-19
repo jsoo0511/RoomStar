@@ -3,7 +3,6 @@ import Password from "./views/user/Password.vue";
 import webCam from './webcam/webCam.vue'
 import HomePage from "./views/general/HomePage.vue";
 import Introduce from "./views/general/Introduce.vue";
-import FlipCard from "./views/general/FlipCard.vue";
 import MyPage from "./views/general/MyPage.vue";
 import WaitingRoom from "./views/general/WaitingRoom.vue";
 import SharingPage from "./views/general/SharingPage.vue";
@@ -25,6 +24,9 @@ import Downloader from './views/Downloader.vue'
 // test(bumi)
 import tempFeed from './views/general/tempFeed.vue'
 import MixFeed from './views/general/MixFeed.vue'
+import MyPage2 from "./views/general/MyPage2.vue";
+import MyPage3 from "./views/general/MyPage3.vue";
+
 
 Vue.use(VueRouter)
 
@@ -43,11 +45,6 @@ export default [
     path:"/introduce",
     name: "introduce",
     component: Introduce
-  },
-  {
-    path:"/flipCard",
-    name:"FlipCard",
-    component: FlipCard
   },
   {
     path:"/webCam",
@@ -120,4 +117,15 @@ export default [
     name:"test2",
     component : MixFeed
   },
+  {
+    path:"/myPage2",
+    name:"myPage2",
+    component : MyPage2
+  },
+  {
+    path:"/myPage3",
+    name:"myPage3",
+    component : MyPage3
+  },
+
 ];

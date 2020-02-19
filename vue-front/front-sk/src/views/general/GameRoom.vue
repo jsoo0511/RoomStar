@@ -2,6 +2,7 @@
   <div id="gameRoom">
       <v-layout row wrap align-center>
         <v-flex xs6 md6>
+          <!-- https://xyxufvchfhks3520734.cdn.ntruss.com/video/ls-20200122105535-tD4G9_1080p_a_l.m3u8 -->
           <div id="firstWebCam">
             <video
               playsinline
@@ -14,7 +15,7 @@
           </div>
         </v-flex>
           <div class="vote1_component">
-            <Vote :socket="this.socket"/>
+            <Vote />
           </div>
         <v-flex xs6 md6>
           <div id="secondWebCam">
@@ -29,11 +30,11 @@
           </div>
         </v-flex>
           <div class="vote2_component">
-            <Vote :socket="this.socket"/>
+            <Vote />
           </div>
       </v-layout>
       <div class="chat_component">
-        <Chat :socket="this.socket"/>
+        <Chat />
       </div>
   </div>
 </template>
@@ -47,7 +48,6 @@ import Vote from "./Vote.vue";
 
 import { mapState, mapGetters, mapActions } from "vuex";
 
-
 const stun_server = "stun.l.google.com:19302";
 const pcConfig = {
   iceServers: [
@@ -59,6 +59,7 @@ const pcConfig = {
 
 export default {
   name: "GameRoom",
+  //props: ["user_id"],
   data() {
     return {
       
@@ -78,47 +79,24 @@ export default {
       watchers_connections: [null, null, null, null, null],
       watcher_cnt :0,
 
-      room_id: "",
+      room_id: 1,
       roomInfo: "",
       singer_num: 0,
 
-      user_id: "",
-      user_identification: "",
+      user_id: "hajung",
+      my_position: "user1", //watcher는 없음
+      user_identification: "watcher",
 
     };
+  },
+  computed: {
+    ...mapState(["singerOrWatcherStatus", "token"])
   },
   components:{
     Chat,
     Vote,
   },
   methods: {
-    getData(){
-     // 스토어 연결...?
-      let store = this.$store;
-      this.user_id = this.$session.get("userId");
-      this.room_id = this.$session.get("roomId");
-      console.log(this.$session.get("singerOrWatcherStatus"))
-
-
-      if (this.$session.get("singerOrWatcherStatus")==1){
-        this.user_identification = "singer";
-      }else{
-        this.user_identification = "watcher";
-      }
-
-      if (this.user_identification === "singer"){
-          if (this.battle_id[0]){
-            this.player_idx = 1;
-          }else{
-            this.player_idx =0;
-          }
-      }
-      
-      // this.room_id = 1;
-      // this.user_id = "hajung";
-      // this.user_identification = "watcher";
-    },
-
     sendMessage(message) {
       //서버로 메세지 보내기
       console.log("sendMessage----->5");
@@ -141,6 +119,7 @@ export default {
         if (join_identification=="singer"){
           bat_id = (this.player_idx+1)%2;
           this.battle_connections[bat_id] = t_pc;
+          console.log("여기가가가가가ㅏ각ㄱ t_pc",t_pc);
           this.battle_id[bat_id] = join_id;
         }else{
           this.watchers_connections[this.watcher_cnt] = t_pc;
@@ -188,10 +167,9 @@ export default {
     }
   },
   created() {
-    this.getData();
        console.log("created()---->1",this.battle_id);
     this.socket = io.connect(
-      "http://70.12.246.73:3001?room_id=" +
+      "http://70.12.246.73:8088?room_id=" +
         this.room_id +
         "&user_id=" +
         this.user_id +
@@ -201,19 +179,24 @@ export default {
         this.player_idx,
       { transports: ["websocket"] }
     );
+    // this.socket = io.connect(
+    //   "http://172.30.123.158:3001",
+    //   { transports: ["websocket"] }
+    // );
+    //console.log("dhdhdh");
+
   },
   mounted() {
-     window.onbeforeunload = () => {
-      this.socket.emit("leave", {
-        room_id:this.room_id,
-        user_identification:this.user_identification,
-        user_id:this.user_id,
-        player_idx:this.player_idx
-      });
-    };
     console.log("mounted()---->2");
     console.log(this);
-    
+    if (this.user_identification=="singer"){
+        if (this.my_position=="user1"){
+          this.player_idx = 0;
+        }else{
+          this.player_idx = 1;
+        }
+
+    }
     this.player_videos[0] = document.getElementById("p1_video");
     this.player_videos[1] = document.getElementById("p2_video");
     
@@ -228,6 +211,9 @@ export default {
         })
         .then(this.get_stream);
 
+      // if (this.my_position=="user1"){
+
+      // }
     }
     this.socket.on("join", message => {
       console.log(message);
@@ -235,6 +221,10 @@ export default {
       console.log(join_id + "들어왔숩다.");
       const join_identification = message.user_identification;
       const join_idx = message.player_idx;
+      //const user_id = message.user_id;
+      //console.log("새로운 상대가 들어옴!");
+
+      
 
       if (this.user_identification == "singer") {
         //가수라면,
@@ -253,6 +243,9 @@ export default {
                   to: join_id,
                   to_identification: join_identification
                   
+                  // study_id: 1,
+                  // from: this.user_id,
+                  // to: user_id
                 });
               },
               e => {
@@ -290,7 +283,7 @@ export default {
     });
 
     this.socket.on("leave", message => {
-      if (message.user_identification=="singer"){
+      if (message.from_identification=="singer"){
         this.player_videos[message.player_idx] = null;
         this.player_streams[message.player_idx] = null;
         this.battle_id[message.player_idx] = null;
@@ -379,6 +372,9 @@ export default {
           sdpMLineIndex: data.message.label,
           candidate: data.message.candidate
         });
+        // //let t_pc = this.peer_connection;
+        // console.log("여기 캔디데이트", cand);
+        // console.log("여기는 pc?", this.op_connection);
         let t_pc = null;
           if (this.user_identification=="singer"){
             if (data.from_identification=="singer"){
@@ -413,20 +409,19 @@ export default {
 }
 .chat_component{
   margin-top:50vh;
-  margin-left:25vw;
   position:fixed;
   height:50%;
   background-color:rgba(0,0,0,0.05);
-  width:50vw;
+  width:100vw;
 }
 .vote1_component{
-  margin-top:35vh;
+  margin-top:3vh;
   position:fixed;
-  margin-left:2vw;
+  margin-left:38vw;
   background-color:rgba(0,0,0,0);
 }
 .vote2_component{
-  margin-top:35vh;
+  margin-top:3vh;
   position:fixed;
   margin-left:88vw;
   background-color:rgba(0,0,0,0);

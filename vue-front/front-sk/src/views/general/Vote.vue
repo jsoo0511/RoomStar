@@ -1,8 +1,10 @@
 <template>
   <div>
-    <div>득표 수 : {{vote}}</div>
-    <v-btn type="submit" @click="plus(vote)" color="rgba(0,0,0,0)" elevation="0"><v-icon color="primary">mdi-thumb-up</v-icon></v-btn>
-    <v-btn type="submit" @click="minus(vote)" color="rgba(0,0,0,0)" elevation="0"><v-icon color="primary">mdi-thumb-up-outline</v-icon></v-btn>
+    <div>{{vote}}</div>
+    <v-btn type="submit" @click="plus(vote)">plus</v-btn>
+    <v-btn type="submit" @click="minus(vote)">minus</v-btn>
+
+    <div>chat</div>
   </div>
 </template>
 
@@ -12,11 +14,15 @@ import io from "socket.io-client";
 import net from "net";
 
 export default {
-  props: ['socket'],
   data() {
     return { vote: 0 };
   },
   computed: {},
+  created() {
+    this.socket = io.connect("http://localhost:8082", {
+      transports: ["websocket"]
+    });
+  },
   methods: {
     plus: function(data) {
       data += 1;

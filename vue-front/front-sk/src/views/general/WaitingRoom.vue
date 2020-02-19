@@ -1,13 +1,8 @@
 <template>
   <div id="waitingRooms">
-    <v-btn @click="singingButton()">노래하기</v-btn>
     <swiper :options="swiperOption">
       <!-- swipter-slide 부분을 v-for로 처리해야 할 것 같은데, -->
-      <swiper-slide
-        @click="watchingButton(roomInfo.room_id, $event)"
-        :key="index"
-        v-for="(roomInfo, index) in allRoomInfo"
-      >
+      <swiper-slide @click="watchingButton(roomInfo.room_id, $event)" :key="index" v-for="(roomInfo, index) in allRoomInfo">
         <v-row id="swiper_row">
           <div class="card marginR">
             <div class="card-image"></div>
@@ -106,14 +101,23 @@ export default {
       const userid = this.$session.get("userId");
       console.log(userid);
       this.$store.dispatch("changeToSinger", 1);
-      this.$session.set("singerOrWatcherStatus", 1);
-      
-
       axios
         .put("http://70.12.247.115:8080/Enter_room/" + userid)
         .then(response => {
-          this.$session.set("roomid", response.data.room_id);
-          this.$router.push("/GameRoom");
+          switch (response.data.room_id) {
+            case 1:
+              this.$router.push("/firstGameRoom"); // firstGameRoom
+              break;
+            case 2:
+              this.$router.push("/secondGameRoom");
+              break;
+            case 3:
+              this.$router.push("/thirdGameRoom");
+              break;
+            case 4:
+              this.$router.push("/fourthGameRoom");
+              break;
+          }
         })
         .catch(e => {
           console.log("error: ", e);
@@ -132,7 +136,6 @@ export default {
         vote: 0
       };
       this.$store.dispatch("changeToWatcher", 2);
-      this.$session.set("singerOrWatcherStatus", 2);
       axios
         .post("http://70.12.247.115:8080/Insert_watching", data)
         .then(response => {

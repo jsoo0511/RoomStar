@@ -139,7 +139,7 @@ export default {
           pw,
           userid
         };
-        const SERVER_IP = "http://192.168.0.9:8080/login/";
+        const SERVER_IP = "http://192.168.0.93:8080/login/";
         axios
           .post(SERVER_IP, data)
           .then(response => {

@@ -209,8 +209,11 @@ data(){
         win: "",
         lose: "",
         winrate: "",
-        thumbnail:""
+        thumbnail:"",
+
+        
   }
+  
 },
 
   name: "mypage",
@@ -222,7 +225,7 @@ data(){
     // 승원 수정
     const userId = this.$session.get("userId");
     axios
-      .get("http://70.12.247.115:8080/mypage/" + userId)
+      .get("http://192.168.0.93:8080/mypage/" + userId)
       .then(response => {
         console.log("success2: ", response);
         const id = response.data.user_info.userid;

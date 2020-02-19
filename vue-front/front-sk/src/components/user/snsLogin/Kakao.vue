@@ -66,7 +66,7 @@ let onSuccess = function(data) {
       };
 
       axios
-        .post("http://70.12.247.115:8080/login", params)
+        .post("http://192.168.0.93:8080/login", params)
         .then(response => {
           let toStore = {
             one: true,
@@ -164,7 +164,7 @@ export default {
               };
               console.log;
               axios
-                .post("http://70.12.247.115:8080/login", params)
+                .post("http://192.168.0.93:8080/login", params)
                 .then(response => {
                   console.log(response);
                   let toStore = {
