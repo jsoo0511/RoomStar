@@ -105,9 +105,7 @@ export default {
     });
   },
   created() {
-    this.socket = io.connect("http://localhost:8080", {
-      transports: ["websocket"]
-    });
+    
     // list에 있는 항목들을 불러옴
 
     var storageRef = firebase.storage().ref();

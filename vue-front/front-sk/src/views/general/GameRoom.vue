@@ -192,6 +192,7 @@ export default {
   created() {
     this.getData();
        console.log("created()---->1",this.battle_id);
+       console.log("주소오오오오오오오옹",process.env.VUE_APP_SOCKET_IP)
     this.socket = io.connect(
         process.env.VUE_APP_SOCKET_IP+"?room_id=" +
         this.room_id +
