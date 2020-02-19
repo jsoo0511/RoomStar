@@ -86,11 +86,13 @@ export default {
 }
 .chat_text{
   height:35vh; 
-  width:100vw; 
+  width:100%;
   border: 1px; 
   border-color:red; 
   border-style: none;
   padding:1.5vw 2vw;
   overflow-y: scroll;
+  color:#fff;
+  font-size:1.5em;
 }
 </style>

@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div v-if="finish===false">
-      <div>득표 수 : {{vote}}</div>
+    <div id="btn_loc" v-if="finish===false">
+      <div id="vote_num">득표 수 : {{vote}}</div>
 
-      <v-btn  @click="plus(vote)" color="rgba(0,0,0,0)" elevation="0"><v-icon color="primary">mdi-thumb-up</v-icon></v-btn>
+      <v-btn  @click="plus(vote)" color="rgba(0,0,0,0)" elevation="0"><v-icon color="red">mdi-heart-outline</v-icon></v-btn>
       <!-- <v-btn type="submit" @click="minus(vote)" color="rgba(0,0,0,0)" elevation="0"><v-icon color="primary">mdi-thumb-up-outline</v-icon></v-btn> -->
     </div>
-    <div v-if="finish===true">
-      <div>득표 수 : {{vote}}</div>
-      <v-btn @click="plus(vote)" color="rgba(0,0,0,0)" elevation="0"><v-icon color="primary">mdi-thumb-up-outline</v-icon></v-btn>
+    <div id="btn_loc" v-if="finish===true">
+      <div id="vote_num">득표 수 : {{vote}}</div>
+      <v-btn @click="plus(vote)" color="rgba(0,0,0,0)" elevation="0"><v-icon color="red">mdi-heart</v-icon></v-btn>
     </div>
   </div>
 
@@ -96,3 +96,15 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+  #btn_loc{
+    margin-left:1vw;
+  }
+
+  #vote_num{
+    margin-left:0;
+    font-size:1.5rem;
+    color:rgba(255,255,255);
+  }
+</style>

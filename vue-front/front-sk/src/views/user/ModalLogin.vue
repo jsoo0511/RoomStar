@@ -14,7 +14,7 @@
 
           <v-row justify="center">
             <kakaoLogin />
-            <GoogleLogin />
+            <GoogleLogin style="elevation:0;" />
           </v-row>
           <br />
           <p style="text-align:center; color:rgba(0,0,0,0.2);">
@@ -241,6 +241,7 @@ export default {
 </script>
 
 <style scoped>
+
 #modalLogin {
   padding: 30px;
   max-width: 350px;
@@ -248,6 +249,7 @@ export default {
   margin: 0 auto;
   border-radius: 2px;
   overflow: hidden;
+  background-color:rgba(255,255,255,0.8);
 }
 
 #dialog {
