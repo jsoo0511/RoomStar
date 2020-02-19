@@ -1,12 +1,13 @@
 <template>
 <div id="mypage2">
+  <link href="https://fonts.googleapis.com/css?family=Gothic+A1|Noto+Sans+KR&display=swap" rel="stylesheet">
 <div class="max" style="height:100vh;" >
-   <h1 class="mypage_text">My Page</h1>
-   <v-list-item-avatar style="margin-top:-20px;"> 
-            <img src="../../assets/images/rs_logo2.png" />
-           
-          </v-list-item-avatar>
-           이거 위치 옮기기
+  <!-- <v-list-item-avatar > 
+            <img src="../../assets/images/rs_logo2.png" />  
+   </v-list-item-avatar>
+        -->
+   <h1 class="mypage_text" >My Page</h1>
+   
 
 <div class="options" >
    <div class="option active" id="profile_once" :style="{'--optionBackground':'url('+profile+')'}">
@@ -284,6 +285,8 @@ $optionDefaultColours: #ED5565,white,black,#2ECC71,radial-gradient(ellipse farth
 h1{
   color:black;
   font-family: fantasy
+//   font-family: 'Noto Sans KR', sans-serif;
+// font-family: 'Gothic A1', sans-serif;
 }
 .mypage_text{
   text-align:center;
@@ -319,7 +322,7 @@ body {
 
    .options {
        
-      margin-top:12em;
+      margin-top:10em;
       margin-left: 20vw;
       display:flex;
       flex-direction:row;

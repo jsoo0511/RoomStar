@@ -8,24 +8,24 @@
     </section>
     <section>
         <article>
-            <h2>노래 배틀하기</h2>
-            <p>나는야 가수왕!</p>
+            <h2>BATTLE</h2>
+          
             <!-- <router-link id="link_btn1" :to="'/MyPage2/'" tag=button>배틀하기</router-link> -->
-            <button id="link_btn1" @click="$router.push('/gameRoom/')">배틀하기</button>
+            <button id="link_btn1" @click="$router.push('/gameRoom/')">대결하기</button>
         </article>
     </section>
     <section>
         <article>
-            <h2>배틀 시청하기</h2>
-            <p>그치만.. 듣지 않으면 알 수 없는걸...</p>
+            <h2>WATCH</h2>
+            
             <!-- <button id="link_btn2">시청하기</button> -->
             <button id="link_btn2" @click="$router.push('/waitingRoom/')">시청하기</button>
         </article>
     </section>
     <section>
         <article>
-            <h2>노래 자랑하기</h2>
-            <p>5252.. 그 정도면 도내 상위랭크라구?</p>
+            <h2>CONTEST</h2>
+            
             <!-- <button id="link_btn3">자랑하기</button> -->
             <button id="link_btn3" @click="$router.push('/SharingPage/')">자랑하기</button>
         </article>
@@ -196,8 +196,9 @@ article {
 }
 
 h2 {
-  font-size: 32px;
+  font-size: 42px;
   margin-bottom: 12px;
+  font-family: Noto Sans;
 }
 
 button {
@@ -221,7 +222,7 @@ button {
 }
 
 #link_btn2{
-  background-color:rgba(12,149,1,0.6) !important;
+  background-color:rgba(242, 153, 245, 0.6) !important;
 }
 
 #link_btn3{
