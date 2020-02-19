@@ -40,12 +40,14 @@ export default {
   data() {
     return {
       textarea: "",
-      message: ""
+      message: "",
+      userNickname:"",
+      userId:""
     };
   },
   created() {
-    const userId = this.$session.get("userId");
-    const userNickname = this.$session.get("userNickname");
+    this.userId = this.$session.get("userId");
+    this.userNickname = this.$session.get("userNickname");
     
   },
   mounted() {

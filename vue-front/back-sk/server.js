@@ -84,10 +84,10 @@ io.on('connection' , function(socket) {
         watchers: watchers,
         player_idx: player_idx
     });
-    
+
     //chat
     socket.on('chat', function(data){
-        console.log('message from Client: '+data.message)
+        console.log('message from '+data.userNickname+': '+data.message)
         socket.broadcast.emit('chat', data);
     });
 
