@@ -93,16 +93,16 @@ io.on('connection' , function(socket) {
     });
 
     //실시간 투표
-    socket.on('SEND_VOTE_SELECTED', function (data) {
-        socket.broadcast.emit('GET_VOTE_SELECTED', data)
-        io.emit('GET_VOTE_SELECTED', data)
+    socket.on('VOTE_SELECTED', function (data) {
+        socket.emit('VOTE_SELECTED', data)
+        //io.emit('GET_VOTE_SELECTED', data)
         console.log('server', data)
     });
 
 
     //음악 선택
     socket.on('SEND_MUSIC_SELECTED', function(data) {
-        socket.broadcast.emit('GET_MUSIC_SELECTED', data)
+        socket.emit('GET_MUSIC_SELECTED', data)
         io.emit('GET_MUSIC_SELECTED', data)
         console.log('server', data)
     });
