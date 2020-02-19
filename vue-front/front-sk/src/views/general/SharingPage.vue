@@ -207,7 +207,6 @@ export default {
       userNickname: this.$session.get("userNickname"),
       videoDownloadUrl: null,
       imageDownloadUrl: null,
-      SERVER_IP: "http://192.168.0.93:8080/",
       newTitle: null,
       newContent: null
     };
@@ -250,7 +249,7 @@ export default {
       // userid videoURL
 
       axios
-        .put(this.SERVER_IP + "update_like_video", params)
+        .put(process.env.VUE_APP_SERVER_IP+ "/update_like_video", params)
         .then(response => {
           console.log(
             "response for update_like_video",
@@ -277,7 +276,7 @@ export default {
         videoURL
       };
       axios
-        .post(this.SERVER_IP + "check", params)
+        .post(process.env.VUE_APP_SERVER_IP+ "/check", params)
         .then(response => {
           this.checkLikeStatus = response.data.data;
           console.log(this.checkLikeStatus);
@@ -317,7 +316,7 @@ export default {
       // 보내서 확인
       console.log("sdds");
       axios
-        .post(this.SERVER_IP + "insert_burst", params)
+        .post(process.env.VUE_APP_SERVER_IP+ "/insert_burst", params)
         .then(response => {
           console.log("response for insert_burst", response);
           // 등록이 되면 바로 동적으로 씌워져야하는데, update를 하게 해야한다.
@@ -386,9 +385,8 @@ export default {
     // 모른 정보를 DB에서 불러온다.
 
     // 다른 api로 변경될 것
-    // const SERVER_IP = "http://70.12.247.115:8080/insert_burst";
     axios
-      .get(this.SERVER_IP + "get_burst")
+      .get(process.env.VUE_APP_SERVER_IP+ "/get_burst")
       .then(response => {
         console.log("get_burst", response);
         // db 정보를 나열하기

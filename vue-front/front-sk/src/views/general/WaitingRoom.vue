@@ -110,7 +110,7 @@ export default {
       
 
       axios
-        .put("http://70.12.247.115:8080/Enter_room/" + userid)
+        .put(process.env.VUE_APP_SERVER_IP+"/Enter_room/" + userid)
         .then(response => {
           this.$session.set("roomid", response.data.room_id);
           this.$router.push("/GameRoom");
@@ -134,7 +134,7 @@ export default {
       this.$store.dispatch("changeToWatcher", 2);
       this.$session.set("singerOrWatcherStatus", 2);
       axios
-        .post("http://70.12.247.115:8080/Insert_watching", data)
+        .post(process.env.VUE_APP_SERVER_IP+"/Insert_watching", data)
         .then(response => {
           console.log(response);
           // 해당 room으로 이동
@@ -164,7 +164,7 @@ export default {
     const userid = this.$session.get("userId");
     console.log(userid);
     axios
-      .post("http://70.12.247.115:8080/Insert_waiting/" + userid)
+      .post(process.env.VUE_APP_SERVER_IP+"/Insert_waiting/" + userid)
       .then(response => {
         for (let i = 0; i < 4; i++) {
           this.allRoomInfo.push(response.data.roomViewInfo[i]);

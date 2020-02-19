@@ -84,7 +84,6 @@ export default {
       if (this.checkForm()) {
         // true라면,
         // this.loading = true;
-        const SERVER_IP = "http://192.168.0.9:8080/update";
         //console.log(this.email, this.password, this.nickName);
         //email, nickname, profileimg, pw
         // provider = local
@@ -98,7 +97,7 @@ export default {
         };
 
         axios
-          .put(SERVER_IP, data)
+          .put(process.env.VUE_APP_SERVER_IP+"/update", data)
           .then(response => {
             this.$router.push("/");
           })
