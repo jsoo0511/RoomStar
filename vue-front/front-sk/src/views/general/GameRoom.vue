@@ -118,7 +118,7 @@ export default {
       
       this.room_id = 1;
       this.user_id = "hajung";
-      this.user_identification = "watcher";
+      this.user_identification = "singer";
     },
 
     sendMessage(message) {
@@ -193,7 +193,7 @@ export default {
     this.getData();
        console.log("created()---->1",this.battle_id);
     this.socket = io.connect(
-      "http://192.168.0.102:3001?room_id=" +
+        process.env.VUE_APP_SOCKET_IP+"?room_id=" +
         this.room_id +
         "&user_id=" +
         this.user_id +

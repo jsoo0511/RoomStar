@@ -1,10 +1,13 @@
 <template>
-
-<div class="max" style="height:100vh;">
-   <h1 class="mypage_text">마 이 페 이 지</h1>
+<div id="mypage2">
+<div class="max" style="height:100vh;" >
+   <h1 class="mypage_text">My Page</h1>
+   <v-list-item-avatar style="margin-top:1px;">
+            <img src="../../assets/images/rs_logo2.png" />
+          </v-list-item-avatar>
 
 <div class="options" >
-   <div class="option active" :style="{'--optionBackground':'url('+profile+')'}">
+   <div class="option active" id="profile_once" :style="{'--optionBackground':'url('+profile+')'}">
           <div class="text" STYLE="writing-mode: tb-rl">NickName</div> <!--작은 화면일때-->
           <div class="text2" >{{nick}}</div> <!-- 큰 화면일때-->
       <div class="shadow">
@@ -20,11 +23,11 @@
       </div>
    </div>
    <div class="option">
-      <div class="text" STYLE="writing-mode: tb-rl">ID</div>
+      <div class="text" STYLE="writing-mode: tb-rl" id="textId2">ID</div>
       <div class="text2" id="textId">{{id}}</div> <!-- 큰 화면일때-->
       <div class="shadow" ></div>
       <div class="label">
-         <div class="icon">
+         <div class="icon" id="aa">
             <i class="fas fa-snowflake"></i>
          </div>
          <div class="info">
@@ -82,23 +85,23 @@
   </h1>
   <ol>
     <li>
-      <mark>Jerry Wood</mark>
+      <mark>원범희</mark>
       <small>315</small>
     </li>
     <li>
-      <mark>Brandon Barnes</mark>
+      <mark>이정수</mark>
       <small>301</small>
     </li>
     <li>
-      <mark>Raymond Knight</mark>
+      <mark>이종호</mark>
       <small>292</small>
     </li>
     <li>
-      <mark>Trevor McCormick</mark>
+      <mark>정승원</mark>
       <small>245</small>
     </li>
     <li>
-      <mark>Andrew Fox</mark>
+      <mark>정하정</mark>
       <small>203</small>
     </li>
   </ol>
@@ -120,7 +123,7 @@
 </div>
 
 </div>
-
+</div>
 </template>
 
 <script>
@@ -157,23 +160,23 @@ data(){
      items: [
         {
           src: 'https://firebasestorage.googleapis.com/v0/b/test-ff9ab.appspot.com/o/diamond.png?alt=media&token=b3ed51ea-3e3a-4e61-9b1e-612553050bf6',
-          title: 'diamond',
+          title: 'Diamond',
         },
         { 
           src: 'https://firebasestorage.googleapis.com/v0/b/test-ff9ab.appspot.com/o/platinum.png?alt=media&token=41a44d43-5c2d-4b2e-ae36-9e069bf0f870',
-          title: 'platinum',
+          title: 'Platinum',
         },
         { 
           src: 'https://firebasestorage.googleapis.com/v0/b/test-ff9ab.appspot.com/o/gold.png?alt=media&token=07882658-5846-4ea6-bc2a-1b2eee1f929c',
-          title: 'gold',
+          title: 'Gold',
         },
         { 
           src: 'https://firebasestorage.googleapis.com/v0/b/test-ff9ab.appspot.com/o/silver.png?alt=media&token=3e27ecaa-5061-471f-b19e-31ce7ee6568c',
-          title: 'silver',
+          title: 'Silver',
         },
         { 
           src: 'https://firebasestorage.googleapis.com/v0/b/test-ff9ab.appspot.com/o/bronze.png?alt=media&token=fafe32d3-f8cc-426d-8946-ebebff71779b',
-          title: 'bronze',
+          title: 'Bronze',
         },
       ],
         id: "",
@@ -203,7 +206,7 @@ data(){
     // 승원 수정
     const userId = this.$session.get("userId");
     axios
-      .get("http://192.168.0.93:8080/mypage/" + userId)
+      .get(process.env.VUE_APP_SERVER_IP+"/mypage/" + userId)
       .then(response => {
         console.log("success2: ", response);
         const id = response.data.user_info.userid;
@@ -269,16 +272,27 @@ data(){
 </script>
 
 <style lang="scss" scoped>
-$optionDefaultColours: #ED5565,#FC6E51,#FFCE54,#2ECC71,#5D9CEC,#AC92EC;
+$optionDefaultColours: #ED5565,white,black,#2ECC71,radial-gradient(ellipse farthest-corner at center top, #f39264 0%, #f2606f 100%);
 
+#mypage2{
+  background-image:url("../../assets/images/back2.jpg") !important;
+}
+
+
+h1{
+  color:black;
+  font-family: fantasy
+}
 .mypage_text{
   text-align:center;
   color:white;
-  padding-top:2em;
+  padding-top:1em;
+  font-size: 70px;
 }
 
    .max{
       background-color: #FFCE54
+     
    }
    .container{
    width:100vw;
@@ -371,8 +385,11 @@ body {
                   margin-top:3vw;
                } 
                #textId{
-                  color:white  !important;
+                  color:black  !important;
                   font-size: 80px;
+               }
+               #snow{
+                 color:black;
                }
                    
                
@@ -401,6 +418,12 @@ body {
             flex-grow:1;
             
             border-radius:30px;
+            #textId2{
+              color:black;
+            }
+             #snow{
+                 color:black;
+               }
              .text{
                    color: white;
                    border-radius:100%;
@@ -473,6 +496,9 @@ body {
 
                background-color:white;
                color:var(--defaultBackground);
+            }
+            #aa{
+              background-color:black;
             }
             .info {
                display:flex;
@@ -749,5 +775,9 @@ Leaderboard
   img {
     max-width: 100%;
   }
+}
+
+#profile_once{
+  
 }
 </style>
