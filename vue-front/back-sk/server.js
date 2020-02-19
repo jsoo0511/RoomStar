@@ -84,8 +84,7 @@ io.on('connection' , function(socket) {
         watchers: watchers,
         player_idx: player_idx
     });
-
-
+    
     //chat
     socket.on('chat', function(data){
         console.log('message from Client: '+data.message)
@@ -102,18 +101,15 @@ io.on('connection' , function(socket) {
 
 
     //음악 선택
-    socket.on('SEND_MUSIC_SELECTED', function(data) {
-        socket.emit('GET_MUSIC_SELECTED', data)
-        io.emit('GET_MUSIC_SELECTED', data)
-        console.log('server', data)
+    socket.on('MUSIC_SELECTED', function(data) {
+        socket.emit('MUSIC_SELECTED', data);
+        console.log('server', data);
     });
 
 
     //webRTC
     socket.on('message', data =>{
        console.log("message in", data.message.type);
-       
-        
         socket.broadcast.emit('message', data);
     });
 
