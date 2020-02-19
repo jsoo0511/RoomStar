@@ -27,7 +27,6 @@ import MixFeed from './views/general/MixFeed.vue'
 import MyPage2 from "./views/general/MyPage2.vue";
 import MyPage3 from "./views/general/MyPage3.vue";
 
-
 Vue.use(VueRouter)
 
 export default [
@@ -127,5 +126,4 @@ export default [
     name:"myPage3",
     component : MyPage3
   },
-
 ];
