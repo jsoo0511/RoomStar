@@ -46,14 +46,17 @@ export default {
   components: {},
   data() {
     return {
-      isUser: this.$store.state.isUser
+      isUser: this.$session.get("isUser")
     };
   },
 
   methods: {
     // 추가
     singingButton() {
+      this.isUser = this.$session.get("isUser")
+      console.log("================", this.isUser);
       if (this.isUser) {
+        console.log("================", this.isUser);
         const userid = this.$session.get("userId");
         console.log("----", this.userid, userid);
         this.$store.dispatch("changeToSinger", 1);
@@ -67,6 +70,7 @@ export default {
             this.$router.push("/GameRoom");
           })
           .catch(e => {
+            console.log("================", this.isUser);
             console.log("error: ", e);
 
             swal({
@@ -75,7 +79,7 @@ export default {
               // icon: "warning"
             });
           });
-      } else if (!this.isUser) {
+      } else {
         swal({
           title: "로그인이 필요합니다.",
           buttons: "확인"
@@ -84,9 +88,13 @@ export default {
       }
     },
     pushToWaiting() {
+      this.isUser = this.$session.get("isUser")
+      console.log("================", this.isUser);
       if (this.isUser) {
+        console.log("================", this.isUser);
         this.$router.push("/waitingRoom/");
-      } else if (!this.isUser) {
+      } else {
+        console.log("================", this.isUser);
         swal({
           title: "로그인이 필요합니다.",
           buttons: "확인"
@@ -95,9 +103,13 @@ export default {
       }
     },
     pushToSharing() {
+      this.isUser = this.$session.get("isUser")
+      console.log("================", this.isUser);
       if (this.isUser) {
+        console.log("================", this.isUser);
         this.$router.push("/SharingPage/");
-      } else if (!this.isUser) {
+      } else {
+        console.log("================", this.isUser);
         swal({
           title: "로그인이 필요합니다.",
           buttons: "확인"
