@@ -28,17 +28,17 @@ io.on('connection' , function(socket) {
 
     if(room){
         //방이 존재 할때
-        if (user_identification=="singer"){
+        if (user_identification==="singer"){
             console.log(room.singer1)
             //노래 부르는 사람일때
-            if (room.singer1){
+            if (player_idx==1){
                 console.log("여기는 싱어1이 있을때 ")
                 room.singer2=user_id;
             }else {
                 room.singer1=user_id;
             }
             room.singer_num = 2;
-        }else if (user_identification=="watcher"){//시청자일 때,
+        }else if (user_identification==="watcher"){//시청자일 때,
             
             if (room.watcher_cnt>=6){
               return;
@@ -52,7 +52,7 @@ io.on('connection' , function(socket) {
     } else{
         //방이 존재하지 않을 때,
         console.log("방이 존재x")
-        if (user_identification=="singer"){
+        if (user_identification==="singer"){
             room = {
                 singer1: user_id,
                 singer2: null,
@@ -122,7 +122,7 @@ io.on('connection' , function(socket) {
         let room = rooms[room_id];
         let socket_id = socket.id;
 
-        if (data.user_identification=="singer"){
+        if (data.user_identification==="singer"){
             if (room.singer_num==1){
                 rooms[room_id] = null;
                 console.log('room destroy');
