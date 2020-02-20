@@ -1,20 +1,18 @@
 <template>
-<div id="HomePage">
-   <v-app light id="hp_video">
-    <v-content>
-      <section>
-		<v-video-parallax height="100vh">
-          <v-layout
-            column
-            align-center
-            justify-center
-            class="white--text"
-          >
-            <img src="../../assets/images/roomstar.png" style="margin-top:35vh; width:230px; height:auto;" />
-            <!--<h1 class="white--text mb-2 display-1 text-center" style="margin-top:30vh;">ROOM STAR</h1>-->
-            <h2 class="subheading mb-1 text-center">        </h2>
+  <div id="HomePage">
+    <v-app light id="hp_video">
+      <v-content>
+        <section>
+          <v-video-parallax height="100vh">
+            <v-layout column align-center justify-center class="white--text">
+              <img
+                src="../../assets/images/roomstar.png"
+                style="margin-top:35vh; width:230px; height:auto;"
+              />
+              <!--<h1 class="white--text mb-2 display-1 text-center" style="margin-top:30vh;">ROOM STAR</h1>-->
+              <h2 class="subheading mb-1 text-center"></h2>
 
-            <!-- <v-btn
+              <!-- <v-btn
               class="mt-12"
               color="orange lighten-1"
               opacity="0.5"
@@ -24,17 +22,20 @@
             >
               로그인하기
             </v-btn> -->
-           <a href="#" id="scroll-down" class="scroll-down" address="true"></a>
-          </v-layout>
-        </v-video-parallax>
-      </section>
+              <a
+                href="#"
+                id="scroll-down"
+                class="scroll-down"
+                address="true"
+                @click="checked"
+              ></a>
+            </v-layout>
+          </v-video-parallax>
+        </section>
 
-     
-
-      <section
-        id="welcome">
-        <FlipCard3 />
-      </section>
+        <section id="welcome">
+          <FlipCard3 />
+        </section>
         <!--<v-layout
           column
           wrap
@@ -130,7 +131,7 @@
             </v-container>
           </v-flex>
         </v-layout>-->
-<!--
+        <!--
  <section class="hide-overflow">
   <v-container grid-list-xl>
         <v-layout>
@@ -192,7 +193,7 @@
       </v-container>
     </section>
 -->
-<!--
+        <!--
       <section>
       <v-container grid-list-xl>
         <v-parallax src="../../assets/images/hero.jpeg" height="380">
@@ -271,140 +272,164 @@
           </v-layout>
         </v-container>
       </section>-->
-      <section id="paral_section" style="padding-top:50px;">
-        <v-parallax src="../../assets/images/welcome.png" id="paral"> 
-        <h1 style="color:#fff; text-align:center;">ROOM ☆ STAR</h1>
-        </v-parallax>
-        <v-container grid-list-xl>
-        <v-layout column wrap>
-        <v-flex>
-         </v-flex>
-         <v-flex>
-          <v-layout row wrap justify-center class="my-12">
-            <v-flex xs12 sm4>
-              <v-card flat class="transparent">
-                <v-card-title primary-title class="layout justify-center">
-                  <div class="headline">Information</div>
-                </v-card-title>
-                <v-card-text>
-                  InformationInformationInformationInformationInfo
-                  InformationInformationInformationInformationInfo
-                  InformationInformationInformationInformationInfo
-                  InformationInformationInformationInformationInfo
-                  InformationInformationInformationInformationInfo
-                  InformationInformationInformationInformationInfo
-                  InformationInformationInformation
-                </v-card-text>
-              </v-card>
-            </v-flex>
-            <v-flex xs12 sm4 offset-sm1>
-              <v-card flat class="transparent">
-                <v-card-title primary-title class="layout justify-center">
-                  <div class="headline">Contact us</div>
-                </v-card-title>
-                <v-card-text>
-                  삼성 청년 SW 아카데미 2기 4반 ★7조★ 1등 ㄱㄱ!!
-                </v-card-text>
-                <v-list class="transparent">
-                  <v-list-item>
-                    <v-list-item-action>
-                      <v-icon class="blue--text text--lighten-2">mdi-phone</v-icon>
-                    </v-list-item-action>
-                    <v-list-item-content>
-                      <v-list-item-title>010-9559-5296</v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-                  <v-list-item>
-                    <v-list-item-action>
-                      <v-icon class="blue--text text--lighten-2">mdi-map-marker</v-icon>
-                    </v-list-item-action>
-                    <v-list-item-content>
-                      <v-list-item-title>서울특별시 강남구 역삼동 테헤란로 212</v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-                  <v-list-item>
-                    <v-list-item-action>
-                      <v-icon class="blue--text text--lighten-2">mdi-email</v-icon>
-                    </v-list-item-action>
-                    <v-list-item-content>
-                      <v-list-item-title>qpalzmfghtgv@naver.com</v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-list>
-              </v-card>
-            </v-flex>
-          </v-layout>
-          </v-flex>
-          </v-layout>
-        </v-container>
-      </section>
-
-    </v-content>
-  </v-app>
- </div>
-
-
+        <section id="paral_section" style="padding-top:50px;">
+          <v-parallax src="../../assets/images/welcome.png" id="paral">
+            <h1 style="color:#fff; text-align:center;">ROOM ☆ STAR</h1>
+          </v-parallax>
+          <v-container grid-list-xl>
+            <v-layout column wrap>
+              <v-flex> </v-flex>
+              <v-flex>
+                <v-layout row wrap justify-center class="my-12">
+                  <v-flex xs12 sm4>
+                    <v-card flat class="transparent">
+                      <v-card-title primary-title class="layout justify-center">
+                        <div class="headline">Information</div>
+                      </v-card-title>
+                      <v-card-text>
+                        InformationInformationInformationInformationInfo
+                        InformationInformationInformationInformationInfo
+                        InformationInformationInformationInformationInfo
+                        InformationInformationInformationInformationInfo
+                        InformationInformationInformationInformationInfo
+                        InformationInformationInformationInformationInfo
+                        InformationInformationInformation
+                      </v-card-text>
+                    </v-card>
+                  </v-flex>
+                  <v-flex xs12 sm4 offset-sm1>
+                    <v-card flat class="transparent">
+                      <v-card-title primary-title class="layout justify-center">
+                        <div class="headline">Contact us</div>
+                      </v-card-title>
+                      <v-card-text>
+                        삼성 청년 SW 아카데미 2기 4반 ★7조★ 1등 ㄱㄱ!!
+                      </v-card-text>
+                      <v-list class="transparent">
+                        <v-list-item>
+                          <v-list-item-action>
+                            <v-icon class="blue--text text--lighten-2"
+                              >mdi-phone</v-icon
+                            >
+                          </v-list-item-action>
+                          <v-list-item-content>
+                            <v-list-item-title>010-9559-5296</v-list-item-title>
+                          </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item>
+                          <v-list-item-action>
+                            <v-icon class="blue--text text--lighten-2"
+                              >mdi-map-marker</v-icon
+                            >
+                          </v-list-item-action>
+                          <v-list-item-content>
+                            <v-list-item-title
+                              >서울특별시 강남구 역삼동 테헤란로
+                              212</v-list-item-title
+                            >
+                          </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item>
+                          <v-list-item-action>
+                            <v-icon class="blue--text text--lighten-2"
+                              >mdi-email</v-icon
+                            >
+                          </v-list-item-action>
+                          <v-list-item-content>
+                            <v-list-item-title
+                              >qpalzmfghtgv@naver.com</v-list-item-title
+                            >
+                          </v-list-item-content>
+                        </v-list-item>
+                      </v-list>
+                    </v-card>
+                  </v-flex>
+                </v-layout>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </section>
+      </v-content>
+    </v-app>
+  </div>
 </template>
- <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
- 
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script>
-import Vue from 'vue'
+import Vue from "vue";
 // import ModalLogin from '../user/ModalLogin.vue'
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
+import Vuetify from "vuetify";
+import "vuetify/dist/vuetify.min.css";
 Vue.use(Vuetify, {
-  iconfont: 'mdi',
+  iconfont: "mdi",
   breakpoint: {
     thresholds: {
       xs: 340,
       sm: 540,
       md: 800,
-      lg: 1280,
+      lg: 1280
     },
-    scrollBarWidth: 24,
+    scrollBarWidth: 24
   }
-})
-import VuetifyVideoParallax from './VuetifyVideoParallax.vue'
-Vue.component('v-video-parallax', VuetifyVideoParallax)
-import VueLoading from 'vue-loading-overlay'
-import 'vue-loading-overlay/dist/vue-loading.css';
-import $ from 'jquery';
-import FlipCard from './FlipCard.vue'
-import FlipCard2 from './FlipCard2.vue'
-import FlipCard3 from './FlipCard3.vue'
+});
+import VuetifyVideoParallax from "./VuetifyVideoParallax.vue";
+import { mapState, mapGetters, mapActions } from "vuex";
+Vue.component("v-video-parallax", VuetifyVideoParallax);
+import VueLoading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
+import $ from "jquery";
+import FlipCard from "./FlipCard.vue";
+import FlipCard2 from "./FlipCard2.vue";
+import FlipCard3 from "./FlipCard3.vue";
 Vue.use(VueLoading);
-Vue.component('loading', VueLoading)
+Vue.component("loading", VueLoading);
 export default {
-  name: 'HomePage',
+  name: "HomePage",
   vuetify: new Vuetify(),
   components: {
     // ModalLogin
     FlipCard,
     FlipCard2,
-    FlipCard3,
+    FlipCard3
   },
-  data () {
+  data() {
     return {
-      title: '',
-      loader: null,      
+      title: "",
+      loader: null,
       drawer: null,
       items: [
         { title: "Home", icon: "dashboard" },
         { title: "About", icon: "question_answer" }
-      ]
+      ],
+      isUser: this.$store.state.isUser
+    };
+  },
+  computed: {
+    ...mapGetters(["options", "userId", "getIsUser", "getToken"])
+  },
+  methods: {
+    checked() {
+      if(!this.$store.state.isUser){
+        alert("로그인이 필요합니다.")
+      }
+      
+      // 로그인안한상태면 alert
     }
   },
-  mounted(){   
-     $(function() {
-    $('#scroll-down').click (function() {
-      $('html, body').animate({scrollTop: $('#welcome').offset().top }, 'slow');
-      return false;
+  mounted() {
+    $(function() {
+      $("#scroll-down").click(function() {
+        $("html, body").animate(
+          { scrollTop: $("#welcome").offset().top },
+          "slow"
+        );
+        return false;
+      });
     });
-  });
   },
+
   created: function() {
     // let loader = Vue.$loading.show({
     //   container: this.$refs.loadingContainer,
@@ -417,31 +442,32 @@ export default {
     //   backgroundColor: '#ffffff',
     //   zIndex: 999,
     // })
-    let self = Object.assign(this, {})
+    let self = Object.assign(this, {});
     window.addEventListener("load", function(event) {
-      console.log('document ready')
+      console.log("document ready");
       // loader.hide();
     });
   }
-}
+};
 </script>
 
 <style scoped>
 .container {
-  width:100vw;
+  width: 100vw;
   float: center;
   box-sizing: border-box;
   min-height: auto;
-  }
-.container > div {
-  padding-top: 0px; }
-#welcome{
-  background-color:#fff;
 }
-section{
-  background-color:#fff;
-  min-height:100vh;
-  overflow:hidden;
+.container > div {
+  padding-top: 0px;
+}
+#welcome {
+  background-color: #fff;
+}
+section {
+  background-color: #fff;
+  min-height: 100vh;
+  overflow: hidden;
 }
 /*
 #introduce{
@@ -450,8 +476,8 @@ section{
   max-height:120vh;
   overflow:visible;
 }*/
-v-content__wrap{
-  background-color:black;
+v-content__wrap {
+  background-color: black;
 }
 
 #thanks {
@@ -472,22 +498,22 @@ v-content__wrap{
 #thanks h2 {
   margin-bottom: 60px;
   color: #333;
-  font : normal 300 64px/1 'Josefin Sans', sans-serif;
+  font: normal 300 64px/1 "Josefin Sans", sans-serif;
   text-align: center;
   white-space: nowrap;
 }
 #thanks p {
   color: #333;
-  font : normal 400 20px/1 'Josefin Sans', sans-serif;
+  font: normal 400 20px/1 "Josefin Sans", sans-serif;
 }
 #thanks p a {
   color: #333;
   text-decoration: none;
-  transition: color .3s;
+  transition: color 0.3s;
 }
 #thanks p a:hover {
   color: #888;
-}/*
+} /*
 .demo a {
   position: absolute;
   bottom: 20px;
@@ -562,8 +588,8 @@ v-content__wrap{
 }
 .scroll-down {
   opacity: 1;
-  -webkit-transition: all .5s ease-in 3s;
-  transition: all .5s ease-in 3s;
+  -webkit-transition: all 0.5s ease-in 3s;
+  transition: all 0.5s ease-in 3s;
 }
 
 .scroll-down {
@@ -574,34 +600,34 @@ v-content__wrap{
   display: block;
   width: 32px;
   height: 32px;
-  border: 2px solid #FFF;
+  border: 2px solid #fff;
   background-size: 14px auto;
   border-radius: 50%;
   z-index: 2;
   -webkit-animation: bounce 2s infinite 2s;
   animation: bounce 2s infinite 2s;
-  -webkit-transition: all .2s ease-in;
-  transition: all .2s ease-in;
-  transform: scale(1)
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  transform: scale(1);
 }
 
 .scroll-down:before {
-    position: absolute;
-    top: calc(50% - 8px);
-    left: calc(50% - 6px);
-    transform: rotate(-45deg);
-    display: block;
-    width: 12px;
-    height: 12px;
-    content: "";
-    border: 2px solid white;
-    border-width: 0px 0 2px 2px;
+  position: absolute;
+  top: calc(50% - 8px);
+  left: calc(50% - 6px);
+  transform: rotate(-45deg);
+  display: block;
+  width: 12px;
+  height: 12px;
+  content: "";
+  border: 2px solid white;
+  border-width: 0px 0 2px 2px;
 }
 
 .scroll-down2 {
   opacity: 1;
-  -webkit-transition: all .5s ease-in 3s;
-  transition: all .5s ease-in 3s;
+  -webkit-transition: all 0.5s ease-in 3s;
+  transition: all 0.5s ease-in 3s;
 }
 
 .scroll-down2 {
@@ -618,22 +644,22 @@ v-content__wrap{
   z-index: 2;
   -webkit-animation: bounce 2s infinite 2s;
   animation: bounce 2s infinite 2s;
-  -webkit-transition: all .2s ease-in;
-  transition: all .2s ease-in;
-  transform: scale(1)
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  transform: scale(1);
 }
 
 .scroll-down2:before {
-    position: absolute;
-    top: calc(50% - 8px);
-    left: calc(50% - 6px);
-    transform: rotate(-45deg);
-    display: block;
-    width: 12px;
-    height: 12px;
-    content: "";
-    border: 2px solid black;
-    border-width: 0px 0 2px 2px;
+  position: absolute;
+  top: calc(50% - 8px);
+  left: calc(50% - 6px);
+  transform: rotate(-45deg);
+  display: block;
+  width: 12px;
+  height: 12px;
+  content: "";
+  border: 2px solid black;
+  border-width: 0px 0 2px 2px;
 }
 
 @keyframes bounce {
@@ -659,73 +685,68 @@ v-content__wrap{
 }
 #card-box {
   transition: 0.5s ease;
-  filter:grayscale(40%);
+  filter: grayscale(40%);
 }
-#card-box:hover{
+#card-box:hover {
   transform: scale(1.1);
-  box-shadow: 5px 5px 15px rgba(0,0,0,0);
-  filter:grayscale(0%);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0);
+  filter: grayscale(0%);
 }
-#paral_section{
-  background-color:#eee;
+#paral_section {
+  background-color: #eee;
 }
-#paral{
-   height:200px !important;
-   margin-left:0vw;
-   width:100vw;
+#paral {
+  height: 200px !important;
+  margin-left: 0vw;
+  width: 100vw;
 }
-
 </style>
 
 <style scoped lang="scss">
- * {
-  box-sizing:border-box;
+* {
+  box-sizing: border-box;
 }
 
-.loading_wrap{
-  padding-top:5vh;
-  margin-bottom:-15vh;
+.loading_wrap {
+  padding-top: 5vh;
+  margin-bottom: -15vh;
 }
 .h2_loading {
-    text-align:center;
-    font-size:3em;
-    color :rgba(0,0,0,0.3);
-    position:relative;
-    margin:0px;
-    &:after {
-      text-align:left;
-      content:attr(data-back);
-      width:0%;
-      height:100%;
-      background:rgba(0,0,0,0.8);
-      -webkit-text-fill-color: transparent;
-      -webkit-background-clip: text;
-      position:absolute;
-      left:42.1%;
-      top:0px;
-      animation: backMasking 4s infinite;
-    }
+  text-align: center;
+  font-size: 3em;
+  color: rgba(0, 0, 0, 0.3);
+  position: relative;
+  margin: 0px;
+  &:after {
+    text-align: left;
+    content: attr(data-back);
+    width: 0%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    position: absolute;
+    left: 42.1%;
+    top: 0px;
+    animation: backMasking 4s infinite;
+  }
 }
-
 
 @keyframes backMasking {
   0% {
-    width:0%;
+    width: 0%;
   }
   100% {
-    width:100%;
+    width: 100%;
   }
-  
 }
 
 @-webkit-keyframes backMasking {
   0% {
-    width:0%;
+    width: 0%;
   }
   100% {
-    width:100%;
+    width: 100%;
   }
-  
 }
-
 </style>
