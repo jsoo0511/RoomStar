@@ -49,7 +49,7 @@
           </v-list-item-avatar>
 
           <v-list-item-content>
-            {{ this.profile }}
+          <!--  {{ this.profile }}-->
             <v-list-item-title>{{ this.userNickname }}</v-list-item-title>
             <v-list-item-subtitle>유저상세정보</v-list-item-subtitle>
           </v-list-item-content>
