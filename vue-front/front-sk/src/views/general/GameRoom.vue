@@ -14,6 +14,7 @@
           </div>
        </v-flex>
           <div class="vote1_component">
+            <SelectMusic1/>
             <SelectMusic1 v-if="singerOrWatcherStatus == 1 & player_idx == 0"/>
             <Vote1 :socket="this.socket"/>
           </div>

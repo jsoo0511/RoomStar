@@ -41,7 +41,7 @@
       <!-- {{ musicSelectedOne.url }} -->
       <!-- musicSelectedOne이 있는 경우에만 -->
       <div v-if="musicSelectedOne">
-        <audio controls name="media">
+        <audio controls autoplay name="media">
           <source :src="musicSelectedOne.url" type="audio/mp3" />
           <!-- 가사 함께 나오도록 -->
         </audio>
