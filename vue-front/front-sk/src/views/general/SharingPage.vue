@@ -6,11 +6,11 @@
     <!-- 업로드 하는 곳 따로 만들기 -->
     <!-- 제목, 내용, 게시자닉네임, 게시자아이디, 이미지 == null 이면 profile사진으로, (필수)동영상파일, 좋아요수-->
     <!-- crud -->
-    <h1 style="color:white">누구나 스타가 될 수 있는 당신의 끼를 보여주세요.</h1>
+    <h1 style="color:white" id="showOff_text">자랑하기</h1>
 
     <v-dialog v-model="uploadDialog" id="dialog" max-width="350">
       <template v-slot:activator="{ on }">
-        <v-btn class="download" v-on="on">등록하기</v-btn>
+        <v-btn class="download" text v-on="on"></v-btn>
       </template>
       <v-card id="modalUpload">
         <div>파일업로드하는곳</div>
@@ -465,9 +465,15 @@ img {
   height: auto;
 }
 .download {
-  background: url("https://cdn.pixabay.com/photo/2015/01/07/16/37/wood-591631_1280.jpg")
-    no-repeat;
+  height:20vh !important;
+  width:13vw !important;
+  margin-top:-20vh;
+  margin-left:70vw;
+  margin-bottom:10vh;
+  background-image : url("../../../src/assets/images/btntree.png")
 }
+/* background: url("https://cdn.pixabay.com/photo/2015/01/07/16/37/wood-591631_1280.jpg")
+    no-repeat; */
 .wrapper {
   width: 100%;
   padding: 0 2rem;
@@ -565,5 +571,10 @@ img {
   background-repeat: repeat;
   width: 100vw;
   height: auto;
+}
+
+#showOff_text{
+  text-align:center;
+  font-size:3rem;
 }
 </style>
