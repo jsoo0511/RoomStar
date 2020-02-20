@@ -21,11 +21,16 @@
               </li>
             </ul>
           </v-radio-group>
-        <div> 
-      </div>
+          <div></div>
           <!-- 선택하면 선택한 것만 music.url을 보내기 -->
           <!-- <v-btn type="submit" @click="trigger(musicSelectedOne)">선택완료1</v-btn> -->
-          <v-btn class="btnCenter" type="submit" color="primary" @click="dialog = false & trigger(musicSelectedOne.url)">선택완료</v-btn>
+          {{ dialog }}
+          <v-btn
+            class="btnCenter"
+            type="submit"
+            color="primary"
+            @click="dialog = false ; trigger(musicSelectedOne.url)"
+          >선택완료</v-btn>
         </div>
       </v-card>
     </v-dialog>
@@ -36,9 +41,10 @@
       <!-- {{ musicSelectedOne.url }} -->
       <!-- musicSelectedOne이 있는 경우에만 -->
       <div v-if="musicSelectedOne">
-        <video controls name="media">
+        <audio controls name="media">
           <source :src="musicSelectedOne.url" type="audio/mp3" />
-        </video>
+          <!-- 가사 함께 나오도록 -->
+        </audio>
       </div>
     </div>
   </div>
@@ -76,11 +82,9 @@ export default {
       this.musicSelectedOne = data["data"];
       console.log(data);
     });
-    console.log("bb"+this);
-
+    console.log("bb" + this);
   },
   created() {
-    
     // list에 있는 항목들을 불러옴
 
     var storageRef = firebase.storage().ref();
@@ -119,12 +123,14 @@ export default {
       // musicSelectedOne.title 로 검색해서 lyrics
       // axios 로 받아서 lyrics 보여주기
     },
-    openClick : function(event){
-        console.log("dd"+event);
-        $(event.currentTarget).toggleClass("open");
-        console.log("aa"+event.currentTarget);
-        if($(event.currentTarget).hasClass("open"))
-          $("dt").not(event.currentTarget).removeClass("open");      
+    openClick: function(event) {
+      console.log("dd" + event);
+      $(event.currentTarget).toggleClass("open");
+      console.log("aa" + event.currentTarget);
+      if ($(event.currentTarget).hasClass("open"))
+        $("dt")
+          .not(event.currentTarget)
+          .removeClass("open");
     }
   }
 };
@@ -138,8 +144,8 @@ export default {
   box-sizing: border-box;
 }
 
-.container{
-  height:100px !important;
+.container {
+  height: 100px !important;
 }
 
 h1 {
@@ -150,16 +156,16 @@ h1 {
   text-align: center;
   margin: 2rem 0;
 }
-ul{
-  padding:0px !important;
+ul {
+  padding: 0px !important;
 }
 .wrapper {
   width: 90%;
   margin: 0 auto;
   max-width: 100rem;
 }
-.wrapper > div{
-  max-height:200px;
+.wrapper > div {
+  max-height: 200px;
 }
 .cols {
   display: -webkit-box;
@@ -185,8 +191,7 @@ ul{
   perspective: 4000px;
 }
 
-.front
- {
+.front {
   background-size: cover;
   background-position: center;
   -webkit-transition: -webkit-transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
@@ -227,7 +232,7 @@ ul{
   backface-visibility: hidden;
   border-radius: 10px;
 }
-.container:hover .front{
+.container:hover .front {
   -webkit-transition: -webkit-transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
   transition: -webkit-transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
   -o-transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
@@ -331,94 +336,93 @@ ul{
   }
 }
 
-
-
-h1{
-  margin-bottom:5px;
+h1 {
+  margin-bottom: 5px;
 }
-.subheading{
-  font-size:.9em;
-  margin-top:0;
-  text-transform:uppercase;
+.subheading {
+  font-size: 0.9em;
+  margin-top: 0;
+  text-transform: uppercase;
 }
 
-dl{
-  margin:30px auto 60px;
-  max-width:300px;
+dl {
+  margin: 30px auto 60px;
+  max-width: 300px;
 }
 
-dt{
-  background:rgba(0,0,0,0);
-  border-left:8px solid #1F2024;
-  color:#111;
-  font-weight:600;
-  padding:15px;
-  position:relative;
-  text-align:left;
-  text-transform:uppercase;
-  transition: all .5s;
+dt {
+  background: rgba(0, 0, 0, 0);
+  border-left: 8px solid #1f2024;
+  color: #111;
+  font-weight: 600;
+  padding: 15px;
+  position: relative;
+  text-align: left;
+  text-transform: uppercase;
+  transition: all 0.5s;
 }
 
-dt:after,dt:before{
-  content:"\f078";
-  font-family:fontAwesome;
-  position:absolute;
-  right:15px;
-  height:28px;
-  top:0;
-  bottom:0;
-  margin:auto;
-  
-  transition:all .7s ease-in-out;
+dt:after,
+dt:before {
+  content: "\f078";
+  font-family: fontAwesome;
+  position: absolute;
+  right: 15px;
+  height: 28px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+
+  transition: all 0.7s ease-in-out;
 }
 
-dt:before{
-  opacity:0;
-  transition:all .4s ease-in-out;
+dt:before {
+  opacity: 0;
+  transition: all 0.4s ease-in-out;
 }
 
-dt:hover{
-  cursor:pointer;
+dt:hover {
+  cursor: pointer;
 }
 
-dt + dd{
-  max-height:0;
+dt + dd {
+  max-height: 0;
 }
 
-dd{
-  background:#1C1C1C;
-  color:#edeff3;
-  margin:0;
-  overflow:hidden;
-  padding:1px 15px;
-  
-  transition: all .5s;
+dd {
+  background: #1c1c1c;
+  color: #edeff3;
+  margin: 0;
+  overflow: hidden;
+  padding: 1px 15px;
+
+  transition: all 0.5s;
 }
 
-dt.open{
-  background:#0E0C0D;
-  border-color:#0E0C0D;
-  color:#edeff3;
-  margin:-5px;
+dt.open {
+  background: #0e0c0d;
+  border-color: #0e0c0d;
+  color: #edeff3;
+  margin: -5px;
 }
 
-dt.open:after{
-  transform:rotate(180deg) translateY(-2px);
+dt.open:after {
+  transform: rotate(180deg) translateY(-2px);
 }
-dt.open:before{
-  opacity:1;
-  transform:rotate(-360deg) translateY(-3px);
-}
-
-dt.open + dd{
-  padding:15px 15px 30px;
-  margin:0 -5px;
-  max-height:200px;
+dt.open:before {
+  opacity: 1;
+  transform: rotate(-360deg) translateY(-3px);
 }
 
-.btnCenter{
-  margin-top:1vh;
-  margin-bottom:1vh;
-  margin-left:12vw;
+dt.open + dd {
+  padding: 15px 15px 30px;
+  margin: 0 -5px;
+  max-height: 200px;
+}
+
+.btnCenter {
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+  margin-left: 12vw;
 }
 </style>

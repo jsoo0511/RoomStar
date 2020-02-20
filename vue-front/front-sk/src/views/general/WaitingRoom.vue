@@ -9,7 +9,6 @@
         
       >
 
-      {{roomInfo.room_id}}
         <v-row id="swiper_row" @click="watchingButton(roomInfo.room_id)">
           <div class="card marginR">
             <div class="card-image"></div>
