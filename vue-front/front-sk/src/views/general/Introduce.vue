@@ -8,7 +8,7 @@
               <div class="layer layer-displayed" data-scene="1">
                 <div
                   class="layer-image-wrapper"
-                  style="background-image: url('https://images.unsplash.com/photo-1513792859704-f49baf5c0b70?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=522c9283a0ad870843048349acb08736&auto=format&fit=crop&w=1050&q=80')"
+                  style="background-image: url('../../assets/images/bh/bh_1')"
                 ></div>
               </div>
               <div class="layer" data-scene="2">
@@ -17,7 +17,7 @@
                   style="background-image: url('https://images.unsplash.com/photo-1510855412585-af057ac84251?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bc9e3d133bcd845118e779ea56c9bb49&auto=format&fit=crop&w=1189&q=80')"
                 ></div>
               </div>
-              <div class="layer" data-scene="3">
+              <div class="layer" data-scene="3">,
                 <div
                   class="layer-image-wrapper"
                   style="background-image: url('https://images.unsplash.com/photo-1517453881932-462e65217f7a?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89c50aab146008513d49a905cfd903d4&auto=format&fit=crop&w=1050&q=80')"

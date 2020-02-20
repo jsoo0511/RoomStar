@@ -465,12 +465,19 @@ img {
   height: auto;
 }
 .download {
-  height:20vh !important;
-  width:13vw !important;
+  height:30vh !important;
+  width:20vw !important;
   margin-top:-20vh;
   margin-left:70vw;
-  margin-bottom:10vh;
   background-image : url("../../../src/assets/images/btntree.png")
+}
+
+.download:hover{
+  height:30vh !important;
+  width:20vw !important;
+  margin-top:-20vh;
+  margin-left:70vw;
+  background-image : url("../../../src/assets/images/btntree2.png")
 }
 /* background: url("https://cdn.pixabay.com/photo/2015/01/07/16/37/wood-591631_1280.jpg")
     no-repeat; */
