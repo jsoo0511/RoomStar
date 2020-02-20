@@ -48,6 +48,7 @@ export default {
   },
 
   methods: {
+    // 추가 
     singingButton() {
       const userid = this.$session.get("userId");
       console.log("----", this.userid, userid);
@@ -57,7 +58,8 @@ export default {
       axios
         .put(process.env.VUE_APP_SERVER_IP + "/Enter_room/" + userid)
         .then(response => {
-          this.$session.set("roomid", response.data.room_id);
+          console.log(response)
+          this.$session.set("roomId", response.data.room_id);
           this.$router.push("/GameRoom");
         })
         .catch(e => {

@@ -4,11 +4,13 @@
     <swiper :options="swiperOption">
       <!-- swipter-slide 부분을 v-for로 처리해야 할 것 같은데, -->
       <swiper-slide
-        @click="watchingButton(roomInfo.room_id, $event)"
         :key="index"
         v-for="(roomInfo, index) in allRoomInfo"
+        
       >
-        <v-row id="swiper_row">
+
+      {{roomInfo.room_id}}
+        <v-row id="swiper_row" @click="watchingButton(roomInfo.room_id)">
           <div class="card marginR">
             <div class="card-image"></div>
             <div class="card-text">
@@ -75,14 +77,14 @@ import axios from "axios";
 
 var swiper = null;
 
-var waitingNumofPeople = 0;
+// var waitingNumofPeople = 0;
 export default {
   name: "WaitingRoom",
   components: {},
   data() {
     return {
       allRoomInfo: [],
-      // waitingNumofPeople: 0
+      waitingNumofPeople: 0,
       swiperOption: {
         effect: "coverflow",
         grabCursor: true,
@@ -122,8 +124,12 @@ export default {
     },
     // 시청하기를 누르면 해당 방으로 이동
     watchingButton(room_id) {
+      console.log(room_id)
+      console.log("===========================");
+      
       const userid = this.$session.get("userId");
       const userNickname = this.$session.get("userNickname");
+      this.$session.set("roomId", room_id);
       console.log(userid, userNickname);
 
       let data = {
@@ -139,7 +145,7 @@ export default {
         .then(response => {
           console.log(response);
           // 해당 room으로 이동
-          this.$session.set("roomid", response.data.room_id);
+          console.log('들어갈때 session확인',this.$session)
           this.$router.push("/GameRoom");
         })
         .catch(e => {
@@ -155,9 +161,12 @@ export default {
     axios
       .post(process.env.VUE_APP_SERVER_IP + "/Insert_waiting/" + userid)
       .then(response => {
-        for (let i = 0; i < 4; i++) {
+        console.log('insert_waiting', response)
+        console.log(response.data.roomViewInfo)
+        for (let i = 0; i < 5; i++) {
           this.allRoomInfo.push(response.data.roomViewInfo[i]);
         }
+        console.log(this.allRoomInfo[0])
         // 대기인원수
         this.waitingNumofPeople = response.data.waitingList.length;
         console.log(this.waitingNumofPeople);
