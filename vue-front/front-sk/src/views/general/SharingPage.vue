@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="bg_feed">
     <br />
     <br />
     <br />
@@ -553,5 +553,12 @@ img {
   right: 5%;
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2);
   transition: all 0.35s;
+}
+
+#bg_feed{
+  background-image : url("../../assets/images/bg_showoff.png");
+  background-repeat: repeat;
+  width:100vw;
+  height:auto;
 }
 </style>

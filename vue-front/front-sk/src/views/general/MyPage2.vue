@@ -297,13 +297,13 @@ h1{
 }
 .mypage_text{
   text-align:center;
-  color:white;
+  color:rgba(136,53,151, 0.9);
   padding-top:1em;
   font-size: 70px;
 }
 
    .max{
-      background-color: #FFCE54
+     background-color:rgba(250,198,117,1);
      
    }
    .container{

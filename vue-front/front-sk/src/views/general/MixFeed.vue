@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="bg_feed">
     <!-- 업로드 하는 곳 따로 만들기 -->
     <!-- 제목, 내용, 게시자닉네임, 게시자아이디, 이미지 == null 이면 profile사진으로, (필수)동영상파일, 좋아요수-->
     <!-- crud -->
@@ -472,4 +472,5 @@ img {
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2);
   transition: all 0.35s;
 }
+
 </style>
