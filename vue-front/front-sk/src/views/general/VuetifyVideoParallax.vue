@@ -1,6 +1,5 @@
 <template>
-<div>
-  <div class="v-parallax" :style="'height: ' + height + '; width:100vw !important;'">
+  <div class="v-parallax" :style="'height: ' + height + ';'">
     <div class="v-parallax__image-container" id="center">
       <img ref="image" :src="img" :style="imageStyles">
       <video ref="video" :loop="loop" :muted="muted" :autoplay="autoplay" :style="videoStyles">
@@ -11,7 +10,6 @@
       <slot/>
     </div>
   </div>
-</div>
 </template>
 
 <script>

@@ -3,7 +3,7 @@
     <v-app light id="hp_video">
       <v-content>
         <section>
-          <v-video-parallax height="100vh" width="100vw !important">
+          <v-video-parallax height="100vh">
             <v-layout column align-center justify-center class="white--text">
               <img
                 src="../../assets/images/roomstar.png"
