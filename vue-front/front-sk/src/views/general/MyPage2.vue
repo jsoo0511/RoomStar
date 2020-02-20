@@ -2,10 +2,9 @@
 <div id="mypage2">
   <link href="https://fonts.googleapis.com/css?family=Gothic+A1|Noto+Sans+KR&display=swap" rel="stylesheet">
 <div class="max" style="height:100vh;" >
-  <!-- <v-list-item-avatar > 
-            <img src="../../assets/images/rs_logo2.png" />  
-   </v-list-item-avatar>
-        -->
+    <img src="../../assets/images/rs_logo2.png" class="img_logo" />  
+
+
    <h1 class="mypage_text" >My Page</h1>
    
 
@@ -281,6 +280,14 @@ $optionDefaultColours: #ED5565,white,black,#2ECC71,radial-gradient(ellipse farth
   background-image:url("../../assets/images/back2.jpg") !important;
 }
 
+.img_logo{
+  position:fixed;
+  width:5vw;
+  height:auto;
+  margin-left:35.7vw;
+  margin-top:11vh;
+  opacity:0.9;
+}
 
 h1{
   color:black;
@@ -290,13 +297,13 @@ h1{
 }
 .mypage_text{
   text-align:center;
-  color:white;
+  color:rgba(136,53,151, 0.9);
   padding-top:1em;
   font-size: 70px;
 }
 
    .max{
-      background-color: #FFCE54
+     background-color:rgba(250,198,117,1);
      
    }
    .container{
@@ -322,7 +329,7 @@ body {
 
    .options {
        
-      margin-top:10em;
+      margin-top:4em;
       margin-left: 20vw;
       display:flex;
       flex-direction:row;

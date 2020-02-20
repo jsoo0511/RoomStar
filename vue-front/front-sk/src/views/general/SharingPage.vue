@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="bg_feed">
     <br />
     <br />
     <br />
@@ -21,22 +21,10 @@
         <!-- 동영상 -->
         <span>동영상</span>
         <!-- change되면 무조건 업로드됨 -->
-        <!-- <v-file-input
-          type="file"
-          accept="video/mp4"
-          @change="detectFilesVideo($event.target.files)"
-          label="동영상 업로드"
-        ></v-file-input>-->
         <input type="file" accept="video/mp4" @change="detectFilesVideo($event.target.files)" />
 
-        <!-- 사진 -->
         <span>사진</span>
-        <!-- <v-file-input
-          type="file"
-          accept="image/jpeg"
-          @change="detectFilesImage($event.target.files)"
-          label="사진 업로드"
-        ></v-file-input>-->
+
         <input type="file" accept="image/jpeg" @change="detectFilesImage($event.target.files)" />
         <br />
         <v-progress-linear class="progress-bar" :height="20" :value="progressUpload" color="purple">
@@ -66,9 +54,6 @@
 
     <div class="wrapper">
       <div v-for="(item, i) in info[0]" :key="i">
-        <!-- {{item}}
-        {{item.id}}-->
-        {{ i}}-----------------------{{ itemDialog[i]}}
         <v-flex xs12 sm6 md3 style="float:left">
           <div class="item">
             <v-dialog v-model="itemDialog[i]" max-width="350" max-height="350">
@@ -126,64 +111,6 @@
         </v-flex>
       </div>
     </div>
-
-    <!-- <div class="wrapper"> -->
-    <!-- 파이어베이스로 바꿔서 가져온애들을 나열하는 걸로 수정해야한다. -->
-    <!-- <div v-for="(music, i) in musicTitle" :key="i">
-        <div v-for="(video, ii) in videoUrl" :key="ii">
-          <v-flex xs12 sm6 md3 style="float:left">
-            <div
-              class="item"
-              v-if="
-                video.title.substring(0, video.title.length - 4) ===
-                  music.title.substring(0, music.title.length - 4)
-              "
-            >
-              <v-dialog max-width="500">
-    <template v-slot:activator="{ on }">-->
-    <!-- 이걸 클릭할때 해당것에 필요한 정보를 가져오게 한다. -->
-    <!-- methods 필요 -->
-    <!-- <div class="polaroid" v-on="on">
-                    <img :src="music.url" />
-    <br />-->
-    <!-- title을 각 제목으로 수정 -->
-    <!-- <span class="caption" v-text="music.title.substring(0, music.title.length - 4)"></span>
-                  </div>
-                </template>
-                <v-card id="modal">
-                  <p>{{video.title}}</p>
-                  <p>{{music.title}}</p>
-
-                  <div>
-    <p>제목</p>-->
-    <!-- 비디오 src 추가 -->
-    <!-- <video width="500" ref="video" controls>
-                      <source :src="video.url" type="video/mp4" />
-                    </video>
-                    <p>게시자</p>
-                    <p>내용</p>
-
-                    <span>좋아요 수</span>
-    <br />-->
-    <!-- true면 -->
-    <!-- <v-icon color="pink">mdi-thumb-up</v-icon> -->
-    <!-- false면 -->
-    <!-- <v-icon color="gray">mdi-thumb-down</v-icon> -->
-    <!-- <br /> -->
-    <!-- axios 좋아요 연결 -->
-    <!-- 이미 사용자가 좋아요를 한 번 누른 영상이라면 더이상 누룰 수 없게 조절해야한다. -->
-    <!-- <v-btn>동영상 좋아요</v-btn> -->
-    <!-- 
-                    <v-btn>나가기</v-btn>
-                    <br />
-                  </div>
-                </v-card>
-              </v-dialog>
-            </div>
-          </v-flex>
-        </div>
-    </div>-->
-    <!-- </div> -->
   </div>
 </template>
 
@@ -226,7 +153,7 @@ export default {
       // this.itemDialog[idx] = false;
       // 값도 바뀌고 인지도 하도록 해야함
       // https://kr.vuejs.org/v2/guide/reactivity.html
-      this.$set(this.itemDialog,idx,false)
+      this.$set(this.itemDialog, idx, false);
       console.log(this.itemDialog[idx]);
     },
     detectFilesVideo(fileList) {
@@ -626,5 +553,12 @@ img {
   right: 5%;
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2);
   transition: all 0.35s;
+}
+
+#bg_feed{
+  background-image : url("../../assets/images/bg_showoff.png");
+  background-repeat: repeat;
+  width:100vw;
+  height:auto;
 }
 </style>

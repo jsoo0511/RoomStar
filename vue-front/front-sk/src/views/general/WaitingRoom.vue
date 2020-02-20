@@ -1,16 +1,22 @@
 <template>
   <div id="waitingRooms">
-    <v-btn @click="singingButton()">노래하기</v-btn>
+    <!-- <v-btn @click="singingButton()">노래하기</v-btn> -->
     <swiper :options="swiperOption">
       <!-- swipter-slide 부분을 v-for로 처리해야 할 것 같은데, -->
       <swiper-slide
-        @click="watchingButton(roomInfo.room_id, $event)"
         :key="index"
         v-for="(roomInfo, index) in allRoomInfo"
+        
       >
-        <v-row id="swiper_row">
+
+        <v-row id="swiper_row" @click="watchingButton(roomInfo.room_id)">
           <div class="card marginR">
-            <div class="card-image"></div>
+            <div class="card-image">
+              <v-img
+              :src="roomInfo.user1_img"
+              id="profile_card_image" width="307.2px" height="310.06px"
+            ></v-img>
+            </div>
             <div class="card-text">
               <span class="rank">{{roomInfo.user1_grade}}</span>
               <h2>{{roomInfo.user1}}</h2>
@@ -34,7 +40,12 @@
           <v-img src="../../assets/images/battle_vs2.png" id="vs_img"></v-img>
 
           <div class="card marginL">
-            <div class="card-image"></div>
+            <div class="card-image">
+              <v-img
+              :src="roomInfo.user2_img"
+              id="profile_card_image" width="307.2px" height="310.06px"
+            ></v-img>
+            </div>
             <div class="card-text">
               <span class="rank">{{roomInfo.user2_grade}}</span>
               <h2>{{roomInfo.user2}}</h2>
@@ -65,7 +76,7 @@
           <v-btn @click="watchingButton(roomInfo.room_id, $event)">시청하기</v-btn>
       </ul>
     -->
-    <p>대기인원: {{ waitingNumofPeople }}</p>
+    <!-- <p>대기인원: {{ waitingNumofPeople }}</p> -->
   </div>
 </template>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -75,14 +86,14 @@ import axios from "axios";
 
 var swiper = null;
 
-var waitingNumofPeople = 0;
+// var waitingNumofPeople = 0;
 export default {
   name: "WaitingRoom",
   components: {},
   data() {
     return {
       allRoomInfo: [],
-      // waitingNumofPeople: 0
+      waitingNumofPeople: 0,
       swiperOption: {
         effect: "coverflow",
         grabCursor: true,
@@ -107,10 +118,10 @@ export default {
       console.log(userid);
       this.$store.dispatch("changeToSinger", 1);
       this.$session.set("singerOrWatcherStatus", 1);
-      
+      // this.$store.dispatch("changeToSinger", 1);
 
       axios
-        .put(process.env.VUE_APP_SERVER_IP+"/Enter_room/" + userid)
+        .put(process.env.VUE_APP_SERVER_IP + "/Enter_room/" + userid)
         .then(response => {
           this.$session.set("roomid", response.data.room_id);
           this.$router.push("/GameRoom");
@@ -122,8 +133,12 @@ export default {
     },
     // 시청하기를 누르면 해당 방으로 이동
     watchingButton(room_id) {
+      console.log(room_id)
+      console.log("===========================");
+      
       const userid = this.$session.get("userId");
       const userNickname = this.$session.get("userNickname");
+      this.$session.set("roomId", room_id);
       console.log(userid, userNickname);
 
       let data = {
@@ -133,25 +148,14 @@ export default {
       };
       this.$store.dispatch("changeToWatcher", 2);
       this.$session.set("singerOrWatcherStatus", 2);
+
       axios
-        .post(process.env.VUE_APP_SERVER_IP+"/Insert_watching", data)
+        .post(process.env.VUE_APP_SERVER_IP + "/Insert_watching", data)
         .then(response => {
           console.log(response);
           // 해당 room으로 이동
-          switch (room_id) {
-            case 1:
-              this.$router.push("/firstGameRoom"); // firstGameRoom
-              break;
-            case 2:
-              this.$router.push("/secondGameRoom");
-              break;
-            case 3:
-              this.$router.push("/thirdGameRoom.vue");
-              break;
-            case 4:
-              this.$router.push("/fourthGameRoom.vue");
-              break;
-          }
+          console.log('들어갈때 session확인',this.$session)
+          this.$router.push("/GameRoom");
         })
         .catch(e => {
           console.log("error: ", e);
@@ -164,11 +168,14 @@ export default {
     const userid = this.$session.get("userId");
     console.log(userid);
     axios
-      .post(process.env.VUE_APP_SERVER_IP+"/Insert_waiting/" + userid)
+      .post(process.env.VUE_APP_SERVER_IP + "/Insert_waiting/" + userid)
       .then(response => {
-        for (let i = 0; i < 4; i++) {
+        console.log('insert_waiting', response)
+        console.log(response.data.roomViewInfo)
+        for (let i = 0; i < 5; i++) {
           this.allRoomInfo.push(response.data.roomViewInfo[i]);
         }
+        console.log(this.allRoomInfo[0])
         // 대기인원수
         this.waitingNumofPeople = response.data.waitingList.length;
         console.log(this.waitingNumofPeople);
@@ -208,6 +215,7 @@ export default {
 
 .card-image {
   grid-area: image;
+  
 }
 .card-text {
   grid-area: text;
@@ -248,7 +256,7 @@ export default {
   grid-template-rows: 1fr;
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
-  background: rgb(255, 7, 110);
+  background:#FFCE54
 }
 
 .card-stats .stat {
@@ -288,6 +296,7 @@ export default {
   height: 76vh;
 }
 #vs_img {
+  z-index: 1 !important;
   position: fixed;
   margin-top: 41%;
   margin-left: 43%;
