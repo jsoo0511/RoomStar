@@ -14,7 +14,7 @@
           </div>
         </v-flex>
           <div class="vote1_component">
-            <SelectMusic1 />
+            <SelectMusic />
             <Vote1 :socket="this.socket"/>
           </div>
         <v-flex xs6 md6>
@@ -30,7 +30,7 @@
           </div>
         </v-flex>
           <div class="vote2_component">
-            <SelectMusic2 />
+            <SelectMusic />
             <Vote2 :socket="this.socket"/>
           </div>
       <button id="outbtn" @click="$router.push('/')">나가기</button>
@@ -49,8 +49,7 @@ import axios from "axios";
 import Chat from "./Chat.vue";
 import Vote1 from "./Vote1.vue";
 import Vote2 from "./Vote2.vue";
-import SelectMusic1 from "./SelectMusic1.vue";
-import SelectMusic2 from "./SelectMusic2.vue";
+import SelectMusic from "./SelectMusic.vue";
 
 import { mapState, mapGetters, mapActions } from "vuex";
 
@@ -98,8 +97,7 @@ export default {
     Chat,
     Vote1,
     Vote2,
-    SelectMusic1,
-    SelectMusic2
+    SelectMusic
   },
   methods: {
     getData(){
