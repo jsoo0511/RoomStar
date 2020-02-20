@@ -6,7 +6,7 @@
 
     <v-dialog v-model="dialog" id="dialog" max-width="30vw">
       <template v-slot:activator="{ on }">
-        <v-btn dark v-on="on">노래고르는버튼</v-btn>
+        <v-btn dark v-on="on">노래 선택하기</v-btn>
       </template>
 
       <v-card>

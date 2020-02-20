@@ -1,38 +1,38 @@
 <template>
   <div id="gameRoom">
-    <v-layout row wrap align-center>
-      <v-flex xs6 md6>
-        <div id="firstWebCam">
-          <video
-            playsinline
-            id="p1_video"
-            autoplay
-            preload="metadata"
-            style="height:100vh; width:auto;"
-            poster="@/assets/images/camPoster.jpg"
-          ></video>
-        </div>
-      </v-flex>
-      <div class="vote1_component">
-        <SelectMusic1 />
-        <Vote1 :socket="this.socket" />
-      </div>
-      <v-flex xs6 md6>
-        <div id="secondWebCam">
-          <video
-            playsinline
-            id="p2_video"
-            autoplay
-            preload="metadata"
-            style="height:100vh; width:auto;"
-            poster="@/assets/images/camPoster.jpg"
-          ></video>
-        </div>
-      </v-flex>
-      <div class="vote2_component">
-        <SelectMusic2 />
-        <Vote2 :socket="this.socket" />
-      </div>
+      <v-layout row wrap align-center>
+        <v-flex xs6 md6>
+          <div id="firstWebCam">
+            <video
+              playsinline
+              id="p1_video"
+              autoplay
+              preload="metadata"
+              style="height:100vh; width:auto;"
+              poster="@/assets/images/camPoster.jpg"
+            ></video>
+          </div>
+       </v-flex>
+          <div class="vote1_component">
+            <SelectMusic v-if="singerOrWatcherStatus == 1"/>
+            <Vote1 :socket="this.socket"/>
+          </div>
+        <v-flex xs6 md6>
+          <div id="secondWebCam">
+            <video
+              playsinline
+              id="p2_video"
+              autoplay
+              preload="metadata"
+              style="height:100vh; width:auto;"
+              poster="@/assets/images/camPoster.jpg"
+            ></video>
+          </div>
+        </v-flex>
+          <div class="vote2_component">
+            <SelectMusic v-if="singerOrWatcherStatus == 1"/>
+            <Vote2 :socket="this.socket"/>
+          </div>
       <button id="outbtn" @click="backButton">나가기</button>
     </v-layout>
 
@@ -49,8 +49,7 @@ import axios from "axios";
 import Chat from "./Chat.vue";
 import Vote1 from "./Vote1.vue";
 import Vote2 from "./Vote2.vue";
-import SelectMusic1 from "./SelectMusic1.vue";
-import SelectMusic2 from "./SelectMusic2.vue";
+import SelectMusic from "./SelectMusic.vue";
 
 import { mapState, mapGetters, mapActions } from "vuex";
 
@@ -95,8 +94,7 @@ export default {
     Chat,
     Vote1,
     Vote2,
-    SelectMusic1,
-    SelectMusic2
+    SelectMusic
   },
   methods: {
     backButton() {
