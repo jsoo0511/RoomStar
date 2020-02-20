@@ -11,7 +11,12 @@
 
         <v-row id="swiper_row" @click="watchingButton(roomInfo.room_id)">
           <div class="card marginR">
-            <div class="card-image"></div>
+            <div class="card-image">
+              <v-img
+              :src="roomInfo.user1_img"
+              id="profile_card_image" width="307.2px" height="310.06px"
+            ></v-img>
+            </div>
             <div class="card-text">
               <span class="rank">{{roomInfo.user1_grade}}</span>
               <h2>{{roomInfo.user1}}</h2>
@@ -35,7 +40,12 @@
           <v-img src="../../assets/images/battle_vs2.png" id="vs_img"></v-img>
 
           <div class="card marginL">
-            <div class="card-image"></div>
+            <div class="card-image">
+              <v-img
+              :src="roomInfo.user2_img"
+              id="profile_card_image" width="307.2px" height="310.06px"
+            ></v-img>
+            </div>
             <div class="card-text">
               <span class="rank">{{roomInfo.user2_grade}}</span>
               <h2>{{roomInfo.user2}}</h2>
@@ -66,7 +76,7 @@
           <v-btn @click="watchingButton(roomInfo.room_id, $event)">시청하기</v-btn>
       </ul>
     -->
-    <p>대기인원: {{ waitingNumofPeople }}</p>
+    <!-- <p>대기인원: {{ waitingNumofPeople }}</p> -->
   </div>
 </template>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -246,7 +256,7 @@ export default {
   grid-template-rows: 1fr;
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
-  background: rgb(255, 7, 110);
+  background:#FFCE54
 }
 
 .card-stats .stat {
@@ -286,6 +296,7 @@ export default {
   height: 76vh;
 }
 #vs_img {
+  z-index: 1 !important;
   position: fixed;
   margin-top: 41%;
   margin-left: 43%;
