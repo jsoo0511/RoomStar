@@ -65,6 +65,7 @@
           <v-list-item-content>
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item-content>
+
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -87,7 +88,7 @@ export default {
       items: [
         { title: "홈으로 가기", icon: "mdi-home-variant", links: "/" },
         { title: "마이페이지", icon: "mdi-panda", links: "/mypage2/" },
-        { title: "노래 배틀하기", icon: "mdi-microphone", links: "/gameRoom/" },
+        // { title: "노래 배틀하기", icon: "mdi-microphone", links: "/gameRoom/" },
         { title: "배틀 시청하기", icon: "mdi-comment-alert-outline", links: "/waitingRoom/" },
         { title: "노래 자랑하기", icon: "mdi-view-dashboard", links: "/SharingPage/" },
         { title: "개발자 소개", icon: "mdi-account-multiple", links: "/Introduce/" },

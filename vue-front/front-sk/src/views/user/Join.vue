@@ -1,6 +1,6 @@
  <template>
   <div>
-    <h1>가입하기</h1>
+    <h1>Join</h1>
     <div>
       <div>
         <input v-model="nickName" id="nickname" placeholder="닉네임을 입력하세요." type="text" />
@@ -15,7 +15,7 @@
           placeholder="이메일을 입력하세요."
           type="text"
         />
-        <label for="email">이메일이다</label>
+        <label for="email">이메일</label>
         <div class="error-text" v-if="error.email">{{error.email}}</div>
       </div> 
 
@@ -70,7 +70,7 @@
         </v-card>
       </v-dialog>
     </v-row>
-
+<br>
     <button type="submit" @click="signUp()">가입하기</button>
   </div>
 </template>
