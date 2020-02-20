@@ -287,13 +287,9 @@
                         <div class="headline" style="color:rgba(183,128,203);">Information</div>
                       </v-card-title>
                       <v-card-text style="color:rgba(230,214,237);">
-                        InformationInformationInformationInformationInfo
-                        InformationInformationInformationInformationInfo
-                        InformationInformationInformationInformationInfo
-                        InformationInformationInformationInformationInfo
-                        InformationInformationInformationInformationInfo
-                        InformationInformationInformationInformationInfo
-                        InformationInformationInformation
+                           노래를 사랑하는 당신! 지금 바로 룸스타를 사용해보세요.
+                        초특급 이벤트, 투표를 통해 승패를 결정하는 시스템!
+                        많은 참가자에게 제공되는 상품들도 놓치지 말고 받아가세요.
                       </v-card-text>
                     </v-card>
                   </v-flex>
