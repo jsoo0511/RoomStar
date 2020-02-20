@@ -6,6 +6,7 @@
     <!-- 업로드 하는 곳 따로 만들기 -->
     <!-- 제목, 내용, 게시자닉네임, 게시자아이디, 이미지 == null 이면 profile사진으로, (필수)동영상파일, 좋아요수-->
     <!-- crud -->
+    <h1 style="color:white">누구나 스타가 될 수 있는 당신의 끼를 보여주세요.</h1>
 
     <v-dialog v-model="uploadDialog" id="dialog" max-width="350">
       <template v-slot:activator="{ on }">
@@ -463,6 +464,10 @@ img {
   max-width: 100%;
   height: auto;
 }
+.download {
+  background: url("https://cdn.pixabay.com/photo/2015/01/07/16/37/wood-591631_1280.jpg")
+    no-repeat;
+}
 .wrapper {
   width: 100%;
   padding: 0 2rem;
@@ -555,10 +560,10 @@ img {
   transition: all 0.35s;
 }
 
-#bg_feed{
-  background-image : url("../../assets/images/bg_showoff.png");
+#bg_feed {
+  background-image: url("../../assets/images/bg_showoff.png");
   background-repeat: repeat;
-  width:100vw;
-  height:auto;
+  width: 100vw;
+  height: auto;
 }
 </style>
