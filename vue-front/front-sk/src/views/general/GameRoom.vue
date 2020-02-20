@@ -431,7 +431,9 @@ export default {
             t_pc = this.battle_connections[data.from_idx];
           }
         }
-        t_pc.setRemoteDescription(new RTCSessionDescription(data.message));
+        if(this.user_identification=="singer"){
+          t_pc.setRemoteDescription(new RTCSessionDescription(data.message));
+        }
       } else if (data.message.type === "candidate") {
         let candidate = new RTCIceCandidate({
           sdpMLineIndex: data.message.label,
