@@ -15,13 +15,16 @@ import router from "@/routes";
 import axios from "axios";
 import jwt_decode from 'jwt-decode';
 
+
+//"401101505375-23se56k9sj4d245aaleqgj9m5d6n602k.apps.googleusercontent.com"
+// 1046038191658-1ds35u75rq3gn5vved5ltomsvf5bdi09.apps.googleusercontent.com
 export default {
   data() {
     return {
       // client_id is the only required property but you can add several more params, full list down bellow on the Auth api section
       params: {
         client_id:
-          "401101505375-23se56k9sj4d245aaleqgj9m5d6n602k.apps.googleusercontent.com"
+          "1046038191658-1ds35u75rq3gn5vved5ltomsvf5bdi09.apps.googleusercontent.com"
       },
       // client_secret : xqVdC-6FJqgLZOSp3JndOKSK
       // only needed if you want to render the button with the google ui
