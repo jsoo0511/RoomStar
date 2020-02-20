@@ -27,7 +27,6 @@
                 id="scroll-down"
                 class="scroll-down"
                 address="true"
-                @click="checked"
               ></a>
             </v-layout>
           </v-video-parallax>
@@ -272,10 +271,11 @@
           </v-layout>
         </v-container>
       </section>-->
-        <section id="paral_section" style="padding-top:50px;">
-          <v-parallax src="../../assets/images/welcome.png" id="paral">
-            <h1 style="color:#fff; text-align:center;">ROOM ☆ STAR</h1>
-          </v-parallax>
+        <section id="paral_section">
+              <img
+                src="../../assets/images/roomstar.png"
+                style="margin-top:20vh; margin-left:41vw; width:230px; height:auto;"
+              />
           <v-container grid-list-xl>
             <v-layout column wrap>
               <v-flex> </v-flex>
@@ -284,9 +284,9 @@
                   <v-flex xs12 sm4>
                     <v-card flat class="transparent">
                       <v-card-title primary-title class="layout justify-center">
-                        <div class="headline">Information</div>
+                        <div class="headline" style="color:rgba(183,128,203);">Information</div>
                       </v-card-title>
-                      <v-card-text>
+                      <v-card-text style="color:rgba(230,214,237);">
                         InformationInformationInformationInformationInfo
                         InformationInformationInformationInformationInfo
                         InformationInformationInformationInformationInfo
@@ -300,9 +300,9 @@
                   <v-flex xs12 sm4 offset-sm1>
                     <v-card flat class="transparent">
                       <v-card-title primary-title class="layout justify-center">
-                        <div class="headline">Contact us</div>
+                        <div class="headline" style="color:rgba(255,177,62);">Contact us</div>
                       </v-card-title>
-                      <v-card-text>
+                      <v-card-text style="color:rgba(219,132,0);">
                         삼성 청년 SW 아카데미 2기 4반 ★7조★ 1등 ㄱㄱ!!
                       </v-card-text>
                       <v-list class="transparent">
@@ -313,7 +313,7 @@
                             >
                           </v-list-item-action>
                           <v-list-item-content>
-                            <v-list-item-title>010-9559-5296</v-list-item-title>
+                            <v-list-item-title style="color:rgba(219,132,0);">010-9559-5296</v-list-item-title>
                           </v-list-item-content>
                         </v-list-item>
                         <v-list-item>
@@ -323,7 +323,7 @@
                             >
                           </v-list-item-action>
                           <v-list-item-content>
-                            <v-list-item-title
+                            <v-list-item-title style="color:rgba(219,132,0);"
                               >서울특별시 강남구 역삼동 테헤란로
                               212</v-list-item-title
                             >
@@ -336,7 +336,7 @@
                             >
                           </v-list-item-action>
                           <v-list-item-content>
-                            <v-list-item-title
+                            <v-list-item-title style="color:rgba(219,132,0);"
                               >qpalzmfghtgv@naver.com</v-list-item-title
                             >
                           </v-list-item-content>
@@ -693,12 +693,8 @@ v-content__wrap {
   filter: grayscale(0%);
 }
 #paral_section {
-  background-color: #eee;
-}
-#paral {
-  height: 200px !important;
-  margin-left: 0vw;
-  width: 100vw;
+  padding-top:10px; background-image:url('../../assets/images/bg_solo4.png');
+  color:white;
 }
 </style>
 
@@ -748,5 +744,9 @@ v-content__wrap {
   100% {
     width: 100%;
   }
+}
+
+.headline{
+  color:white;
 }
 </style>
