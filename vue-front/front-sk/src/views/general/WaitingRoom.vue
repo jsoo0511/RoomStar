@@ -208,6 +208,7 @@ export default {
 
 .card-image {
   grid-area: image;
+  
 }
 .card-text {
   grid-area: text;
