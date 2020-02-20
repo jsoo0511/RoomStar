@@ -1,5 +1,5 @@
 <template>
-  <div id="bg_feed">
+  <div class="bg_feed">
     <br />
     <br />
     <br />
@@ -57,12 +57,9 @@
       <div v-for="(item, i) in info[0]" :key="i">
         <v-flex xs12 sm6 md3 style="float:left">
           <div class="item">
-            <v-dialog v-model="itemDialog[i]" max-width="350" max-height="350">
-              <!--  -->
+            <v-dialog v-model="itemDialog[i]" max-width="500" max-height="350">
               <template v-slot:activator="{ on }">
                 <!-- 이걸 클릭할때 해당것에 필요한 정보를 가져오게 한다. -->
-                <!-- methods 필요 -->
-
                 <div @click="checkLike(userId, item.id)" class="polaroid" v-on="on">
                   <img :src="item.imgURL" />
                   <br />
@@ -72,18 +69,18 @@
               </template>
               <!-- item하나 선택하고 -> 그 아이템에 관한 id값으로 axios로 데이터 받고
               그 데이터 받은걸 v-card에 갱신-->
-
               <v-card id="modal">
                 <div>
-                  <p>{{item.title}}</p>
-                  <!-- 비디오 src 추가 -->
-                  <video width="500" ref="video" controls>
+                  <p id="ptag">{{item.title}}</p>
+                  <!-- 비디오 src 추가 max-width:640px; -->
+                  <video style="width: 100%;height: auto" ref="video" controls>
                     <source :src="item.videoURL" type="video/mp4" />
                   </video>
-                  <p>게시자: {{item.nickname}}</p>
-                  <p>내용: {{item.contents}}</p>좋아요 수:
-                  <p id="newLike">{{ item.like_num }}</p>
-                  {{item.videoURL}}
+                  <p class="resultOwner">게시자:{{item.nickname}}</p>
+                  <p class="resultContent">내용: {{item.contents}}</p>
+                  <!-- 좋아요 수: -->
+                  <!-- <p id="newLike">{{ item.like_num }}</p> -->
+                  <!-- {{item.videoURL}} -->
                   <!-- 열자마자 좋아요 누른사람인지 아닌지 판단해주는것 서버에 요청 -->
                   <!-- true면 -->
                   <v-icon
@@ -98,12 +95,15 @@
                     v-else-if="checkLikeStatus === 'true'"
                   >mdi-thumb-up</v-icon>
                   <br />
-                  <v-btn @click="dClose(i)">나가기</v-btn>
-
-                  <br />
-                  {{userId}}
-                  {{ item.userid}}
-                  <v-btn v-if="userId == item.userid" @click="deleteItem(item.id)">삭제</v-btn>
+                  <v-btn text small color="black" type="submit" @click="dClose(i)">나가기</v-btn>
+                  <v-btn
+                    text
+                    small
+                    color="black"
+                    type="submit"
+                    v-if="userId == item.userid"
+                    @click="deleteItem(item.id)"
+                  >삭제</v-btn>
                   <br />
                 </div>
               </v-card>
@@ -148,14 +148,7 @@ export default {
 
   methods: {
     dClose(idx) {
-      console.log("idx = ", idx);
-      console.log(this.itemDialog[idx]);
-      console.log(this);
-      // this.itemDialog[idx] = false;
-      // 값도 바뀌고 인지도 하도록 해야함
-      // https://kr.vuejs.org/v2/guide/reactivity.html
       this.$set(this.itemDialog, idx, false);
-      console.log(this.itemDialog[idx]);
     },
     detectFilesVideo(fileList) {
       Array.from(Array(fileList.length).keys()).map(x => {
@@ -229,9 +222,7 @@ export default {
         })
         .catch(error => {
           console.log(error);
-          // this.loading = false;
         });
-      // 데이터도 새로 그리기
       axios
         .get(process.env.VUE_APP_SERVER_IP + "/get_burst/" + id)
         .then(response => {
@@ -239,7 +230,6 @@ export default {
         })
         .catch(error => {
           console.log(error);
-          // this.loading = false;
         });
     },
     deleteItem(id) {
@@ -250,16 +240,13 @@ export default {
         })
         .catch(error => {
           console.log(error);
-          // this.loading = false;
         });
     },
 
     uploadContent(data) {
-      // if imageDownloadUrl === null  => profile default image 전달
       console.log(data["newTitle"], data["newContent"]);
       console.log(this.userNickname, this.userId, this.profile);
       console.log(this.videoDownloadUrl, this.imageDownloadUrl);
-      // 안들어오면 user profile로 대신 넣어준다.
       if (this.imageDownloadUrl === null) {
         this.imageDownloadUrl = this.profile;
       }
@@ -268,7 +255,6 @@ export default {
         this.imageDownloadUrl =
           "https://firebasestorage.googleapis.com/v0/b/test-ff9ab.appspot.com/o/%EC%95%84%EC%9D%B4%EC%9C%A0-%EA%B8%88%EC%9A%94%EC%9D%BC%EC%97%90%20%EB%A7%8C%EB%82%98%EC%9A%94.jpg?alt=media&token=11a481ff-501b-48af-a37a-31ce5e9b93b0";
       }
-
       let params = {
         videoURL: this.videoDownloadUrl,
         like_num: 0,
@@ -279,7 +265,6 @@ export default {
         contents: data["newContent"]
       };
       console.log(params);
-
       // 보내서 확인
       console.log("sdds");
       axios
@@ -288,12 +273,10 @@ export default {
           console.log("response for insert_burst", response);
           // 등록이 되면 바로 동적으로 씌워져야하는데, update를 하게 해야한다.
           // 이런경우 watch를 사용하는게 맞겠지?
-          // this.info.push(params)
           this.uploadDialog = false;
         })
         .catch(error => {
           console.log(error);
-          // this.loading = false;
         });
     }
   },
@@ -351,7 +334,6 @@ export default {
   },
   created() {
     // 모른 정보를 DB에서 불러온다.
-
     // 다른 api로 변경될 것
     axios
       .get(process.env.VUE_APP_SERVER_IP + "/get_burst")
@@ -366,30 +348,13 @@ export default {
           console.log("=================");
         }
         console.log(this.itemDialog);
-        // this.itemDialog
         this.info.push(response.data.data);
         console.log("clean", this.info[0]);
-
-        //
-        // if (music.title[music.title.length - 1] == "g") {
-        //   this.musicTitle.push(music);
-        // }
-        // if (video.title[video.title.length - 1] == "4") {
-        //   this.videoUrl.push(video);
-        // }
       })
       .catch(error => {
         console.log(error);
-        // this.loading = false;
       });
-
-    // 이후 삭제 앞으로 DB에서 불러올 것
-    // firebase list에 있는 항목들을 불러옴
-
     var storageRef = firebase.storage().ref();
-    // console.log("1234");
-    // console.log(storageRef);
-
     storageRef
       .listAll()
       .then(result => {
@@ -415,7 +380,6 @@ export default {
         result.items.forEach(urlRef => {
           let video = {};
           video.title = urlRef.name;
-
           urlRef
             .getDownloadURL()
             .then(url => {
@@ -441,9 +405,25 @@ export default {
   border-radius: 2px;
   overflow: hidden;
 }
-
+#modal {
+  margin: 0 auto;
+  border-radius: 2px;
+  overflow: hidden;
+}
+#ptag {
+  font-size: 30px;
+  margin-left: 1em;
+}
 #dialog {
   max-width: 350px;
+}
+
+.resultOwner {
+  font-family: "Indie Flower";
+}
+
+.resultContent {
+  font-family: "Indie Flower";
 }
 * {
   box-sizing: border-box;
@@ -465,19 +445,19 @@ img {
   height: auto;
 }
 .download {
-  height:30vh !important;
-  width:20vw !important;
-  margin-top:-20vh;
-  margin-left:70vw;
-  background-image : url("../../../src/assets/images/btntree.png")
+  height: 30vh !important;
+  width: 20vw !important;
+  margin-top: -20vh;
+  margin-left: 70vw;
+  background-image: url("../../../src/assets/images/btntree.png");
 }
 
-.download:hover{
-  height:30vh !important;
-  width:20vw !important;
-  margin-top:-20vh;
-  margin-left:70vw;
-  background-image : url("../../../src/assets/images/btntree2.png")
+.download:hover {
+  height: 30vh !important;
+  width: 20vw !important;
+  margin-top: -20vh;
+  margin-left: 70vw;
+  background-image: url("../../../src/assets/images/btntree2.png");
 }
 /* background: url("https://cdn.pixabay.com/photo/2015/01/07/16/37/wood-591631_1280.jpg")
     no-repeat; */
@@ -573,15 +553,15 @@ img {
   transition: all 0.35s;
 }
 
-#bg_feed {
+.bg_feed {
   background-image: url("../../assets/images/bg_showoff.png");
   background-repeat: repeat;
   width: 100vw;
   height: auto;
 }
 
-#showOff_text{
-  text-align:center;
-  font-size:3rem;
+#showOff_text {
+  text-align: center;
+  font-size: 3rem;
 }
 </style>
