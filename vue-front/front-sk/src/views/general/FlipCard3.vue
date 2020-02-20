@@ -20,7 +20,7 @@
         <h2>WATCH</h2>
 
         <!-- <button id="link_btn2">시청하기</button> -->
-        <button id="link_btn2" @click="$router.push('/waitingRoom/')">시청하기</button>
+        <button id="link_btn2" @click="pushToWaiting">시청하기</button>
       </article>
     </section>
     <section>
@@ -28,7 +28,7 @@
         <h2>CONTEST</h2>
 
         <!-- <button id="link_btn3">자랑하기</button> -->
-        <button id="link_btn3" @click="$router.push('/SharingPage/')">자랑하기</button>
+        <button id="link_btn3" @click="pushToSharing">자랑하기</button>
       </article>
     </section>
     <section>
@@ -40,6 +40,7 @@
 <script>
 import router from "@/routes";
 import axios from "axios";
+import swal from "sweetalert";
 export default {
   name: "flipcard3",
   components: {},
@@ -50,24 +51,59 @@ export default {
   },
 
   methods: {
-    // 추가 
+    // 추가
     singingButton() {
-      const userid = this.$session.get("userId");
-      console.log("----", this.userid, userid);
-      this.$store.dispatch("changeToSinger", 1);
-      this.$session.set("singerOrWatcherStatus", 1);
+      if (this.isUser) {
+        const userid = this.$session.get("userId");
+        console.log("----", this.userid, userid);
+        this.$store.dispatch("changeToSinger", 1);
+        this.$session.set("singerOrWatcherStatus", 1);
 
-      axios
-        .put(process.env.VUE_APP_SERVER_IP + "/Enter_room/" + userid)
-        .then(response => {
-          console.log(response)
-          this.$session.set("roomId", response.data.room_id);
-          this.$router.push("/GameRoom");
-        })
-        .catch(e => {
-          console.log("error: ", e);
-          alert("모든 방이 차있습니다.");
+        axios
+          .put(process.env.VUE_APP_SERVER_IP + "/Enter_room/" + userid)
+          .then(response => {
+            console.log(response);
+            this.$session.set("roomId", response.data.room_id);
+            this.$router.push("/GameRoom");
+          })
+          .catch(e => {
+            console.log("error: ", e);
+
+            swal({
+              title: "모든 방이 차있습니다.",
+              buttons: "확인"
+              // icon: "warning"
+            });
+          });
+      } else if (!this.isUser) {
+        swal({
+          title: "로그인이 필요합니다.",
+          buttons: "확인"
+          // icon: "warning"
         });
+      }
+    },
+    pushToWaiting() {
+      if (this.isUser) {
+        this.$router.push("/waitingRoom/");
+      } else if (!this.isUser) {
+        swal({
+          title: "로그인이 필요합니다.",
+          buttons: "확인"
+          // icon: "warning"
+        });
+      }
+    },
+    pushToSharing() {
+      if (this.isUser) {
+        this.$router.push("/SharingPage/");
+      } else if (!this.isUser) {
+        swal({
+          title: "로그인이 필요합니다.",
+          buttons: "확인"
+          // icon: "warning"
+        });
+      }
     }
   }
 };
