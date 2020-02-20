@@ -44,7 +44,9 @@ export default {
   name: "flipcard3",
   components: {},
   data() {
-    return {};
+    return {
+      isUser: this.$store.state.isUser
+    };
   },
 
   methods: {
