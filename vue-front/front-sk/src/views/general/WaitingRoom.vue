@@ -172,8 +172,12 @@ export default {
       .then(response => {
         console.log('insert_waiting', response)
         console.log(response.data.roomViewInfo)
+        console.log(response.data.roomViewInfo[0].singer_num)
         for (let i = 0; i < 5; i++) {
+          // singer1 or singer2 한명이라도 있으면 보여주기
+          if (response.data.roomViewInfo[i].singer_num) {
           this.allRoomInfo.push(response.data.roomViewInfo[i]);
+          }
         }
         console.log(this.allRoomInfo[0])
         // 대기인원수

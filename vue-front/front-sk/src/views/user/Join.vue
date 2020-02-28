@@ -82,7 +82,7 @@ import axios from "axios";
 import PV from "password-validator";
 import * as EmailValidator from "email-validator";
 import TermPopup from "@/components/modal/TermPopup.vue";
-
+import swal from "sweetalert";
 // https://vuetifyjs.com/en/components/dialogs#modal
 // Overflowed
 
@@ -127,6 +127,9 @@ export default {
           .post(process.env.VUE_APP_SERVER_IP+"/insert/", data)
           .then(response => {
             console.log(response);
+                       swal({
+              title: "회원가입이 완료되었습니다."
+            });
             this.joinDialog = false
             this.$emit('update');
           })
@@ -134,6 +137,10 @@ export default {
             console.log(error);
             // 중복시 로긴 불가
             // this.loading = false;
+                      
+                       swal({
+              title: "에러가 발생했습니다."
+            });
           });
       }
       this.$nextTick(() => {
