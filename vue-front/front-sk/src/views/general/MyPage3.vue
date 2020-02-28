@@ -281,7 +281,7 @@ export default {
           ['5m', 'Total Downloads'],
         ],
       }
-    }
+    },
 };
 </script>
 
