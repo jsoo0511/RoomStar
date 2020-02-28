@@ -20,7 +20,7 @@ export default {
     return {
       params: {
         client_id:
-          "263255205373-rts238jq78d4fekjcikjgchcou6g2gii.apps.googleusercontent.com"
+          "263255205373-jmqe0biaeja2gh6to8kp3tep8c9s2irk.apps.googleusercontent.com"
       },
       renderParams: {
         width: 50,
