@@ -83,7 +83,7 @@
 <script>
 import router from "@/routes";
 import axios from "axios";
-
+import swal from "sweetalert";
 var swiper = null;
 
 // var waitingNumofPeople = 0;
@@ -178,6 +178,11 @@ export default {
           if (response.data.roomViewInfo[i].singer_num) {
           this.allRoomInfo.push(response.data.roomViewInfo[i]);
           }
+        }
+        if (this.allRoomInfo.length == 0) {
+                                 swal({
+              title: "현재 활성화된 방이 없습니다."
+            });
         }
         console.log(this.allRoomInfo[0])
         // 대기인원수
