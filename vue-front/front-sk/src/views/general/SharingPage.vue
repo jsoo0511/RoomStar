@@ -1,5 +1,9 @@
 <template>
-  <div class="bg_feed">
+<div id="test">
+  
+  <div v-show="show" id="demo">ddddddd</div>
+ 
+  <div class="bg_feed" v-show="!show">
     <br />
     <br />
     <br />
@@ -13,6 +17,7 @@
         <v-btn class="download" text v-on="on"></v-btn>
       </template>
       <v-card id="modalUpload">
+
         <div>파일업로드하는곳</div>
         <input placeholder="제목" v-model="newTitle" />
         <br />
@@ -113,6 +118,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -124,8 +130,11 @@ import axios from "axios";
 import router from "@/routes";
 
 export default {
+  
   data() {
     return {
+
+      show: true,
       musicTitle: [],
       videoUrl: [],
       info: [],
@@ -333,6 +342,9 @@ export default {
     }
   },
   created() {
+    this.show=true;
+
+    
     // 모른 정보를 DB에서 불러온다.
     // 다른 api로 변경될 것
     axios
@@ -384,7 +396,7 @@ export default {
             .getDownloadURL()
             .then(url => {
               video.url = url;
-              if (video.title[video.title.length - 1] == "4") {
+              if (video.title[video.title.length - 1] == "4"||video.title[video.title.length - 1] == "V") {
                 this.videoUrl.push(video);
               }
             })
@@ -392,6 +404,12 @@ export default {
         });
       })
       .catch(function(error) {});
+      
+      console.log(this.show);
+      setTimeout(() => {
+        this.show=false;
+}, 1000);
+      console.log(this.show);
   }
 };
 </script>
@@ -564,4 +582,23 @@ img {
   text-align: center;
   font-size: 3rem;
 }
+
+#test{
+    background-image: url("../../assets/images/bg_showoff.png");
+  background-repeat: repeat;
+  width: 100vw;
+  height: auto;
+}
+
+#demo{
+    width:100%;
+    height:100%;
+    position:fixed;
+    left:0px;
+    top:0px;
+    background: black;
+    z-index:1000; /* 이 값으로 레이어의 위치를 조정합니다. */
+}
+
+
 </style>
