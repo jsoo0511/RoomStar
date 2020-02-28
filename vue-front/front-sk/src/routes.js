@@ -26,6 +26,7 @@ import Downloader from './views/Downloader.vue'
 import tempFeed from './views/general/tempFeed.vue'
 import MixFeed from './views/general/MixFeed.vue'
 import MyPage2 from "./views/general/MyPage2.vue";
+import MyPage3 from "./views/general/MyPage3.vue";
 
 Vue.use(VueRouter)
 
@@ -125,5 +126,10 @@ export default [
     path:"/myPage2",
     name:"myPage2",
     component : MyPage2
+  },
+  {
+    path:"/myPage3",
+    name:"myPage3",
+    component : MyPage3
   },
 ];
