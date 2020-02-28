@@ -20,13 +20,13 @@
               <div class="layer" data-scene="3">,
                 <div
                   class="layer-image-wrapper"
-                   :style="{backgroundImage: 'url('+require('@/assets/images/jh/jh_1.jpg')+')'}">
+                   :style="{backgroundImage: 'url('+require('@/assets/images/jh/jh_4.jpg')+')', marginTop:'-20px'}">
               </div>
               </div>
                <div class="layer" data-scene="4">,
                 <div
                   class="layer-image-wrapper"
-                   :style="{backgroundImage: 'url('+require('@/assets/images/js/js_1.jpg')+')'}">
+                   :style="{backgroundImage: 'url('+require('@/assets/images/js/js_1.jpg')+')', marginTop:'-20px'}">
               </div>
               </div>
                <div class="layer" data-scene="5">,
@@ -61,13 +61,13 @@
               <div class="layer" data-scene="3">
                 <div
                   class="layer-image-wrapper"
-                   :style="{backgroundImage: 'url('+require('@/assets/images/jh/jh_2.jpg')+')'}">
+                   :style="{backgroundImage: 'url('+require('@/assets/images/jh/jh_1.jpg')+')'}">
               </div>
               </div>
               <div class="layer" data-scene="4">
                 <div
                   class="layer-image-wrapper"
-                  :style="{backgroundImage: 'url('+require('@/assets/images/js/js_1.jpg')+')'}">
+                  :style="{backgroundImage: 'url('+require('@/assets/images/js/js_3.jpg')+')'}">
               </div>
               </div>
               <div class="layer" data-scene="5">
@@ -81,15 +81,15 @@
               <div class="layer__wrapper">
                 <div class="layer layer-displayed" data-scene="1">
                   <span></span>
-                  <span>S/ Moda</span>
+                  <span>Leader</span>
                 </div>
                 <div class="layer" data-scene="2">
                   <span></span>
-                  <span>Muse Magazine</span>
+                  <span>Web Socket</span>
                 </div>
                 <div class="layer" data-scene="3">
                   <span></span>
-                  <span>Fashion Floor</span>
+                  <span>Front-End</span>
                 </div>
                  <div class="layer" data-scene="4">
                   <span></span>
@@ -97,7 +97,7 @@
                 </div>
                  <div class="layer" data-scene="5">
                   <span></span>
-                  <span>Muse Magazine</span>
+                  <span>Full Stack</span>
                 </div>
               </div>
               <button @click="switchLayer()">NEXT TALENT ></button>
@@ -120,13 +120,13 @@
                 <div class="layer" data-scene="3">
                   <div
                     class="layer-image-wrapper"
-                    :style="{backgroundImage: 'url('+require('@/assets/images/jh/jh_3.jpg')+')'}">
+                    :style="{backgroundImage: 'url('+require('@/assets/images/jh/jh_5.jpg')+')'}">
               </div>
                 </div>
                  <div class="layer" data-scene="4">
                   <div
                     class="layer-image-wrapper"
-                     :style="{backgroundImage: 'url('+require('@/assets/images/js/js_1.jpg')+')'}">
+                     :style="{backgroundImage: 'url('+require('@/assets/images/js/js_4.jpg')+')'}">
               </div>
                 </div>
                  <div class="layer" data-scene="5">
@@ -152,13 +152,13 @@
                 <div class="layer" data-scene="3">
                   <div
                     class="layer-image-wrapper"
-                     :style="{backgroundImage: 'url('+require('@/assets/images/jh/jh_4.jpg')+')'}">
+                     :style="{backgroundImage: 'url('+require('@/assets/images/jh/jh_2.jpg')+')'}">
               </div>
                 </div>
                  <div class="layer" data-scene="4">
                   <div
                     class="layer-image-wrapper"
-                     :style="{backgroundImage: 'url('+require('@/assets/images/js/js_1.jpg')+')'}">
+                     :style="{backgroundImage: 'url('+require('@/assets/images/js/js_2.jpg')+')'}">
               </div>
                 </div>
                  <div class="layer" data-scene="5">

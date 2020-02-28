@@ -2,8 +2,7 @@
 <div id="mypage2">
 <div class="max" style="height:100%;" >
     <section class="banner">
-        <v-parallax
-          :height="$vuetify.breakpoint.smAndDown ? 800 : 700"
+        <v-parallax id="paral"
           src="../../assets/images/mypage_banner.jpg"
         >
           <v-container fill-height>
@@ -28,7 +27,7 @@
           </v-container>
         </v-parallax>
     </section>
-    <section id="mypage_content">
+    <section class="mypage_content">
       <div class="options" >
         <div class="option active" id="profile_once" :style="{'--optionBackground':'url('+profile+')'}">
                 <div class="text" STYLE="writing-mode: tb-rl">NickName</div> <!--작은 화면일때-->
@@ -291,7 +290,7 @@ data(){
       $(function() {
       $("#scroll-down").click(function() {
         $("html, body").animate(
-          { scrollTop: $("#mypage_content").offset().top },
+          { scrollTop: $(".mypage_content").offset().top },
           "slow"
         );
         return false;
@@ -312,12 +311,11 @@ $optionDefaultColours: #ED5565,white,black,#2ECC71,radial-gradient(ellipse farth
 }
 
 section {
-  height : 80vh;
-  background-image:url("../../assets/images/section.jpg");
+  height : 100vh;
+  // background-color:rgba(254,248,226,1);
 }
 
-#mypage2{
-  background-image:url("../../assets/images/section.jpg")  !important;
+#mypage2{  
 }
 
 .img_logo{
@@ -367,9 +365,7 @@ body {
    }
 
    .options {
-       
-      margin-top:4em;
-      margin-left: 20vw;
+      margin-left:23vw;
       display:flex;
       flex-direction:row;
       align-items:stretch;
@@ -379,7 +375,7 @@ body {
       max-width:900px;
       width:calc(100% - 100px);
       
-      height:400px;
+      height:500px;
       
       @for $i from 1 through 4 {
          @media screen and (max-width:878px - $i*80) {
@@ -395,7 +391,6 @@ body {
          position: relative;
          overflow:hidden;
 
-        
          min-width:60px;
          margin:10px;
          //border:0px solid --defaultColor;
@@ -403,6 +398,7 @@ body {
          background:var(--optionBackground, var(--defaultBackground, #E6E9ED));
          background-size:auto 120%;
          background-position:center;
+         background-color:rgba(166,83,0,0.2);
 
          cursor: pointer;
 
@@ -859,5 +855,14 @@ Leaderboard
 .mypages{
   font-size:100px;
   font-family: 'Noto Sans'
+}
+#paral{
+  height:100vh !important;
+}
+.mypage_content{
+  padding-top:20vh;
+  //background-color:rgba(255,213,170);
+  background-image: url("../../assets/images/mypage_content2.jpg");
+  width:100vw;
 }
 </style>
