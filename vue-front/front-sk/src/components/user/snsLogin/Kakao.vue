@@ -8,7 +8,7 @@
     </button>
 
     <KakaoLogin
-      api-key=process.env.VUE_APP_KAKAO_API_KEY
+      api-key="75bdc978e83228e7b1e197264c163a8f"
       :on-success="onSuccess"
       :on-failure="onFailure"
       image="kakao_account_login_btn_medium_narrow"

@@ -20,7 +20,7 @@ export default {
     return {
       params: {
         client_id:
-          process.env.VUE_APP_GOOGLE_CLIENT_ID
+          "263255205373-rts238jq78d4fekjcikjgchcou6g2gii.apps.googleusercontent.com"
       },
       renderParams: {
         width: 50,
