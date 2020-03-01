@@ -528,6 +528,12 @@ body {
   );
   background-size: 10px 10px;
 }
+
+  #picture{
+  max-width: 100%;
+  height: auto;
+  }
+
 .download {
   height: 30vh !important;
   width: 20vw !important;
@@ -901,9 +907,4 @@ background: linear-gradient(to right, #9733EE, #DA22FF); /* W3C, IE 10+/ Edge, F
     -moz-transform: scale(1.2, 1);
   }
 }
-
-  #picture{
-  max-width: 100%;
-  height: auto;
-  }
 </style>
