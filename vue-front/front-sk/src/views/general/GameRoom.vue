@@ -317,7 +317,8 @@ export default {
         this.user_identification +
         "&player_idx=" +
         this.player_idx,
-      { transports: ["websocket"] }
+      { transports: ["websocket"] },
+      {secure:true}
     );
   },
     mounted() {
