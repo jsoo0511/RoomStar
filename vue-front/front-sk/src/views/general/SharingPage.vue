@@ -10,10 +10,9 @@
         </div>
   <!-- <div v-show="show" id="demo"></div> -->
  
-  <div class="bg_feed" v-show="!show" />
 <section class="banner">
         <v-parallax id="paral"
-          src="../../../../../../../showoff_banner.jpg"
+          src="../../assets/images/showoff_banner.jpg"
         >
           <v-container fill-height>
             <v-row class="mx-auto">
@@ -38,21 +37,17 @@
         </v-parallax>
     </section>
 
-<section id="test">
- 
+<section id="test"> 
   <div class="bg_feed" v-show="!show">
     <!-- 업로드 하는 곳 따로 만들기 -->
     <!-- 제목, 내용, 게시자닉네임, 게시자아이디, 이미지 == null 이면 profile사진으로, (필수)동영상파일, 좋아요수-->
     <!-- crud -->
-    <h1 style="color:white" id="showOff_text">자랑하기</h1>
-
     <v-dialog v-model="uploadDialog" id="dialog" max-width="350">
       <template v-slot:activator="{ on }">
         <v-btn class="download" text v-on="on"></v-btn>
       </template>
       <v-card id="modalUpload">
 
-        <div>파일업로드하는곳</div>
         <input placeholder="제목" v-model="newTitle" />
         <br />
         <!-- <textarea placeholder="내용" v-model="newContent"></textarea> -->
@@ -643,12 +638,6 @@ body {
   transition: all 0.35s;
 }
 
-.bg_feed {
-  background-image: url("../../assets/images/bg_showoff.png");
-  background-repeat: repeat;
-  width: 100vw;
-  height: auto;
-}
 
 #showOff_text {
   text-align: center;

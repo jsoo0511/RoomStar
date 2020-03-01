@@ -245,7 +245,7 @@ export default {
     this.hero = document.querySelector('.hero');
      setTimeout(() => {
         this.show=false;
-}, 100000);
+}, 1500);
     
   },
   

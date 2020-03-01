@@ -854,7 +854,7 @@ Leaderboard
 .mypage_content{
   padding-top:20vh;
   //background-color:rgba(255,213,170);
-  background-image: url("../../../../../../../test11.jpg");
+  background-image: url("../../assets/images/mypage_content.jpg");
   background-opacity:0.5;
   width:100vw;
 }
