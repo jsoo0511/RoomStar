@@ -1,7 +1,13 @@
 <template>
 <div>
  <div v-show="show" id="loading">
-           <div class="cssload-box-loading"></div>
+           <div class="cssload-box-loading">
+
+              <img
+                src="../../assets/images/roomstar.png"
+                style="margin-top:10vh; margin-left:-6vw; width:230px; height:auto ;"
+              />
+           </div>
         </div>
 
   <div v-show="!show" id="HomePage">
@@ -239,7 +245,7 @@ export default {
     this.hero = document.querySelector('.hero');
      setTimeout(() => {
         this.show=false;
-}, 1000);
+}, 100000);
     
   },
   
@@ -308,7 +314,7 @@ body
 
 #loading {
     background: #DA22FF;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #9733EE, #DA22FF);  /* Chrome 10-25, Safari 5.1-6 */
+background: -webkit-linear-gradient(to right, rgb(176, 101, 241), #DA22FF);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to right, #9733EE, #DA22FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
     height: 100%;
