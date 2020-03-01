@@ -689,7 +689,8 @@ v-content__wrap {
   filter: grayscale(0%);
 }
 #paral_section {
-  padding-top:10px; background-image:url('../../assets/images/bg_solo4.png');
+  padding-top:10px; 
+  background-image:url('../../assets/images/bg_solo4.png');
   color:white;
 }
 </style>

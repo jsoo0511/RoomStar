@@ -1,6 +1,6 @@
 <template>
 <div id="mypage2">
-<div class="max" style="height:100%;" >
+<div style="height:100%;" >
     <section class="banner">
         <v-parallax id="paral"
           src="../../assets/images/mypage_banner.jpg"
@@ -284,9 +284,8 @@ data(){
    $(".option").click(function(){
    $(".option").removeClass("active");
    $(this).addClass("active");
-   
-});
-  });
+    });
+    });
       $(function() {
       $("#scroll-down").click(function() {
         $("html, body").animate(
@@ -314,10 +313,6 @@ section {
   height : 100vh;
   // background-color:rgba(254,248,226,1);
 }
-
-#mypage2{  
-}
-
 .img_logo{
   position:fixed;
   width:5vw;
@@ -339,10 +334,6 @@ h1{
   padding-top:1em;
   font-size: 70px;
 }
-
-   .max{
-     
-   }
    .container{
    width:100vw;
    }
@@ -365,6 +356,7 @@ body {
    }
 
    .options {
+     margin-top:5vh;
       margin-left:23vw;
       display:flex;
       flex-direction:row;
@@ -862,7 +854,8 @@ Leaderboard
 .mypage_content{
   padding-top:20vh;
   //background-color:rgba(255,213,170);
-  background-image: url("../../assets/images/mypage_content2.jpg");
+  background-image: url("../../../../../../../test11.jpg");
+  background-opacity:0.5;
   width:100vw;
 }
 </style>
