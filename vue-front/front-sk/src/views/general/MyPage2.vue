@@ -577,7 +577,7 @@ body {
 }
 </style>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 /*--------------------
 Body
 --------------------*/
