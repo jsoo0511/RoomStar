@@ -31,7 +31,7 @@
       <div class="options" >
         <div class="option active" id="profile_once" :style="{'--optionBackground':'url('+profile+')'}">
                 <div class="text" STYLE="writing-mode: tb-rl">NickName</div> <!--작은 화면일때-->
-                <div class="text2" >{{nick}}</div> <!-- 큰 화면일때-->
+                <div class="text2" ></div> <!-- 큰 화면일때-->
             <div class="shadow">
             </div>
             <div class="label">
@@ -303,7 +303,7 @@ data(){
 </script>
 
 <style lang="scss" scoped>
-$optionDefaultColours: #ED5565,white,black,#2ECC71,radial-gradient(ellipse farthest-corner at center top, #f39264 0%, #f2606f 100%);
+$optionDefaultColours: #ED5565,rgb(223, 7, 243),black,#2ECC71,radial-gradient(ellipse farthest-corner at center top, #f39264 0%, #f2606f 100%);
 
 .banner {
   height: 100vh;
@@ -354,6 +354,7 @@ body {
       
       color:#000;
    }
+
 
    .options {
      margin-top:5vh;
@@ -424,7 +425,7 @@ body {
                   margin-top:3vw;
                } 
                #textId{
-                  color:black  !important;
+                  color:white  !important;
                   font-size: 80px;
                }
                #snow{
@@ -458,7 +459,7 @@ body {
             
             border-radius:30px;
             #textId2{
-              color:black;
+              color:white;
             }
              #snow{
                  color:black;
@@ -537,7 +538,7 @@ body {
                color:var(--defaultBackground);
             }
             #aa{
-              background-color:black;
+              background-color:white;
             }
             .info {
                display:flex;

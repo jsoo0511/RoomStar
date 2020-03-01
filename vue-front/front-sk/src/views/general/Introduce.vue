@@ -43,7 +43,7 @@
                <div class="layer" data-scene="5">,
                 <div
                   class="layer-image-wrapper"
-                  :style="{backgroundImage: 'url('+require('@/assets/images/sw/sw_1.jpg')+')'}">
+                  :style="{backgroundImage: 'url('+require('@/assets/images/sw/sw_1.jpg')+')',marginTop:'-20px'}">
               </div>
               </div>
               <div class="text">
