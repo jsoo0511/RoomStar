@@ -91,7 +91,7 @@ export default {
 
       vote1:0,
       vote2:0,
-      result:""
+      result:"",
 
       singerOrWatcherStatus: this.$session.get("singerOrWatcherStatus")
     };
@@ -166,9 +166,6 @@ export default {
         player_idx:this.player_idx
       });
     },
-    getData(){
-     // 스토어 연결...?
-=======
     backButton() {
       console.log("moveeeeeeeeeeeeee");
       let userid = this.user_id;
@@ -320,7 +317,8 @@ export default {
         this.user_identification +
         "&player_idx=" +
         this.player_idx,
-      { transports: ["websocket"] }
+      { transports: ["websocket"] },
+      {secure:true}
     );
   },
     mounted() {

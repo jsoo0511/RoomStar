@@ -1,13 +1,24 @@
 var app = require('express')();
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
+var privateKey = fs.readFileSync('/etc/letsencrypt/live/i02a407.p.ssafy.io/privkey.pem').toString();
+var certificate = fs.readFileSync('/etc/letsencrypt/live/i02a407.p.ssafy.io/cert.pem').toString();
+var ca = fs.readFileSync('/etc/letsencrypt/live/i02a407.p.ssafy.io/fullchain.pem').toString();
 var port = 3030;
+var server = require('https').createServer(app);
+var io = require('socket.io')(server).listen(port,{key:privateKey,cert:certificate,ca:ca});
 
-let rooms = [null,null,null,null,null];
 
 server.listen(port, function() {
     console.log('socket io server listening on port '+port);
 })
+
+
+
+
+
+
+let rooms = [null,null,null,null,null];
+
+
 
 //connection event handler
 io.on('connection' , function(socket) {
