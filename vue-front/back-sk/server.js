@@ -1,3 +1,4 @@
+var fs = require('fs');
 var app = require('express')();
 var privateKey = fs.readFileSync('/etc/letsencrypt/live/i02a407.p.ssafy.io/privkey.pem').toString();
 var certificate = fs.readFileSync('/etc/letsencrypt/live/i02a407.p.ssafy.io/cert.pem').toString();
