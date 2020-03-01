@@ -3,7 +3,12 @@
 
  
   <div v-show="show" id="loading">
-           <div class="cssload-box-loading"></div>
+           <div class="cssload-box-loading">
+              <img
+                src="../../assets/images/roomstar.png"
+                style="margin-top:10vh; margin-left:-6vw; width:230px; height:auto ;"
+              />
+           </div>
         </div>
 
   <!-- <div v-show="show" id="demo"></div> -->
@@ -71,7 +76,7 @@
               <template v-slot:activator="{ on }">
                 <!-- 이걸 클릭할때 해당것에 필요한 정보를 가져오게 한다. -->
                 <div @click="checkLike(userId, item.id)" class="polaroid" v-on="on">
-                  <img :src="item.imgURL" />
+                  <img id="picture" :src="item.imgURL" />
                   <br />
                   <!-- title을 각 제목으로 수정 -->
                   <span class="caption" v-text="item.title"></span>
@@ -673,10 +678,12 @@ body {
   );
   background-size: 10px 10px;
 }
-img {
+
+  #picture{
   max-width: 100%;
   height: auto;
-}
+  }
+
 .download {
   height: 30vh !important;
   width: 20vw !important;
