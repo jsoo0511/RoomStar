@@ -3,7 +3,7 @@
     <div class="v-parallax__image-container" id="center">
       <img ref="image" :src="img" :style="imageStyles">
       <video ref="video" :loop="loop" :autoplay="autoplay" :style="videoStyles">
-        <source src="../../../../../../../IU_SKD.mp4" type="video/mp4">
+        <source src="https://firebasestorage.googleapis.com/v0/b/test-ff9ab.appspot.com/o/IU_SKD.mp4?alt=media&token=e4d51360-7f3f-43cf-95e7-f3147dcbeb79" type="video/mp4">
       </video>
     </div>
     <div class="v-parallax__content">
