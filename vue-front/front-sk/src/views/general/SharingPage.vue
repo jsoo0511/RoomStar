@@ -1,17 +1,28 @@
 <template>
-  <div id="bg_feed">
+<div id="test">
+
+ 
+  <div v-show="show" id="loading">
+           <div class="cssload-box-loading"></div>
+        </div>
+
+  <!-- <div v-show="show" id="demo"></div> -->
+ 
+  <div class="bg_feed" v-show="!show">
     <br />
     <br />
     <br />
     <!-- 업로드 하는 곳 따로 만들기 -->
     <!-- 제목, 내용, 게시자닉네임, 게시자아이디, 이미지 == null 이면 profile사진으로, (필수)동영상파일, 좋아요수-->
     <!-- crud -->
+    <h1 style="color:white" id="showOff_text">자랑하기</h1>
 
     <v-dialog v-model="uploadDialog" id="dialog" max-width="350">
       <template v-slot:activator="{ on }">
-        <v-btn class="download" v-on="on">등록하기</v-btn>
+        <v-btn class="download" text v-on="on"></v-btn>
       </template>
       <v-card id="modalUpload">
+
         <div>파일업로드하는곳</div>
         <input placeholder="제목" v-model="newTitle" />
         <br />
@@ -56,12 +67,9 @@
       <div v-for="(item, i) in info[0]" :key="i">
         <v-flex xs12 sm6 md3 style="float:left">
           <div class="item">
-            <v-dialog v-model="itemDialog[i]" max-width="350" max-height="350">
-              <!--  -->
+            <v-dialog v-model="itemDialog[i]" max-width="500" max-height="350">
               <template v-slot:activator="{ on }">
                 <!-- 이걸 클릭할때 해당것에 필요한 정보를 가져오게 한다. -->
-                <!-- methods 필요 -->
-
                 <div @click="checkLike(userId, item.id)" class="polaroid" v-on="on">
                   <img :src="item.imgURL" />
                   <br />
@@ -71,18 +79,18 @@
               </template>
               <!-- item하나 선택하고 -> 그 아이템에 관한 id값으로 axios로 데이터 받고
               그 데이터 받은걸 v-card에 갱신-->
-
               <v-card id="modal">
                 <div>
-                  <p>{{item.title}}</p>
-                  <!-- 비디오 src 추가 -->
-                  <video width="500" ref="video" controls>
+                  <p id="ptag">{{item.title}}</p>
+                  <!-- 비디오 src 추가 max-width:640px; -->
+                  <video style="width: 100%;height: auto" ref="video" controls>
                     <source :src="item.videoURL" type="video/mp4" />
                   </video>
-                  <p>게시자: {{item.nickname}}</p>
-                  <p>내용: {{item.contents}}</p>좋아요 수:
-                  <p id="newLike">{{ item.like_num }}</p>
-                  {{item.videoURL}}
+                  <p class="resultOwner">게시자:{{item.nickname}}</p>
+                  <p class="resultContent">내용: {{item.contents}}</p>
+                  <!-- 좋아요 수: -->
+                  <!-- <p id="newLike">{{ item.like_num }}</p> -->
+                  <!-- {{item.videoURL}} -->
                   <!-- 열자마자 좋아요 누른사람인지 아닌지 판단해주는것 서버에 요청 -->
                   <!-- true면 -->
                   <v-icon
@@ -97,12 +105,15 @@
                     v-else-if="checkLikeStatus === 'true'"
                   >mdi-thumb-up</v-icon>
                   <br />
-                  <v-btn @click="dClose(i)">나가기</v-btn>
-
-                  <br />
-                  {{userId}}
-                  {{ item.userid}}
-                  <v-btn v-if="userId == item.userid" @click="deleteItem(item.id)">삭제</v-btn>
+                  <v-btn text small color="black" type="submit" @click="dClose(i)">나가기</v-btn>
+                  <v-btn
+                    text
+                    small
+                    color="black"
+                    type="submit"
+                    v-if="userId == item.userid"
+                    @click="deleteItem(item.id)"
+                  >삭제</v-btn>
                   <br />
                 </div>
               </v-card>
@@ -112,6 +123,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -123,8 +135,11 @@ import axios from "axios";
 import router from "@/routes";
 
 export default {
+  
   data() {
     return {
+
+      show: true,
       musicTitle: [],
       videoUrl: [],
       info: [],
@@ -147,14 +162,7 @@ export default {
 
   methods: {
     dClose(idx) {
-      console.log("idx = ", idx);
-      console.log(this.itemDialog[idx]);
-      console.log(this);
-      // this.itemDialog[idx] = false;
-      // 값도 바뀌고 인지도 하도록 해야함
-      // https://kr.vuejs.org/v2/guide/reactivity.html
       this.$set(this.itemDialog, idx, false);
-      console.log(this.itemDialog[idx]);
     },
     detectFilesVideo(fileList) {
       Array.from(Array(fileList.length).keys()).map(x => {
@@ -228,9 +236,7 @@ export default {
         })
         .catch(error => {
           console.log(error);
-          // this.loading = false;
         });
-      // 데이터도 새로 그리기
       axios
         .get(process.env.VUE_APP_SERVER_IP + "/get_burst/" + id)
         .then(response => {
@@ -238,7 +244,6 @@ export default {
         })
         .catch(error => {
           console.log(error);
-          // this.loading = false;
         });
     },
     deleteItem(id) {
@@ -249,16 +254,13 @@ export default {
         })
         .catch(error => {
           console.log(error);
-          // this.loading = false;
         });
     },
 
     uploadContent(data) {
-      // if imageDownloadUrl === null  => profile default image 전달
       console.log(data["newTitle"], data["newContent"]);
       console.log(this.userNickname, this.userId, this.profile);
       console.log(this.videoDownloadUrl, this.imageDownloadUrl);
-      // 안들어오면 user profile로 대신 넣어준다.
       if (this.imageDownloadUrl === null) {
         this.imageDownloadUrl = this.profile;
       }
@@ -267,7 +269,6 @@ export default {
         this.imageDownloadUrl =
           "https://firebasestorage.googleapis.com/v0/b/test-ff9ab.appspot.com/o/%EC%95%84%EC%9D%B4%EC%9C%A0-%EA%B8%88%EC%9A%94%EC%9D%BC%EC%97%90%20%EB%A7%8C%EB%82%98%EC%9A%94.jpg?alt=media&token=11a481ff-501b-48af-a37a-31ce5e9b93b0";
       }
-
       let params = {
         videoURL: this.videoDownloadUrl,
         like_num: 0,
@@ -278,7 +279,6 @@ export default {
         contents: data["newContent"]
       };
       console.log(params);
-
       // 보내서 확인
       console.log("sdds");
       axios
@@ -287,12 +287,10 @@ export default {
           console.log("response for insert_burst", response);
           // 등록이 되면 바로 동적으로 씌워져야하는데, update를 하게 해야한다.
           // 이런경우 watch를 사용하는게 맞겠지?
-          // this.info.push(params)
           this.uploadDialog = false;
         })
         .catch(error => {
           console.log(error);
-          // this.loading = false;
         });
     }
   },
@@ -349,8 +347,10 @@ export default {
     }
   },
   created() {
-    // 모른 정보를 DB에서 불러온다.
+    this.show=true;
 
+    
+    // 모른 정보를 DB에서 불러온다.
     // 다른 api로 변경될 것
     axios
       .get(process.env.VUE_APP_SERVER_IP + "/get_burst")
@@ -365,30 +365,13 @@ export default {
           console.log("=================");
         }
         console.log(this.itemDialog);
-        // this.itemDialog
         this.info.push(response.data.data);
         console.log("clean", this.info[0]);
-
-        //
-        // if (music.title[music.title.length - 1] == "g") {
-        //   this.musicTitle.push(music);
-        // }
-        // if (video.title[video.title.length - 1] == "4") {
-        //   this.videoUrl.push(video);
-        // }
       })
       .catch(error => {
         console.log(error);
-        // this.loading = false;
       });
-
-    // 이후 삭제 앞으로 DB에서 불러올 것
-    // firebase list에 있는 항목들을 불러옴
-
     var storageRef = firebase.storage().ref();
-    // console.log("1234");
-    // console.log(storageRef);
-
     storageRef
       .listAll()
       .then(result => {
@@ -414,12 +397,11 @@ export default {
         result.items.forEach(urlRef => {
           let video = {};
           video.title = urlRef.name;
-
           urlRef
             .getDownloadURL()
             .then(url => {
               video.url = url;
-              if (video.title[video.title.length - 1] == "4") {
+              if (video.title[video.title.length - 1] == "4"||video.title[video.title.length - 1] == "V") {
                 this.videoUrl.push(video);
               }
             })
@@ -427,11 +409,227 @@ export default {
         });
       })
       .catch(function(error) {});
+      
+      console.log(this.show);
+      setTimeout(() => {
+        this.show=false;
+}, 1000);
+      console.log(this.show);
   }
 };
 </script>
 
 <style scoped>
+body
+{
+  margin:0;
+  padding:0
+}
+
+#loading {
+    background: #DA22FF;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #9733EE, #DA22FF);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #9733EE, #DA22FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    margin-top: 0px;
+    top: 0px;
+    z-index: 999999;
+    display: block;
+}
+
+
+/*-------------------------
+    33.Preloader CSS
+---------------------------*/
+.loadding-page {
+  width: 100%;
+  height: 100%;
+  background: #fdd245;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+}
+.cssload-box-loading {
+  width: 49px;
+  height: 49px;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.cssload-box-loading:before {
+  content: '';
+  width: 49px;
+  height: 5px;
+  background: #000000;
+  opacity: 0.1;
+  position: absolute;
+  top: 58px;
+  left: 0;
+  border-radius: 50%;
+  animation: shadow 0.58s linear infinite;
+  -o-animation: shadow 0.58s linear infinite;
+  -ms-animation: shadow 0.58s linear infinite;
+  -webkit-animation: shadow 0.58s linear infinite;
+  -moz-animation: shadow 0.58s linear infinite;
+}
+.cssload-box-loading:after {
+  content: '';
+  width: 49px;
+  height: 49px;
+  background: #fdd245;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 3px;
+  animation: cssload-animate 0.58s linear infinite;
+  -o-animation: cssload-animate 0.58s linear infinite;
+  -ms-animation: cssload-animate 0.58s linear infinite;
+  -webkit-animation: cssload-animate 0.58s linear infinite;
+  -moz-animation: cssload-animate 0.58s linear infinite;
+}
+@keyframes cssload-animate {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  75% {
+    transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(90deg);
+  }
+}
+@-o-keyframes cssload-animate {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    -o-transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    -o-transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  75% {
+    -o-transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    -o-transform: translateY(0) rotate(90deg);
+  }
+}
+@-ms-keyframes cssload-animate {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    -ms-transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    -ms-transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  75% {
+    -ms-transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    -ms-transform: translateY(0) rotate(90deg);
+  }
+}
+@-webkit-keyframes cssload-animate {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    -webkit-transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    -webkit-transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  75% {
+    -webkit-transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    -webkit-transform: translateY(0) rotate(90deg);
+  }
+}
+@-moz-keyframes cssload-animate {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    -moz-transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    -moz-transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  75% {
+    -moz-transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    -moz-transform: translateY(0) rotate(90deg);
+  }
+}
+@keyframes shadow {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.2, 1);
+  }
+}
+@-o-keyframes shadow {
+  0%,
+  100% {
+    -o-transform: scale(1, 1);
+  }
+  50% {
+    -o-transform: scale(1.2, 1);
+  }
+}
+@-ms-keyframes shadow {
+  0%,
+  100% {
+    -ms-transform: scale(1, 1);
+  }
+  50% {
+    -ms-transform: scale(1.2, 1);
+  }
+}
+@-webkit-keyframes shadow {
+  0%,
+  100% {
+    -webkit-transform: scale(1, 1);
+  }
+  50% {
+    -webkit-transform: scale(1.2, 1);
+  }
+}
+@-moz-keyframes shadow {
+  0%,
+  100% {
+    -moz-transform: scale(1, 1);
+  }
+  50% {
+    -moz-transform: scale(1.2, 1);
+  }
+}
 #modalUpload {
   padding: 30px;
   max-width: 350px;
@@ -440,9 +638,25 @@ export default {
   border-radius: 2px;
   overflow: hidden;
 }
-
+#modal {
+  margin: 0 auto;
+  border-radius: 2px;
+  overflow: hidden;
+}
+#ptag {
+  font-size: 30px;
+  margin-left: 1em;
+}
 #dialog {
   max-width: 350px;
+}
+
+.resultOwner {
+  font-family: "Indie Flower";
+}
+
+.resultContent {
+  font-family: "Indie Flower";
 }
 * {
   box-sizing: border-box;
@@ -463,6 +677,23 @@ img {
   max-width: 100%;
   height: auto;
 }
+.download {
+  height: 30vh !important;
+  width: 20vw !important;
+  margin-top: -20vh;
+  margin-left: 70vw;
+  background-image: url("../../../src/assets/images/btntree.png");
+}
+
+.download:hover {
+  height: 30vh !important;
+  width: 20vw !important;
+  margin-top: -20vh;
+  margin-left: 70vw;
+  background-image: url("../../../src/assets/images/btntree2.png");
+}
+/* background: url("https://cdn.pixabay.com/photo/2015/01/07/16/37/wood-591631_1280.jpg")
+    no-repeat; */
 .wrapper {
   width: 100%;
   padding: 0 2rem;
@@ -555,10 +786,25 @@ img {
   transition: all 0.35s;
 }
 
-#bg_feed{
-  background-image : url("../../assets/images/bg_showoff.png");
+.bg_feed {
+  background-image: url("../../assets/images/bg_showoff.png");
   background-repeat: repeat;
-  width:100vw;
-  height:auto;
+  width: 100vw;
+  height: auto;
 }
+
+#showOff_text {
+  text-align: center;
+  font-size: 3rem;
+}
+
+#test{
+    background-image: url("../../assets/images/bg_showoff.png");
+  background-repeat: repeat;
+  width: 100vw;
+  height: auto;
+}
+
+
+
 </style>

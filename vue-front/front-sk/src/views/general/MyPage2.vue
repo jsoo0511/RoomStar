@@ -1,130 +1,150 @@
 <template>
 <div id="mypage2">
-  <link href="https://fonts.googleapis.com/css?family=Gothic+A1|Noto+Sans+KR&display=swap" rel="stylesheet">
-<div class="max" style="height:100vh;" >
-    <img src="../../assets/images/rs_logo2.png" class="img_logo" />  
-
-
-   <h1 class="mypage_text" >My Page</h1>
-   
-
-<div class="options" >
-   <div class="option active" id="profile_once" :style="{'--optionBackground':'url('+profile+')'}">
-          <div class="text" STYLE="writing-mode: tb-rl">NickName</div> <!--작은 화면일때-->
-          <div class="text2" >{{nick}}</div> <!-- 큰 화면일때-->
-      <div class="shadow">
-      </div>
-      <div class="label">
-         <div class="icon">
-            <i class="fas fa-walking"></i>
-         </div>
-         <div class="info">
-            <div class="main">{{nick}}</div>
-            <div class="sub">{{provider}}</div>
-         </div>
-      </div>
-   </div>
-   <div class="option">
-      <div class="text" STYLE="writing-mode: tb-rl" id="textId2">ID</div>
-      <div class="text2" id="textId">{{id}}</div> <!-- 큰 화면일때-->
-      <div class="shadow" ></div>
-      <div class="label">
-         <div class="icon" id="aa">
-            <i class="fas fa-snowflake"></i>
-         </div>
-         <div class="info">
-            <div class="main">{{id}}</div>
-            <div class="sub">ID</div>
-         </div>
-      </div>
-   </div>
-   <div class="option">
-       
-       <div class=graph2 > 
-       
-         <vc-donut  background="white" foreground="grey" 
-     
-    :sections="sections" :total="100" id="donut">{{winrate}}%</vc-donut>
-       </div>
-      <div class="text" STYLE="writing-mode: tb-rl">WinRate</div>
+<div class="max" style="height:100%;" >
+    <section class="banner">
+        <v-parallax id="paral"
+          src="../../assets/images/mypage_banner.jpg"
+        >
+          <v-container fill-height>
+            <v-row class="mx-auto">
+              <v-col
+                cols="12"
+                md="12"
+              >
+                <div class="text-center">
+                  <div
+                    class="font-weight-black mb-4"
+                  ><p class="mypages">My page</p></div>
+                </div>
+              </v-col>
+            </v-row>
+              <a
+                href="#"
+                id="scroll-down"
+                class="scroll-down"
+                address="true"
+              ></a>
+          </v-container>
+        </v-parallax>
+    </section>
+    <section class="mypage_content">
+      <div class="options" >
+        <div class="option active" id="profile_once" :style="{'--optionBackground':'url('+profile+')'}">
+                <div class="text" STYLE="writing-mode: tb-rl">NickName</div> <!--작은 화면일때-->
+                <div class="text2" >{{nick}}</div> <!-- 큰 화면일때-->
+            <div class="shadow">
+            </div>
+            <div class="label">
+              <div class="icon">
+                  <i class="fas fa-walking"></i>
+              </div>
+              <div class="info">
+                  <div class="main">{{nick}}</div>
+                  <div class="sub">{{provider}}</div>
+              </div>
+            </div>
+        </div>
+        <div class="option">
+            <div class="text" STYLE="writing-mode: tb-rl" id="textId2">ID</div>
+            <div class="text2" id="textId">{{id}}</div> <!-- 큰 화면일때-->
+            <div class="shadow" ></div>
+            <div class="label">
+              <div class="icon" id="aa">
+                  <i class="fas fa-snowflake"></i>
+              </div>
+              <div class="info">
+                  <div class="main">{{id}}</div>
+                  <div class="sub">ID</div>
+              </div>
+            </div>
+        </div>
+        <div class="option">
+            
+            <div class=graph2 > 
+            
+              <vc-donut  background="white" foreground="grey" 
+          
+          :sections="sections" :total="100" id="donut">{{winrate}}%</vc-donut>
+            </div>
+            <div class="text" STYLE="writing-mode: tb-rl">WinRate</div>
+            
+            <div class="shadow"></div>
+            <div class="label">
+              <div class="icon">
+                  <i class="fas fa-tree"></i>
+              </div>
+              <div class="info">
+                  <div class="main">{{win}} 승  {{lose}} 패</div>
+                  <div class="sub">승률</div>
+              </div>
+            </div>
+        </div>
       
-      <div class="shadow"></div>
-      <div class="label">
-         <div class="icon">
-            <i class="fas fa-tree"></i>
-         </div>
-         <div class="info">
-            <div class="main">{{win}} 승  {{lose}} 패</div>
-            <div class="sub">승률</div>
-         </div>
+        <div class="option" :style="{'--optionBackground':'url('+imgsrc+')'}">
+            <div class="text" STYLE="writing-mode: tb-rl">Grade</div>
+            <div class="text2" >{{grade}}</div> <!-- 큰 화면일때-->
+            <div class="shadow"></div>
+            <div class="label">
+              <div class="icon">
+                  <i class="fas fa-sun"></i>
+              </div>
+              <div class="info">
+                  <div class="main">{{grade}}</div>
+                  <div class="sub">등급</div>
+              </div>
+            </div>
+        </div>
+
+          <div class="option" >
+            <div class="text" STYLE="writing-mode: tb-rl">RANK</div>
+            <div class="text2" id="board">
+                <div class="leaderboard">
+        <h1>
+          <svg class="ico-cup">
+            <use xlink:href="#cup"></use>
+          </svg>
+          Most active Players
+        </h1>
+        <ol>
+          <li>
+            <mark>정하정</mark>
+            <small>315</small>
+          </li>
+          <li>
+            <mark>원범희</mark>
+            <small>301</small>
+          </li>
+          <li>
+            <mark>이종호</mark>
+            <small>292</small>
+          </li>
+          <li>
+            <mark>정승원</mark>
+            <small>245</small>
+          </li>
+          <li>
+            <mark>이정수</mark>
+            <small>203</small>
+          </li>
+        </ol>
       </div>
-   </div>
- 
-   <div class="option" :style="{'--optionBackground':'url('+imgsrc+')'}">
-      <div class="text" STYLE="writing-mode: tb-rl">Grade</div>
-      <div class="text2" >{{grade}}</div> <!-- 큰 화면일때-->
-      <div class="shadow"></div>
-      <div class="label">
-         <div class="icon">
-            <i class="fas fa-sun"></i>
-         </div>
-         <div class="info">
-            <div class="main">{{grade}}</div>
-            <div class="sub">등급</div>
-         </div>
+
+
+      </div> <!-- 큰 화면일때-->
+            <div class="shadow"></div>
+            <div class="label">
+              <div class="icon">
+                  <i class="fas fa-sun"></i>
+              </div>
+              <div class="info">
+                  <div class="main">1등</div>
+                  <div class="sub">랭킹</div>
+              </div>
+            </div>
+        </div>
       </div>
-   </div>
-
-    <div class="option" >
-      <div class="text" STYLE="writing-mode: tb-rl">RANK</div>
-      <div class="text2" id="board">
-          <div class="leaderboard">
-  <h1>
-    <svg class="ico-cup">
-      <use xlink:href="#cup"></use>
-    </svg>
-    Most active Players
-  </h1>
-  <ol>
-    <li>
-      <mark>정하정</mark>
-      <small>315</small>
-    </li>
-    <li>
-      <mark>원범희</mark>
-      <small>301</small>
-    </li>
-    <li>
-      <mark>이종호</mark>
-      <small>292</small>
-    </li>
-    <li>
-      <mark>정승원</mark>
-      <small>245</small>
-    </li>
-    <li>
-      <mark>이정수</mark>
-      <small>203</small>
-    </li>
-  </ol>
-</div>
-
-
-</div> <!-- 큰 화면일때-->
-      <div class="shadow"></div>
-      <div class="label">
-         <div class="icon">
-            <i class="fas fa-sun"></i>
-         </div>
-         <div class="info">
-            <div class="main">1등</div>
-            <div class="sub">랭킹</div>
-         </div>
-      </div>
-   </div>
-</div>
-
-</div>
+    </section>
+  </div>
 </div>
 </template>
 
@@ -267,7 +287,17 @@ data(){
    
 });
   });
+      $(function() {
+      $("#scroll-down").click(function() {
+        $("html, body").animate(
+          { scrollTop: $(".mypage_content").offset().top },
+          "slow"
+        );
+        return false;
+      });
+    });
   },
+  
 
   // viewMypage
 };
@@ -276,8 +306,16 @@ data(){
 <style lang="scss" scoped>
 $optionDefaultColours: #ED5565,white,black,#2ECC71,radial-gradient(ellipse farthest-corner at center top, #f39264 0%, #f2606f 100%);
 
-#mypage2{
-  background-image:url("../../assets/images/back2.jpg") !important;
+.banner {
+  height: 100vh;
+}
+
+section {
+  height : 100vh;
+  // background-color:rgba(254,248,226,1);
+}
+
+#mypage2{  
 }
 
 .img_logo{
@@ -303,7 +341,6 @@ h1{
 }
 
    .max{
-     background-color:rgba(250,198,117,1);
      
    }
    .container{
@@ -328,9 +365,7 @@ body {
    }
 
    .options {
-       
-      margin-top:4em;
-      margin-left: 20vw;
+      margin-left:23vw;
       display:flex;
       flex-direction:row;
       align-items:stretch;
@@ -340,7 +375,7 @@ body {
       max-width:900px;
       width:calc(100% - 100px);
       
-      height:400px;
+      height:500px;
       
       @for $i from 1 through 4 {
          @media screen and (max-width:878px - $i*80) {
@@ -356,7 +391,6 @@ body {
          position: relative;
          overflow:hidden;
 
-        
          min-width:60px;
          margin:10px;
          //border:0px solid --defaultColor;
@@ -364,6 +398,7 @@ body {
          background:var(--optionBackground, var(--defaultBackground, #E6E9ED));
          background-size:auto 120%;
          background-position:center;
+         background-color:rgba(166,83,0,0.2);
 
          cursor: pointer;
 
@@ -542,7 +577,7 @@ body {
 }
 </style>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 /*--------------------
 Body
 --------------------*/
@@ -550,15 +585,6 @@ Body
 *::before,
 *::after {
   box-sizing: border-box;
-}
-
-body {
-  min-height: 450px;
-  height: 100vh;
-  margin: 0;  
-  background: radial-gradient(ellipse farthest-corner at center top, #f39264 0%, #f2606f 100%);
-  color: #fff;
-  font-family: 'Open Sans', sans-serif;  
 }
 
 
@@ -788,8 +814,55 @@ Leaderboard
     max-width: 100%;
   }
 }
+.scroll-down {
+  opacity: 1;
+  -webkit-transition: all 0.5s ease-in 3s;
+  transition: all 0.5s ease-in 3s;
+}
 
-#profile_once{
-  
+.scroll-down {
+  position: absolute;
+  bottom: 150px;
+  left: 50%;
+  margin-left: -16px;
+  display: block;
+  width: 32px;
+  height: 32px;
+  border: 2px solid #fff;
+  background-size: 14px auto;
+  border-radius: 50%;
+  z-index: 2;
+  -webkit-animation: bounce 2s infinite 2s;
+  animation: bounce 2s infinite 2s;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  transform: scale(1);
+}
+
+.scroll-down:before {
+  position: absolute;
+  top: calc(50% - 8px);
+  left: calc(50% - 6px);
+  transform: rotate(-45deg);
+  display: block;
+  width: 12px;
+  height: 12px;
+  content: "";
+  border: 2px solid white;
+  border-width: 0px 0 2px 2px;
+}
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans&display=swap');
+.mypages{
+  font-size:100px;
+  font-family: 'Noto Sans'
+}
+#paral{
+  height:100vh !important;
+}
+.mypage_content{
+  padding-top:20vh;
+  //background-color:rgba(255,213,170);
+  background-image: url("../../assets/images/mypage_content2.jpg");
+  width:100vw;
 }
 </style>

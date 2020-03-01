@@ -14,7 +14,7 @@
             <div class="card-image">
               <v-img
               :src="roomInfo.user1_img"
-              id="profile_card_image" width="307.2px" height="310.06px"
+              id="profile_card_image"
             ></v-img>
             </div>
             <div class="card-text">
@@ -43,7 +43,7 @@
             <div class="card-image">
               <v-img
               :src="roomInfo.user2_img"
-              id="profile_card_image" width="307.2px" height="310.06px"
+              id="profile_card_image"
             ></v-img>
             </div>
             <div class="card-text">
@@ -83,7 +83,7 @@
 <script>
 import router from "@/routes";
 import axios from "axios";
-
+import swal from "sweetalert";
 var swiper = null;
 
 // var waitingNumofPeople = 0;
@@ -172,8 +172,17 @@ export default {
       .then(response => {
         console.log('insert_waiting', response)
         console.log(response.data.roomViewInfo)
+        console.log(response.data.roomViewInfo[0].singer_num)
         for (let i = 0; i < 5; i++) {
+          // singer1 or singer2 한명이라도 있으면 보여주기
+          if (response.data.roomViewInfo[i].singer_num) {
           this.allRoomInfo.push(response.data.roomViewInfo[i]);
+          }
+        }
+        if (this.allRoomInfo.length == 0) {
+                                 swal({
+              title: "현재 활성화된 방이 없습니다."
+            });
         }
         console.log(this.allRoomInfo[0])
         // 대기인원수
@@ -212,11 +221,6 @@ export default {
 .marginR {
   margin-right: 1em;
 }
-
-.card-image {
-  grid-area: image;
-  
-}
 .card-text {
   grid-area: text;
 }
@@ -225,8 +229,13 @@ export default {
   background: url("../../assets/images/bg_solo2.png");
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-  background-size: cover;
+  background-size: cover
 }
+
+.card-image #profile_card_image{
+    width:307.2px !important;
+    height:310.06px !important;
+  }
 
 .card-text {
   grid-area: text;

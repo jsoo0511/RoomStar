@@ -91,7 +91,7 @@ export default {
   border-color:red; 
   border-style: none;
   padding:1.5vw 2vw;
-  overflow-y: scroll;
+  overflow-y: hidden;
   color:#fff;
   font-size:1.5em;
 }

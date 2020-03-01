@@ -1,69 +1,108 @@
 <template>
-  <div id="HomePage">
+<div>
+ <div v-show="show" id="loading">
+           <div class="cssload-box-loading"></div>
+        </div>
+
+  <div v-show="!show" id="HomePage">
     <v-app light id="hp_video">
       <v-content>
         <section class="introduce">
           <section class="hero">
             <div class="hero__main">
-              <div class="layer layer-displayed" data-scene="1">
+              <div class="layer layer-displayed" data-scene="1">  <!-- 왼쪽 맨 위 사진-->
                 <div
                   class="layer-image-wrapper"
-                  style="background-image: url('https://images.unsplash.com/photo-1513792859704-f49baf5c0b70?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=522c9283a0ad870843048349acb08736&auto=format&fit=crop&w=1050&q=80')"
-                ></div>
+                  :style="{backgroundImage: 'url('+require('@/assets/images/bh/bh_1.jpg')+')'}">
+              </div>
               </div>
               <div class="layer" data-scene="2">
                 <div
                   class="layer-image-wrapper"
-                  style="background-image: url('https://images.unsplash.com/photo-1510855412585-af057ac84251?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bc9e3d133bcd845118e779ea56c9bb49&auto=format&fit=crop&w=1189&q=80')"
-                ></div>
+                  :style="{backgroundImage: 'url('+require('@/assets/images/hj/hj_1.jpg')+')'}">
               </div>
-              <div class="layer" data-scene="3">
+              </div>
+              <div class="layer" data-scene="3">,
                 <div
                   class="layer-image-wrapper"
-                  style="background-image: url('https://images.unsplash.com/photo-1517453881932-462e65217f7a?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89c50aab146008513d49a905cfd903d4&auto=format&fit=crop&w=1050&q=80')"
-                ></div>
+                   :style="{backgroundImage: 'url('+require('@/assets/images/jh/jh_4.jpg')+')', marginTop:'-20px'}">
+              </div>
+              </div>
+               <div class="layer" data-scene="4">,
+                <div
+                  class="layer-image-wrapper"
+                   :style="{backgroundImage: 'url('+require('@/assets/images/js/js_1.jpg')+')', marginTop:'-20px'}">
+              </div>
+              </div>
+               <div class="layer" data-scene="5">,
+                <div
+                  class="layer-image-wrapper"
+                  :style="{backgroundImage: 'url('+require('@/assets/images/sw/sw_1.jpg')+')'}">
+              </div>
               </div>
               <div class="text">
                 <div class="text__layers">
-                  <span class="layer layer-displayed" data-scene="1">Marcus Ohslon</span>
-                  <span class="layer" data-scene="2">Benjamin Vunk</span>
-                  <span class="layer" data-scene="3">Marisa Green</span>
+                  <span class="layer layer-displayed" data-scene="1">Bumhee Won</span>
+                  <span class="layer" data-scene="2">Hajung Jung</span>
+                  <span class="layer" data-scene="3">Jongho Lee</span>
+                  <span class="layer" data-scene="4">JungSoo Lee</span>
+                  <span class="layer" data-scene="5">Seungwon Chung</span>
                 </div>
               </div>
             </div>
             <div class="hero__second">
-              <div class="layer layer-displayed" data-scene="1">
+              <div class="layer layer-displayed" data-scene="1"> <!-- 가장 오른쪽 사진-->
                 <div
                   class="layer-image-wrapper"
-                  style="background-image: url('https://images.unsplash.com/photo-1523944339743-0fe06f079939?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=32ea302b4d051f92ebd80985d90cb4d4&auto=format&fit=crop&w=658&q=80')"
-                ></div>
+                   :style="{backgroundImage: 'url('+require('@/assets/images/bh/bh_2.jpg')+')'}">
+              </div>
               </div>
               <div class="layer" data-scene="2">
                 <div
                   class="layer-image-wrapper"
-                  style="background-image: url('https://images.unsplash.com/photo-1512646737873-990ddc1a8e48?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=1a92535fa6c18e78089680b09e039995&auto=format&fit=crop&w=650&q=80')"
-                ></div>
+                  :style="{backgroundImage: 'url('+require('@/assets/images/hj/hj_2.jpg')+')'}">
+              </div>
               </div>
               <div class="layer" data-scene="3">
                 <div
                   class="layer-image-wrapper"
-                  style="background-image: url('https://images.unsplash.com/photo-1508901459911-fc63f8c7e521?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ce36b4cfc6cbab935c17c5114a91f229&auto=format&fit=crop&w=334&q=80')"
-                ></div>
+                   :style="{backgroundImage: 'url('+require('@/assets/images/jh/jh_1.jpg')+')'}">
+              </div>
+              </div>
+              <div class="layer" data-scene="4">
+                <div
+                  class="layer-image-wrapper"
+                  :style="{backgroundImage: 'url('+require('@/assets/images/js/js_3.jpg')+')'}">
+              </div>
+              </div>
+              <div class="layer" data-scene="5">
+                <div
+                  class="layer-image-wrapper"
+                  :style="{backgroundImage: 'url('+require('@/assets/images/sw/sw_2.jpg')+')'}">
+              </div>
               </div>
             </div>
             <div class="hero__third">
               <div class="layer__wrapper">
                 <div class="layer layer-displayed" data-scene="1">
-                  <span>Richard Steffon</span>
-                  <span>S/ Moda</span>
+                  <span></span>
+                  <span>Leader</span>
                 </div>
                 <div class="layer" data-scene="2">
-                  <span>Maria Jeferaf</span>
-                  <span>Muse Magazine</span>
+                  <span></span>
+                  <span>Web Socket</span>
                 </div>
                 <div class="layer" data-scene="3">
-                  <span>Zaileene</span>
-                  <span>Fashion Floor</span>
+                  <span></span>
+                  <span>Front-End</span>
+                </div>
+                 <div class="layer" data-scene="4">
+                  <span></span>
+                  <span>Back-End</span>
+                </div>
+                 <div class="layer" data-scene="5">
+                  <span></span>
+                  <span>Full Stack</span>
                 </div>
               </div>
               <button @click="switchLayer()">NEXT TALENT ></button>
@@ -71,62 +110,97 @@
             </div>
             <div class="hero__footer">
               <div class="container">
-                <div class="layer layer-displayed" data-scene="1">
+                <div class="layer layer-displayed" data-scene="1"> <!--아래 왼쪽-->
                   <div
                     class="layer-image-wrapper"
-                    style="background-image: url('https://images.unsplash.com/photo-1506091618538-5c362f734eab?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b6e37e3cf92364310d45e3d7940c4190&auto=format&fit=crop&w=1052&q=80')"
-                  ></div>
+                   :style="{backgroundImage: 'url('+require('@/assets/images/bh/bh_4.jpg')+')'}">
+              </div>
                 </div>
                 <div class="layer" data-scene="2">
                   <div
                     class="layer-image-wrapper"
-                    style="background-image: url('https://images.unsplash.com/photo-1500917129638-ca7e13bc30f3?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=0e004a8ee3c1a65041db94f60439b704&auto=format&fit=crop&w=1050&q=80')"
-                  ></div>
+                    :style="{backgroundImage: 'url('+require('@/assets/images/hj/hj_3.jpg')+')'}">
+              </div>
                 </div>
                 <div class="layer" data-scene="3">
                   <div
                     class="layer-image-wrapper"
-                    style="background-image: url('https://images.unsplash.com/photo-1498387727476-b30055b2ef21?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=753c6cf02995c1bfc3f015037549b06b&auto=format&fit=crop&w=1050&q=80')"
-                  ></div>
+                    :style="{backgroundImage: 'url('+require('@/assets/images/jh/jh_5.jpg')+')'}">
+              </div>
+                </div>
+                 <div class="layer" data-scene="4">
+                  <div
+                    class="layer-image-wrapper"
+                     :style="{backgroundImage: 'url('+require('@/assets/images/js/js_4.jpg')+')'}">
+              </div>
+                </div>
+                 <div class="layer" data-scene="5">
+                  <div
+                    class="layer-image-wrapper"
+                     :style="{backgroundImage: 'url('+require('@/assets/images/sw/sw_3.jpg')+')'}">
+              </div>
                 </div>
               </div>
               <div class="container">
-                <div class="layer layer-displayed" data-scene="1">
+                <div class="layer layer-displayed" data-scene="1"> <!--아래 오른쪽-->
                   <div
                     class="layer-image-wrapper"
-                    style="background-image: url('https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7834d8f490640ffe7e7f251227679b3d&auto=format&fit=crop&w=701&q=80')"
-                  ></div>
+                     :style="{backgroundImage: 'url('+require('@/assets/images/bh/bh_5.jpg')+')'}">
+              </div>
                 </div>
                 <div class="layer" data-scene="2">
                   <div
                     class="layer-image-wrapper"
-                    style="background-image: url('https://images.unsplash.com/photo-1522322659370-3c98da30c99c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=38cc8e2b8e8c4439192c1130a861e3da&auto=format&fit=crop&w=655&q=80')"
-                  ></div>
+                     :style="{backgroundImage: 'url('+require('@/assets/images/hj/hj_4.jpg')+')'}">
+              </div>
                 </div>
                 <div class="layer" data-scene="3">
                   <div
                     class="layer-image-wrapper"
-                    style="background-image: url('https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e1297fa068f9bd048e8e42b6f1ccbd1e&auto=format&fit=crop&w=334&q=80')"
-                  ></div>
+                     :style="{backgroundImage: 'url('+require('@/assets/images/jh/jh_2.jpg')+')'}">
+              </div>
+                </div>
+                 <div class="layer" data-scene="4">
+                  <div
+                    class="layer-image-wrapper"
+                     :style="{backgroundImage: 'url('+require('@/assets/images/js/js_2.jpg')+')'}">
+              </div>
+                </div>
+                 <div class="layer" data-scene="5">
+                  <div
+                    class="layer-image-wrapper"
+                    :style="{backgroundImage: 'url('+require('@/assets/images/sw/sw_5.jpg')+')'}">
+              </div>
                 </div>
               </div>
             </div>
-            <div class="portrait">
+            <div class="portrait">  <!-- 증명사진 부분-->
               <div
                 class="layer layer-displayed"
                 data-scene="1"
-                style="background-image: url('https://images.unsplash.com/photo-1505840717430-882ce147ef2d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=72b653203146f33bb76721c00cf5cbb2&auto=format&fit=crop&w=334&q=80')"
-              ></div>
+                :style="{backgroundImage: 'url('+require('@/assets/images/bh/bh_img.jpg')+')'}">
+              </div>
+              
               <div
                 class="layer"
                 data-scene="2"
-                style="background-image: url('https://images.unsplash.com/photo-1512146587460-f94274cc6b9f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7ef91c21318c8ffa1a9da0ba9f5b9207&auto=format&fit=crop&w=334&q=80')"
-              ></div>
+                 :style="{backgroundImage: 'url('+require('@/assets/images/hj/hj_img.jpg')+')'}">
+              </div>
               <div
                 class="layer"
                 data-scene="3"
-                style="background-image: url('https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7880e3b80dd9960e65d543cd39d3540e&auto=format&fit=crop&w=334&q=80')"
-              ></div>
+                  :style="{backgroundImage: 'url('+require('@/assets/images/jh/jh_img.jpg')+')'}">
+              </div>
+               <div
+                class="layer"
+                data-scene="4"
+                 :style="{backgroundImage: 'url('+require('@/assets/images/js/js_img.jpg')+')'}">
+              </div>
+               <div
+                class="layer"
+                data-scene="5"
+                  :style="{backgroundImage: 'url('+require('@/assets/images/sw/sw_img.jpg')+')'}">
+              </div>
             </div>
             <div class="line"></div>
           </section>
@@ -134,6 +208,7 @@
       </v-content>
     </v-app>
   </div>
+</div>
 </template>
 
 <script>
@@ -143,18 +218,29 @@ export default {
   components: {},
   data() {
     return {
+      show: true,
       hero: "",
       layers: [],
       sliderIndex: 1
     };
   },
   // 모든게 부착되고 나서 받아와야 하므로 mounted사용함
+  created(){
+    this.show=true;
+  },
   mounted() {
+    
+    
     // console.log('--------', document.querySelectorAll('.layer.layer-displayed'))
     // console.log('===========', document.querySelectorAll('.layer'))
     this.layers = [...document.querySelectorAll('.layer')];
     console.log(this.layers)
+    console.log("부착");
     this.hero = document.querySelector('.hero');
+     setTimeout(() => {
+        this.show=false;
+}, 1000);
+    
   },
   
   computed: {
@@ -166,11 +252,12 @@ export default {
     }
   },
   methods: {
+    
     outboundInput() {},
     switchLayer() {
       var step = 1;
       const nextSlide =
-        (this.sliderIndex + step) % 3 === 0 ? 3 : (this.sliderIndex + step) % 3;
+        (this.sliderIndex + step) % 5 === 0 ? 5 : (this.sliderIndex + step) % 5;
       console.log(this.layers);
       for (let i of this.layers) {
         i.classList.remove("layer-displayed");
@@ -186,6 +273,7 @@ export default {
       }
       console.log(nextSlide);
       this.sliderIndex = nextSlide;
+      
     }
   }
 
@@ -211,6 +299,217 @@ export default {
 </script>
 
 <style scoped lang="scss" type="text/scss">
+
+body
+{
+  margin:0;
+  padding:0
+}
+
+#loading {
+    background: #DA22FF;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #9733EE, #DA22FF);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #9733EE, #DA22FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    margin-top: 0px;
+    top: 0px;
+    z-index: 999999;
+    display: block;
+}
+
+
+/*-------------------------
+    33.Preloader CSS
+---------------------------*/
+.loadding-page {
+  width: 100%;
+  height: 100%;
+  background: #fdd245;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+}
+.cssload-box-loading {
+  width: 49px;
+  height: 49px;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.cssload-box-loading:before {
+  content: '';
+  width: 49px;
+  height: 5px;
+  background: #000000;
+  opacity: 0.1;
+  position: absolute;
+  top: 58px;
+  left: 0;
+  border-radius: 50%;
+  animation: shadow 0.58s linear infinite;
+  -o-animation: shadow 0.58s linear infinite;
+  -ms-animation: shadow 0.58s linear infinite;
+  -webkit-animation: shadow 0.58s linear infinite;
+  -moz-animation: shadow 0.58s linear infinite;
+}
+.cssload-box-loading:after {
+  content: '';
+  width: 49px;
+  height: 49px;
+  background: #fdd245;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 3px;
+  animation: cssload-animate 0.58s linear infinite;
+  -o-animation: cssload-animate 0.58s linear infinite;
+  -ms-animation: cssload-animate 0.58s linear infinite;
+  -webkit-animation: cssload-animate 0.58s linear infinite;
+  -moz-animation: cssload-animate 0.58s linear infinite;
+}
+@keyframes cssload-animate {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  75% {
+    transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(90deg);
+  }
+}
+@-o-keyframes cssload-animate {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    -o-transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    -o-transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  75% {
+    -o-transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    -o-transform: translateY(0) rotate(90deg);
+  }
+}
+@-ms-keyframes cssload-animate {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    -ms-transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    -ms-transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  75% {
+    -ms-transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    -ms-transform: translateY(0) rotate(90deg);
+  }
+}
+@-webkit-keyframes cssload-animate {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    -webkit-transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    -webkit-transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  75% {
+    -webkit-transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    -webkit-transform: translateY(0) rotate(90deg);
+  }
+}
+@-moz-keyframes cssload-animate {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    -moz-transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    -moz-transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  75% {
+    -moz-transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    -moz-transform: translateY(0) rotate(90deg);
+  }
+}
+@keyframes shadow {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.2, 1);
+  }
+}
+@-o-keyframes shadow {
+  0%,
+  100% {
+    -o-transform: scale(1, 1);
+  }
+  50% {
+    -o-transform: scale(1.2, 1);
+  }
+}
+@-ms-keyframes shadow {
+  0%,
+  100% {
+    -ms-transform: scale(1, 1);
+  }
+  50% {
+    -ms-transform: scale(1.2, 1);
+  }
+}
+@-webkit-keyframes shadow {
+  0%,
+  100% {
+    -webkit-transform: scale(1, 1);
+  }
+  50% {
+    -webkit-transform: scale(1.2, 1);
+  }
+}
+@-moz-keyframes shadow {
+  0%,
+  100% {
+    -moz-transform: scale(1, 1);
+  }
+  50% {
+    -moz-transform: scale(1.2, 1);
+  }
+}
 @import url("https://fonts.googleapis.com/css?family=Playfair+Display:400,700");
 
 :root {
