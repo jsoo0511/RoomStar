@@ -376,8 +376,6 @@ Vue.component("v-video-parallax", VuetifyVideoParallax);
 import VueLoading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 import $ from "jquery";
-import FlipCard from "./FlipCard.vue";
-import FlipCard2 from "./FlipCard2.vue";
 import FlipCard3 from "./FlipCard3.vue";
 Vue.use(VueLoading);
 Vue.component("loading", VueLoading);
@@ -386,8 +384,6 @@ export default {
   vuetify: new Vuetify(),
   components: {
     // ModalLogin
-    FlipCard,
-    FlipCard2,
     FlipCard3
   },
   data() {
