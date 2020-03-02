@@ -306,12 +306,19 @@ export default {
         
         this.player_streams[bat_id] = event.stream;
         this.player_videos[bat_id].srcObject = this.player_streams[bat_id];
-
-
       }
 
-     if (this.user_identification==="singer" && this.player_streams[this.player_idx]!=null){
+     if (this.user_identification==="singer"){
+
+      if(this.player_streams[this.player_idx]!=null){
+
         t_pc.addStream(this.player_streams[this.player_idx]);
+
+        } else{
+          let player_stream = this.player_streams[this.player_idx];
+          t_pc.addStream(player_stream);
+        }
+          
       }
       return t_pc;
     }
@@ -320,23 +327,6 @@ export default {
     this.getData();
     console.log("created()---->1", this.battle_id);
     console.log("주소오오오오오오오옹", process.env.VUE_APP_SOCKET_IP);
-
-    this.player_videos[0] = document.getElementById("p1_video");
-    this.player_videos[1] = document.getElementById("p2_video");
-    
-    //player1일때,
-    if (this.user_identification === "singer") {
-      console.log("가수");
-      navigator.mediaDevices
-        .getUserMedia({
-          
-          audio: true,
-          video: true
-        })
-        .then(this.get_stream);
-
-    }
-
     this.socket = io.connect(
       process.env.VUE_APP_SOCKET_IP +
         "?room_id=" +
@@ -363,7 +353,21 @@ export default {
     console.log("mounted()---->2");
     console.log(this);
     
+    this.player_videos[0] = document.getElementById("p1_video");
+    this.player_videos[1] = document.getElementById("p2_video");
     
+    //player1일때,
+    if (this.user_identification === "singer") {
+      console.log("가수");
+      navigator.mediaDevices
+        .getUserMedia({
+          
+          audio: true,
+          video: true
+        })
+        .then(this.get_stream);
+
+    }
     this.socket.on("join", message => {
       console.log(message);
       const join_id = message.user_id;
