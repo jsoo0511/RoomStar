@@ -7,15 +7,9 @@
             <v-row class="mx-auto">
               <v-col cols="12" md="12">
                 <div class="text-center">
-<<<<<<< HEAD
                   <div
                     class="font-weight-black mb-4"
                   ><p class="mypages">마이페이지</p></div>
-=======
-                  <div class="font-weight-black mb-4">
-                    <p class="mypages">My page</p>
-                  </div>
->>>>>>> 9fede136299e90e4403b941364401657b57a5d04
                 </div>
               </v-col>
             </v-row>
@@ -865,18 +859,11 @@ Leaderboard
   border: 2px solid white;
   border-width: 0px 0 2px 2px;
 }
-<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans&display=swap');
 .mypages{
   font-size:100px;
   font-family: 'Do Hyeon', ;
   -webkit-text-stroke: 1px #000;
-=======
-@import url("https://fonts.googleapis.com/css?family=Noto+Sans&display=swap");
-.mypages {
-  font-size: 100px;
-  font-family: "Noto Sans";
->>>>>>> 9fede136299e90e4403b941364401657b57a5d04
 }
 #paral {
   height: 100vh !important;
