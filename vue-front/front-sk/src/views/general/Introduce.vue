@@ -32,7 +32,7 @@
                <div class="layer" data-scene="5">,
                 <div
                   class="layer-image-wrapper"
-                  :style="{backgroundImage: 'url('+require('@/assets/images/sw/sw_1.jpg')+')'}">
+                  :style="{backgroundImage: 'url('+require('@/assets/images/sw/sw_5.jpg')+')'}">
               </div>
               </div>
               <div class="text">
@@ -97,7 +97,7 @@
                 </div>
                  <div class="layer" data-scene="5">
                   <span></span>
-                  <span>Muse Magazine</span>
+                  <span>Full-Stack</span>
                 </div>
               </div>
               <button @click="switchLayer()">NEXT TALENT ></button>
@@ -164,7 +164,7 @@
                  <div class="layer" data-scene="5">
                   <div
                     class="layer-image-wrapper"
-                    :style="{backgroundImage: 'url('+require('@/assets/images/sw/sw_5.jpg')+')'}">
+                    :style="{backgroundImage: 'url('+require('@/assets/images/sw/sw_4.jpg')+')'}">
               </div>
                 </div>
               </div>
