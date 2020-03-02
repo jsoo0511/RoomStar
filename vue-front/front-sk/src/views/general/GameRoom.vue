@@ -70,7 +70,8 @@ export default {
       //video, stream
       player_videos: [null, null],
       player_streams: [null, null],
-      player_idx: 1,
+      player_idx: 0,
+      local_stream: null,
 
       //대결하는 사람들의 정보
       battle_id: [null, null],
@@ -100,8 +101,8 @@ export default {
     Chat,
     Vote1,
     Vote2,
-    SelectMusic1,
-    SelectMusic2,
+    //SelectMusic1,
+    //SelectMusic2,
   },
   methods: {
     finish(){
@@ -149,23 +150,23 @@ export default {
           });
         }
     },
-    leave(){
-      axios
-        .put(process.env.VUE_APP_SERVER_IP+"/Out_room/"+ this.user_id)
-        .then(response => {
-          console.log(response);
-          this.$router.push("/");
-        })
-        .catch(e => {
-          console.log("error: ", e);
-        });
-      this.socket.emit("leave", {
-        room_id:this.room_id,
-        user_identification:this.user_identification,
-        user_id:this.user_id,
-        player_idx:this.player_idx
-      });
-    },
+    // leave(){
+    //   axios
+    //     .put(process.env.VUE_APP_SERVER_IP+"/Out_room/"+ this.user_id)
+    //     .then(response => {
+    //       console.log(response);
+    //       this.$router.push("/");
+    //     })
+    //     .catch(e => {
+    //       console.log("error: ", e);
+    //     });
+    //   this.socket.emit("leave", {
+    //     room_id:this.room_id,
+    //     user_identification:this.user_identification,
+    //     user_id:this.user_id,
+    //     player_idx:this.player_idx
+    //   });
+    // },
     backButton() {
       console.log("moveeeeeeeeeeeeee");
       let userid = this.user_id;
@@ -175,7 +176,12 @@ export default {
         userid,
         room_id: this.room_id
       };
-
+      this.socket.emit("leave", {
+        room_id:this.room_id,
+        user_identification:this.user_identification,
+        user_id:this.user_id,
+        player_idx:this.player_idx
+      });
       switch (this.singerOrWatcherStatus) {
         case 1: // singer
           console.log(userid);
@@ -215,8 +221,8 @@ export default {
       let store = this.$store;
       this.user_id = this.$session.get("userId");
       this.room_id = this.$session.get("roomId");
-      console.log(this.$session.get("singerOrWatcherStatus"));
-
+     
+      console.log("현재 나의 존재 ",this.$session.get("singerOrWatcherStatus"));
 
       if (this.$session.get("singerOrWatcherStatus")==1){
         this.user_identification = "singer";
@@ -224,12 +230,15 @@ export default {
         this.user_identification = "watcher";
       }
 
+      console.log(this.user_identification);
       if (this.user_identification === "singer") {
-        if (this.battle_id[0]) {
-          this.player_idx = 1;
-        } else {
-          this.player_idx = 0;
-        }
+        this.player_idx = this.$session.get("playerIdx");
+
+        // if (this.battle_id[0]) {
+        //   this.player_idx = 1;
+        // } else {
+        //   this.player_idx = 0;
+        // }
       }
 
       // this.room_id = 1;
@@ -243,9 +252,10 @@ export default {
       this.socket.emit("message", message);
     },
     async get_stream(stream) {
-      console.log("get_stream---->3");
+      console.log("get_stream---->3",this.player_idx);
       this.player_videos[this.player_idx].srcObject = stream;
       this.player_streams[this.player_idx] = stream;
+      this.local_stream = stream;
     },
     async getPeerConnection(join_id, join_identification, join_idx) {
       console.log("getPeerConnection()----->4");
@@ -259,6 +269,7 @@ export default {
           bat_id = (this.player_idx+1)%2;
           
           this.battle_connections[bat_id] = t_pc;
+          console.log(this.battle_connections)
           this.battle_id[bat_id] = join_id;
         } else {
           this.watchers_connections[this.watcher_cnt] = t_pc;
@@ -290,15 +301,27 @@ export default {
       };
 
       t_pc.onaddstream = event => {
-        this.player_streams[bat_id] = event.stream;
-
-        this.player_videos[bat_id].srcObject = this.player_streams[bat_id];
-
+        let remote_video = document.getElementById("p1_video");
+        if (bat_id==1){
+          remote_video = document.getElementById("p2_video");
+        }
         
+        this.player_streams[bat_id] = event.stream;
+        remote_video.srcObject = this.player_streams[bat_id];
+        console.log("제발                  ㄴㄴㄴ",this.player_streams[bat_id])
       }
 
-     if (this.user_identification==="singer"){
-        t_pc.addStream(this.player_streams[this.player_idx]);
+     if (this.user_identification==="singer" && this.local_stream!=null){
+
+      // if(this.player_streams[this.player_idx]!=null){
+
+      //   t_pc.addStream(this.player_streams[this.player_idx]);
+
+      //   } else{
+      //     let player_stream = this.player_streams[this.player_idx];
+      //     t_pc.addStream(player_stream);
+      //   }
+          t_pc.addStream(this.local_stream);
       }
       return t_pc;
     }
@@ -317,8 +340,8 @@ export default {
         this.user_identification +
         "&player_idx=" +
         this.player_idx,
-      { transports: ["websocket"] },
-      {secure:true}
+      { transports: ["websocket"] }
+      //{secure:true}
     );
   },
     mounted() {
@@ -343,7 +366,10 @@ export default {
         .getUserMedia({
           
           audio: true,
-          video: true
+          video: true,
+          sampleRate: 48000, 
+          echoCancellation: true,
+           noiseSuppression:true
         })
         .then(this.get_stream);
 
@@ -432,7 +458,7 @@ export default {
           if (data.from_identification == "singer") {
             //상대도 가수
             console.log("오퍼를 받앗습니다.답장을 해요", data);
-            this.battle_id[(this.player_idx + 1) % 2] = data.from;
+            this.battle_id[data.from_idx] = data.from;
           } else {
             //상대가 시청자일 경우
             this.watchers_id[this.watcher_cnt++] = data.from;
@@ -489,25 +515,27 @@ export default {
         console.log(
           "새로 들어온" +
             data.from_identification +
-            "한테 answer을 받았습니다." +
+            "한테 answer을 받았습니다.",
             data
         );
-        let t_pc = null;
+        //let t_pc = null;
         if (this.user_identification == "singer") {
           if (data.from_identification == "singer") {
-            t_pc = this.battle_connections[(this.player_idx + 1) % 2];
+            console.log("여기 오는지 확인",this.battle_connections[data.from_idx])
+            this.battle_connections[data.from_idx].setRemoteDescription(new RTCSessionDescription(data.message));
           } else {
-            t_pc = this.watchers_connections[this.watcher_cnt - 1];
+           this.watchers_connections[this.watcher_cnt - 1].setRemoteDescription(new RTCSessionDescription(data.message));
           }
         } else {
           if (data.from_identification == "singer") {
-            t_pc = this.battle_connections[data.from_idx];
+            this.battle_connections[data.from_idx].setRemoteDescription(new RTCSessionDescription(data.message));
           }
         }
         
-        if (this.user_identification==="singer"){
-          t_pc.setRemoteDescription(new RTCSessionDescription(data.message));
-        }
+        // if (this._identification==="singer"){
+        //   console.log("여기는 오는가 ????")
+        //   t_pc.setRemoteDescription(new RTCSessionDescription(data.message));
+        // }
       } else if (data.message.type === "candidate") {
         let candidate = new RTCIceCandidate({
           sdpMLineIndex: data.message.label,
@@ -516,7 +544,7 @@ export default {
         let t_pc = null;
         if (this.user_identification == "singer") {
           if (data.from_identification == "singer") {
-            t_pc = this.battle_connections[(this.player_idx + 1) % 2];
+            t_pc = this.battle_connections[data.from_idx];
 
             t_pc.addIceCandidate(candidate);
           } else {

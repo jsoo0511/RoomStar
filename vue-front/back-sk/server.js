@@ -1,3 +1,18 @@
+// var fs = require('fs');
+// var app = require('express')();
+// var privateKey = fs.readFileSync('/etc/letsencrypt/live/i02a407.p.ssafy.io/privkey.pem').toString();
+// var certificate = fs.readFileSync('/etc/letsencrypt/live/i02a407.p.ssafy.io/cert.pem').toString();
+// var ca = fs.readFileSync('/etc/letsencrypt/live/i02a407.p.ssafy.io/fullchain.pem').toString();
+// var port = 3030;
+// var server = require('https').createServer(app);
+// var io = require('socket.io')(server).listen(port,{key:privateKey,cert:certificate,ca:ca});
+
+
+// server.listen(port, function() {
+//     console.log('socket io server listening on port '+port);
+// })
+
+
 var app = require('express')();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
@@ -8,6 +23,13 @@ let rooms = [null,null,null,null,null];
 server.listen(port, function() {
     console.log('socket io server listening on port '+port);
 })
+
+
+
+
+//let rooms = [null,null,null,null,null];
+
+
 
 //connection event handler
 io.on('connection' , function(socket) {
@@ -20,7 +42,7 @@ io.on('connection' , function(socket) {
     let user_identification = socket.handshake.query.user_identification;
     let player_idx = socket.handshake.query.player_idx;
 
-    console.log("새로운 입장 : "+room_id,user_id);
+    console.log("새로운 입장 : "+room_id,user_id, player_idx);
     let room = rooms[room_id];
     //let watcher_cnt = 0;
 
