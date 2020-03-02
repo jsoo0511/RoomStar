@@ -91,7 +91,7 @@
       <div v-for="(item, i) in info[0]" :key="i">
         <v-flex xs12 sm6 md3 style="float:left">
           <div class="item">
-            <v-dialog v-model="itemDialog[i]" max-width="500" max-height="350">
+            <v-dialog v-model="itemDialog[i]" max-width="628" max-height="350">
               <template v-slot:activator="{ on }">
                 <!-- 이걸 클릭할때 해당것에 필요한 정보를 가져오게 한다. -->
                 <div @click="checkLike(userId, item.id)" class="polaroid" v-on="on">
@@ -105,32 +105,33 @@
               그 데이터 받은걸 v-card에 갱신-->
               <v-card id="modal">
                 <div>
-                  <p id="ptag">{{item.title}}</p>
-                  <!-- 비디오 src 추가 max-width:640px; -->
-                  <video style="width: 100%;height: auto" ref="video" controls>
+                  <video style="width: 620px;height:462px; margin-left: 4px; margin-top: 4px" ref="video" controls>
                     <source :src="item.videoURL" type="video/mp4" />
                   </video>
-                  <p class="resultOwner">게시자:{{item.nickname}}</p>
-                  <p class="resultContent">내용: {{item.contents}}</p>
+                  <p id="ptag">{{item.title}}</p>
+                  <!-- 비디오 src 추가 max-width:640px; -->
+                  <p class="resultOwner">{{item.nickname}}</p>
+                  <p class="resultContent">{{item.contents}}</p>
+                  <br>
+                  <hr>
                   <!-- 좋아요 수: -->
                   <!-- <p id="newLike">{{ item.like_num }}</p> -->
                   <!-- {{item.videoURL}} -->
                   <!-- 열자마자 좋아요 누른사람인지 아닌지 판단해주는것 서버에 요청 -->
                   <!-- true면 -->
-                  <v-icon
+                  <v-icon id="thumb"
                     color="pink"
                     @click="like(item.id) & item.like_num - 1"
                     v-if="checkLikeStatus === 'false'"
                   >mdi-thumb-up</v-icon>
                   <!-- false면 -->
-                  <v-icon
+                  <v-icon id="thumb"
                     color="gray"
                     @click="like(item.id) & item.like_num + 1"
                     v-else-if="checkLikeStatus === 'true'"
                   >mdi-thumb-up</v-icon>
-                  <br />
-                  <v-btn text small color="black" type="submit" @click="dClose(i)">나가기</v-btn>
-                  <v-btn
+                   <v-btn style="margin-left: 30vw; margin-top: 2vh;" text small color="black" type="submit" @click="dClose(i)">나가기</v-btn>
+                  <v-btn style="margin-top: 2vh;"
                     text
                     small
                     color="black"
@@ -138,6 +139,8 @@
                     v-if="userId == item.userid"
                     @click="deleteItem(item.id)"
                   >삭제</v-btn>
+                  <br />
+                 
                   <br />
                 </div>
               </v-card>
@@ -489,24 +492,34 @@ section{
   overflow: hidden;
 }
 #modal {
+  background: white;
+  width: 100% !important;
   margin: 0 auto;
   border-radius: 2px;
   overflow: hidden;
 }
 #ptag {
-  font-size: 30px;
-  margin-left: 1em;
+  font-size: 20px;
+  margin-left: 16px;
 }
 #dialog {
   max-width: 350px;
 }
 
+#thumb{
+  margin-top: 11px;
+  margin-left: 16px;
+}
 .resultOwner {
   font-family: "Indie Flower";
+  margin-left: 16px;
+  
 }
 
 .resultContent {
+  margin-top: 16px;
   font-family: "Indie Flower";
+  margin-left: 16px;
 }
 * {
   box-sizing: border-box;
@@ -900,5 +913,8 @@ background: linear-gradient(to right, #9733EE, #DA22FF); /* W3C, IE 10+/ Edge, F
   50% {
     -moz-transform: scale(1.2, 1);
   }
+}
+p{
+  margin-bottom: 0px !important;
 }
 </style>
