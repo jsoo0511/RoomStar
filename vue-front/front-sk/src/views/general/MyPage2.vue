@@ -14,7 +14,7 @@
                 <div class="text-center">
                   <div
                     class="font-weight-black mb-4"
-                  ><p class="mypages">My page</p></div>
+                  ><p class="mypages">마이페이지</p></div>
                 </div>
               </v-col>
             </v-row>
@@ -147,7 +147,9 @@
   </div>
 </div>
 </template>
-
+<style>
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean');
+</style>
 <script>
 import router from "@/routes";
 import axios from "axios";
@@ -849,7 +851,8 @@ Leaderboard
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans&display=swap');
 .mypages{
   font-size:100px;
-  font-family: 'Noto Sans'
+  font-family: 'Do Hyeon', ;
+  -webkit-text-stroke: 1px #000;
 }
 #paral{
   height:100vh !important;

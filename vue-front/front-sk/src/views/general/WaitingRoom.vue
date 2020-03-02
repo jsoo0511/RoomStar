@@ -1,5 +1,5 @@
 <template>
-  <div id="waitingRooms">
+  <section id="waitingRooms">
     <!-- <v-btn @click="singingButton()">노래하기</v-btn> -->
     <swiper :options="swiperOption">
       <!-- swipter-slide 부분을 v-for로 처리해야 할 것 같은데, -->
@@ -37,7 +37,7 @@
               </div>
             </div>
           </div>
-          <v-img src="../../assets/images/battle_vs2.png" id="vs_img"></v-img>
+          <v-img src="../../assets/images/logo_vs2.png" id="vs_img"></v-img>
 
           <div class="card marginL">
             <div class="card-image">
@@ -77,7 +77,7 @@
       </ul>
     -->
     <!-- <p>대기인원: {{ waitingNumofPeople }}</p> -->
-  </div>
+  </section>
 </template>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
@@ -265,7 +265,7 @@ export default {
   grid-template-rows: 1fr;
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
-  background:#FFCE54
+  background:rgba(253,175,15);
 }
 
 .card-stats .stat {
@@ -288,8 +288,9 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-image: url("../../assets/images/see_bg70.png");
+  height: 100vh;
+  width:100vw;
+  background-image: url("../../assets/images/waitingroom_back.png");
   font-family: "Poppins", sans-serif;
 }
 
@@ -308,7 +309,7 @@ export default {
   z-index: 1 !important;
   position: fixed;
   margin-top: 41%;
-  margin-left: 43%;
+  margin-left: 44%;
 }
 #swiper_row {
   transition: 0.5s ease;

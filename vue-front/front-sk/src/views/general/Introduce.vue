@@ -682,7 +682,7 @@ main {
 
       display: grid;
       grid-template-rows: auto 50px;
-      background-color: #ab8972;
+      background-color: rgba(253,183,27);
       color: white;
 
       button {
@@ -695,7 +695,7 @@ main {
         letter-spacing: 5px;
         font-size: 1rem;
 
-        background-color: #ab8972;
+        background-color: rgba(190,42,248);
 
         z-index: 5;
         cursor: pointer;

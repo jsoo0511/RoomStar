@@ -23,7 +23,7 @@
                 <div class="text-center">
                   <div
                     class="font-weight-black mb-4"
-                  ><p class="mypages"></p></div>
+                  ><p class="mypages">노래자랑하기</p></div>
                 </div>
               </v-col>
             </v-row>
@@ -149,7 +149,6 @@
 </section>
 </div>
 </template>
-
 <script>
 import { app } from "../../services/FirebaseServices";
 import * as firebase from "firebase/app";
@@ -535,6 +534,7 @@ body {
   width: 13vw !important;
   margin-left: 70vw;
   background-image: url("../../../src/assets/images/btntree.png");
+  box-shadow:none;
 }
 
 .download:hover {
@@ -542,6 +542,7 @@ body {
   width: 13vw !important;
   margin-left: 70vw;
   background-image: url("../../../src/assets/images/btntree2.png");
+  box-shadow:none;
 }
 .bg_feed{
   margin-bottom:5vh;
@@ -693,10 +694,12 @@ body {
   border: 2px solid white;
   border-width: 0px 0 2px 2px;
 }
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans&display=swap');
+
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean');
 .mypages{
   font-size:100px;
-  font-family: 'Noto Sans'
+  font-family: 'Do Hyeon' !important ;
+  -webkit-text-stroke: 1px #000
 }
 #loading {
     background: #DA22FF;  /* fallback for old browsers */
