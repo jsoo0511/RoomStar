@@ -1,5 +1,15 @@
 <template>
-  <div id="mypage2">
+<div>
+ <div v-show="show" id="loading">
+           <div class="cssload-box-loading">
+
+              <img
+                src="../../assets/images/roomstar.png"
+                style="margin-top:10vh; margin-left:-6vw; width:230px; height:auto ;"
+              />
+           </div>
+        </div>
+  <div v-show="!show" id="mypage2">
     <div style="height:100%;">
       <section class="banner">
         <v-parallax id="paral" src="../../assets/images/mypage_banner.jpg">
@@ -129,6 +139,7 @@
       </section>
     </div>
   </div>
+</div>
 </template>
 <style>
 @import url('https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean');
@@ -149,6 +160,7 @@ Vue.use(Donut);
 export default {
   data() {
     return {
+      show: true,
       items: [
         {
           src:
@@ -296,6 +308,10 @@ export default {
         console.log(this.rankingUsers)
         console.log(this.myranking)
       });
+
+      setTimeout(() => {
+        this.show=false;
+}, 1000);
   },
   mounted() {
     $(function() {
@@ -320,6 +336,219 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+body
+{
+  margin:0;
+  padding:0
+}
+
+#loading {
+    background: #DA22FF;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #9733EE, #DA22FF);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #9733EE, #DA22FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    margin-top: 0px;
+    top: 0px;
+    z-index: 999999;
+    display: block;
+}
+
+
+/*-------------------------
+    33.Preloader CSS
+---------------------------*/
+.loadding-page {
+  width: 100%;
+  height: 100%;
+  background: #fdd245;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+}
+.cssload-box-loading {
+  width: 49px;
+  height: 49px;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.cssload-box-loading:before {
+  content: '';
+  width: 49px;
+  height: 5px;
+  background: #000000;
+  opacity: 0.1;
+  position: absolute;
+  top: 58px;
+  left: 0;
+  border-radius: 50%;
+  animation: shadow 0.58s linear infinite;
+  -o-animation: shadow 0.58s linear infinite;
+  -ms-animation: shadow 0.58s linear infinite;
+  -webkit-animation: shadow 0.58s linear infinite;
+  -moz-animation: shadow 0.58s linear infinite;
+}
+.cssload-box-loading:after {
+  content: '';
+  width: 49px;
+  height: 49px;
+  background: #fdd245;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 3px;
+  animation: cssload-animate 0.58s linear infinite;
+  -o-animation: cssload-animate 0.58s linear infinite;
+  -ms-animation: cssload-animate 0.58s linear infinite;
+  -webkit-animation: cssload-animate 0.58s linear infinite;
+  -moz-animation: cssload-animate 0.58s linear infinite;
+}
+@keyframes cssload-animate {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  75% {
+    transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(90deg);
+  }
+}
+@-o-keyframes cssload-animate {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    -o-transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    -o-transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  75% {
+    -o-transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    -o-transform: translateY(0) rotate(90deg);
+  }
+}
+@-ms-keyframes cssload-animate {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    -ms-transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    -ms-transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  75% {
+    -ms-transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    -ms-transform: translateY(0) rotate(90deg);
+  }
+}
+@-webkit-keyframes cssload-animate {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    -webkit-transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    -webkit-transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  75% {
+    -webkit-transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    -webkit-transform: translateY(0) rotate(90deg);
+  }
+}
+@-moz-keyframes cssload-animate {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    -moz-transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    -moz-transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  75% {
+    -moz-transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    -moz-transform: translateY(0) rotate(90deg);
+  }
+}
+@keyframes shadow {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.2, 1);
+  }
+}
+@-o-keyframes shadow {
+  0%,
+  100% {
+    -o-transform: scale(1, 1);
+  }
+  50% {
+    -o-transform: scale(1.2, 1);
+  }
+}
+@-ms-keyframes shadow {
+  0%,
+  100% {
+    -ms-transform: scale(1, 1);
+  }
+  50% {
+    -ms-transform: scale(1.2, 1);
+  }
+}
+@-webkit-keyframes shadow {
+  0%,
+  100% {
+    -webkit-transform: scale(1, 1);
+  }
+  50% {
+    -webkit-transform: scale(1.2, 1);
+  }
+}
+@-moz-keyframes shadow {
+  0%,
+  100% {
+    -moz-transform: scale(1, 1);
+  }
+  50% {
+    -moz-transform: scale(1.2, 1);
+  }
+}
+
+
 $optionDefaultColours: #ed5565, rgb(223, 7, 243), black, #2ecc71,
   radial-gradient(
     ellipse farthest-corner at center top,
@@ -863,6 +1092,7 @@ Leaderboard
 .mypages{
   font-size:100px;
   font-family: 'Do Hyeon', ;
+  color:rgba(255,255,255);
   -webkit-text-stroke: 1px #000;
 }
 #paral {
