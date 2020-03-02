@@ -1092,6 +1092,7 @@ Leaderboard
 .mypages{
   font-size:100px;
   font-family: 'Do Hyeon', ;
+  color:rgba(255,255,255);
   -webkit-text-stroke: 1px #000;
 }
 #paral {

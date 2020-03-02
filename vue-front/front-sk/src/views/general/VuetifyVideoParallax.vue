@@ -231,7 +231,7 @@ export default {
     contain: strict;
 }
 .v-parallax__content {
-    color: #000000;
+    color: #ffffff !important;
     height: 100%;
     z-index: 2;
     position: relative;
@@ -246,5 +246,6 @@ export default {
     -ms-flex-pack: center;
     justify-content: center;
     padding: 0 1rem;
+    width:100vw !important;
 }
 </style>
