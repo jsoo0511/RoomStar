@@ -1,235 +1,217 @@
 <template>
-<div id="mypage2">
-<div style="height:100%;" >
-    <section class="banner">
-        <v-parallax id="paral"
-          src="../../assets/images/mypage_banner.jpg"
-        >
+  <div id="mypage2">
+    <div style="height:100%;">
+      <section class="banner">
+        <v-parallax id="paral" src="../../assets/images/mypage_banner.jpg">
           <v-container fill-height>
             <v-row class="mx-auto">
-              <v-col
-                cols="12"
-                md="12"
-              >
+              <v-col cols="12" md="12">
                 <div class="text-center">
+<<<<<<< HEAD
                   <div
                     class="font-weight-black mb-4"
-                  ><p class="mypages">My page</p></div>
+                  ><p class="mypages">마이페이지</p></div>
+=======
+                  <div class="font-weight-black mb-4">
+                    <p class="mypages">My page</p>
+                  </div>
+>>>>>>> 9fede136299e90e4403b941364401657b57a5d04
                 </div>
               </v-col>
             </v-row>
-              <a
-                href="#"
-                id="scroll-down"
-                class="scroll-down"
-                address="true"
-              ></a>
+            <a href="#" id="scroll-down" class="scroll-down" address="true"></a>
           </v-container>
         </v-parallax>
-    </section>
-    <section class="mypage_content">
-      <div class="options" >
-        <div class="option active" id="profile_once" :style="{'--optionBackground':'url('+profile+')'}">
-                <div class="text" STYLE="writing-mode: tb-rl">NickName</div> <!--작은 화면일때-->
-                <div class="text2" ></div> <!-- 큰 화면일때-->
-            <div class="shadow">
-            </div>
+      </section>
+      <section class="mypage_content">
+        <div class="options">
+          <div
+            class="option active"
+            id="profile_once"
+            :style="{'--optionBackground':'url('+profile+')'}"
+          >
+            <div class="text" style="writing-mode: tb-rl">NickName</div>
+            <!--작은 화면일때-->
+            <div class="text2"></div>
+            <!-- 큰 화면일때-->
+            <div class="shadow"></div>
             <div class="label">
               <div class="icon">
-                  <i class="fas fa-walking"></i>
+                <i class="fas fa-walking"></i>
               </div>
               <div class="info">
-                  <div class="main">{{nick}}</div>
-                  <div class="sub">{{provider}}</div>
+                <div class="main">{{nick}}</div>
+                <div class="sub">{{provider}}</div>
               </div>
             </div>
-        </div>
-        <div class="option">
-            <div class="text" STYLE="writing-mode: tb-rl" id="textId2">ID</div>
-            <div class="text2" id="textId">{{id}}</div> <!-- 큰 화면일때-->
-            <div class="shadow" ></div>
+          </div>
+          <div class="option">
+            <div class="text" style="writing-mode: tb-rl" id="textId2">ID</div>
+            <div class="text2" id="textId">{{id}}</div>
+            <!-- 큰 화면일때-->
+            <div class="shadow"></div>
             <div class="label">
               <div class="icon" id="aa">
-                  <i class="fas fa-snowflake"></i>
+                <i class="fas fa-snowflake"></i>
               </div>
               <div class="info">
-                  <div class="main">{{id}}</div>
-                  <div class="sub">ID</div>
+                <div class="main">{{id}}</div>
+                <div class="sub">ID</div>
               </div>
             </div>
-        </div>
-        <div class="option">
-            
-            <div class=graph2 > 
-            
-              <vc-donut  background="white" foreground="grey" 
-          
-          :sections="sections" :total="100" id="donut">{{winrate}}%</vc-donut>
+          </div>
+          <div class="option">
+            <div class="graph2">
+              <vc-donut
+                background="white"
+                foreground="grey"
+                :sections="sections"
+                :total="100"
+                id="donut"
+              >{{winrate}}%</vc-donut>
             </div>
-            <div class="text" STYLE="writing-mode: tb-rl">WinRate</div>
-            
-            <div class="shadow"></div>
-            <div class="label">
-              <div class="icon">
-                  <i class="fas fa-tree"></i>
-              </div>
-              <div class="info">
-                  <div class="main">{{win}} 승  {{lose}} 패</div>
-                  <div class="sub">승률</div>
-              </div>
-            </div>
-        </div>
-      
-        <div class="option" :style="{'--optionBackground':'url('+imgsrc+')'}">
-            <div class="text" STYLE="writing-mode: tb-rl">Grade</div>
-            <div class="text2" >{{grade}}</div> <!-- 큰 화면일때-->
-            <div class="shadow"></div>
-            <div class="label">
-              <div class="icon">
-                  <i class="fas fa-sun"></i>
-              </div>
-              <div class="info">
-                  <div class="main">{{grade}}</div>
-                  <div class="sub">등급</div>
-              </div>
-            </div>
-        </div>
+            <div class="text" style="writing-mode: tb-rl">WinRate</div>
 
-          <div class="option" >
-            <div class="text" STYLE="writing-mode: tb-rl">RANK</div>
+            <div class="shadow"></div>
+            <div class="label">
+              <div class="icon">
+                <i class="fas fa-tree"></i>
+              </div>
+              <div class="info">
+                <div class="main">{{win}} 승 {{lose}} 패</div>
+                <div class="sub">승률</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="option" :style="{'--optionBackground':'url('+imgsrc+')'}">
+            <div class="text" style="writing-mode: tb-rl">Grade</div>
+            <div class="text2">{{grade}}</div>
+            <!-- 큰 화면일때-->
+            <div class="shadow"></div>
+            <div class="label">
+              <div class="icon">
+                <i class="fas fa-sun"></i>
+              </div>
+              <div class="info">
+                <div class="main">{{grade}}</div>
+                <div class="sub">등급</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="option">
+            <div class="text" style="writing-mode: tb-rl">RANK</div>
             <div class="text2" id="board">
-                <div class="leaderboard">
-        <h1>
-          <svg class="ico-cup">
-            <use xlink:href="#cup"></use>
-          </svg>
-          Most active Players
-        </h1>
-        <ol>
-          <li>
-            <mark>정하정</mark>
-            <small>315</small>
-          </li>
-          <li>
-            <mark>원범희</mark>
-            <small>301</small>
-          </li>
-          <li>
-            <mark>이종호</mark>
-            <small>292</small>
-          </li>
-          <li>
-            <mark>정승원</mark>
-            <small>245</small>
-          </li>
-          <li>
-            <mark>이정수</mark>
-            <small>203</small>
-          </li>
-        </ol>
-      </div>
-
-
-      </div> <!-- 큰 화면일때-->
+              <div class="leaderboard">
+                <h1>
+                  <svg class="ico-cup">
+                    <use xlink:href="#cup" />
+                  </svg>
+                  랭킹
+                </h1>
+                <ol>
+                  <!-- 랭킹수정 -->
+                  <li v-for="(rankinguser, index) in rankingUsers" :key="index">
+                    <mark>{{rankinguser[1]}}</mark>
+                    <small>승률 {{rankinguser[0]}}%</small>
+                  </li>
+                </ol>
+              </div>
+            </div>
+            <!-- 큰 화면일때-->
             <div class="shadow"></div>
             <div class="label">
               <div class="icon">
-                  <i class="fas fa-sun"></i>
+                <i class="fas fa-sun"></i>
               </div>
               <div class="info">
-                  <div class="main">1등</div>
-                  <div class="sub">랭킹</div>
+                <div class="main">{{this.myranking}}등</div>
+                <div class="sub">RANK</div>
               </div>
             </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
-</div>
 </template>
-
+<style>
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean');
+</style>
 <script>
 import router from "@/routes";
 import axios from "axios";
 import ModalMyPage from "./ModalMyPage.vue";
 import $ from "jquery";
-import Donut from 'vue-css-donut-chart';
-import 'vue-css-donut-chart/dist/vcdonut.css';
-import Vue from 'vue';
+import Donut from "vue-css-donut-chart";
+import "vue-css-donut-chart/dist/vcdonut.css";
+import Vue from "vue";
 import Trend from "vuetrend";
 
-Vue.use(Trend)
+Vue.use(Trend);
 Vue.use(Donut);
 
-// let viewMypage =function(response){
-//   let userId1 = response.userid;
-//   let userNickname1 = response.nickname;
-//   let profileImage1 = response.profileimg;
-//   let userEmail1 = response.email;
-//   let provider=response.provider;
-//   let game=response.game;
-//   let win=response.win;
-//   let lose=response.lose;
-
-//   console.log("-----------");
-//   console.log(userId1);
-//   console.log("-----------");
-// }
-
 export default {
-data(){
-  return {
-     items: [
+  data() {
+    return {
+      items: [
         {
-          src: 'https://firebasestorage.googleapis.com/v0/b/test-ff9ab.appspot.com/o/diamond.png?alt=media&token=b3ed51ea-3e3a-4e61-9b1e-612553050bf6',
-          title: 'Diamond',
+          src:
+            "https://firebasestorage.googleapis.com/v0/b/test-ff9ab.appspot.com/o/diamond.png?alt=media&token=b3ed51ea-3e3a-4e61-9b1e-612553050bf6",
+          title: "Diamond"
         },
-        { 
-          src: 'https://firebasestorage.googleapis.com/v0/b/test-ff9ab.appspot.com/o/platinum.png?alt=media&token=41a44d43-5c2d-4b2e-ae36-9e069bf0f870',
-          title: 'Platinum',
+        {
+          src:
+            "https://firebasestorage.googleapis.com/v0/b/test-ff9ab.appspot.com/o/platinum.png?alt=media&token=41a44d43-5c2d-4b2e-ae36-9e069bf0f870",
+          title: "Platinum"
         },
-        { 
-          src: 'https://firebasestorage.googleapis.com/v0/b/test-ff9ab.appspot.com/o/gold.png?alt=media&token=07882658-5846-4ea6-bc2a-1b2eee1f929c',
-          title: 'Gold',
+        {
+          src:
+            "https://firebasestorage.googleapis.com/v0/b/test-ff9ab.appspot.com/o/gold.png?alt=media&token=07882658-5846-4ea6-bc2a-1b2eee1f929c",
+          title: "Gold"
         },
-        { 
-          src: 'https://firebasestorage.googleapis.com/v0/b/test-ff9ab.appspot.com/o/silver.png?alt=media&token=3e27ecaa-5061-471f-b19e-31ce7ee6568c',
-          title: 'Silver',
+        {
+          src:
+            "https://firebasestorage.googleapis.com/v0/b/test-ff9ab.appspot.com/o/silver.png?alt=media&token=3e27ecaa-5061-471f-b19e-31ce7ee6568c",
+          title: "Silver"
         },
-        { 
-          src: 'https://firebasestorage.googleapis.com/v0/b/test-ff9ab.appspot.com/o/bronze.png?alt=media&token=fafe32d3-f8cc-426d-8946-ebebff71779b',
-          title: 'Bronze',
-        },
+        {
+          src:
+            "https://firebasestorage.googleapis.com/v0/b/test-ff9ab.appspot.com/o/bronze.png?alt=media&token=fafe32d3-f8cc-426d-8946-ebebff71779b",
+          title: "Bronze"
+        }
       ],
-        id: "",
-        nick: "",
-        profile: "",
-        email: "",
-        provider: "",
-        grade: "",
-        game: "",
-        win: "",
-        lose: "",
-        winrate: "",
-        thumbnail:"",
-        flag: false,
-        imgsrc:"",
-
-    sections: [{ value: null },{ value: null }]
-  }
-},
+      id: "",
+      nick: "",
+      profile: "",
+      email: "",
+      provider: "",
+      grade: "",
+      game: "",
+      win: "",
+      lose: "",
+      winrate: "",
+      thumbnail: "",
+      flag: false,
+      imgsrc: "",
+      rankingUsers: "",
+      fiveRankingUsers: [],
+      myranking: "",
+      sections: [{ value: null }, { value: null }]
+    };
+  },
 
   name: "mypage",
-  // components: {
-  // },
 
   created() {
     let store = this.$store;
     // 승원 수정
     const userId = this.$session.get("userId");
     axios
-      .get(process.env.VUE_APP_SERVER_IP+"/mypage/" + userId)
+      .get(process.env.VUE_APP_SERVER_IP + "/mypage/" + userId)
       .then(response => {
+        // 전체에서 몇등인지 정보있어야함
         console.log("success2: ", response);
         const id = response.data.user_info.userid;
         console.log(id);
@@ -244,11 +226,7 @@ data(){
         const lose = response.data.user_info.lose;
         const winrate = response.data.win_rate;
 
-
         this.id = id;
-        console.log(this.id);
-        
-        
         this.nick = nick;
         this.profile = profile;
         this.thumbnail = thumbnail;
@@ -260,33 +238,79 @@ data(){
         this.lose = lose;
         this.winrate = winrate;
 
-          console.log("ddddddsd");
-
-       for(let i of this.items){
-          console.log(i.title);  
-          if(i.title==grade){
-             this.imgsrc=i.src;
+        for (let i of this.items) {
+          console.log(i.title);
+          if (i.title == grade) {
+            this.imgsrc = i.src;
           }
-       }
-             console.log(this.imgsrc); 
-
-        console.log(this.sections[0].value, this.sections[1].value)
-        this.sections[0].value = 100-winrate;
-        this.sections[1].value =winrate;
-         console.log(this.value1)
+        }
+        this.sections[0].value = 100 - winrate;
+        this.sections[1].value = winrate;
       })
       .catch(e => {
         console.log("error: ", e);
       });
+
+    // 랭킹 정보 모두 가져오기
+
+    // http://localhost:8081/getUserInfo
+    axios
+      .get(process.env.VUE_APP_SERVER_IP + "/getUserInfo/")
+      .then(response => {
+        console.log(response.data.data);
+        this.rankingUsers = response.data.data;
+        //var i=0; i<array.length; i++
+        for (var i = 0; i < this.rankingUsers.length; i++) {
+          console.log(this.rankingUsers[i]);
+          // console.log(this.rankingUsers);
+          // 승률은?
+          // 승률 높은 5명만 뽑아오기
+          // 승률 계산 방식
+          // 전체게임수 분의 승 곱하기 백
+          // 승수 곱하기 백
+          // (승리한 경기 수) ÷ (승수+패수)
+          let rate = 0;
+          if (this.rankingUsers[i].win + this.rankingUsers[i].lose == 0) {
+            rate = 0;
+          } else {
+            rate = (this.rankingUsers[i].win / this.rankingUsers[i].game) * 100;
+            rate = Math.floor(rate);
+          }
+          console.log(rate);
+          var user = {
+            rate : rate,
+            nickname : this.rankingUsers[i].nickname,
+          }
+          
+          this.fiveRankingUsers.push([rate,this.rankingUsers[i].nickname])
+
+
+
+        }
+        this.fiveRankingUsers.sort()
+        this.fiveRankingUsers.reverse()
+
+        for (var j=0; j < this.fiveRankingUsers.length; j ++ ){
+          if (this.nick === this.fiveRankingUsers[j][1]) {
+            this.myranking = j+1;
+          }
+        }
+
+        this.fiveRankingUsers = this.fiveRankingUsers.slice(0, 5)
+        // 승률 내림차순
+        this.rankingUsers = this.fiveRankingUsers;
+        console.log(this.rankingUsers)
+        console.log(this.myranking)
+      });
   },
-  mounted(){   
-     $(function() {
-   $(".option").click(function(){
-   $(".option").removeClass("active");
-   $(this).addClass("active");
+  mounted() {
+    $(function() {
+      $(".option").click(function() {
+        $(".option").removeClass("active");
+        $(this).addClass("active");
+      });
     });
-    });
-      $(function() {
+    $(function() {
       $("#scroll-down").click(function() {
         $("html, body").animate(
           { scrollTop: $(".mypage_content").offset().top },
@@ -295,280 +319,274 @@ data(){
         return false;
       });
     });
-  },
-  
+  }
 
   // viewMypage
 };
 </script>
 
 <style lang="scss" scoped>
-$optionDefaultColours: #ED5565,rgb(223, 7, 243),black,#2ECC71,radial-gradient(ellipse farthest-corner at center top, #f39264 0%, #f2606f 100%);
+$optionDefaultColours: #ed5565, rgb(223, 7, 243), black, #2ecc71,
+  radial-gradient(
+    ellipse farthest-corner at center top,
+    #f39264 0%,
+    #f2606f 100%
+  );
 
 .banner {
   height: 100vh !important;
-  width:auto;
+  width: auto;
 }
 
 section {
-  height : 100vh !important; 
+  height: 100vh !important;
   // background-color:rgba(254,248,226,1);
-  width:auto;
+  width: auto;
 }
-.img_logo{
-  position:fixed;
-  width:5vw;
-  height:auto;
-  margin-left:35.7vw;
-  margin-top:11vh;
-  opacity:0.9;
+.img_logo {
+  position: fixed;
+  width: 5vw;
+  height: auto;
+  margin-left: 35.7vw;
+  margin-top: 11vh;
+  opacity: 0.9;
 }
 
-h1{
-  color:black;
-  font-family: fantasy
-//   font-family: 'Noto Sans KR', sans-serif;
-// font-family: 'Gothic A1', sans-serif;
+h1 {
+  color: black;
+  font-family: fantasy;
+  //   font-family: 'Noto Sans KR', sans-serif;
+  // font-family: 'Gothic A1', sans-serif;
 }
-.mypage_text{
-  text-align:center;
-  color:rgba(136,53,151, 0.9);
-  padding-top:1em;
+.mypage_text {
+  text-align: center;
+  color: rgba(136, 53, 151, 0.9);
+  padding-top: 1em;
   font-size: 70px;
 }
-   .container{
-   width:100vw;
-   }
+.container {
+  width: 100vw;
+}
 body {
-   display:flex;
-   flex-direction:row;
-   justify-content:center;
-   align-items:center;
-   overflow:hidden;
-   height:100vh;
-   
-   font-family: 'Roboto', sans-serif;
-   .credit {
-       
-      position: absolute;
-      bottom:20px;
-      left:20px;
-      
-      color:#000;
-   }
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  height: 100vh;
 
+  font-family: "Roboto", sans-serif;
+  .credit {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
 
-   .options {
-     margin-top:5vh;
-      margin-left:23vw;
-      display:flex;
-      flex-direction:row;
-      align-items:stretch;
-      overflow:hidden;
+    color: #000;
+  }
 
-      min-width:600px;
-      max-width:900px;
-      width:calc(100% - 100px);
-      
-      height:500px;
-      
-      @for $i from 1 through 4 {
-         @media screen and (max-width:878px - $i*80) {
-            min-width:600px - $i*80;
-            .option:nth-child(#{6-$i}) {
-               display:none;
-            }
-         }
+  .options {
+    margin-top: 5vh;
+    margin-left: 23vw;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    overflow: hidden;
+
+    min-width: 600px;
+    max-width: 900px;
+    width: calc(100% - 100px);
+
+    height: 500px;
+
+    @for $i from 1 through 4 {
+      @media screen and (max-width: 878px - $i*80) {
+        min-width: 600px - $i * 80;
+        .option:nth-child(#{6-$i}) {
+          display: none;
+        }
       }
-      
-      .option {
-          
-         position: relative;
-         overflow:hidden;
+    }
 
-         min-width:60px;
-         margin:10px;
-         //border:0px solid --defaultColor;
+    .option {
+      position: relative;
+      overflow: hidden;
 
-         background:var(--optionBackground, var(--defaultBackground, #E6E9ED));
-         background-size:auto 120%;
-         background-position:center;
-         background-color:rgba(166,83,0,0.2);
+      min-width: 60px;
+      margin: 10px;
+      //border:0px solid --defaultColor;
 
-         cursor: pointer;
+      background: var(--optionBackground, var(--defaultBackground, #e6e9ed));
+      background-size: auto 120%;
+      background-position: center;
+      background-color: rgba(166, 83, 0, 0.2);
 
-         transition:.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
+      cursor: pointer;
 
-         @for $i from 1 through length($optionDefaultColours) {
-            &:nth-child(#{$i}) {
-               --defaultBackground:#{nth($optionDefaultColours, $i)};
-            }
-         }
-         &.active {
-            
-            flex-grow:10000;
-            transform:scale(1);
-            color:white;
-            max-width:600px;
-            margin:0px;
-            border-radius:40px;
-            background-size:auto 100%;
-            .text{
-                   color: rgba(0,0,0,0); 
-                }
-            .text2{
-              
-                   border-radius:100%;
-                   font-size: 100px;
-                   margin-top: 1em;
-                   text-align: center;
-            }#donut{
-                  color: #000 !important;
-                  margin-top:3vw;
-               } 
-               #textId{
-                  color:white  !important;
-                  font-size: 80px;
-               }
-               #snow{
-                 color:black;
-               }
-                   
-               
-            
-            .shadow {
-               box-shadow:inset 0 -120px 120px -120px black, inset 0 -120px 120px -100px black;
-                
-            }
-            .label {
-               bottom:20px;
-               background-color: rgba(0,0,0,0) !important;
-               left:20px;
-               .info{
-                   background-color: rgba(0,0,0,0) !important;
-               }
-               .info >div {
-                  left:0px;
-                  opacity:1;
-               }
-            }
-            /*&:active {
+      transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
+
+      @for $i from 1 through length($optionDefaultColours) {
+        &:nth-child(#{$i}) {
+          --defaultBackground: #{nth($optionDefaultColours, $i)};
+        }
+      }
+      &.active {
+        flex-grow: 10000;
+        transform: scale(1);
+        color: white;
+        max-width: 600px;
+        margin: 0px;
+        border-radius: 40px;
+        background-size: auto 100%;
+        .text {
+          color: rgba(0, 0, 0, 0);
+        }
+        .text2 {
+          border-radius: 100%;
+          font-size: 100px;
+          margin-top: 1em;
+          text-align: center;
+        }
+        #donut {
+          color: #000 !important;
+          margin-top: 3vw;
+        }
+        #textId {
+          color: white !important;
+          font-size: 80px;
+        }
+        #snow {
+          color: black;
+        }
+
+        .shadow {
+          box-shadow: inset 0 -120px 120px -120px black,
+            inset 0 -120px 120px -100px black;
+        }
+        .label {
+          bottom: 20px;
+          background-color: rgba(0, 0, 0, 0) !important;
+          left: 20px;
+          .info {
+            background-color: rgba(0, 0, 0, 0) !important;
+          }
+          .info > div {
+            left: 0px;
+            opacity: 1;
+          }
+        }
+        /*&:active {
                transform:scale(0.9);
             }*/
-         }
-         &:not(.active) {
-            flex-grow:1;
-            
-            border-radius:30px;
-            #textId2{
-              color:white;
-            }
-             #snow{
-                 color:black;
-               }
-             .text{
-                   color: white;
-                   border-radius:100%;
-                   font-size: 30px;
-                   margin-top: 1em;
-                   
-               }
-                 .text2{
-                   color: rgba(0,0,0,0); 
-                    width:60px !important;
-                }
-                .graph2{
-                   
-                   width:60px !important;
-               }
-               #donut{
-                  opacity:0;
-                  margin-top:-16.3vw;
-               }
-               #board{
-                   opacity:0;
-                  margin-top:-16.3vw;
-               }
-            .shadow {
-               bottom:-40px;
-               box-shadow:inset 0 -120px 0px -120px black, inset 0 -120px 0px -100px black;
-
-              
-            }
-            .label {
-               bottom:10px;
-               left:10px;
-               .info{
-                   background-color: rgba(0,0,0,0) !important;
-               }
-               .info >div {
-                  left:20px;
-                  opacity:0;
-               }
-            }
-         }
-         .shadow {
-            position: absolute;
-            bottom:0px;
-            left:0px;
-            right:0px;
-            
-            height:120px;
-            
-            transition:.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
-         }
-         .label {
-             
-            display:flex;
-            position: absolute;
-            right:0px;
-
-            height:40px;
-            transition:.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
-            .icon {
-               display:flex;
-               flex-direction:row;
-               justify-content:center;
-               align-items:center;
-               
-               min-width:40px;
-               max-width:40px;
-               height:40px;
-               border-radius:100%;
-
-               background-color:white;
-               color:var(--defaultBackground);
-            }
-            #aa{
-              background-color:white;
-            }
-            .info {
-               display:flex;
-               flex-direction:column;
-               justify-content:center;
-               
-               margin-left:10px;
-               
-               color:white;
-               
-               white-space: pre;
-               >div {
-                  position: relative;
-                  
-                  transition:.5s cubic-bezier(0.05, 0.61, 0.41, 0.95), opacity .5s ease-out;
-               }
-               .main {
-                  font-weight:bold;
-                  font-size:1.2rem;
-               }
-               .sub {
-                   
-                  transition-delay:.1s;
-               }
-            }
-         }
       }
-   }
+      &:not(.active) {
+        flex-grow: 1;
+
+        border-radius: 30px;
+        #textId2 {
+          color: white;
+        }
+        #snow {
+          color: black;
+        }
+        .text {
+          color: white;
+          border-radius: 100%;
+          font-size: 30px;
+          margin-top: 1em;
+        }
+        .text2 {
+          color: rgba(0, 0, 0, 0);
+          width: 60px !important;
+        }
+        .graph2 {
+          width: 60px !important;
+        }
+        #donut {
+          opacity: 0;
+          margin-top: -16.3vw;
+        }
+        #board {
+          opacity: 0;
+          margin-top: -16.3vw;
+        }
+        .shadow {
+          bottom: -40px;
+          box-shadow: inset 0 -120px 0px -120px black,
+            inset 0 -120px 0px -100px black;
+        }
+        .label {
+          bottom: 10px;
+          left: 10px;
+          .info {
+            background-color: rgba(0, 0, 0, 0) !important;
+          }
+          .info > div {
+            left: 20px;
+            opacity: 0;
+          }
+        }
+      }
+      .shadow {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+
+        height: 120px;
+
+        transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
+      }
+      .label {
+        display: flex;
+        position: absolute;
+        right: 0px;
+
+        height: 40px;
+        transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
+        .icon {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+
+          min-width: 40px;
+          max-width: 40px;
+          height: 40px;
+          border-radius: 100%;
+
+          background-color: white;
+          color: var(--defaultBackground);
+        }
+        #aa {
+          background-color: white;
+        }
+        .info {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+
+          margin-left: 10px;
+
+          color: white;
+
+          white-space: pre;
+          > div {
+            position: relative;
+
+            transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95),
+              opacity 0.5s ease-out;
+          }
+          .main {
+            font-weight: bold;
+            font-size: 1.2rem;
+          }
+          .sub {
+            transition-delay: 0.1s;
+          }
+        }
+      }
+    }
+  }
 }
 </style>
 
@@ -582,7 +600,6 @@ Body
   box-sizing: border-box;
 }
 
-
 /*--------------------
 Leaderboard
 --------------------*/
@@ -595,7 +612,7 @@ Leaderboard
   height: 308px;
   background: linear-gradient(to bottom, #3a404d, #181c26);
   border-radius: 10px;
-  box-shadow: 0 7px 30px rgba(62, 9, 11, .3);
+  box-shadow: 0 7px 30px rgba(62, 9, 11, 0.3);
 
   h1 {
     font-size: 18px;
@@ -610,7 +627,6 @@ Leaderboard
       margin-right: 6px;
       vertical-align: baseline;
     }
-
   }
 
   ol {
@@ -624,8 +640,7 @@ Leaderboard
       padding: 18px 10px 18px 50px;
       cursor: pointer;
       backface-visibility: hidden;
-      transform: translateZ(0) scale(1.0, 1.0);
-
+      transform: translateZ(0) scale(1, 1);
 
       &::before {
         content: counter(leaderboard);
@@ -654,15 +669,16 @@ Leaderboard
         background: none;
         color: #fff;
 
-        &::before, &::after {
-          content: '';
+        &::before,
+        &::after {
+          content: "";
           position: absolute;
           z-index: 1;
           bottom: -11px;
           left: -9px;
           border-top: 10px solid #c24448;
           border-left: 10px solid transparent;
-          transition: all .1s ease-in-out;
+          transition: all 0.1s ease-in-out;
           opacity: 0;
         }
 
@@ -682,7 +698,7 @@ Leaderboard
       }
 
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         z-index: 1;
         top: 0;
@@ -690,9 +706,9 @@ Leaderboard
         width: 100%;
         height: 100%;
         background: #fa6855;
-        box-shadow: 0 3px 0 rgba(0, 0, 0, .08);
+        box-shadow: 0 3px 0 rgba(0, 0, 0, 0.08);
         // transform: scaleX(1.06) scaleY(1.03);
-        transition: all .3s ease-in-out;
+        transition: all 0.3s ease-in-out;
         opacity: 0;
       }
 
@@ -707,11 +723,12 @@ Leaderboard
         background: #e0574f;
         &::after {
           background: #e0574f;
-          box-shadow: 0 2px 0 rgba(0, 0, 0, .08);
+          box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
         }
 
         & mark {
-          &::before, &::after {
+          &::before,
+          &::after {
             border-top: 6px solid #ba4741;
             bottom: -7px;
           }
@@ -722,11 +739,12 @@ Leaderboard
         background: #d7514d;
         &::after {
           background: #d7514d;
-          box-shadow: 0 1px 0 rgba(0, 0, 0, .11);
+          box-shadow: 0 1px 0 rgba(0, 0, 0, 0.11);
         }
 
         & mark {
-          &::before, &::after {
+          &::before,
+          &::after {
             border-top: 2px solid #b0433f;
             bottom: -3px;
           }
@@ -737,15 +755,16 @@ Leaderboard
         background: #cd4b4b;
         &::after {
           background: #cd4b4b;
-          box-shadow: 0 -1px 0 rgba(0, 0, 0, .15);
+          box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
         }
 
         & mark {
-          &::before, &::after {
+          &::before,
+          &::after {
             top: -7px;
             bottom: auto;
             border-top: none;
-            border-bottom: 6px solid #a63d3d;;
+            border-bottom: 6px solid #a63d3d;
           }
         }
       }
@@ -755,12 +774,13 @@ Leaderboard
         border-radius: 0 0 10px 10px;
         &::after {
           background: #c24448;
-          box-shadow: 0 -2.5px 0 rgba(0, 0, 0, .12);
+          box-shadow: 0 -2.5px 0 rgba(0, 0, 0, 0.12);
           border-radius: 0 0 10px 10px;
         }
 
         & mark {
-          &::before, &::after {
+          &::before,
+          &::after {
             top: -9px;
             bottom: auto;
             border-top: none;
@@ -768,7 +788,6 @@ Leaderboard
           }
         }
       }
-
     }
 
     // hover
@@ -782,13 +801,13 @@ Leaderboard
       }
 
       & mark {
-        &::before, &::after {
+        &::before,
+        &::after {
           opacity: 1;
-          transition: all .35s ease-in-out;
+          transition: all 0.35s ease-in-out;
         }
       }
     }
-
   }
 }
 
@@ -804,7 +823,7 @@ Leaderboard
   width: 50vw;
   max-width: 200px;
   padding: 10px;
-  
+
   img {
     max-width: 100%;
   }
@@ -846,20 +865,28 @@ Leaderboard
   border: 2px solid white;
   border-width: 0px 0 2px 2px;
 }
+<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans&display=swap');
 .mypages{
   font-size:100px;
-  font-family: 'Noto Sans'
+  font-family: 'Do Hyeon', ;
+  -webkit-text-stroke: 1px #000;
+=======
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans&display=swap");
+.mypages {
+  font-size: 100px;
+  font-family: "Noto Sans";
+>>>>>>> 9fede136299e90e4403b941364401657b57a5d04
 }
-#paral{
-  height:100vh !important;
-  width:auto;
+#paral {
+  height: 100vh !important;
+  width: auto;
 }
-.mypage_content{
-  padding-top:20vh;
+.mypage_content {
+  padding-top: 20vh;
   //background-color:rgba(255,213,170);
   background-image: url("../../assets/images/mypage_content.jpg");
-  background-opacity:0.5;
-  width:100vw;
+  background-opacity: 0.5;
+  width: 100vw;
 }
 </style>

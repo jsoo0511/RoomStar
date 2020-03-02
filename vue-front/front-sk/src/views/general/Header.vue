@@ -11,7 +11,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-spacer></v-spacer>
       <v-toolbar-title v-if="this.isUser === true" style="margin-right:10px;">
-        <button @click="headerLogout()" style="color:white">로그아웃</button>
+        <button @click="headerLogout()" style="color:white;">로그아웃</button>
       </v-toolbar-title>
     </v-app-bar>
 
