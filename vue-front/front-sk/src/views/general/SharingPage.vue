@@ -48,9 +48,9 @@
             <v-btn class="download" text v-on="on"></v-btn>
           </template>
           <v-card id="modalUpload">
-            <input placeholder="제목" v-model="newTitle" />
+            <input id="newTitle_" placeholder="제목" v-model="newTitle" />
             <br />
-            <!-- <textarea placeholder="내용" v-model="newContent"></textarea> -->
+            <textarea placeholder="내용" v-model="newContent"></textarea>
             <v-text-field v-model="newContent" placeholder="내용" Solo height="100"></v-text-field>
             <br />
             <!-- 동영상 -->
@@ -451,13 +451,8 @@ export default {
       console.log(this.show);
       setTimeout(() => {
         this.show=false;
-}, 1000);
-      console.log(this.show);
-  
-setTimeout(() => {
-        this.show=false;
-}, 1000);
-      console.log(this.show);
+}, 2000);
+ 
   }
 }; 
 
@@ -477,7 +472,7 @@ section{
 }
 
 #test{
-    background-image: url("../../assets/images/bg_showoff.png");
+    background-image: url("../../assets/images/bg_sharing.jpg");
   background-repeat: repeat;
   min-height:100vh;
   overflow-y:scroll;
@@ -550,13 +545,13 @@ body {
   box-shadow:none;
 }
 
-.download:hover {
+/* .download:hover {
   height: 22vh !important;
   width: 13vw !important;
   margin-left: 70vw;
   background-image: url("../../../src/assets/images/btntree2.png");
   box-shadow:none;
-}
+} */
 .bg_feed{
   margin-bottom:5vh;
 }
@@ -763,6 +758,9 @@ background: linear-gradient(to right, #9733EE, #DA22FF); /* W3C, IE 10+/ Edge, F
   -ms-animation: shadow 0.58s linear infinite;
   -webkit-animation: shadow 0.58s linear infinite;
   -moz-animation: shadow 0.58s linear infinite;
+}
+#newTitle_{
+  padding-left: 0px !important;
 }
 .cssload-box-loading:after {
   content: '';
