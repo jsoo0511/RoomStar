@@ -149,23 +149,23 @@ export default {
           });
         }
     },
-    leave(){
-      axios
-        .put(process.env.VUE_APP_SERVER_IP+"/Out_room/"+ this.user_id)
-        .then(response => {
-          console.log(response);
-          this.$router.push("/");
-        })
-        .catch(e => {
-          console.log("error: ", e);
-        });
-      this.socket.emit("leave", {
-        room_id:this.room_id,
-        user_identification:this.user_identification,
-        user_id:this.user_id,
-        player_idx:this.player_idx
-      });
-    },
+    // leave(){
+    //   axios
+    //     .put(process.env.VUE_APP_SERVER_IP+"/Out_room/"+ this.user_id)
+    //     .then(response => {
+    //       console.log(response);
+    //       this.$router.push("/");
+    //     })
+    //     .catch(e => {
+    //       console.log("error: ", e);
+    //     });
+    //   this.socket.emit("leave", {
+    //     room_id:this.room_id,
+    //     user_identification:this.user_identification,
+    //     user_id:this.user_id,
+    //     player_idx:this.player_idx
+    //   });
+    // },
     backButton() {
       console.log("moveeeeeeeeeeeeee");
       let userid = this.user_id;
@@ -175,7 +175,12 @@ export default {
         userid,
         room_id: this.room_id
       };
-
+      this.socket.emit("leave", {
+        room_id:this.room_id,
+        user_identification:this.user_identification,
+        user_id:this.user_id,
+        player_idx:this.player_idx
+      });
       switch (this.singerOrWatcherStatus) {
         case 1: // singer
           console.log(userid);
@@ -315,6 +320,23 @@ export default {
     this.getData();
     console.log("created()---->1", this.battle_id);
     console.log("주소오오오오오오오옹", process.env.VUE_APP_SOCKET_IP);
+
+    this.player_videos[0] = document.getElementById("p1_video");
+    this.player_videos[1] = document.getElementById("p2_video");
+    
+    //player1일때,
+    if (this.user_identification === "singer") {
+      console.log("가수");
+      navigator.mediaDevices
+        .getUserMedia({
+          
+          audio: true,
+          video: true
+        })
+        .then(this.get_stream);
+
+    }
+
     this.socket = io.connect(
       process.env.VUE_APP_SOCKET_IP +
         "?room_id=" +
@@ -341,21 +363,7 @@ export default {
     console.log("mounted()---->2");
     console.log(this);
     
-    this.player_videos[0] = document.getElementById("p1_video");
-    this.player_videos[1] = document.getElementById("p2_video");
     
-    //player1일때,
-    if (this.user_identification === "singer") {
-      console.log("가수");
-      navigator.mediaDevices
-        .getUserMedia({
-          
-          audio: true,
-          video: true
-        })
-        .then(this.get_stream);
-
-    }
     this.socket.on("join", message => {
       console.log(message);
       const join_id = message.user_id;
