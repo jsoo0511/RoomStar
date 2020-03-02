@@ -49,9 +49,7 @@
           </v-list-item-avatar>
 
           <v-list-item-content>
-          <!--  {{ this.profile }}-->
-            <v-list-item-title>{{ this.userNickname }}</v-list-item-title>
-            <v-list-item-subtitle>유저상세정보</v-list-item-subtitle>
+            <v-list-item-subtitle>{{ this.userNickname }}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
 
@@ -88,7 +86,6 @@ export default {
       items: [
         { title: "홈으로 가기", icon: "mdi-home-variant", links: "/" },
         { title: "마이페이지", icon: "mdi-panda", links: "/mypage2/" },
-        // { title: "노래 배틀하기", icon: "mdi-microphone", links: "/gameRoom/" },
         { title: "배틀 시청하기", icon: "mdi-comment-alert-outline", links: "/waitingRoom/" },
         { title: "노래 자랑하기", icon: "mdi-view-dashboard", links: "/SharingPage/" },
         { title: "개발자 소개", icon: "mdi-account-multiple", links: "/Introduce/" },
@@ -99,7 +96,6 @@ export default {
       background: false,
       profile: this.$session.get("profileImg"),
       userNickname: this.$session.get("userNickname")
-      
     };
   },
   computed: {
