@@ -13,10 +13,10 @@
  
     <v-spacer></v-spacer>
     <v-btn max-width="5px">
-      <v-icon style="color:rgba(0,0,0,0.5);">mdi-volume-high</v-icon>
+      <v-icon style="color:rgba(255,255,255,0.7);">mdi-volume-high</v-icon>
     </v-btn>
     <v-btn href="#" max-width="5px">
-      <v-icon style="color:rgba(0,0,0,0.5);">mdi-arrow-up-bold</v-icon>
+      <v-icon style="color:rgba(255,255,255,0.7);">mdi-arrow-up-bold</v-icon>
     </v-btn>
 
     <!-- 간단한 연락 챗봇/ 오늘의 노래/ 멜론 인기순위 보여주기? 하고싶다 -->
