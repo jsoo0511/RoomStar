@@ -262,6 +262,7 @@ export default {
           bat_id = (this.player_idx+1)%2;
           
           this.battle_connections[bat_id] = t_pc;
+          console.log(this.battle_connections)
           this.battle_id[bat_id] = join_id;
         } else {
           this.watchers_connections[this.watcher_cnt] = t_pc;
@@ -293,11 +294,15 @@ export default {
       };
 
       t_pc.onaddstream = event => {
+        let remote_video = document.getElementById("p1_video");
+        if (bat_id==1){
+          remote_video = document.getElementById("p2_video");
+        }
+        
         this.player_streams[bat_id] = event.stream;
-
         this.player_videos[bat_id].srcObject = this.player_streams[bat_id];
 
-        
+
       }
 
      if (this.user_identification==="singer" && this.player_streams[this.player_idx]!=null){
@@ -492,25 +497,27 @@ export default {
         console.log(
           "새로 들어온" +
             data.from_identification +
-            "한테 answer을 받았습니다." +
+            "한테 answer을 받았습니다.",
             data
         );
-        let t_pc = null;
+        //let t_pc = null;
         if (this.user_identification == "singer") {
           if (data.from_identification == "singer") {
-            t_pc = this.battle_connections[(this.player_idx + 1) % 2];
+            console.log("여기 오는지 확인",this.battle_connections[data.from_idx])
+            this.battle_connections[data.from_idx].setRemoteDescription(new RTCSessionDescription(data.message));
           } else {
-            t_pc = this.watchers_connections[this.watcher_cnt - 1];
+           this.watchers_connections[this.watcher_cnt - 1].setRemoteDescription(new RTCSessionDescription(data.message));
           }
         } else {
           if (data.from_identification == "singer") {
-            t_pc = this.battle_connections[data.from_idx];
+            this.battle_connections[data.from_idx].setRemoteDescription(new RTCSessionDescription(data.message));
           }
         }
         
-        if (this.user_identification==="singer"){
-          t_pc.setRemoteDescription(new RTCSessionDescription(data.message));
-        }
+        // if (this._identification==="singer"){
+        //   console.log("여기는 오는가 ????")
+        //   t_pc.setRemoteDescription(new RTCSessionDescription(data.message));
+        // }
       } else if (data.message.type === "candidate") {
         let candidate = new RTCIceCandidate({
           sdpMLineIndex: data.message.label,
@@ -519,7 +526,7 @@ export default {
         let t_pc = null;
         if (this.user_identification == "singer") {
           if (data.from_identification == "singer") {
-            t_pc = this.battle_connections[(this.player_idx + 1) % 2];
+            t_pc = this.battle_connections[data.from_idx];
 
             t_pc.addIceCandidate(candidate);
           } else {

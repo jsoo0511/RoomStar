@@ -147,8 +147,6 @@ export default {
         let remote_video = document.createElement("video");
         this.remote_streams[video_num] = event.stream;
 
-        // remote_video.width = "100%"
-        // remote_video.height = 150
         remote_video.playsinline = true
         remote_video.srcObject = this.remote_streams[video_num]
         remote_video.autoplay = true
