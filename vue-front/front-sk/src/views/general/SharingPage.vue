@@ -50,7 +50,7 @@
           <v-card id="modalUpload">
             <input id="newTitle_" placeholder="제목" v-model="newTitle" />
             <br />
-            <textarea placeholder="내용" v-model="newContent"></textarea>
+            <!-- <textarea placeholder="내용" v-model="newContent"></textarea> -->
             <v-text-field v-model="newContent" placeholder="내용" Solo height="100"></v-text-field>
             <br />
             <!-- 동영상 -->
