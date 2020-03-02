@@ -455,7 +455,7 @@ export default {
           if (data.from_identification == "singer") {
             //상대도 가수
             console.log("오퍼를 받앗습니다.답장을 해요", data);
-            this.battle_id[(this.player_idx + 1) % 2] = data.from;
+            this.battle_id[data.from_idx] = data.from;
           } else {
             //상대가 시청자일 경우
             this.watchers_id[this.watcher_cnt++] = data.from;
