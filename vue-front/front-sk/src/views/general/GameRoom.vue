@@ -311,7 +311,7 @@ export default {
         console.log("제발                  ㄴㄴㄴ",this.player_streams[bat_id])
       }
 
-     if (this.user_identification==="singer"){
+     if (this.user_identification==="singer" && this.local_stream!=null){
 
       // if(this.player_streams[this.player_idx]!=null){
 
@@ -366,7 +366,10 @@ export default {
         .getUserMedia({
           
           audio: true,
-          video: true
+          video: true,
+          sampleRate: 48000, 
+          echoCancellation: true,
+           noiseSuppression:true
         })
         .then(this.get_stream);
 
