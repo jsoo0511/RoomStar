@@ -1,24 +1,53 @@
 <template>
-<div id="test">
-  
-  <div v-show="show" id="demo">ddddddd</div>
+<div style="height:100%;">
+  <div v-show="show" id="loading">
+           <div class="cssload-box-loading">
+              <img
+                src="../../assets/images/roomstar.png"
+                style="margin-top:10vh; margin-left:-6vw; width:230px; height:auto ;"
+              />
+           </div>
+        </div>
+  <!-- <div v-show="show" id="demo"></div> -->
  
+<section class="banner">
+        <v-parallax id="paral"
+          src="../../assets/images/showoff_banner.jpg"
+        >
+          <v-container fill-height>
+            <v-row class="mx-auto">
+              <v-col
+                cols="12"
+                md="12"
+              >
+                <div class="text-center">
+                  <div
+                    class="font-weight-black mb-4"
+                  ><p class="mypages"></p></div>
+                </div>
+              </v-col>
+            </v-row>
+              <a
+                href="#"
+                id="scroll-down"
+                class="scroll-down"
+                address="true"
+              ></a>
+          </v-container>
+        </v-parallax>
+    </section>
+
+<section id="test"> 
   <div class="bg_feed" v-show="!show">
-    <br />
-    <br />
-    <br />
     <!-- 업로드 하는 곳 따로 만들기 -->
     <!-- 제목, 내용, 게시자닉네임, 게시자아이디, 이미지 == null 이면 profile사진으로, (필수)동영상파일, 좋아요수-->
     <!-- crud -->
-    <h1 style="color:white" id="showOff_text">자랑하기</h1>
-
     <v-dialog v-model="uploadDialog" id="dialog" max-width="350">
       <template v-slot:activator="{ on }">
         <v-btn class="download" text v-on="on"></v-btn>
       </template>
       <v-card id="modalUpload">
 
-        <div>파일업로드하는곳</div>
         <input placeholder="제목" v-model="newTitle" />
         <br />
         <!-- <textarea placeholder="내용" v-model="newContent"></textarea> -->
@@ -66,7 +95,7 @@
               <template v-slot:activator="{ on }">
                 <!-- 이걸 클릭할때 해당것에 필요한 정보를 가져오게 한다. -->
                 <div @click="checkLike(userId, item.id)" class="polaroid" v-on="on">
-                  <img :src="item.imgURL" />
+                   <img id="picture" :src="item.imgURL" />
                   <br />
                   <!-- title을 각 제목으로 수정 -->
                   <span class="caption" v-text="item.title"></span>
@@ -118,6 +147,7 @@
       </div>
     </div>
   </div>
+</section>
 </div>
 </template>
 
@@ -128,6 +158,7 @@ import "firebase/firestore";
 import "firebase/storage";
 import axios from "axios";
 import router from "@/routes";
+import $ from "jquery";
 
 export default {
   
@@ -155,6 +186,17 @@ export default {
     };
   },
 
+  mounted() {
+    $(function() {
+      $("#scroll-down").click(function() {
+        $("html, body").animate(
+          { scrollTop: $("#test").offset().top },
+          "slow"
+        );
+        return false;
+      });
+    });
+  },
   methods: {
     dClose(idx) {
       this.$set(this.itemDialog, idx, false);
@@ -410,11 +452,34 @@ export default {
         this.show=false;
 }, 1000);
       console.log(this.show);
+  
+setTimeout(() => {
+        this.show=false;
+}, 1000);
+      console.log(this.show);
   }
-};
+}; 
+
 </script>
 
 <style scoped>
+
+section{
+  width: 100vw;
+}
+.banner{
+  height:100vh;
+}
+
+#paral{
+  height:100vh !important;
+}
+
+#test{
+    background-image: url("../../assets/images/bg_showoff.png");
+  background-repeat: repeat;
+}
+
 #modalUpload {
   padding: 30px;
   max-width: 350px;
@@ -458,10 +523,12 @@ body {
   );
   background-size: 10px 10px;
 }
-img {
+
+  #picture{
   max-width: 100%;
   height: auto;
-}
+  }
+
 .download {
   height: 30vh !important;
   width: 20vw !important;
@@ -571,24 +638,12 @@ img {
   transition: all 0.35s;
 }
 
-.bg_feed {
-  background-image: url("../../assets/images/bg_showoff.png");
-  background-repeat: repeat;
-  width: 100vw;
-  height: auto;
-}
 
 #showOff_text {
   text-align: center;
   font-size: 3rem;
 }
 
-#test{
-    background-image: url("../../assets/images/bg_showoff.png");
-  background-repeat: repeat;
-  width: 100vw;
-  height: auto;
-}
 
 #demo{
     width:100%;
@@ -599,6 +654,246 @@ img {
     background: black;
     z-index:1000; /* 이 값으로 레이어의 위치를 조정합니다. */
 }
+.scroll-down {
+  opacity: 1;
+  -webkit-transition: all 0.5s ease-in 3s;
+  transition: all 0.5s ease-in 3s;
+}
 
+.scroll-down {
+  position: absolute;
+  bottom: 150px;
+  left: 50%;
+  margin-left: -16px;
+  display: block;
+  width: 32px;
+  height: 32px;
+  border: 2px solid #fff;
+  background-size: 14px auto;
+  border-radius: 50%;
+  z-index: 2;
+  -webkit-animation: bounce 2s infinite 2s;
+  animation: bounce 2s infinite 2s;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  transform: scale(1);
+}
 
+.scroll-down:before {
+  position: absolute;
+  top: calc(50% - 8px);
+  left: calc(50% - 6px);
+  transform: rotate(-45deg);
+  display: block;
+  width: 12px;
+  height: 12px;
+  content: "";
+  border: 2px solid white;
+  border-width: 0px 0 2px 2px;
+}
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans&display=swap');
+.mypages{
+  font-size:100px;
+  font-family: 'Noto Sans'
+}
+#loading {
+    background: #DA22FF;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #9733EE, #DA22FF);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #9733EE, #DA22FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    margin-top: 0px;
+    top: 0px;
+    z-index: 999999;
+    display: block;
+}
+
+.loadding-page {
+  width: 100%;
+  height: 100%;
+  background: #fdd245;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+}
+.cssload-box-loading {
+  width: 49px;
+  height: 49px;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.cssload-box-loading:before {
+  content: '';
+  width: 49px;
+  height: 5px;
+  background: #000000;
+  opacity: 0.1;
+  position: absolute;
+  top: 58px;
+  left: 0;
+  border-radius: 50%;
+  animation: shadow 0.58s linear infinite;
+  -o-animation: shadow 0.58s linear infinite;
+  -ms-animation: shadow 0.58s linear infinite;
+  -webkit-animation: shadow 0.58s linear infinite;
+  -moz-animation: shadow 0.58s linear infinite;
+}
+.cssload-box-loading:after {
+  content: '';
+  width: 49px;
+  height: 49px;
+  background: #fdd245;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 3px;
+  animation: cssload-animate 0.58s linear infinite;
+  -o-animation: cssload-animate 0.58s linear infinite;
+  -ms-animation: cssload-animate 0.58s linear infinite;
+  -webkit-animation: cssload-animate 0.58s linear infinite;
+  -moz-animation: cssload-animate 0.58s linear infinite;
+}
+@keyframes cssload-animate {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  75% {
+    transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(90deg);
+  }
+}
+@-o-keyframes cssload-animate {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    -o-transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    -o-transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  75% {
+    -o-transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    -o-transform: translateY(0) rotate(90deg);
+  }
+}
+@-ms-keyframes cssload-animate {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    -ms-transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    -ms-transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  75% {
+    -ms-transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    -ms-transform: translateY(0) rotate(90deg);
+  }
+}
+@-webkit-keyframes cssload-animate {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    -webkit-transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    -webkit-transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  75% {
+    -webkit-transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    -webkit-transform: translateY(0) rotate(90deg);
+  }
+}
+@-moz-keyframes cssload-animate {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    -moz-transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    -moz-transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  75% {
+    -moz-transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    -moz-transform: translateY(0) rotate(90deg);
+  }
+}
+@keyframes shadow {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.2, 1);
+  }
+}
+@-o-keyframes shadow {
+  0%,
+  100% {
+    -o-transform: scale(1, 1);
+  }
+  50% {
+    -o-transform: scale(1.2, 1);
+  }
+}
+@-ms-keyframes shadow {
+  0%,
+  100% {
+    -ms-transform: scale(1, 1);
+  }
+  50% {
+    -ms-transform: scale(1.2, 1);
+  }
+}
+@-webkit-keyframes shadow {
+  0%,
+  100% {
+    -webkit-transform: scale(1, 1);
+  }
+  50% {
+    -webkit-transform: scale(1.2, 1);
+  }
+}
+@-moz-keyframes shadow {
+  0%,
+  100% {
+    -moz-transform: scale(1, 1);
+  }
+  50% {
+    -moz-transform: scale(1.2, 1);
+  }
+}
 </style>

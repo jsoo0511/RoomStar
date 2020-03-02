@@ -1,9 +1,8 @@
 <template>
 <div id="mypage2">
-<div class="max" style="height:100%;" >
+<div style="height:100%;" >
     <section class="banner">
-        <v-parallax
-          :height="$vuetify.breakpoint.smAndDown ? 800 : 700"
+        <v-parallax id="paral"
           src="../../assets/images/mypage_banner.jpg"
         >
           <v-container fill-height>
@@ -28,11 +27,11 @@
           </v-container>
         </v-parallax>
     </section>
-    <section id="mypage_content">
+    <section class="mypage_content">
       <div class="options" >
         <div class="option active" id="profile_once" :style="{'--optionBackground':'url('+profile+')'}">
                 <div class="text" STYLE="writing-mode: tb-rl">NickName</div> <!--작은 화면일때-->
-                <div class="text2" >{{nick}}</div> <!-- 큰 화면일때-->
+                <div class="text2" ></div> <!-- 큰 화면일때-->
             <div class="shadow">
             </div>
             <div class="label">
@@ -285,13 +284,12 @@ data(){
    $(".option").click(function(){
    $(".option").removeClass("active");
    $(this).addClass("active");
-   
-});
-  });
+    });
+    });
       $(function() {
       $("#scroll-down").click(function() {
         $("html, body").animate(
-          { scrollTop: $("#mypage_content").offset().top },
+          { scrollTop: $(".mypage_content").offset().top },
           "slow"
         );
         return false;
@@ -305,21 +303,18 @@ data(){
 </script>
 
 <style lang="scss" scoped>
-$optionDefaultColours: #ED5565,white,black,#2ECC71,radial-gradient(ellipse farthest-corner at center top, #f39264 0%, #f2606f 100%);
+$optionDefaultColours: #ED5565,rgb(223, 7, 243),black,#2ECC71,radial-gradient(ellipse farthest-corner at center top, #f39264 0%, #f2606f 100%);
 
 .banner {
-  height: 100vh;
+  height: 100vh !important;
+  width:auto;
 }
 
 section {
-  height : 80vh;
-  background-image:url("../../assets/images/section.jpg");
+  height : 100vh !important; 
+  // background-color:rgba(254,248,226,1);
+  width:auto;
 }
-
-#mypage2{
-  background-image:url("../../assets/images/section.jpg")  !important;
-}
-
 .img_logo{
   position:fixed;
   width:5vw;
@@ -341,10 +336,6 @@ h1{
   padding-top:1em;
   font-size: 70px;
 }
-
-   .max{
-     
-   }
    .container{
    width:100vw;
    }
@@ -366,10 +357,10 @@ body {
       color:#000;
    }
 
+
    .options {
-       
-      margin-top:4em;
-      margin-left: 20vw;
+     margin-top:5vh;
+      margin-left:23vw;
       display:flex;
       flex-direction:row;
       align-items:stretch;
@@ -379,7 +370,7 @@ body {
       max-width:900px;
       width:calc(100% - 100px);
       
-      height:400px;
+      height:500px;
       
       @for $i from 1 through 4 {
          @media screen and (max-width:878px - $i*80) {
@@ -395,7 +386,6 @@ body {
          position: relative;
          overflow:hidden;
 
-        
          min-width:60px;
          margin:10px;
          //border:0px solid --defaultColor;
@@ -403,6 +393,7 @@ body {
          background:var(--optionBackground, var(--defaultBackground, #E6E9ED));
          background-size:auto 120%;
          background-position:center;
+         background-color:rgba(166,83,0,0.2);
 
          cursor: pointer;
 
@@ -436,7 +427,7 @@ body {
                   margin-top:3vw;
                } 
                #textId{
-                  color:black  !important;
+                  color:white  !important;
                   font-size: 80px;
                }
                #snow{
@@ -470,7 +461,7 @@ body {
             
             border-radius:30px;
             #textId2{
-              color:black;
+              color:white;
             }
              #snow{
                  color:black;
@@ -549,7 +540,7 @@ body {
                color:var(--defaultBackground);
             }
             #aa{
-              background-color:black;
+              background-color:white;
             }
             .info {
                display:flex;
@@ -581,7 +572,7 @@ body {
 }
 </style>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 /*--------------------
 Body
 --------------------*/
@@ -859,5 +850,16 @@ Leaderboard
 .mypages{
   font-size:100px;
   font-family: 'Noto Sans'
+}
+#paral{
+  height:100vh !important;
+  width:auto;
+}
+.mypage_content{
+  padding-top:20vh;
+  //background-color:rgba(255,213,170);
+  background-image: url("../../assets/images/mypage_content.jpg");
+  background-opacity:0.5;
+  width:100vw;
 }
 </style>

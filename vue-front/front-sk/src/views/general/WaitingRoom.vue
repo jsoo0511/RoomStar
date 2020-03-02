@@ -14,7 +14,7 @@
             <div class="card-image">
               <v-img
               :src="roomInfo.user1_img"
-              id="profile_card_image" width="307.2px" height="310.06px"
+              id="profile_card_image"
             ></v-img>
             </div>
             <div class="card-text">
@@ -43,7 +43,7 @@
             <div class="card-image">
               <v-img
               :src="roomInfo.user2_img"
-              id="profile_card_image" width="307.2px" height="310.06px"
+              id="profile_card_image"
             ></v-img>
             </div>
             <div class="card-text">
@@ -221,11 +221,6 @@ export default {
 .marginR {
   margin-right: 1em;
 }
-
-.card-image {
-  grid-area: image;
-  
-}
 .card-text {
   grid-area: text;
 }
@@ -234,8 +229,13 @@ export default {
   background: url("../../assets/images/bg_solo2.png");
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-  background-size: cover;
+  background-size: cover
 }
+
+.card-image #profile_card_image{
+    width:307.2px !important;
+    height:310.06px !important;
+  }
 
 .card-text {
   grid-area: text;
