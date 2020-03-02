@@ -175,7 +175,7 @@
                  <div class="layer" data-scene="5">
                   <div
                     class="layer-image-wrapper"
-                    :style="{backgroundImage: 'url('+require('@/assets/images/sw/sw_5.jpg')+')'}">
+                    :style="{backgroundImage: 'url('+require('@/assets/images/sw/sw_4.jpg')+')'}">
               </div>
                 </div>
               </div>
