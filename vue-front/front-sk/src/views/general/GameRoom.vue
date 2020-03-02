@@ -300,7 +300,7 @@ export default {
         
       }
 
-     if (this.user_identification==="singer"){
+     if (this.user_identification==="singer" && this.player_streams[this.player_idx]!=null){
         t_pc.addStream(this.player_streams[this.player_idx]);
       }
       return t_pc;
