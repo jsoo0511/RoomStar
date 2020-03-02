@@ -306,12 +306,14 @@ data(){
 $optionDefaultColours: #ED5565,rgb(223, 7, 243),black,#2ECC71,radial-gradient(ellipse farthest-corner at center top, #f39264 0%, #f2606f 100%);
 
 .banner {
-  height: 100vh;
+  height: 100vh !important;
+  width:auto;
 }
 
 section {
-  height : 100vh;
+  height : 100vh !important; 
   // background-color:rgba(254,248,226,1);
+  width:auto;
 }
 .img_logo{
   position:fixed;
@@ -851,6 +853,7 @@ Leaderboard
 }
 #paral{
   height:100vh !important;
+  width:auto;
 }
 .mypage_content{
   padding-top:20vh;

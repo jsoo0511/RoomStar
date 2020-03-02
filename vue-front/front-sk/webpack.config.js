@@ -3,6 +3,11 @@ const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 module.exports = {
   entry: "./src/main.js",
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
+  },
   module: {
     rules: [
       { test: /\.js$/, use: "babel-loader" },
