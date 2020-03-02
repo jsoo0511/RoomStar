@@ -1,12 +1,24 @@
-var fs = require('fs');
-var app = require('express')();
-var privateKey = fs.readFileSync('/etc/letsencrypt/live/i02a407.p.ssafy.io/privkey.pem').toString();
-var certificate = fs.readFileSync('/etc/letsencrypt/live/i02a407.p.ssafy.io/cert.pem').toString();
-var ca = fs.readFileSync('/etc/letsencrypt/live/i02a407.p.ssafy.io/fullchain.pem').toString();
-var port = 3030;
-var server = require('https').createServer(app);
-var io = require('socket.io')(server).listen(port,{key:privateKey,cert:certificate,ca:ca});
+// var fs = require('fs');
+// var app = require('express')();
+// var privateKey = fs.readFileSync('/etc/letsencrypt/live/i02a407.p.ssafy.io/privkey.pem').toString();
+// var certificate = fs.readFileSync('/etc/letsencrypt/live/i02a407.p.ssafy.io/cert.pem').toString();
+// var ca = fs.readFileSync('/etc/letsencrypt/live/i02a407.p.ssafy.io/fullchain.pem').toString();
+// var port = 3030;
+// var server = require('https').createServer(app);
+// var io = require('socket.io')(server).listen(port,{key:privateKey,cert:certificate,ca:ca});
 
+
+// server.listen(port, function() {
+//     console.log('socket io server listening on port '+port);
+// })
+
+
+var app = require('express')();
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+var port = 3030;
+
+let rooms = [null,null,null,null,null];
 
 server.listen(port, function() {
     console.log('socket io server listening on port '+port);
@@ -15,9 +27,7 @@ server.listen(port, function() {
 
 
 
-
-
-let rooms = [null,null,null,null,null];
+//let rooms = [null,null,null,null,null];
 
 
 
