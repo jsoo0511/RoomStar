@@ -246,5 +246,6 @@ export default {
     -ms-flex-pack: center;
     justify-content: center;
     padding: 0 1rem;
+    width:100vw !important;
 }
 </style>

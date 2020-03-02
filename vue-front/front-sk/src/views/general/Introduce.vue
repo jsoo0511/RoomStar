@@ -11,7 +11,7 @@
         </div>
 
   <div v-show="!show" id="HomePage">
-    <v-app light id="hp_video">
+    <v-app light id="hp_vid">
       <v-content>
         <section class="introduce">
           <section class="hero">
