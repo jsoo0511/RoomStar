@@ -38,56 +38,56 @@
     </section>
 
 <section id="test"> 
-  <div class="bg_feed" v-show="!show">
-    <!-- 업로드 하는 곳 따로 만들기 -->
-    <!-- 제목, 내용, 게시자닉네임, 게시자아이디, 이미지 == null 이면 profile사진으로, (필수)동영상파일, 좋아요수-->
-    <!-- crud -->
-    <v-dialog v-model="uploadDialog" id="dialog" max-width="350">
-      <template v-slot:activator="{ on }">
-        <v-btn class="download" text v-on="on"></v-btn>
-      </template>
-      <v-card id="modalUpload">
-
-        <input placeholder="제목" v-model="newTitle" />
-        <br />
-        <!-- <textarea placeholder="내용" v-model="newContent"></textarea> -->
-        <v-text-field v-model="newContent" placeholder="내용" Solo height="100"></v-text-field>
-        <br />
-        <!-- 동영상 -->
-        <span>동영상</span>
-        <!-- change되면 무조건 업로드됨 -->
-        <input type="file" accept="video/mp4" @change="detectFilesVideo($event.target.files)" />
-
-        <span>사진</span>
-
-        <input type="file" accept="image/jpeg" @change="detectFilesImage($event.target.files)" />
-        <br />
-        <v-progress-linear class="progress-bar" :height="20" :value="progressUpload" color="purple">
-          <strong>{{ progressUpload }}% 완료</strong>
-        </v-progress-linear>
-
-        <v-btn text small color="black" dark @click="uploadDialog = false">취소</v-btn>
-        <v-btn
-          text
-          small
-          color="black"
-          type="submit"
-          @click="uploadContent({newTitle, newContent})"
-          v-if="progressUpload !== 100"
-          disabled
-        >등록</v-btn>
-        <v-btn
-          text
-          small
-          color="black"
-          type="submit"
-          @click="uploadContent({newTitle, newContent})"
-          v-if="progressUpload === 100"
-        >등록</v-btn>
-      </v-card>
-    </v-dialog>
-
     <div class="wrapper">
+      <div class="bg_feed" v-show="!show">
+        <!-- 업로드 하는 곳 따로 만들기 -->
+        <!-- 제목, 내용, 게시자닉네임, 게시자아이디, 이미지 == null 이면 profile사진으로, (필수)동영상파일, 좋아요수-->
+        <!-- crud -->
+        <v-dialog v-model="uploadDialog" id="dialog" max-width="350">
+          <template v-slot:activator="{ on }">
+            <v-btn class="download" text v-on="on"></v-btn>
+          </template>
+          <v-card id="modalUpload">
+            <input placeholder="제목" v-model="newTitle" />
+            <br />
+            <!-- <textarea placeholder="내용" v-model="newContent"></textarea> -->
+            <v-text-field v-model="newContent" placeholder="내용" Solo height="100"></v-text-field>
+            <br />
+            <!-- 동영상 -->
+            <span>동영상</span>
+            <!-- change되면 무조건 업로드됨 -->
+            <input type="file" accept="video/mp4" @change="detectFilesVideo($event.target.files)" />
+
+            <span>사진</span>
+
+            <input type="file" accept="image/jpeg" @change="detectFilesImage($event.target.files)" />
+            <br />
+            <v-progress-linear class="progress-bar" :height="20" :value="progressUpload" color="purple">
+              <strong>{{ progressUpload }}% 완료</strong>
+            </v-progress-linear>
+
+            <v-btn text small color="black" dark @click="uploadDialog = false">취소</v-btn>
+            <v-btn
+              text
+              small
+              color="black"
+              type="submit"
+              @click="uploadContent({newTitle, newContent})"
+              v-if="progressUpload !== 100"
+              disabled
+            >등록</v-btn>
+            <v-btn
+              text
+              small
+              color="black"
+              type="submit"
+              @click="uploadContent({newTitle, newContent})"
+              v-if="progressUpload === 100"
+            >등록</v-btn>
+          </v-card>
+        </v-dialog>
+      </div>
+
       <div v-for="(item, i) in info[0]" :key="i">
         <v-flex xs12 sm6 md3 style="float:left">
           <div class="item">
@@ -146,7 +146,6 @@
         </v-flex>
       </div>
     </div>
-  </div>
 </section>
 </div>
 </template>
@@ -478,6 +477,8 @@ section{
 #test{
     background-image: url("../../assets/images/bg_showoff.png");
   background-repeat: repeat;
+  min-height:100vh;
+  overflow-y:scroll;
 }
 
 #modalUpload {
@@ -530,19 +531,20 @@ body {
   }
 
 .download {
-  height: 30vh !important;
-  width: 20vw !important;
-  margin-top: -20vh;
+  height: 22vh !important;
+  width: 13vw !important;
   margin-left: 70vw;
   background-image: url("../../../src/assets/images/btntree.png");
 }
 
 .download:hover {
-  height: 30vh !important;
-  width: 20vw !important;
-  margin-top: -20vh;
+  height: 22vh !important;
+  width: 13vw !important;
   margin-left: 70vw;
   background-image: url("../../../src/assets/images/btntree2.png");
+}
+.bg_feed{
+  margin-bottom:5vh;
 }
 /* background: url("https://cdn.pixabay.com/photo/2015/01/07/16/37/wood-591631_1280.jpg")
     no-repeat; */
