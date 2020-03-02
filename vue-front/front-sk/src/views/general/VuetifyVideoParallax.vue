@@ -231,7 +231,7 @@ export default {
     contain: strict;
 }
 .v-parallax__content {
-    color: #000000;
+    color: #ffffff !important;
     height: 100%;
     z-index: 2;
     position: relative;
