@@ -307,7 +307,8 @@ export default {
         }
         
         this.player_streams[bat_id] = event.stream;
-        this.player_videos[bat_id].srcObject = this.player_streams[bat_id];
+        remote_video.srcObject = this.player_streams[bat_id];
+        console.log("제발                  ㄴㄴㄴ",this.player_streams[bat_id])
       }
 
      if (this.user_identification==="singer"){
@@ -320,7 +321,7 @@ export default {
       //     let player_stream = this.player_streams[this.player_idx];
       //     t_pc.addStream(player_stream);
       //   }
-          t_pc.addStrea(this.local_stream);
+          t_pc.addStream(this.local_stream);
       }
       return t_pc;
     }
