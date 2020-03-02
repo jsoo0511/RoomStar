@@ -111,7 +111,7 @@
                   <span>Full Stack</span>
                 </div>
               </div>
-              <button @click="switchLayer()">NEXT TALENT ></button>
+              <button @click="switchLayer()" id="btn_font">NEXT PAGE ></button>
               <!-- <button onclick="switchLayer(); return true;">NEXT TALENT ></button> -->
             </div>
             <div class="hero__footer">
@@ -839,5 +839,9 @@ main {
       transform: rotate(50deg) translateX(20%);
     }
   }
+}
+
+#btn_font{
+  font-size:2rem !important;
 }
 </style>

@@ -319,4 +319,10 @@ export default {
   transform: scale(1.15);
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0);
 }
+.swiper-container{
+  min-width:80vw;
+}
+.v-responsive{
+  max-height:100%;
+}
 </style>
