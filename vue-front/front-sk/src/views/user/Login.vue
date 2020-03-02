@@ -42,7 +42,6 @@
           <div class="bar"></div>
         </div>
 
-        <NaverLogin :component="component" />
         <kakaoLogin :component="component" />
         <GoogleLogin :component="component" />
       </div>
@@ -78,14 +77,12 @@ import * as EmailValidator from "email-validator";
 // 이 이름으로 가져오겠다는 뜻
 import KakaoLogin from "../../components/user/snsLogin/Kakao.vue";
 import GoogleLogin from "../../components/user/snsLogin/Google.vue";
-import NaverLogin from "../../components/user/snsLogin/Naver.vue";
 import UserApi from "../../apis/UserApi";
 
 export default {
   components: {
     KakaoLogin,
     GoogleLogin,
-    NaverLogin
   },
   created() {
     this.component = this;
