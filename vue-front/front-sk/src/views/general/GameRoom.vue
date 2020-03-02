@@ -70,7 +70,7 @@ export default {
       //video, stream
       player_videos: [null, null],
       player_streams: [null, null],
-      player_idx: 1,
+      player_idx: 0,
 
       //대결하는 사람들의 정보
       battle_id: [null, null],
@@ -215,6 +215,7 @@ export default {
       let store = this.$store;
       this.user_id = this.$session.get("userId");
       this.room_id = this.$session.get("roomId");
+     
       console.log(this.$session.get("singerOrWatcherStatus"));
 
 
@@ -225,11 +226,13 @@ export default {
       }
 
       if (this.user_identification === "singer") {
-        if (this.battle_id[0]) {
-          this.player_idx = 0;
-        } else {
-          this.player_idx = 1;
-        }
+        this.player_idx = this.$session.get("playerIdx");
+
+        // if (this.battle_id[0]) {
+        //   this.player_idx = 1;
+        // } else {
+        //   this.player_idx = 0;
+        // }
       }
 
       // this.room_id = 1;
@@ -243,7 +246,7 @@ export default {
       this.socket.emit("message", message);
     },
     async get_stream(stream) {
-      console.log("get_stream---->3");
+      console.log("get_stream---->3",this.player_idx);
       this.player_videos[this.player_idx].srcObject = stream;
       this.player_streams[this.player_idx] = stream;
     },

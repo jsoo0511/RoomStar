@@ -123,7 +123,8 @@ export default {
       axios
         .put(process.env.VUE_APP_SERVER_IP + "/Enter_room/" + userid)
         .then(response => {
-          this.$session.set("roomid", response.data.room_id);
+          this.$session.set("roomId", response.data.room_id);
+          this.$session.set("playerIdx",response.data.player_idx);
           this.$router.push("/GameRoom");
         })
         .catch(e => {

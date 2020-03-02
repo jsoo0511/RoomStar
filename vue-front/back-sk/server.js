@@ -42,7 +42,7 @@ io.on('connection' , function(socket) {
     let user_identification = socket.handshake.query.user_identification;
     let player_idx = socket.handshake.query.player_idx;
 
-    console.log("새로운 입장 : "+room_id,user_id);
+    console.log("새로운 입장 : "+room_id,user_id, player_idx);
     let room = rooms[room_id];
     //let watcher_cnt = 0;
 
