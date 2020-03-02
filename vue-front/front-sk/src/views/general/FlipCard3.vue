@@ -67,6 +67,7 @@ export default {
           .then(response => {
             console.log(response);
             this.$session.set("roomId", response.data.room_id);
+            this.$session.set("playerIdx", response.data.player_idx);
             this.$router.push("/GameRoom");
           })
           .catch(e => {

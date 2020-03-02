@@ -216,8 +216,7 @@ export default {
       this.user_id = this.$session.get("userId");
       this.room_id = this.$session.get("roomId");
      
-      console.log(this.$session.get("singerOrWatcherStatus"));
-
+      console.log("현재 나의 존재 ",this.$session.get("singerOrWatcherStatus"));
 
       if (this.$session.get("singerOrWatcherStatus")==1){
         this.user_identification = "singer";
@@ -225,6 +224,7 @@ export default {
         this.user_identification = "watcher";
       }
 
+      console.log(this.user_identification);
       if (this.user_identification === "singer") {
         this.player_idx = this.$session.get("playerIdx");
 
