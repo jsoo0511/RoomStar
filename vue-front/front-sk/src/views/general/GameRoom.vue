@@ -71,6 +71,7 @@ export default {
       player_videos: [null, null],
       player_streams: [null, null],
       player_idx: 0,
+      local_stream: null,
 
       //대결하는 사람들의 정보
       battle_id: [null, null],
@@ -254,6 +255,7 @@ export default {
       console.log("get_stream---->3",this.player_idx);
       this.player_videos[this.player_idx].srcObject = stream;
       this.player_streams[this.player_idx] = stream;
+      this.local_stream = stream;
     },
     async getPeerConnection(join_id, join_identification, join_idx) {
       console.log("getPeerConnection()----->4");
@@ -310,15 +312,15 @@ export default {
 
      if (this.user_identification==="singer"){
 
-      if(this.player_streams[this.player_idx]!=null){
+      // if(this.player_streams[this.player_idx]!=null){
 
-        t_pc.addStream(this.player_streams[this.player_idx]);
+      //   t_pc.addStream(this.player_streams[this.player_idx]);
 
-        } else{
-          let player_stream = this.player_streams[this.player_idx];
-          t_pc.addStream(player_stream);
-        }
-          
+      //   } else{
+      //     let player_stream = this.player_streams[this.player_idx];
+      //     t_pc.addStream(player_stream);
+      //   }
+          t_pc.addStrea(this.local_stream);
       }
       return t_pc;
     }
