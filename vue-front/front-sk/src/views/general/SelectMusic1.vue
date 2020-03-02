@@ -97,7 +97,6 @@ export default {
           let image = {};
           music.title = musicRef.name;
           image.title = musicRef.name;
-          console.log(musicRef);
           musicRef.getDownloadURL().then(url => {
             //앨범 커버 정보를 담음
             image.url = url;

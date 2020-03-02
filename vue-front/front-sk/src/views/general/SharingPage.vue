@@ -1,69 +1,93 @@
 <template>
-<div id="test">
-
- 
+<div style="height:100%;">
   <div v-show="show" id="loading">
-           <div class="cssload-box-loading"></div>
+           <div class="cssload-box-loading">
+              <img
+                src="../../assets/images/roomstar.png"
+                style="margin-top:10vh; margin-left:-6vw; width:230px; height:auto ;"
+              />
+           </div>
         </div>
-
   <!-- <div v-show="show" id="demo"></div> -->
  
-  <div class="bg_feed" v-show="!show">
-    <br />
-    <br />
-    <br />
-    <!-- 업로드 하는 곳 따로 만들기 -->
-    <!-- 제목, 내용, 게시자닉네임, 게시자아이디, 이미지 == null 이면 profile사진으로, (필수)동영상파일, 좋아요수-->
-    <!-- crud -->
-    <h1 style="color:white" id="showOff_text">자랑하기</h1>
+<section class="banner">
+        <v-parallax id="paral"
+          src="../../assets/images/showoff_banner.jpg"
+        >
+          <v-container fill-height>
+            <v-row class="mx-auto">
+              <v-col
+                cols="12"
+                md="12"
+              >
+                <div class="text-center">
+                  <div
+                    class="font-weight-black mb-4"
+                  ><p class="mypages"></p></div>
+                </div>
+              </v-col>
+            </v-row>
+              <a
+                href="#"
+                id="scroll-down"
+                class="scroll-down"
+                address="true"
+              ></a>
+          </v-container>
+        </v-parallax>
+    </section>
 
-    <v-dialog v-model="uploadDialog" id="dialog" max-width="350">
-      <template v-slot:activator="{ on }">
-        <v-btn class="download" text v-on="on"></v-btn>
-      </template>
-      <v-card id="modalUpload">
-
-        <div>파일업로드하는곳</div>
-        <input placeholder="제목" v-model="newTitle" />
-        <br />
-        <!-- <textarea placeholder="내용" v-model="newContent"></textarea> -->
-        <v-text-field v-model="newContent" placeholder="내용" Solo height="100"></v-text-field>
-        <br />
-        <!-- 동영상 -->
-        <span>동영상</span>
-        <!-- change되면 무조건 업로드됨 -->
-        <input type="file" accept="video/mp4" @change="detectFilesVideo($event.target.files)" />
-
-        <span>사진</span>
-
-        <input type="file" accept="image/jpeg" @change="detectFilesImage($event.target.files)" />
-        <br />
-        <v-progress-linear class="progress-bar" :height="20" :value="progressUpload" color="purple">
-          <strong>{{ progressUpload }}% 완료</strong>
-        </v-progress-linear>
-
-        <v-btn text small color="black" dark @click="uploadDialog = false">취소</v-btn>
-        <v-btn
-          text
-          small
-          color="black"
-          type="submit"
-          @click="uploadContent({newTitle, newContent})"
-          v-if="progressUpload !== 100"
-          disabled
-        >등록</v-btn>
-        <v-btn
-          text
-          small
-          color="black"
-          type="submit"
-          @click="uploadContent({newTitle, newContent})"
-          v-if="progressUpload === 100"
-        >등록</v-btn>
-      </v-card>
-    </v-dialog>
-
+<section id="test"> 
     <div class="wrapper">
+      <div class="bg_feed" v-show="!show">
+        <!-- 업로드 하는 곳 따로 만들기 -->
+        <!-- 제목, 내용, 게시자닉네임, 게시자아이디, 이미지 == null 이면 profile사진으로, (필수)동영상파일, 좋아요수-->
+        <!-- crud -->
+        <v-dialog v-model="uploadDialog" id="dialog" max-width="350">
+          <template v-slot:activator="{ on }">
+            <v-btn class="download" text v-on="on"></v-btn>
+          </template>
+          <v-card id="modalUpload">
+            <input placeholder="제목" v-model="newTitle" />
+            <br />
+            <!-- <textarea placeholder="내용" v-model="newContent"></textarea> -->
+            <v-text-field v-model="newContent" placeholder="내용" Solo height="100"></v-text-field>
+            <br />
+            <!-- 동영상 -->
+            <span>동영상</span>
+            <!-- change되면 무조건 업로드됨 -->
+            <input type="file" accept="video/mp4" @change="detectFilesVideo($event.target.files)" />
+
+            <span>사진</span>
+
+            <input type="file" accept="image/jpeg" @change="detectFilesImage($event.target.files)" />
+            <br />
+            <v-progress-linear class="progress-bar" :height="20" :value="progressUpload" color="purple">
+              <strong>{{ progressUpload }}% 완료</strong>
+            </v-progress-linear>
+
+            <v-btn text small color="black" dark @click="uploadDialog = false">취소</v-btn>
+            <v-btn
+              text
+              small
+              color="black"
+              type="submit"
+              @click="uploadContent({newTitle, newContent})"
+              v-if="progressUpload !== 100"
+              disabled
+            >등록</v-btn>
+            <v-btn
+              text
+              small
+              color="black"
+              type="submit"
+              @click="uploadContent({newTitle, newContent})"
+              v-if="progressUpload === 100"
+            >등록</v-btn>
+          </v-card>
+        </v-dialog>
+      </div>
+
       <div v-for="(item, i) in info[0]" :key="i">
         <v-flex xs12 sm6 md3 style="float:left">
           <div class="item">
@@ -71,7 +95,7 @@
               <template v-slot:activator="{ on }">
                 <!-- 이걸 클릭할때 해당것에 필요한 정보를 가져오게 한다. -->
                 <div @click="checkLike(userId, item.id)" class="polaroid" v-on="on">
-                  <img :src="item.imgURL" />
+                   <img id="picture" :src="item.imgURL" />
                   <br />
                   <!-- title을 각 제목으로 수정 -->
                   <span class="caption" v-text="item.title"></span>
@@ -122,7 +146,7 @@
         </v-flex>
       </div>
     </div>
-  </div>
+</section>
 </div>
 </template>
 
@@ -133,6 +157,7 @@ import "firebase/firestore";
 import "firebase/storage";
 import axios from "axios";
 import router from "@/routes";
+import $ from "jquery";
 
 export default {
   
@@ -160,6 +185,17 @@ export default {
     };
   },
 
+  mounted() {
+    $(function() {
+      $("#scroll-down").click(function() {
+        $("html, body").animate(
+          { scrollTop: $("#test").offset().top },
+          "slow"
+        );
+        return false;
+      });
+    });
+  },
   methods: {
     dClose(idx) {
       this.$set(this.itemDialog, idx, false);
@@ -415,17 +451,253 @@ export default {
         this.show=false;
 }, 1000);
       console.log(this.show);
+  
+setTimeout(() => {
+        this.show=false;
+}, 1000);
+      console.log(this.show);
   }
-};
+}; 
+
 </script>
 
 <style scoped>
-body
-{
-  margin:0;
-  padding:0
+
+section{
+  width: 100vw;
+}
+.banner{
+  height:100vh;
 }
 
+#paral{
+  height:100vh !important;
+}
+
+#test{
+    background-image: url("../../assets/images/bg_showoff.png");
+  background-repeat: repeat;
+  min-height:100vh;
+  overflow-y:scroll;
+}
+
+#modalUpload {
+  padding: 30px;
+  max-width: 350px;
+  width: 100% !important;
+  margin: 0 auto;
+  border-radius: 2px;
+  overflow: hidden;
+}
+#modal {
+  margin: 0 auto;
+  border-radius: 2px;
+  overflow: hidden;
+}
+#ptag {
+  font-size: 30px;
+  margin-left: 1em;
+}
+#dialog {
+  max-width: 350px;
+}
+
+.resultOwner {
+  font-family: "Indie Flower";
+}
+
+.resultContent {
+  font-family: "Indie Flower";
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: "Indie Flower";
+  line-height: 1.618em;
+  background-color: #e4d4bb;
+  background-image: repeating-radial-gradient(
+    circle,
+    #e4d4bb,
+    #e7dac6 50%,
+    #e7dac6 100%
+  );
+  background-size: 10px 10px;
+}
+
+  #picture{
+  max-width: 100%;
+  height: auto;
+  }
+
+.download {
+  height: 22vh !important;
+  width: 13vw !important;
+  margin-left: 70vw;
+  background-image: url("../../../src/assets/images/btntree.png");
+}
+
+.download:hover {
+  height: 22vh !important;
+  width: 13vw !important;
+  margin-left: 70vw;
+  background-image: url("../../../src/assets/images/btntree2.png");
+}
+.bg_feed{
+  margin-bottom:5vh;
+}
+/* background: url("https://cdn.pixabay.com/photo/2015/01/07/16/37/wood-591631_1280.jpg")
+    no-repeat; */
+.wrapper {
+  width: 100%;
+  padding: 0 2rem;
+  text-align: center;
+}
+.polaroid {
+  background: #fff;
+  padding: 1rem;
+  box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.2);
+}
+.caption {
+  font-size: 1.125rem;
+  text-align: center;
+  line-height: 2em;
+}
+.item {
+  display: inline-block;
+  margin-top: 2rem;
+  filter: grayscale(50%);
+}
+.item .polaroid:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  transition: all 0.35s;
+}
+.item:nth-of-type(4n + 1) {
+  transform: scale(0.8, 0.8) rotate(5deg);
+  transition: all 0.35s;
+}
+.item:nth-of-type(4n + 1) .polaroid:before {
+  transform: rotate(6deg);
+  height: 20%;
+  width: 47%;
+  bottom: 30px;
+  right: 12px;
+  box-shadow: 0 2.1rem 2rem rgba(0, 0, 0, 0.4);
+}
+.item:nth-of-type(4n + 2) {
+  transform: scale(0.8, 0.8) rotate(-5deg);
+  transition: all 0.35s;
+}
+.item:nth-of-type(4n + 2) .polaroid:before {
+  transform: rotate(-6deg);
+  height: 20%;
+  width: 47%;
+  bottom: 30px;
+  left: 12px;
+  box-shadow: 0 2.1rem 2rem rgba(0, 0, 0, 0.4);
+}
+.item:nth-of-type(4n + 4) {
+  transform: scale(0.8, 0.8) rotate(3deg);
+  transition: all 0.35s;
+}
+.item:nth-of-type(4n + 4) .polaroid:before {
+  transform: rotate(4deg);
+  height: 20%;
+  width: 47%;
+  bottom: 30px;
+  right: 12px;
+  box-shadow: 0 2.1rem 2rem rgba(0, 0, 0, 0.3);
+}
+.item:nth-of-type(4n + 3) {
+  transform: scale(0.8, 0.8) rotate(-3deg);
+  transition: all 0.35s;
+}
+.item:nth-of-type(4n + 3) .polaroid:before {
+  transform: rotate(-4deg);
+  height: 20%;
+  width: 47%;
+  bottom: 30px;
+  left: 12px;
+  box-shadow: 0 2.1rem 2rem rgba(0, 0, 0, 0.3);
+}
+.item:hover {
+  filter: none;
+  transform: scale(1, 1) rotate(0deg) !important;
+  transition: all 0.35s;
+}
+.item:hover .polaroid:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  transform: rotate(0deg);
+  height: 90%;
+  width: 90%;
+  bottom: 0%;
+  right: 5%;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2);
+  transition: all 0.35s;
+}
+
+
+#showOff_text {
+  text-align: center;
+  font-size: 3rem;
+}
+
+
+#demo{
+    width:100%;
+    height:100%;
+    position:fixed;
+    left:0px;
+    top:0px;
+    background: black;
+    z-index:1000; /* 이 값으로 레이어의 위치를 조정합니다. */
+}
+.scroll-down {
+  opacity: 1;
+  -webkit-transition: all 0.5s ease-in 3s;
+  transition: all 0.5s ease-in 3s;
+}
+
+.scroll-down {
+  position: absolute;
+  bottom: 150px;
+  left: 50%;
+  margin-left: -16px;
+  display: block;
+  width: 32px;
+  height: 32px;
+  border: 2px solid #fff;
+  background-size: 14px auto;
+  border-radius: 50%;
+  z-index: 2;
+  -webkit-animation: bounce 2s infinite 2s;
+  animation: bounce 2s infinite 2s;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  transform: scale(1);
+}
+
+.scroll-down:before {
+  position: absolute;
+  top: calc(50% - 8px);
+  left: calc(50% - 6px);
+  transform: rotate(-45deg);
+  display: block;
+  width: 12px;
+  height: 12px;
+  content: "";
+  border: 2px solid white;
+  border-width: 0px 0 2px 2px;
+}
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans&display=swap');
+.mypages{
+  font-size:100px;
+  font-family: 'Noto Sans'
+}
 #loading {
     background: #DA22FF;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to right, #9733EE, #DA22FF);  /* Chrome 10-25, Safari 5.1-6 */
@@ -441,10 +713,6 @@ background: linear-gradient(to right, #9733EE, #DA22FF); /* W3C, IE 10+/ Edge, F
     display: block;
 }
 
-
-/*-------------------------
-    33.Preloader CSS
----------------------------*/
 .loadding-page {
   width: 100%;
   height: 100%;
@@ -630,181 +898,4 @@ background: linear-gradient(to right, #9733EE, #DA22FF); /* W3C, IE 10+/ Edge, F
     -moz-transform: scale(1.2, 1);
   }
 }
-#modalUpload {
-  padding: 30px;
-  max-width: 350px;
-  width: 100% !important;
-  margin: 0 auto;
-  border-radius: 2px;
-  overflow: hidden;
-}
-#modal {
-  margin: 0 auto;
-  border-radius: 2px;
-  overflow: hidden;
-}
-#ptag {
-  font-size: 30px;
-  margin-left: 1em;
-}
-#dialog {
-  max-width: 350px;
-}
-
-.resultOwner {
-  font-family: "Indie Flower";
-}
-
-.resultContent {
-  font-family: "Indie Flower";
-}
-* {
-  box-sizing: border-box;
-}
-body {
-  font-family: "Indie Flower";
-  line-height: 1.618em;
-  background-color: #e4d4bb;
-  background-image: repeating-radial-gradient(
-    circle,
-    #e4d4bb,
-    #e7dac6 50%,
-    #e7dac6 100%
-  );
-  background-size: 10px 10px;
-}
-img {
-  max-width: 100%;
-  height: auto;
-}
-.download {
-  height: 30vh !important;
-  width: 20vw !important;
-  margin-top: -20vh;
-  margin-left: 70vw;
-  background-image: url("../../../src/assets/images/btntree.png");
-}
-
-.download:hover {
-  height: 30vh !important;
-  width: 20vw !important;
-  margin-top: -20vh;
-  margin-left: 70vw;
-  background-image: url("../../../src/assets/images/btntree2.png");
-}
-/* background: url("https://cdn.pixabay.com/photo/2015/01/07/16/37/wood-591631_1280.jpg")
-    no-repeat; */
-.wrapper {
-  width: 100%;
-  padding: 0 2rem;
-  text-align: center;
-}
-.polaroid {
-  background: #fff;
-  padding: 1rem;
-  box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.2);
-}
-.caption {
-  font-size: 1.125rem;
-  text-align: center;
-  line-height: 2em;
-}
-.item {
-  display: inline-block;
-  margin-top: 2rem;
-  filter: grayscale(50%);
-}
-.item .polaroid:before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  transition: all 0.35s;
-}
-.item:nth-of-type(4n + 1) {
-  transform: scale(0.8, 0.8) rotate(5deg);
-  transition: all 0.35s;
-}
-.item:nth-of-type(4n + 1) .polaroid:before {
-  transform: rotate(6deg);
-  height: 20%;
-  width: 47%;
-  bottom: 30px;
-  right: 12px;
-  box-shadow: 0 2.1rem 2rem rgba(0, 0, 0, 0.4);
-}
-.item:nth-of-type(4n + 2) {
-  transform: scale(0.8, 0.8) rotate(-5deg);
-  transition: all 0.35s;
-}
-.item:nth-of-type(4n + 2) .polaroid:before {
-  transform: rotate(-6deg);
-  height: 20%;
-  width: 47%;
-  bottom: 30px;
-  left: 12px;
-  box-shadow: 0 2.1rem 2rem rgba(0, 0, 0, 0.4);
-}
-.item:nth-of-type(4n + 4) {
-  transform: scale(0.8, 0.8) rotate(3deg);
-  transition: all 0.35s;
-}
-.item:nth-of-type(4n + 4) .polaroid:before {
-  transform: rotate(4deg);
-  height: 20%;
-  width: 47%;
-  bottom: 30px;
-  right: 12px;
-  box-shadow: 0 2.1rem 2rem rgba(0, 0, 0, 0.3);
-}
-.item:nth-of-type(4n + 3) {
-  transform: scale(0.8, 0.8) rotate(-3deg);
-  transition: all 0.35s;
-}
-.item:nth-of-type(4n + 3) .polaroid:before {
-  transform: rotate(-4deg);
-  height: 20%;
-  width: 47%;
-  bottom: 30px;
-  left: 12px;
-  box-shadow: 0 2.1rem 2rem rgba(0, 0, 0, 0.3);
-}
-.item:hover {
-  filter: none;
-  transform: scale(1, 1) rotate(0deg) !important;
-  transition: all 0.35s;
-}
-.item:hover .polaroid:before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  transform: rotate(0deg);
-  height: 90%;
-  width: 90%;
-  bottom: 0%;
-  right: 5%;
-  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2);
-  transition: all 0.35s;
-}
-
-.bg_feed {
-  background-image: url("../../assets/images/bg_showoff.png");
-  background-repeat: repeat;
-  width: 100vw;
-  height: auto;
-}
-
-#showOff_text {
-  text-align: center;
-  font-size: 3rem;
-}
-
-#test{
-    background-image: url("../../assets/images/bg_showoff.png");
-  background-repeat: repeat;
-  width: 100vw;
-  height: auto;
-}
-
-
-
 </style>
