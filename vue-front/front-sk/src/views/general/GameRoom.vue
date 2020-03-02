@@ -100,8 +100,8 @@ export default {
     Chat,
     Vote1,
     Vote2,
-    SelectMusic1,
-    SelectMusic2,
+    //SelectMusic1,
+    //SelectMusic2,
   },
   methods: {
     finish(){
@@ -226,9 +226,9 @@ export default {
 
       if (this.user_identification === "singer") {
         if (this.battle_id[0]) {
-          this.player_idx = 1;
-        } else {
           this.player_idx = 0;
+        } else {
+          this.player_idx = 1;
         }
       }
 
