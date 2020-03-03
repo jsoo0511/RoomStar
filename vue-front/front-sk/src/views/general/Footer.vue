@@ -12,9 +12,9 @@
   <!--<p align="justify;" style="color:rgba(255,255,255,0.3); margin-left:49em;">Copyright ⓒ 2019 by 7조</p>-->
  
     <v-spacer></v-spacer>
-    <v-btn max-width="5px">
+  <!--  <v-btn max-width="5px">
       <v-icon style="color:rgba(255,255,255,0.7);">mdi-volume-high</v-icon>
-    </v-btn>
+    </v-btn>-->
     <v-btn href="#" max-width="5px">
       <v-icon style="color:rgba(255,255,255,0.7);">mdi-arrow-up-bold</v-icon>
     </v-btn>

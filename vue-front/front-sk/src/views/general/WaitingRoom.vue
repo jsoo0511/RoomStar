@@ -28,7 +28,7 @@
               id="profile_card_image"
             ></v-img>
             </div>
-            <div class="card-text">
+            <div class="card-text" style="padding-top:3vh;">
               <span class="rank">{{roomInfo.user1_grade}}</span>
               <h2>{{roomInfo.user1}}</h2>
               <h4>{{roomInfo.music1}}</h4>
@@ -57,7 +57,7 @@
               id="profile_card_image"
             ></v-img>
             </div>
-            <div class="card-text">
+            <div class="card-text" style="padding-top:3vh;">
               <span class="rank">{{roomInfo.user2_grade}}</span>
               <h2>{{roomInfo.user2}}</h2>
               <h4>{{roomInfo.music2}}</h4>

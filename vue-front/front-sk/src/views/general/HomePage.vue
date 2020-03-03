@@ -455,7 +455,7 @@ export default {
     
      setTimeout(() => {
         this.show=false;
-}, 1000);
+}, 5000);
   }
 };
 </script>

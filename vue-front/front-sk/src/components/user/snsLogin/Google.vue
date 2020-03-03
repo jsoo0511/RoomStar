@@ -14,13 +14,14 @@ import GoogleLogin from "vue-google-login";
 import router from "@/routes";
 import axios from "axios";
 import jwt_decode from 'jwt-decode';
-
+// "263255205373-jmqe0biaeja2gh6to8kp3tep8c9s2irk.apps.googleusercontent.com"
 export default {
   data() {
     return {
       params: {
         client_id:
-          "263255205373-jmqe0biaeja2gh6to8kp3tep8c9s2irk.apps.googleusercontent.com"
+          
+          "263255205373-6g8po0pnapaul469vmbqlb2ooifi4q1u.apps.googleusercontent.com"
       },
       renderParams: {
         width: 50,
