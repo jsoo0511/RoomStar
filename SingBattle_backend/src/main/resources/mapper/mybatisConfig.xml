@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+		<typeAlias type="com.ssafy.link.dto.User" alias="user"/>
+		<typeAlias type="com.ssafy.link.dto.User_local" alias="user_local"/>
+		<typeAlias type="com.ssafy.link.dto.Room" alias="room"/>
+		<typeAlias type="com.ssafy.link.dto.Watching" alias="watching"/>
+		<typeAlias type="com.ssafy.link.dto.Waiting" alias="waiting"/>
+		<typeAlias type="com.ssafy.link.dto.Room_need" alias="need"/>
+		<typeAlias type="com.ssafy.link.dto.Burst" alias="burst"/>
+		<typeAlias type="com.ssafy.link.dto.Like_video" alias="like_video"/>
+		<typeAlias type="com.ssafy.link.dto.Vote" alias="vote"/>
+		<typeAlias type="com.ssafy.link.dto.Get_vote" alias="get_vote"/>
+		
+    </typeAliases>
+    <mappers>
+        <mapper resource="mapper/KakaoMapper.xml"/>
+        <mapper resource="mapper/roomMapper.xml"/>
+        <mapper resource="mapper/watingMapper.xml"/>
+        <mapper resource="mapper/burstMapper.xml"/>
+    </mappers>
+</configuration>

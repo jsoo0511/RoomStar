@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.link.mapper.BurstMapper">
+
+	<insert id="insert_burst" parameterType="burst">
+		insert into burst(videoURL,userid,imgURL,nickname,title,contents,like_num) values(#{videoURL},#{userid},#{imgURL},#{nickname},#{title},#{contents},0)
+	</insert>
+	
+	<select id="check_like_video" parameterType="like_video" resultType="like_video">
+		select * from like_video where userid=#{userid} and id=#{id}
+	</select>
+	
+	<select id="get_burst" resultType="burst">
+		select * from burst;
+	</select>
+	<select id="get_burst_id" resultType="burst" parameterType="int">
+		select * from burst where id=#{id}
+	</select>
+	<insert id="like_video_insert" parameterType="like_video">
+		insert into like_video values(#{userid},#{id})
+	</insert>
+	
+	<delete id="like_video_delete" parameterType="like_video">
+		delete from like_video where userid=#{userid} and id=#{id}
+	</delete>
+
+	<update id="plus_like_num" parameterType="like_video">
+		update burst set like_num=like_num+1 where id=#{id}
+	</update>
+	<update id="minus_like_num" parameterType="like_video">
+		update burst set like_num=like_num-1 where id=#{id}
+	</update>
+	<select id="count_like_video" parameterType="string" resultType="int">
+		select count(*) from like_video where videoURL=#{videoURL}
+	</select>
+	
+	<delete id="delete_burst" parameterType="int">
+		delete from burst where id=#{id}
+	</delete>
+	
+	<delete id="delete_like_video" parameterType="int">
+		delete from like_video where id=#{id}
+	</delete>
+	<select id="get_lyric" parameterType="string" resultType="string">
+		select lyric from lyrics where title=#{title}
+	</select>
+	
+</mapper>

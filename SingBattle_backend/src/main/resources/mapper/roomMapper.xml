@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.link.mapper.RoomMapper">
+
+	<select id="get_room" resultType="room">
+		select * from room;
+	</select>
+	<!-- 그룹바이로 묶기 -->
+	<select id="get_room_include_watching_num" parameterType="int"
+		resultType="room">
+		SELECT * from room where room_id=#{room_id}
+	</select>
+
+	<select id="get_room_info_for_out_room" parameterType="string"
+		resultType="room">
+		select * from room where user1=#{user1} or user2=#{user2}
+	</select>
+
+	<update id="update_room" parameterType="room">
+		<if test="user1==null">
+			update room set singer_num=#{singer_num},user2=#{user2}
+			where
+			room_id=#{room_id}
+		</if>
+		<if test="user2==null">
+			update room set singer_num=#{singer_num},user1=#{user1}
+			where
+			room_id=#{room_id}
+		</if>
+	</update>
+
+	<update id="insert_vote_user" parameterType="room">
+		<if test="user1==null">
+			update vote set user2=#{user2},vote2=0 where
+			room_id=#{room_id}
+		</if>
+		<if test="user2==null">
+			update vote set user1=#{user1},vote1=0 where
+			room_id=#{room_id}
+		</if>
+	</update>
+
+	<update id="out_room" parameterType="room">
+		<if test="user1==1">
+			update room set
+			singer_num=#{singer_num},user1=null,music1=null where
+			room_id=#{room_id}
+		</if>
+		<if test="user2==1">
+			update room set
+			singer_num=#{singer_num},user2=null,music2=null where
+			room_id=#{room_id}
+		</if>
+	</update>
+
+
+	<update id="delete_vote_user" parameterType="room">
+		<if test="user1==1">
+			update vote set user2=null, vote2=0 where
+			room_id=#{room_id}
+		</if>
+		<if test="user2==1">
+			update vote set user1=null, vote1=0 where
+			room_id=#{room_id}
+		</if>
+	</update>
+
+	<update id="update_vote" parameterType="vote">
+		<if test="player_idx==0">
+			update vote set vote1=#{vote_num} where room_id=#{room_id}
+		</if>
+		<if test="player_idx==1">
+			update vote set vote2=#{vote_num} where room_id=#{room_id}
+		</if>
+	</update>
+
+	<select id="select_watching" resultType="watching">
+		select * from watching
+	</select>
+
+	<insert id="insert_watching" parameterType="watching">
+		insert into watching
+		values(#{userid},#{room_id},0)
+	</insert>
+
+	<!-- 시청자 입장시 방에 시청 인원수 추가 -->
+	<update id="plus_watching_num" parameterType="int">
+		update room set
+		watching_num=watching_num+1 where room_id=#{room_id}
+	</update>
+
+	<delete id="delete_watching" parameterType="string">
+		delete from watching
+		where userid=#{userid}
+	</delete>
+
+	<!-- 시청자 퇴장시 방에 시청 인원수 감소 -->
+	<update id="minus_watching_num" parameterType="int">
+		update room set
+		watching_num=watching_num-1 where room_id=#{room_id}
+	</update>
+
+
+	<!-- 모든 player퇴장시 방을 폐쇠하고 시청자수를 0으로 만듦 -->
+	<update id="set_0_watching_num" parameterType="int">
+		update room set
+		watching_num=0 where room_id=#{room_id}
+	</update>
+
+	<delete id="delete_watching_in_room" parameterType="int">
+		delete from
+		watching where room_id=#{room_id}
+	</delete>
+	<!-- 위에 update ,delete가 같은 역할 -->
+
+	<!-- 투표시 어떤 시청자가 누구에게 투표했는지 update -->
+	<update id="update_watching" parameterType="watching">
+		update watching set
+		vote=#{vote} where userid=#{userid}
+	</update>
+
+	<!-- Room에서 노래선택시 노래 선택 update -->
+	<update id="select_music" parameterType="room">
+		<if test="music2==null or music2.equals('')">
+			update room set music1=#{music1} where room_id=#{room_id}
+		</if>
+		<if test="music1==null or music1.equals('')">
+			update room set music2=#{music2} where room_id=#{room_id}
+		</if>
+	</update>
+
+	<select id="get_vote" parameterType="int" resultType="get_vote">
+		select *
+		from vote where room_id=#{room_id}
+	</select>
+
+	<!-- 방 나가면 음악 null로 해줘야 되는디 이걸 따로 이렇게 메서드를 만들지 아님 다른곳에 있는지 찾아봐야됨 -->
+
+
+</mapper>

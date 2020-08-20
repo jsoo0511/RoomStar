@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.link.mapper.KakaoMapper">
+	<insert id="insert_total" parameterType="user">
+		<choose>
+			<when test="provider=='local'">
+				insert into user
+				values(#{email},#{nickname},#{profileimg},#{email},#{pw},#{provider},"bronze",0,0,0)
+			</when>
+			<otherwise>
+				insert into user
+				values(#{userid},#{nickname},#{profileimg},#{email},null,#{provider},"bronze",0,0,0)
+			</otherwise>
+		</choose>
+	</insert>
+
+	<select id="login" resultType="user" parameterType="user">
+		<choose>
+			<when test="pw!=null and !pw.equals('')">
+				select * from user where userid=#{userid} and
+				pw=#{pw}
+			</when>
+			<otherwise>
+				select * from user where userid=#{userid}
+			</otherwise>
+		</choose>
+	</select>
+
+	<update id="battle_result" parameterType="user">
+		<choose>
+			<when test="win==1">
+				UPDATE user SET win=win+1,game=game+1 WHERE
+				userid=#{userid};
+			</when>
+			<otherwise>
+				UPDATE user SET lose=lose+1,game=game+1 WHERE
+				userid=#{userid};
+			</otherwise>
+		</choose>
+	</update>
+
+
+
+	<select id="getById" resultType="user" parameterType="string">
+		select *
+		from user where userid=#{userid}
+	</select>
+
+
+	<delete id="delete" parameterType="user">
+		<choose>
+			<when test="provider=='local'">
+				delete from user where userid=#{userid} and pw=#{pw}
+			</when>
+			<otherwise>
+				delete from user where userid=#{userid}
+			</otherwise>
+		</choose>
+	</delete>
+
+	<update id="update" parameterType="user">
+		update user set email=#{email},
+		nickname=#{nickname},profileimg=#{profileimg} where userid=#{userid}
+	</update>
+
+	<select id="getByNickname" resultType="user"
+		parameterType="string">
+		select * from user where userid=#{userid}
+	</select>
+
+
+	<select id="getAll" resultType="user">
+		select * from user
+	</select>
+	
+	<update id="set_grade" parameterType="user">
+		update user set grade=#{grade} where userid=#{userid}
+	</update>
+
+</mapper>

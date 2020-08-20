@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.link.mapper.WaitingMapper">
+
+<insert id="insert_waiting" parameterType="waiting">
+   insert into waiting2 values (#{userid},#{nickname})
+</insert>
+
+<select id="get_waiting_num" resultType="int">
+	select count(*) from waiting2
+</select>
+<select id="get_waiting_ids" resultType="waiting">
+	select * from waiting2
+</select>
+
+<select id="get_room_need" resultType="need" parameterType="need">
+	SELECT nickname, profileimg, grade, win, lose FROM user WHERE nickname=#{nickname};
+</select>
+	
+	<delete id="delete_waiting" parameterType="string">
+		delete from waiting2 where userid=#{userid}
+	</delete>
+	
+</mapper>
